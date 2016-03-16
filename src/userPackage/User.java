@@ -26,7 +26,7 @@ public abstract class User{
 		// Skal sp�rre database
 		return "Food orders:\n";
 	}
-	//view 
+	//view customer list
 	public String viewCustomerList(){
 		String customerList = null;
 		
