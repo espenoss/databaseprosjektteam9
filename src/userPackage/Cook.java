@@ -5,11 +5,6 @@ public class Cook extends User {
 	public Cook(String name, String pword) {
 		super(name, pword);
 	}
-
-	public String viewFoodOrders(){
-		// Skal spørre database
-		return "Food orders:\n";
-	}
 	
 	public boolean markAsReady(){
 		boolean success = false;

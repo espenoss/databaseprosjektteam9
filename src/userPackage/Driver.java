@@ -5,11 +5,6 @@ public class Driver extends User {
 	public Driver(String name, String pword) {
 		super(name, pword);
 	}
-
-	public String viewFoodOrders(){
-		// Skal spørre database
-		return "Food orders:\n";
-	}
 	
 	public boolean markDelivered(int orderIndex){
 		

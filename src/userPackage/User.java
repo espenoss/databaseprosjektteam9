@@ -22,6 +22,11 @@ public abstract class User{
 		return name;
 	}
 
+	public String viewFoodOrders(){
+		// Skal spørre database
+		return "Food orders:\n";
+	}
+	
 	public String toString(){
 		return "Employee info:\n" + name;
 	}
