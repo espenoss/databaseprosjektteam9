@@ -10,7 +10,7 @@ public class Admin extends User {
 		boolean success = true;
 		
 		// register ny bruker i databasen
-		// test
+		//Enda en test
 		
 		return success;
 	}
