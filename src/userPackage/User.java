@@ -40,7 +40,7 @@ public abstract class User{
 		
 		return ingredients;
 	}
-	
+	//toString
 	public String toString(){
 		return "Employee info:\n" + name;
 	}
