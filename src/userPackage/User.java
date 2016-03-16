@@ -22,6 +22,25 @@ public abstract class User{
 		return name;
 	}
 
+	public String viewFoodOrders(){
+		// Skal spørre database
+		return "Food orders:\n";
+	}
+	
+	public String viewCustomerList(){
+		String customerList = null;
+		
+		return customerList;
+	}
+	
+	public String viewOrderIngredients(){
+		String ingredients = null;
+		
+		// hent ingredienser fra database
+		
+		return ingredients;
+	}
+	
 	public String toString(){
 		return "Employee info:\n" + name;
 	}

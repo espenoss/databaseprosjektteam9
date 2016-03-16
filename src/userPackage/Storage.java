@@ -5,9 +5,7 @@ public class Storage extends User {
 	public Storage(String name, String pword) {
 		super(name, pword);
 	}
-
-
-
+	
 	public boolean registerDelivery(String orderinfo){
 		boolean success = false;
 		
