@@ -1,12 +1,9 @@
 package userPackage;
 
 public class Admin extends User {
-
-	String userTitle;
 	
 	public Admin(String name, String pword, String userTitle) {
 		super(name, pword);
-		this.userTitle= userTitle;
 	}
 
 	public boolean registerUser(){
@@ -29,7 +26,7 @@ public class Admin extends User {
 	public String toString() {
 		String s = super.toString() + "\n";
 	
-		s += userTitle;
+		s += "Admin";
 		
 		return s;
 	}
