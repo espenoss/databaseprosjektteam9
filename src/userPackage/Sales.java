@@ -1,11 +1,6 @@
 package userPackage;
 
 public class Sales extends User {
-
-/*	private final static String[] methodList = {
-			"Register new order"	
-		};
-*/
 	
 	public Sales(String name, String pword) {
 		super(name, pword);

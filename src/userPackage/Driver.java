@@ -1,11 +1,6 @@
 package userPackage;
 
 public class Driver extends User {
-
-/*	private final static String[] methodList = {
-		"View food orders"	
-	};
-*/
 	
 	public Driver(String name, String pword) {
 		super(name, pword);

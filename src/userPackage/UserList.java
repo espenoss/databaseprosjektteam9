@@ -23,11 +23,7 @@ public class UserList {
 	
 	public static void main(String[] args) {		
 
-		// Legger til en kommentar for å teste
-		
 		// testmetode
-		
-//		UserList users = new UserList();
 		
 	}
 
