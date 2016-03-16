@@ -13,6 +13,14 @@ public class Sales extends User {
 		
 		return success;
 	}
+	
+	public boolean registerSubscription(String orderinfo){
+		boolean success = false;
+		
+		// opprett ny ordre i database
+		
+		return success;
+	}
 
 	public boolean changeFoodOrder(String orderinfo){
 		boolean success = false;
@@ -50,7 +58,7 @@ public class Sales extends User {
 		
 		return success;						
 	}
-	
+		
 	@Override
 	public String toString() {
 		String s = super.toString() + "\n";
