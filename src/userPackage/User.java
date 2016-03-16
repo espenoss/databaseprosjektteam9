@@ -17,7 +17,7 @@ public abstract class User{
 	public void setPword(String pword) {
 		this.pword = pword;
 	}
-
+//test
 	public String getName() {
 		return name;
 	}
