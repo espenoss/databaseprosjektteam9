@@ -17,14 +17,6 @@ public class Admin extends User {
 		return success;
 	}
 	
-	public String viewCustomerList(){
-		String customerList = null;
-		
-		// hent kundedata fra database
-		
-		return customerList;
-	}
-	
 	public String getStatistics(){
 		String statistics = null;
 		

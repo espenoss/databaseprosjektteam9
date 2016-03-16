@@ -14,14 +14,6 @@ public class Cook extends User {
 		return success;
 	}
 	
-	public String viewOrderIngredients(){
-		String ingredients = null;
-		
-		// hent ingredienser fra database
-		
-		return ingredients;
-	}
-	
 	@Override
 	public String toString() {
 		String s = super.toString() + "\n";

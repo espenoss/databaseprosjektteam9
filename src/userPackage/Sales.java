@@ -51,12 +51,6 @@ public class Sales extends User {
 		return success;						
 	}
 	
-	public String viewCustomerList(){
-		String customerList = null;
-		
-		return customerList;
-	}
-	
 	@Override
 	public String toString() {
 		String s = super.toString() + "\n";

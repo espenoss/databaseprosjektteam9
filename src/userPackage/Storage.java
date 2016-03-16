@@ -6,10 +6,6 @@ public class Storage extends User {
 		super(name, pword);
 	}
 	
-	public String viewFoodOrders(){
-		return "No access\n";
-	}
-
 	public boolean registerDelivery(String orderinfo){
 		boolean success = false;
 		
