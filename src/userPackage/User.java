@@ -23,10 +23,10 @@ public abstract class User{
 	}
 
 	public String viewFoodOrders(){
-		// Skal spørre database
+		// Skal spï¿½rre database
 		return "Food orders:\n";
 	}
-	
+	//view 
 	public String viewCustomerList(){
 		String customerList = null;
 		
