@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 class LogIn extends JFrame{
 	private JTextField username = new JTextField(20);
 	private JTextField password = new JTextField(20);
+	private JLabel message = new JLabel("Log in information");
 	
 	public LogIn(String title){
 		setTitle(title);
@@ -29,7 +30,8 @@ class LogIn extends JFrame{
 		add(input1, BorderLayout.NORTH);
 		
 	    Button button = new Button();
-	    add(button, BorderLayout.SOUTH);	  
+	    add(button, BorderLayout.SOUTH);
+	    add(message, BorderLayout.EAST);
 	    pack();
 	}	    
 	    
@@ -49,9 +51,15 @@ class LogIn extends JFrame{
 	/*
 	 * Lytter etter knappetrykk
 	 */
-	
 	private class Buttonlistener implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
+			JButton whichButton = (JButton)event.getSource();
+			String buttonName = whichButton.getText();
+			if (buttonName.equals("Sign in")){
+			String name = username.getText();
+			message.setText(name + " have successfully logged in ");	
+			add(message);
+			}
 		}
 	}
 
