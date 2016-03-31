@@ -26,13 +26,16 @@ class LogIn extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
-		UserInput input1 = new UserInput();
-		add(input1, BorderLayout.NORTH);
+		UserInput input = new UserInput();
+		add(input, BorderLayout.NORTH);
 		
-	    Button button = new Button();
-	    add(button, BorderLayout.SOUTH);
-	    add(message, BorderLayout.EAST);
-	    pack();
+		JButton button = new JButton("Sign in");
+		add(button, BorderLayout.CENTER);  
+		add(message, BorderLayout.PAGE_END);
+		
+		Buttonlistener buttonlistener = new Buttonlistener();
+		button.addActionListener (buttonlistener);
+		pack();
 	}	    
 	    
 	/*
@@ -40,25 +43,25 @@ class LogIn extends JFrame{
 	 * Lager en lytter og knytter knappen til denne lytteren
 	 */	  
 	    
-	private class Button extends JPanel{
+/*	private class Button extends JPanel {
 		public Button(){
-			Buttonlistener listener = new Buttonlistener();
+	    	Buttonlistener listener = new Buttonlistener();
 			JButton button = new JButton("Sign in");
-			add(button);
+			add(button);      
 		}
-	}
+	}            */
 	
 	/*
 	 * Lytter etter knappetrykk
 	 */
 	private class Buttonlistener implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
-			JButton whichButton = (JButton)event.getSource();
-			String buttonName = whichButton.getText();
+			JButton button = (JButton)event.getSource();
+			String buttonName = button.getText();
 			if (buttonName.equals("Sign in")){
 			String name = username.getText();
 			message.setText(name + " have successfully logged in ");	
-			add(message);
+			add(message, BorderLayout.PAGE_END);
 			}
 		}
 	}
