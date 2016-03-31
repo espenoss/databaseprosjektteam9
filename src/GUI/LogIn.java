@@ -24,6 +24,7 @@ class LogIn extends JFrame{
 		setTitle(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		
 		UserInput input1 = new UserInput();
 		add(input1, BorderLayout.NORTH);
 		
@@ -70,6 +71,13 @@ class LogIn extends JFrame{
 			add(text);
 			add(password);
 		}	
+	}
+}
+
+class TestLogIn{
+	public static void main(String[] args){
+		LogIn window = new LogIn("Log In");
+		window.setVisible(true);
 	}
 }
 
