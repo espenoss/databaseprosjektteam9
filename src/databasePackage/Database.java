@@ -1,5 +1,6 @@
 package databasePackage;
 import java.sql.*;
+import java.util.*;
 
 public class Database {
 		
@@ -18,10 +19,10 @@ public class Database {
 			this.dbName = dbName;
 	}
 	
-	// Executes a statement and returns any results as a String array
-	public String[] makeSingleStatement(String statement) throws Exception{
+	// Executes a statement and returns any results as a two dimensional String array
+	public String[][] makeSingleStatement(String statement) throws Exception{
 
-		String[] values = null;
+		ArrayList<String[]> values = new ArrayList<String[]>();		
 		Connection connection = null;
 		Statement sqlStatement = null;
 		ResultSet result = null;
@@ -40,13 +41,16 @@ public class Database {
 				result = sqlStatement.getResultSet();					
 				ResultSetMetaData resultMeta = result.getMetaData();	
 
-				// collect results in string array
+				// collect results in arraylist of string arrays
 				int noCol = resultMeta.getColumnCount();
-				values = new String[noCol];
+				
+				int x = 0;
 				while(result.next()){
+					values.add(new String[noCol]);
 					for(int i = 0; i < noCol; i++){
-						values[i] = result.getString(i+1);	// MySQL column numbering begins at 1
+						values.get(x)[i] = result.getString(i+1);	// MySQL column numbering begins at 1 >:((((
 					}
+					x++;
 				}
 			}
 		}catch(SQLException e){
@@ -57,8 +61,12 @@ public class Database {
 			Cleaner.closeStatement(sqlStatement);
 			Cleaner.closeConnection(connection);
 		}
+
+		// Convert from arraylist to array
+		String[][] r = new String[values.size()][];
+		values.toArray(r);
 		
-		return values;
+		return r;
 	}
 	
 	public ResultSet makeTransaction(String[] statements){
@@ -92,18 +100,23 @@ public class Database {
 
 		// testkode
 		
-		String username = "espenme";
+		String username = "";
 		String password = "";
 		Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + username + "&password=" + password);
 		
-		String statement = "SELECT * FROM byer WHERE bynr = '1'";
+		String statement = "SELECT * FROM byer";
 		
-		String[] result = database.makeSingleStatement(statement);
+		String[][] result = database.makeSingleStatement(statement);
 		
 		for(int i = 0; i < result.length; i++){
-			System.out.println(result[i]);
+			for(int y = 0; y < result[i].length; y++){
+				System.out.print(result[i][y] + " ");
+			}
+			System.out.print("\n");			
 		}
 		
+//		String statement2 = "INSERT INTO byer VALUES(4, 'Bodø')";		
+//		database.makeSingleStatement(statement2);		
 	}
 	
 }
