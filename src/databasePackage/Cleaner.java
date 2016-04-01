@@ -54,7 +54,7 @@ public class Cleaner {
 	}
 	
 	public static void printMessage(Exception e, String message){
-	    System.err.println("*** Feil oppstått: " + message + ". ***");
+	    System.err.println("*** Error occured: " + message + ". ***");
 	    e.printStackTrace(System.err);		
 	}
 }
