@@ -22,6 +22,7 @@ public class Admin extends User {
 		return statistics;
 	}
 	
+	
 	@Override
 	public String toString() {
 		String s = super.toString() + "\n";
