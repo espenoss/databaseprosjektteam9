@@ -2,15 +2,7 @@ package databasePackage;
 import java.sql.*;
 import java.util.*;
 
-public class Database {
-		
-		// User types
-		public final int U_ADMIN = 0;
-		public final int U_COOK = 1;
-		public final int U_DRIVER = 2;
-		public final int U_SALES = 3;
-		public final int U_STORAGE = 4;
-		
+public class Database {		
 		private final String dbDriver; 
 		private final String dbName;    
 		
@@ -31,6 +23,7 @@ public class Database {
 		Class.forName(dbDriver);
 		
 		try{
+			// Establish database connection
 			connection = DriverManager.getConnection(dbName);
 			sqlStatement = connection.createStatement();
 			
@@ -40,15 +33,14 @@ public class Database {
 				// if resultset is returned, get results, check number of columns
 				result = sqlStatement.getResultSet();					
 				ResultSetMetaData resultMeta = result.getMetaData();	
-
-				// collect results in arraylist of string arrays
 				int noCol = resultMeta.getColumnCount();
-				
+
+				// collect results in arraylist of string arrays				
 				int x = 0;
 				while(result.next()){
 					values.add(new String[noCol]);
-					for(int i = 0; i < noCol; i++){
-						values.get(x)[i] = result.getString(i+1);	// MySQL column numbering begins at 1 >:((((
+					for(int y = 0; y < noCol; y++){
+						values.get(x)[y] = result.getString(y+1);	// MySQL column numbering begins at 1
 					}
 					x++;
 				}
@@ -69,33 +61,38 @@ public class Database {
 		return r;
 	}
 	
-	public ResultSet makeTransaction(String[] statements){
+	// Executes a transaction from list of update statements
+	public void makeUpdateTransaction(String[] statements) throws Exception{
 		
-		ResultSet result = null;
+		Connection connection = null;
+		Statement sqlStatement = null;
+
+		// instantiate driver
+		Class.forName(dbDriver);
 		
-		return result;
+		try{
+			// Establish database connection and disable autocommit
+			connection = DriverManager.getConnection(dbName);
+			sqlStatement = connection.createStatement();
+			connection.setAutoCommit(false);
+			
+			// Assume only update statements in transaction
+			for(int i=0; i<statements.length; i++){
+				sqlStatement.executeUpdate(statements[i]); 
+			}
+			// Commit changes if everything went well
+			connection.commit();
+		}catch(SQLException e){
+			Cleaner.rollback(connection);
+			Cleaner.printMessage(e, "makeSingleStatement()");
+		}finally{
+			// close database connections
+			connection.setAutoCommit(true);
+			Cleaner.closeStatement(sqlStatement);
+			Cleaner.closeConnection(connection);
+		}
 	}
 		
-	public boolean registerUser(int userType, String name, String password){
-	
-		return false;
-	}
-	// INSERT INTO user VALUES (userType, name, password)
-	
-	/*
-	public boolean registerCompany(String companyName, String firstName, String surName, String email, String adress, String zip_code, String zone_nr, String preferences, String active);
-	public boolean registerCustomer(String firstName, String surName, String email, String adress, String zip_code, String zone_nr, String preferences, String active);
-
-	public boolean registerOrder(String delivery_date, int quantity, String mealName);
-	public boolean registerSubscription(String delivery_date, int quantity, String fromDate, String toDate, String subName);
-	
-	public boolean updateOrder(String delivery_date, int quantity, String mealName);
-	
-
-	public boolean updateCompany(String customerId, String companyName, String firstName, String surName, String email, String adress, String zip_code, String zone_nr, String preferences, String active);
-	public boolean updateCustomer(String customerId, String surName, String email, String adress, String zip_code, String zone_nr, String preferences, String active);
-	*/
-	
 	public static void main(String[] args) throws Exception{
 
 		// testkode
@@ -115,7 +112,9 @@ public class Database {
 			System.out.print("\n");			
 		}
 		
-//		String statement2 = "INSERT INTO byer VALUES(4, 'Bodø')";		
+		
+		
+//		String statement2 = "INSERT INTO byer VALUES(5, 'Narvik')";		
 //		database.makeSingleStatement(statement2);		
 	}
 	
