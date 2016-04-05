@@ -76,7 +76,7 @@ class LogInGui extends JFrame /*implements ActionListener*/{
 	}
 }
 
-class TestLogIn{
+class TestLogInGui{
 	public static void main(String[] args){
 		LogInGui window = new LogInGui("Log In");
 		window.setVisible(true);
