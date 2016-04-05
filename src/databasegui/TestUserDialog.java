@@ -62,11 +62,7 @@ class Parentwindow extends JFrame {
 			}
 			text += "\n";
 		}
-		  
-		  
 		JOptionPane.showMessageDialog(null, text);
-
-		  
 	  }
   }	    
 }
