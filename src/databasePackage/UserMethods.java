@@ -25,6 +25,12 @@ public class UserMethods {
 		// Sjekk setning, fjern etter testing
 		System.out.println(statement);
 	}
+
+	public static String[][] viewAllUsers(Database database) throws Exception{
+		
+		return database.makeSingleStatement("SELECT user_id, user_type, name FROM user");
+		
+	}	
 	
 	public static int logIn(String name, String password, Database database) throws Exception{
 		
@@ -52,12 +58,6 @@ public class UserMethods {
 		System.out.println(statement);
 		
 		database.makeSingleStatement(statement);
-	}
-	
-	public static String[][] viewAllCustomers(Database database) throws Exception{
-		
-		return database.makeSingleStatement("SELECT user_id, user_type, name FROM user");
-		
 	}
 	
 	public static void registerCompany(String surName, String firstName, String email, String adress, 
