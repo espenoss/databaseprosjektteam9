@@ -61,7 +61,10 @@ public class MyDialog extends JDialog {
 		}
 	}
 	
-	//Se kommentarer s. 644 i boka
+	/*Privat klasse som beskriver hva som skal skje når brukeren trykker ok og avbryt. Metoden put() i klassen ActionMap krever Action 
+	/*som andre argunent. Action er et sub-interface til ActionListener. Interfacet inneholder mange metoder, klasseb AbstractAction 
+	 * implementerer disse metodene, og vi kan bruke den so en adapterklasse.
+	 */
 	private class Commandlistener extends AbstractAction{
 		public void actionPerformed(ActionEvent event){
 			String command = event.getActionCommand();
