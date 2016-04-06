@@ -65,16 +65,7 @@ public class UserMethods {
 	
 		registerCustomer(firstName, surName, email, adress, zip_code, zone_nr, preferences, active, database);
 		
-		String[][] customerID = database.makeSingleStatement("SELECT customer_id FROM customer WHERE firstname = '" + firstName 
-				+ "' AND surname = '" + surName + "'");
-
-		if(customerID.length > 1){ // If customer name is not unique
-			// Avbryte her?
-			System.out.println("Not a unique name");								
-		}else{
-			// Test
-			System.out.println(customerID[0][0]);					
-		}
+		String[][] customerID = database.makeSingleStatement("SELECT MAX(customer_id) FROM customer");
 				
 		String statement = "INSERT INTO company VALUES("
 				+ aq(customerID[0][0]) + "'" + companyName + "');";		
@@ -85,9 +76,25 @@ public class UserMethods {
 		database.makeSingleStatement(statement);
 	}
 	
+
+	public static void registerSingleOrder(String order_date, int customer_id, String info, int user_id, int mealID, String deliveryDate, int quantity, Database database) throws Exception{
+		
+		String statement = "INSERT INTO food_order VALUES(DEFAULT, "
+				+ aq(order_date) + customer_id + "," + aq(info) + user_id + ");";
+//		database.makeSingleStatement(statement);
+//		System.out.println(statement);
+
+		String orderID = database.makeSingleStatement("SELECT MAX(order_id) FROM food_order")[0][0];
+		
+		statement = "INSERT INTO ordered_meal VALUES("
+				+ aq(orderID) + mealID + "," + aq(deliveryDate) + quantity + "," + 0 + "," + 0 + ");";
+		database.makeSingleStatement(statement);
+		System.out.println(statement);
+		
+	}
+
 	
-/*
-	public boolean registerOrder(String delivery_date, int quantity, String mealName);
+	/*
 	public boolean registerSubscription(String delivery_date, int quantity, String fromDate, String toDate, String subName);
 	
 	public boolean updateOrder(String delivery_date, int quantity, String mealName);
@@ -121,6 +128,8 @@ public class UserMethods {
 		}
 */
 //		System.out.println(UserMethods.logIn("Espen", "asd", database));
+		
+		UserMethods.registerSingleOrder("2012-03-02", 10001, "Her er info om bestilingen", 1, 1, "2012-12-12", 1, database);
 	}
 }
 
