@@ -32,7 +32,7 @@ public class TestUserMethods {
 		String passord = "tgp8sBZA";
 		String databasenavn = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + brukernavn + "?user=" + brukernavn + "&password=" + passord;
 		
-		Database instance = new Database("com.mysql.jdbc.Driver", databasenavn);
+		instance = new Database("com.mysql.jdbc.Driver", databasenavn);
 	}
 	
 	@After
@@ -57,7 +57,20 @@ public class TestUserMethods {
 	
 	@Ignore
 	public void testLogIn() {
-		fail("Not yet implemented");
+		System.out.println("Test logIn");
+		UserMethods userM = new UserMethods();
+		
+		userM.registerUser(3, "Marie", "1234", instance);
+		int result = userM.logIn("Marie", "1234", instance);
+		int expResult = 3;
+		assertEquals(expResult, result);
+		
+		//Try to register same user again
+		expResult = -1; 
+		result = userM.logIn(name, password, database)
+		assertEquals(expResult, result);
+		
+		
 	}
 	
 	@Test
@@ -82,7 +95,7 @@ public class TestUserMethods {
 	}
 	
 	@Ignore
-	public void testRegisterOrder() {
+	public void registerSingleOrder() {
 		fail("Not yet implemented");
 	}
 	
