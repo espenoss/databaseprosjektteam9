@@ -103,15 +103,20 @@ public class TestUserMethods {
 		
 	}
 	
-	@Ignore
-	public void registerSingleOrder() {
+	@Test
+	public void registerSingleOrder() throws Exception{
 		System.out.println("Test: Regiser single order");
 		UserMethods userM = new UserMethods();
 		
 		boolean expResult = true;
-		boolean result = userM.registerSingleOrder("2016-01-03", customer_id, info, user_id, mealID, deliveryDate, quantity, database);
+		boolean result = userM.registerSingleOrder("2016-01-03", 1, "none", "Marie", 3, "2016-01-04", 4, instance);
 		
 		assertEquals(expResult, result);
+	}
+	
+	@Test
+	public void testRegisterMeal(){
+		
 	}
 	
 	@Ignore
