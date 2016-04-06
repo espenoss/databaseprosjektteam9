@@ -9,18 +9,29 @@ import org.junit.Test;
 public class TestUserMethods {
 	
 	@BeforeClass
+	// opprett databaseforbindelse
+	public static void setUpClass(){
+		String brukernavn = "marith1";
+		String passord = "tgp8sBZA";
+		String database = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + brukernavn + "?user=" + brukernavn + "&password=" + passord;
+		
+	}
 	
 	@AfterClass
+	// lukk databaseforbindelse
+	public static void tearDownClass(){
+		
+	}
 	
 	@Before
 	public void beforeTest(){
-		// opprett databaseforbindelse
+	
 		
 	}
 	
 	@After
 	public void afterTest(){
-		// lukk databaseforbindelse
+	
 	}
 
 	@Test
