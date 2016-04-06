@@ -79,6 +79,14 @@ public class UserMethods {
 		return database.getLastResult();
 	}
 
+	public static String[][] viewAllCompanies(Database database) throws Exception{		
+		database.makeSingleStatement("SELECT *  FROM company NATURAL JOIN customer "
+				+ "WHERE company.customer_id = customer.customer_id");
+		
+		return database.getLastResult();
+	}
+	
+	
 	public static boolean registerSingleOrder(String order_date, int customer_id, String info, int user_id, int mealID, String deliveryDate, int quantity, Database database) throws Exception{
 		
 		String statement = "INSERT INTO food_order VALUES(DEFAULT, "
@@ -95,34 +103,30 @@ public class UserMethods {
 		
 		return true;
 	}
-
+	
+	
+	
 	/*
-	public boolean registerSubscription(String delivery_date, int quantity, String fromDate, String toDate, String subName);
-	
-	public boolean updateOrder(String delivery_date, int quantity, String mealName);
-	
-	
-	public boolean updateCompany(String customerId, String companyName, String firstName, String surName, String email, String adress, String zip_code, String zone_nr, String preferences, String active);
-	public boolean updateCustomer(String customerId, String surName, String email, String adress, String zip_code, String zone_nr, String preferences, String active);
+	public boolean registerSubscription(String delivery_date, int quantity, String fromDate, String toDate, String subName);	
 	*/
-
+	
 	
 	
 	public static void main(String[] args) throws Exception{
 		// testkode
 		
-		String username = "";
-		String password = "";
+		String username = "espenme";
+		String password = "16Sossosem06";
 		Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + username + "&password=" + password);
 		
 		String testStr = "test";
 		
-		UserMethods.registerCustomer("surname", "firstname", "aabbccdd", "email", "veigata", 1111, 1, "None", 1, database);
-		UserMethods.registerCompany("Meland", "Espen", "aabbccdd", "asd@asd", "Haga", 1234, 1, "Vegetarisk", 1, "Hask", database);		
+//		UserMethods.registerCustomer("surname", "firstname", "aabbccdd", "email", "veigata", 1111, 1, "None", 1, database);
+//		UserMethods.registerCompany("Meland", "Espen", "aabbccdd", "asd@asd", "Haga", 1234, 1, "Vegetarisk", 1, "Hask", database);		
 		
 		
-		/*
-		UserMethods.viewAllCustomers(database);
+		
+		UserMethods.viewAllCompanies(database);
 		
 		String[][] resultat = database.getLastResult();
 		
@@ -132,7 +136,7 @@ public class UserMethods {
 			}
 			System.out.println();
 		}
-		*/
+		
 //		System.out.println(UserMethods.logIn("Espen", "asd", database));
 		
 //		UserMethods.registerSingleOrder("2012-03-02", 10001, "Her er info om bestilingen", 1, 1, "2012-12-12", 1, database);
