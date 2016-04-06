@@ -10,13 +10,13 @@ public class Customer implements java.io.Serializable{
 	private int zone_nr;
 	private String preferences;
 	
-	public Customer(String firstName, String surName, String email, String adress, int zip_code, int zone_nr, String preferences){
+	public Customer(String firstName, String surName, String email, String adress, /*int zip_code, int zone_nr,*/ String preferences){
 		this.firstName=firstName;
 		this.surName=surName;
 		this.email=email;
 		this.adress=adress;
-		this.zip_code=zip_code;
-		this.zone_nr=zone_nr;
+	//	this.zip_code=zip_code;
+	//	this.zone_nr=zone_nr;
 		this.preferences=preferences;
 	}
 	public void setFirstName(String firstName){
