@@ -11,51 +11,17 @@ import databaseguiii.CustomerDialog;
 //import databaseguiii.Parentwindow.ButtonListener;
 //import databaseguiii.Parentwindow.ButtonListener2;
 
-class Parentwindow extends JFrame {
-  private Customer customer = new Customer("", "","", "", "");
-  private CustomerDialog dialog = new CustomerDialog(this);
-
-  public Parentwindow() {
-    setTitle("New customer registration");
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setLayout(new FlowLayout());
-    JButton button = new JButton("Register new customer ");
-    add(button);
-    button.addActionListener(new ButtonListener());
-    setLocation(300, 300); // plasserer foreldrevinduet
-    dialog.setLocation(350, 350);  // plasserer dialogen
-  }
-
-  private class ButtonListener implements ActionListener {
-    public void actionPerformed(ActionEvent action) {
-      if (dialog.showDialog(customer)) {
-        System.out.println("OK is pressed ...");
-      } else {
-        System.out.println("Cancel is pressed...");
-      }
-      System.out.println(customer); // bruker toString()
-    }
-  }
-}
-
-class MainCustomerGui {
-  static public void main(String[] args) {
-	Parentwindow test = new Parentwindow();
-    test.setSize(500, 300);  // for å få litt størrelse på vinduet
-    test.setSize(900, 600);  // for å få litt størrelse på vinduet
-    test.setVisible(true);
-  }   
-}  
 
 class Parentwindow2 extends JFrame {
-	  private Customer customer = new Customer("", "", "", "", "");
+	  private Customer customer = new Customer("", "", "", "", "", 0, 0, "");
 	  private CustomerDialog dialog = new CustomerDialog(this);
 	  private String firstName = "";
 	  private String surName = "";
 	  private String email = "";
 	  private String adress = "";
+	  private String phoneNumber = "";
 	  private String preferences = "";
-	  private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" +  name +"&password=" + pword);
+	  private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/ninameed?user=ninameed&password=1Le5YPPr");
 	  
 	  public Parentwindow2() {
 	    setTitle("Registrer customer");
@@ -75,7 +41,7 @@ class Parentwindow2 extends JFrame {
 	    public void actionPerformed(ActionEvent action) {
 	      if (dialog.showDialog(customer)) {
 	          try {
-	      		UserMethods.registerCustomer(customer.getFirstName(), customer.getSurName(), customer.getEmail(), customer.getAdress(), customer.getPreferences(), int active, database);
+	      		UserMethods.registerCustomer(customer.getFirstName(), customer.getSurName(), customer.getEmail(), customer.getAdress(), customer.getPreferences(), customer.getZipCode(), customer.getZoneNr(), customer.getPhoneNumber(), 1, database);
 	            } catch (Exception e) {
 	      		e.printStackTrace();
 	            }
@@ -110,11 +76,11 @@ class Parentwindow2 extends JFrame {
 	  }	    
 	}
 
-	class TestUserDialog {
+	class MainCustomerGui {
 	  static public void main(String[] args) {
-		Parentwindow test = new Parentwindow();
+		Parentwindow2 test = new Parentwindow2();
 	    test.setSize(300, 200);  //For � f� litt st�rrelse p� vinduet
 	    test.setVisible(true);
 	  }   
-	}  
+	} 
 

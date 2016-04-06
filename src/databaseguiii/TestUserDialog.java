@@ -24,7 +24,7 @@ class Parentwindow extends JFrame {
     JButton button2 = new JButton("List users");
     add(button2);
     button2.addActionListener(new ButtonListener2());   
-    setLocation(300, 300); // plasserer foreldrevinduet
+    setLocation(300, 300); // plasserer foreldrevinduet..
     dialog.setLocation(350, 350);  // plasserer dialogen
   }
 

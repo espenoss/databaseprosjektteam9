@@ -9,15 +9,17 @@ public class Customer implements java.io.Serializable{
 	private int zip_code;
 	private int zone_nr;
 	private String preferences;
+	private String phoneNumber;
 	
-	public Customer(String firstName, String surName, String email, String adress, /*int zip_code, int zone_nr,*/ String preferences){
+	public Customer(String firstName, String surName, String phoneNumber, String email, String adress, int zip_code, int zone_nr, String preferences){
 		this.firstName=firstName;
 		this.surName=surName;
 		this.email=email;
 		this.adress=adress;
-	//	this.zip_code=zip_code;
-	//	this.zone_nr=zone_nr;
+		this.zip_code=zip_code;
+		this.zone_nr=zone_nr;
 		this.preferences=preferences;
+		this.phoneNumber=phoneNumber;
 	}
 	public void setFirstName(String firstName){
 		this.firstName=firstName;
@@ -41,6 +43,9 @@ public class Customer implements java.io.Serializable{
 	public void setPreferences(String preferences){
 		this.preferences=preferences;
 	}
+	public void setPhoneNumber(String phoneNumber){
+		this.phoneNumber=phoneNumber;
+	}
 	public String getFirstName(){
 		return firstName;
 	}
@@ -62,6 +67,11 @@ public class Customer implements java.io.Serializable{
 	public String getPreferences(){
 		return preferences;
 	}
+	public String getPhoneNumber(){
+		return phoneNumber;
+	}
+	
+	
 	public boolean equals(Object obj){
 		if(!(obj instanceof Customer)){
 			return false;
@@ -71,9 +81,9 @@ public class Customer implements java.io.Serializable{
 		}
 		Customer c=(Customer)obj;
 		return (firstName==c.getFirstName()&&surName==c.getSurName()&&email==c.getEmail()
-				&&adress==c.getAdress()&&zip_code==c.getZipCode()&&zone_nr==c.zone_nr&&preferences==c.getPreferences());
+				&&adress==c.getAdress()&&zip_code==c.getZipCode()&&zone_nr==c.zone_nr&&preferences==c.getPreferences()&&phoneNumber==c.getPhoneNumber());
 	}
 	public String toString(){
-		return firstName+" "+ surName +" "+email+" "+adress+" "+zip_code+" "+zone_nr+" "+preferences;
+		return firstName+" "+ surName +" "+email+" "+adress+" "+zip_code+" "+zone_nr+" "+preferences + "" + phoneNumber;
 	}
 }

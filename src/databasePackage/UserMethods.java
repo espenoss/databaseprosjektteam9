@@ -52,7 +52,7 @@ public class UserMethods {
 		String statement = "INSERT INTO customer VALUES(DEFAULT, " 
 				+ aq(surName) + aq(firstName) + aq(phoneNumber) 
 				+ aq(email) + aq(adress)
-			/*	+ zip_code + ", " + zone_nr + ", " */
+				+ zip_code + ", " + zone_nr + ", " 
 				+ aq(preferences) + "" + active + ");";
 		
 		return database.makeSingleStatement(statement);
