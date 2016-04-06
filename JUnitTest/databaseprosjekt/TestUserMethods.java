@@ -1,5 +1,6 @@
 package databaseprosjekt;
 
+import databasePackage.*;
 import org.junit.*;
 
 import static org.junit.Assert.*;
@@ -13,8 +14,9 @@ public class TestUserMethods {
 	public static void setUpClass(){
 		String brukernavn = "marith1";
 		String passord = "tgp8sBZA";
-		String database = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + brukernavn + "?user=" + brukernavn + "&password=" + passord;
+		String databasenavn = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + brukernavn + "?user=" + brukernavn + "&password=" + passord;
 		
+		Database database = new Database("com.mysql.jdbc.Driver", databasenavn);
 	}
 	
 	@AfterClass
