@@ -46,10 +46,10 @@ public class UserMethods {
 		}
 	}
 
-	public static boolean registerCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
+	public static boolean registerCustomer(int customerID, String surName, String firstName, String phoneNumber, String email, String adress, 
 			int zip_code, int zone_nr, String preferences, int active, Database database) throws Exception{
 		
-		String statement = "INSERT INTO customer VALUES(DEFAULT, " 
+		String statement = "INSERT INTO customer VALUES(" + customerID + ", " 
 				+ aq(surName) + aq(firstName) + aq(phoneNumber) 
 				+ aq(email) + aq(adress)
 				+ zip_code + ", " + zone_nr + ", " 
@@ -58,17 +58,15 @@ public class UserMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
-	public static boolean registerCompany(String surName, String firstName, String phoneNumber,String email, String adress, 
+	public static boolean registerCompany(int customerID, String surName, String firstName, String phoneNumber,String email, String adress, 
 			int zip_code, int zone_nr, String preferences, int active, String companyName, Database database) throws Exception{
 	
-		registerCustomer(firstName, surName, phoneNumber, email, adress, zip_code, zone_nr, preferences, active, database);
+		registerCustomer(customerID, firstName, surName, phoneNumber, email, adress, zip_code, zone_nr, preferences, active, database);
 		
 		database.makeSingleStatement("SELECT MAX(customer_id) FROM customer");
-		
-		String[][] customerID = database.getLastResult();
-				
+						
 		String statement = "INSERT INTO company VALUES("
-				+ aq(customerID[0][0]) + "'" + companyName + "');";		
+				+ customerID + ",'" + companyName + "');";		
 		
 		return database.makeSingleStatement(statement);
 	}
@@ -124,11 +122,11 @@ public class UserMethods {
 		String password = "";
 		Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + username + "&password=" + password);
 		
-		UserMethods.registerUser("espenme", 1, "Espen Meland", "asd", database);
+//		UserMethods.registerUser("espenme", 1, "Espen Meland", "asd", database);
 		
 		
-//		UserMethods.registerCustomer("surname", "firstname", "aabbccdd", "email", "veigata", 1111, 1, "None", 1, database);
-//		UserMethods.registerCompany("Meland", "Espen", "aabbccdd", "asd@asd", "Haga", 1234, 1, "Vegetarisk", 1, "Hask", database);		
+//		UserMethods.registerCustomer(11, "surname", "firstname", "aabbccdd", "email", "veigata", 1111, 1, "None", 1, database);
+//		UserMethods.registerCompany(12, "Meland", "Espen", "aabbccdd", "asd@asd", "Haga", 1234, 1, "Vegetarisk", 1, "Hask", database);		
 		
 		
 		
