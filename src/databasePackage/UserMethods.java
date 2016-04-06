@@ -87,7 +87,7 @@ public class UserMethods {
 	}
 	
 	
-	public static boolean registerSingleOrder(String order_date, int customer_id, String info, int user_id, int mealID, String deliveryDate, int quantity, Database database) throws Exception{
+	public static boolean registerSingleOrder(String order_date, int customer_id, String info, String user_id, int mealID, String deliveryDate, int quantity, Database database) throws Exception{
 		
 		String statement = "INSERT INTO food_order VALUES(DEFAULT, "
 				+ aq(order_date) + customer_id + "," + aq(info) + user_id + ");";
