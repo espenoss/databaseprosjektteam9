@@ -41,7 +41,7 @@ public class TestUserMethods {
 
 	@Test
 	public void testRegisterUser() throws Exception{
-		System.out.println("Test register new user");
+		System.out.println("Test registrer new user");
 		UserMethods userM = new UserMethods();
 		
 		//Register new user
@@ -56,37 +56,30 @@ public class TestUserMethods {
 	}
 	
 	@Ignore
-	public void testLogIn() {
+	public void testLogIn() throws Exception{
 		System.out.println("Test logIn");
 		UserMethods userM = new UserMethods();
 		
+		//try to log in
 		userM.registerUser(3, "Marie", "1234", instance);
 		int result = userM.logIn("Marie", "1234", instance);
 		int expResult = 3;
 		assertEquals(expResult, result);
 		
-		//Try to register same user again
+		//login with wrong password
 		expResult = -1; 
-		result = userM.logIn(name, password, database)
+		result = userM.logIn("Marie", "  ", instance);
 		assertEquals(expResult, result);
 		
-		
+		//login with nonexcisting user
+		expResult = -1; 
+		result = userM.logIn("Marit", "1234", instance);
+		assertEquals(expResult, result);
 	}
 	
-	@Test
-	public void testRegisterCustomer() throws Exception{
-		System.out.println("Test register customer");
-		UserMethods userM = new UserMethods();
-		
-		boolean expResult = true;
-		boolean result = userM.registerCustomer("Geir", "Larsen", "geir@larsen.no", "Erling Skakkes gate 66", 7012, 1, "ingen", 1, instance);
-		
-		assertEquals(expResult, result);
-		
-		expResult = false;
-		result = userM.registerCustomer("Geir", "Larsen", "geir@larsen.no", "Erling Skakkes gate 66", 7012, 1, "ingen", 1, instance);
-		assertEquals(expResult, result);
-		
+	@Ignore
+	public void testRegisterCustomer() {
+		fail("Not yet implemented");
 	}
 	
 	@Ignore
