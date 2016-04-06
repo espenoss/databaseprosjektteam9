@@ -8,15 +8,16 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class TestUserMethods {
+	private static Database instance;
+	
+	public TestUserMethods(){
+	}
+
 	
 	@BeforeClass
 	// opprett databaseforbindelse
 	public static void setUpClass(){
-		String brukernavn = "marith1";
-		String passord = "tgp8sBZA";
-		String databasenavn = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + brukernavn + "?user=" + brukernavn + "&password=" + passord;
-		
-		Database database = new Database("com.mysql.jdbc.Driver", databasenavn);
+
 	}
 	
 	@AfterClass
@@ -27,37 +28,81 @@ public class TestUserMethods {
 	
 	@Before
 	public void beforeTest(){
-	
+		String brukernavn = "marith1";
+		String passord = "tgp8sBZA";
+		String databasenavn = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + brukernavn + "?user=" + brukernavn + "&password=" + passord;
 		
+		instance = new Database("com.mysql.jdbc.Driver", databasenavn);
 	}
 	
 	@After
 	public void afterTest(){
-	
 	}
 
 	@Test
-	public void testRegisterUser() {
-		fail("Not yet implemented");
+	public void testRegisterUser() throws Exception{
+		System.out.println("Test registrer new user");
+		UserMethods userM = new UserMethods();
+		
+		//Register new user
+		boolean expResult = true;
+		boolean result = userM.registerUser(3, "Hanne", "1234", instance);
+		assertEquals(expResult, result);
+		
+		//Try to register same user again
+		expResult = false; 
+		result = userM.registerUser(3, "Hanne", "1234", instance);
+		assertEquals(expResult, result);
 	}
 	
 	@Ignore
-	public void testLogIn() {
-		fail("Not yet implemented");
+	public void testLogIn() throws Exception{
+		System.out.println("Test logIn");
+		UserMethods userM = new UserMethods();
+		
+		//try to log in
+		userM.registerUser(3, "Marie", "1234", instance);
+		int result = userM.logIn("Marie", "1234", instance);
+		int expResult = 3;
+		assertEquals(expResult, result);
+		
+		//login with wrong password
+		expResult = -1; 
+		result = userM.logIn("Marie", "  ", instance);
+		assertEquals(expResult, result);
+		
+		//login with nonexcisting user
+		expResult = -1; 
+		result = userM.logIn("Marit", "1234", instance);
+		assertEquals(expResult, result);
+	}
+	
+	@Test
+	public void testRegisterCustomer() throws Exception{
+		System.out.println("Test register customer");
+		UserMethods userM = new UserMethods();
+		
+		boolean expResult = true;
+		boolean result = userM.registerCustomer("Geir", "Larsen", "geir@larsen.no", "Erling Skakkes gate 66", 7012, 1, "none", 1, instance);
+		
+		assertEquals(expResult, result);
+		
+	}
+	
+	@Test
+	public void testRegisterCompany() throws Exception{
+		System.out.println("Test: register company");
+		UserMethods userM = new UserMethods();
+		
+		boolean expResult = true;
+		boolean result = userM.registerCompany("Hansen", "Abraham", "a@hansen.com", "Bakkegata 123", 7014, 3, "none", 1, "Franks blomster", instance);
+		
+		assertEquals(expResult, result);
+		
 	}
 	
 	@Ignore
-	public void testRegisterCustomer() {
-		fail("Not yet implemented");
-	}
-	
-	@Ignore
-	public void testRegisterCompany() {
-		fail("Not yet implemented");
-	}
-	
-	@Ignore
-	public void testRegisterOrder() {
+	public void registerSingleOrder() {
 		fail("Not yet implemented");
 	}
 	

@@ -67,7 +67,7 @@ class Parentwindow2 extends JFrame {
 	    JButton button2 = new JButton("List customers");
 	    add(button2);
 	    button2.addActionListener(new ButtonListener2());   
-	    setLocation(300, 300); // plasserer foreldrevinduet
+	    setLocation(300, 300); // plasserer foreldrevinduet..
 	    dialog.setLocation(350, 350);  // plasserer dialogen
 	  }
 
@@ -82,7 +82,7 @@ class Parentwindow2 extends JFrame {
 	      } else {
 	        System.out.println("Cancelled");
 	      }
-	      System.out.println(customer); // bruker toString()
+	      System.out.println(customer); //bruker toString()
 	    }
 	  }
 	  
@@ -113,7 +113,7 @@ class Parentwindow2 extends JFrame {
 	class TestUserDialog {
 	  static public void main(String[] args) {
 		Parentwindow test = new Parentwindow();
-	    test.setSize(300, 200);  // for å få litt størrelse på vinduet
+	    test.setSize(300, 200);  //For å få litt størrelse på vinduet
 	    test.setVisible(true);
 	  }   
 	}  
