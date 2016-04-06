@@ -76,13 +76,10 @@ class LogInGui extends JFrame /*implements ActionListener*/{
 	}
 }
 
-class TestLogInGui{
+class MainLogInGui{
 	public static void main(String[] args){
 		LogInGui window = new LogInGui("Log In");
 		window.setVisible(true);
 	}
 }
-
-
-
 
