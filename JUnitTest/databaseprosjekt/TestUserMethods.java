@@ -67,12 +67,5 @@ public class TestUserMethods {
 		fail("Not yet implemented");
 	}
 	
-	
-	
-	
-
-	
-	
-	
 
 }
