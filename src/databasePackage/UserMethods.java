@@ -35,7 +35,7 @@ public class UserMethods {
 		
 		String[][] userType = null;
 		
-		database.makeSingleStatement("SELECT user_type FROM user WHERE userID = '" + userID + "' AND password ='" + password + "'");	
+		database.makeSingleStatement("SELECT user_type FROM user WHERE user_id = '" + userID + "' AND password ='" + password + "'");	
 		
 		userType = database.getLastResult();
 		
@@ -102,11 +102,21 @@ public class UserMethods {
 		return true;
 	}
 	
-	public static boolean registerMeal(String name, String instructions, int available, int price, int discount, int discountLim, Database database){
+	public static boolean registerMeal(String name, String instructions, int available, int price, int discount, int discountLim, Database database) throws Exception{
 		
-		String statement = "INSERT INTO meal VALUES(DEFAULT, ";
+		String statement = "INSERT INTO meal VALUES(DEFAULT, "
+				+ aq(name) + aq(instructions) + available + ", " + price + ", " + discount + ", " + discountLim + ");";
+				
+		return database.makeSingleStatement(statement);
+	}
+	
+	public static String[][] viewMeals(Database database) throws Exception{
 		
-		return false;
+		String statement = "SELECT * FROM meal";
+		
+		database.makeSingleStatement(statement);
+		
+		return database.getLastResult();
 	}
 	
 	/*
@@ -121,7 +131,21 @@ public class UserMethods {
 		String username = "";
 		String password = "";
 		Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + username + "&password=" + password);
+		String[][] resultat = null;
 		
+//		UserMethods.registerMeal("Mais", "ingenting", 1, 123, 10, 12, database);
+	
+//		UserMethods.viewMeals(database);
+
+/*		resultat = database.getLastResult();		
+		
+		for(int x=0;x<resultat.length; x++){
+			for(int y=0;y<resultat[x].length;y++){
+				System.out.print(resultat[x][y] + " ");
+			}
+			System.out.println();
+		}		
+*/		
 //		UserMethods.registerUser("espenme", 1, "Espen Meland", "asd", database);
 		
 		
@@ -132,7 +156,6 @@ public class UserMethods {
 		
 /*		UserMethods.viewAllCompanies(database);
 		
-		String[][] resultat = database.getLastResult();
 		
 		for(int x=0;x<resultat.length; x++){
 			for(int y=0;y<resultat[x].length;y++){

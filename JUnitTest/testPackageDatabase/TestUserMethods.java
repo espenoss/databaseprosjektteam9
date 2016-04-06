@@ -1,4 +1,4 @@
-package databaseprosjekt;
+package testPackageDatabase;
 
 import databasePackage.*;
 import org.junit.*;
@@ -64,19 +64,23 @@ public class TestUserMethods {
 		
 		//try to log in
 		userM.registerUser("Marie", 3, "Marie M", "1234", instance);
+		
 		int result = userM.logIn("Marie", "1234", instance);
 		int expResult = 3;
 		assertEquals(expResult, result);
+		
 		
 		//login with wrong password
 		expResult = -1; 
 		result = userM.logIn("Marie", "  ", instance);
 		assertEquals(expResult, result);
 		
+		
 		//login with nonexcisting user
 		expResult = -1; 
 		result = userM.logIn("Marit", "1234", instance);
 		assertEquals(expResult, result);
+		
 	}
 	
 	@Test
@@ -85,7 +89,7 @@ public class TestUserMethods {
 		UserMethods userM = new UserMethods();
 		
 		boolean expResult = true;
-		boolean result = userM.registerCustomer("Larsen", "Geir", "73123456", "geir@larsen.no", "Erling Skakkes gate 66", 7012, 1, "none", 1, instance);
+		boolean result = userM.registerCustomer(100, "Larsen", "Geir", "73123456", "geir@larsen.no", "Erling Skakkes gate 66", 7012, 1, "none", 1, instance);
 		
 		assertEquals(expResult, result);
 		
@@ -97,7 +101,7 @@ public class TestUserMethods {
 		UserMethods userM = new UserMethods();
 		
 		boolean expResult = true;
-		boolean result = userM.registerCompany("Hansen", "Abraham", "73309090", "ab.hansen@franksblomster.com", "Bakkegata 123", 7014, 3, "none", 1, "Franks blomster", instance);
+		boolean result = userM.registerCompany(101, "Hansen", "Abraham", "73309090", "ab.hansen@franksblomster.com", "Bakkegata 123", 7014, 3, "none", 1, "Franks blomster", instance);
 		
 		assertEquals(expResult, result);
 		
@@ -109,7 +113,7 @@ public class TestUserMethods {
 		UserMethods userM = new UserMethods();
 		
 		boolean expResult = true;
-		boolean result = userM.registerSingleOrder("2016-01-03", 1, "none", "Marie", 3, "2016-01-04", 4, instance);
+		boolean result = userM.registerSingleOrder("2016-01-03", 1, "none", "Marie", 1, "2016-01-04", 4, instance);
 		
 		assertEquals(expResult, result);
 	}
