@@ -77,14 +77,34 @@ public class TestUserMethods {
 		assertEquals(expResult, result);
 	}
 	
-	@Ignore
-	public void testRegisterCustomer() {
-		fail("Not yet implemented");
+	@Test
+	public void testRegisterCustomer() throws Exception{
+		System.out.println("Test register customer");
+		UserMethods userM = new UserMethods();
+		
+		boolean expResult = true;
+		boolean result = userM.registerCustomer("Geir", "Larsen", "geir@larsen.no", "Erling Skakkes gate 66", 7012, 1, "none", 1, instance);
+		
+		assertEquals(expResult, result);
+		
+		expResult = false;
+		result = userM.registerCustomer("Geir", "Larsen", "geir@larsen.no", "Erling Skakkes gate 66", 7012, 1, "none", 1, instance);
+		assertEquals(expResult, result);
 	}
 	
-	@Ignore
-	public void testRegisterCompany() {
-		fail("Not yet implemented");
+	@Test
+	public void testRegisterCompany() throws Exception{
+		System.out.println("Test: register company");
+		UserMethods userM = new UserMethods();
+		
+		boolean expResult = true;
+		boolean result = userM.registerCompany("Hansen", "Abraham", "a@hansen.com", "Bakkegata 123", 7014, 3, "none", 1, "Franks blomster", instance);
+		
+		assertEquals(expResult, result);
+		
+		expResult = false;
+		result = userM.registerCompany("Hansen", "Abraham", "a@hansen.com", "Bakkegata 123", 7014, 3, "none", 1, "Franks blomster", instance);
+		assertEquals(expResult, result);
 	}
 	
 	@Ignore
