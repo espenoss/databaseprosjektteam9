@@ -48,7 +48,7 @@ class Parentwindow2 extends JFrame {
 	      } else {
 	        System.out.println("Cancelled");
 	      }
-	      System.out.println(customer); //bruker toString()
+	      System.out.println(customer); //bruker toString().
 	    }
 	  }
 	  
