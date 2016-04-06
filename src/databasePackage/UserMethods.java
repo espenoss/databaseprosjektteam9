@@ -111,8 +111,8 @@ public class UserMethods {
 	public static void main(String[] args) throws Exception{
 		// testkode
 		
-		String username = "espenme";
-		String password = "16Sossosem06";
+		String username = "";
+		String password = "";
 		Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + username + "&password=" + password);
 		
 		String testStr = "test";
