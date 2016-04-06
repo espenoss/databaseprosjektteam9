@@ -64,19 +64,23 @@ public class TestUserMethods {
 		
 		//try to log in
 		userM.registerUser("Marie", 3, "Marie M", "1234", instance);
+		
 		int result = userM.logIn("Marie", "1234", instance);
 		int expResult = 3;
 		assertEquals(expResult, result);
+		
 		
 		//login with wrong password
 		expResult = -1; 
 		result = userM.logIn("Marie", "  ", instance);
 		assertEquals(expResult, result);
 		
+		
 		//login with nonexcisting user
 		expResult = -1; 
 		result = userM.logIn("Marit", "1234", instance);
 		assertEquals(expResult, result);
+		
 	}
 	
 	@Test

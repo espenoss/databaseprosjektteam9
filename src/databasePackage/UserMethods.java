@@ -35,7 +35,7 @@ public class UserMethods {
 		
 		String[][] userType = null;
 		
-		database.makeSingleStatement("SELECT user_type FROM user WHERE userID = '" + userID + "' AND password ='" + password + "'");	
+		database.makeSingleStatement("SELECT user_type FROM user WHERE user_id = '" + userID + "' AND password ='" + password + "'");	
 		
 		userType = database.getLastResult();
 		
