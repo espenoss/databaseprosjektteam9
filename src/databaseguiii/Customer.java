@@ -10,40 +10,68 @@ public class Customer implements java.io.Serializable{
 	private int zone_nr;
 	private String preferences;
 	
-	public User(String firstName, String surName, String email, String adress, int zip_code, int zone_nr, String preferences){
+	public Customer(String firstName, String surName, String email, String adress, int zip_code, int zone_nr, String preferences){
 		this.firstName=firstName;
 		this.surName=surName;
 		this.email=email;
+		this.adress=adress;
+		this.zip_code=zip_code;
+		this.zone_nr=zone_nr;
+		this.preferences=preferences;
 	}
-	public void setUsername(String username){
-		this.username=username;
+	public void setFirstName(String firstName){
+		this.firstName=firstName;
 	}
-	public void setRole(String role){
-		this.role = role;
+	public void setSurName(String surName){
+		this.surName=surName;
 	}
-	public void setPassword(String password){
-		this.password=password;
+	
+	public void setEmail(String email){
+		this.email=email;
 	}
-	public String getUsername(){
-		return username;
+	
+	public void setZipCode(int zip_code){
+		this.zip_code=zip_code;
 	}
-	public String getRole(){
-		return role;
+	public void setZoneNr(int zone_nr){
+		this.zone_nr=zone_nr;
 	}
-	public String getPassword(){
-		return password;
+	public void setPreferences(String preferences){
+		this.preferences=preferences;
+	}
+	public String getFirstName(){
+		return firstName;
+	}
+	public String getSurName(){
+		return surName;
+	}
+	public String getEmail(){
+		return email;
+	}
+	public String getAdress(){
+		return adress;
+	}
+	public int getZipCode(){
+		return zip_code;
+	}
+	public int getZoneNr(){
+		return zone_nr;
+	}
+	public String getPreferences(){
+		return preferences;
 	}
 	public boolean equals(Object obj){
-		if(!(obj instanceof User)){
+		if(!(obj instanceof Customer)){
 			return false;
 		}
 		if(this==obj){
 			return true;
 		}
-		User p=(User)obj;
-		return (username==p.getUsername()&&password==p.getPassword()&&role==p.getRole());
+		Customer c=(Customer)obj;
+		return (firstName==c.getFirstName()&&surName==c.getSurName()&&email==c.getEmail()
+				&&adress==c.getAdress()&&zip_code==c.getZipCode()&&zone_nr==c.zone_nr&&preferences==c.getPreferences());
 	}
 	public String toString(){
-		return username+" "+ role +" "+password;
+		return firstName+" "+ surName +" "+email+" "+adress+" "+zip_code+" "+zone_nr+" "+preferences;
 	}
 }
