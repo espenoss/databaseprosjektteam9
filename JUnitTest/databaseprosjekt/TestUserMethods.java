@@ -46,15 +46,15 @@ public class TestUserMethods {
 		
 		//Register new user
 		boolean expResult = true;
-		boolean result = userM.registerUser(3, "Hanne", "1234", instance);
+		boolean result = userM.registerUser("Hanne", 3, "Hanne Hansen", "1234", instance);
 		assertEquals(expResult, result);
 		
-		/*
+		//(String userID, int userType, String name, String password, Database database)
+		
 		//Try to register same user again
 		expResult = false; 
-		result = userM.registerUser(3, "Hanne", "1234", instance);
+		result = userM.registerUser("Hanne", 3, "Hanne H", "1234", instance);
 		assertEquals(expResult, result);
-		*/
 	}
 	
 	@Test
@@ -63,7 +63,7 @@ public class TestUserMethods {
 		UserMethods userM = new UserMethods();
 		
 		//try to log in
-		userM.registerUser(3, "Marie", "1234", instance);
+		userM.registerUser("Marie", 3, "Marie M", "1234", instance);
 		int result = userM.logIn("Marie", "1234", instance);
 		int expResult = 3;
 		assertEquals(expResult, result);
@@ -85,7 +85,7 @@ public class TestUserMethods {
 		UserMethods userM = new UserMethods();
 		
 		boolean expResult = true;
-		boolean result = userM.registerCustomer("Geir", "Larsen", "geir@larsen.no", "Erling Skakkes gate 66", 7012, 1, "none", 1, instance);
+		boolean result = userM.registerCustomer("Larsen", "Geir", "73123456", "geir@larsen.no", "Erling Skakkes gate 66", 7012, 1, "none", 1, instance);
 		
 		assertEquals(expResult, result);
 		
@@ -97,21 +97,26 @@ public class TestUserMethods {
 		UserMethods userM = new UserMethods();
 		
 		boolean expResult = true;
-		boolean result = userM.registerCompany("Hansen", "Abraham", "a@hansen.com", "Bakkegata 123", 7014, 3, "none", 1, "Franks blomster", instance);
+		boolean result = userM.registerCompany("Hansen", "Abraham", "73309090", "ab.hansen@franksblomster.com", "Bakkegata 123", 7014, 3, "none", 1, "Franks blomster", instance);
 		
 		assertEquals(expResult, result);
 		
 	}
 	
 	@Test
-	public void registerSingleOrder() {
+	public void registerSingleOrder() throws Exception{
 		System.out.println("Test: Regiser single order");
 		UserMethods userM = new UserMethods();
 		
 		boolean expResult = true;
-		boolean result = userM.registerSingleOrder("2016-01-03", customer_id, info, user_id, mealID, deliveryDate, quantity, database);
+		boolean result = userM.registerSingleOrder("2016-01-03", 1, "none", "Marie", 3, "2016-01-04", 4, instance);
 		
 		assertEquals(expResult, result);
+	}
+	
+	@Ignore
+	public void testRegisterMeal(){
+		
 	}
 	
 	@Ignore

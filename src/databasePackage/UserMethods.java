@@ -15,9 +15,9 @@ public class UserMethods {
 	}
 	
 	// Method for registering new user in database
-	public static boolean registerUser(int userType, String name, String password, Database database) throws Exception{
+	public static boolean registerUser(String userID, int userType, String name, String password, Database database) throws Exception{
 		
-		String statement = "INSERT INTO user VALUES(DEFAULT, " 
+		String statement = "INSERT INTO user VALUES(" + aq(userID) 
 				+ userType + ", '" + name + "', '" + password + "');";
 
 		return database.makeSingleStatement(statement);
@@ -31,11 +31,11 @@ public class UserMethods {
 		
 	}	
 	
-	public static int logIn(String name, String password, Database database) throws Exception{
+	public static int logIn(String userID, String password, Database database) throws Exception{
 		
 		String[][] userType = null;
 		
-		database.makeSingleStatement("SELECT user_type FROM user WHERE name = '" + name + "' AND password ='" + password + "'");	
+		database.makeSingleStatement("SELECT user_type FROM user WHERE userID = '" + userID + "' AND password ='" + password + "'");	
 		
 		userType = database.getLastResult();
 		
@@ -46,10 +46,10 @@ public class UserMethods {
 		}
 	}
 
-	public static boolean registerCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
+	public static boolean registerCustomer(int customerID, String surName, String firstName, String phoneNumber, String email, String adress, 
 			int zip_code, int zone_nr, String preferences, int active, Database database) throws Exception{
 		
-		String statement = "INSERT INTO customer VALUES(DEFAULT, " 
+		String statement = "INSERT INTO customer VALUES(" + customerID + ", " 
 				+ aq(surName) + aq(firstName) + aq(phoneNumber) 
 				+ aq(email) + aq(adress)
 				+ zip_code + ", " + zone_nr + ", " 
@@ -58,17 +58,15 @@ public class UserMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
-	public static boolean registerCompany(String surName, String firstName, String phoneNumber,String email, String adress, 
+	public static boolean registerCompany(int customerID, String surName, String firstName, String phoneNumber,String email, String adress, 
 			int zip_code, int zone_nr, String preferences, int active, String companyName, Database database) throws Exception{
 	
-		registerCustomer(firstName, surName, phoneNumber, email, adress, zip_code, zone_nr, preferences, active, database);
+		registerCustomer(customerID, firstName, surName, phoneNumber, email, adress, zip_code, zone_nr, preferences, active, database);
 		
 		database.makeSingleStatement("SELECT MAX(customer_id) FROM customer");
-		
-		String[][] customerID = database.getLastResult();
-				
+						
 		String statement = "INSERT INTO company VALUES("
-				+ aq(customerID[0][0]) + "'" + companyName + "');";		
+				+ customerID + ",'" + companyName + "');";		
 		
 		return database.makeSingleStatement(statement);
 	}
@@ -79,7 +77,15 @@ public class UserMethods {
 		return database.getLastResult();
 	}
 
-	public static boolean registerSingleOrder(String order_date, int customer_id, String info, int user_id, int mealID, String deliveryDate, int quantity, Database database) throws Exception{
+	public static String[][] viewAllCompanies(Database database) throws Exception{		
+		database.makeSingleStatement("SELECT *  FROM company NATURAL JOIN customer "
+				+ "WHERE company.customer_id = customer.customer_id");
+		
+		return database.getLastResult();
+	}
+	
+	
+	public static boolean registerSingleOrder(String order_date, int customer_id, String info, String user_id, int mealID, String deliveryDate, int quantity, Database database) throws Exception{
 		
 		String statement = "INSERT INTO food_order VALUES(DEFAULT, "
 				+ aq(order_date) + customer_id + "," + aq(info) + user_id + ");";
@@ -95,17 +101,18 @@ public class UserMethods {
 		
 		return true;
 	}
-
+	
+	public static boolean registerMeal(String name, String instructions, int available, int price, int discount, int discountLim, Database database){
+		
+		String statement = "INSERT INTO meal VALUES(DEFAULT, ";
+		
+		return false;
+	}
+	
 	/*
-	public boolean registerSubscription(String delivery_date, int quantity, String fromDate, String toDate, String subName);
-	
-	public boolean updateOrder(String delivery_date, int quantity, String mealName);
-	
-	
-	public boolean updateCompany(String customerId, String companyName, String firstName, String surName, String email, String adress, String zip_code, String zone_nr, String preferences, String active);
-	public boolean updateCustomer(String customerId, String surName, String email, String adress, String zip_code, String zone_nr, String preferences, String active);
+	public boolean registerSubscription(String delivery_date, int quantity, String fromDate, String toDate, String subName);	
 	*/
-
+	
 	
 	
 	public static void main(String[] args) throws Exception{
@@ -115,14 +122,15 @@ public class UserMethods {
 		String password = "";
 		Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + username + "&password=" + password);
 		
-		String testStr = "test";
-		
-		UserMethods.registerCustomer("surname", "firstname", "aabbccdd", "email", "veigata", 1111, 1, "None", 1, database);
-		UserMethods.registerCompany("Meland", "Espen", "aabbccdd", "asd@asd", "Haga", 1234, 1, "Vegetarisk", 1, "Hask", database);		
+//		UserMethods.registerUser("espenme", 1, "Espen Meland", "asd", database);
 		
 		
-		/*
-		UserMethods.viewAllCustomers(database);
+//		UserMethods.registerCustomer(11, "surname", "firstname", "aabbccdd", "email", "veigata", 1111, 1, "None", 1, database);
+//		UserMethods.registerCompany(12, "Meland", "Espen", "aabbccdd", "asd@asd", "Haga", 1234, 1, "Vegetarisk", 1, "Hask", database);		
+		
+		
+		
+/*		UserMethods.viewAllCompanies(database);
 		
 		String[][] resultat = database.getLastResult();
 		
@@ -132,7 +140,7 @@ public class UserMethods {
 			}
 			System.out.println();
 		}
-		*/
+*/		
 //		System.out.println(UserMethods.logIn("Espen", "asd", database));
 		
 //		UserMethods.registerSingleOrder("2012-03-02", 10001, "Her er info om bestilingen", 1, 1, "2012-12-12", 1, database);

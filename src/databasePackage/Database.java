@@ -104,4 +104,32 @@ public class Database {
 		return success;
 	}
 	
+	
+	public boolean initiateDb(String table, String createTable){
+        boolean ok = false;
+        Connection connection = null;                  
+    	Statement statement = null;
+    	
+        try {    
+        	Class.forName(dbDriver);        
+        	connection = DriverManager.getConnection(dbName);                    
+        	statement = connection.createStatement();
+        	String sqlDeleteTable = "DROP TABLE IF EXISTS "+table;
+	        String sqlCreateTable = createTable;
+	        statement.executeUpdate(sqlDeleteTable );
+	        statement.executeUpdate(sqlCreateTable);
+        	ok = true;
+        } catch (ClassNotFoundException e){
+        	Cleaner.printMessage(e, "Database.initiateDb(): driver not found");
+        }catch (SQLException e){
+        	Cleaner.printMessage(e, "Database.initiateDb(): SQL-error.");
+        } catch (Exception e){
+        	Cleaner.printMessage(e, "Database.initiateDb(): general error");
+        } finally{
+    		// close database connections
+    		Cleaner.closeStatement(statement);
+    		Cleaner.closeConnection(connection);
+        }
+        return ok;
+    }
 }
