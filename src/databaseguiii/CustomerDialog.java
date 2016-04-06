@@ -15,13 +15,13 @@ public class CustomerDialog extends MyDialog{
 	private JTextField email = new JTextField(20);
 	private JTextField adress = new JTextField(20);
 	
-	private JTextField zip_code = new JTextField(6);
+/*	private JTextField zip_code = new JTextField(6);
 	String text1 = zip_code.getText();
 	int  zip_codeInt= Integer.parseInt(text1);
 	
 	private JTextField zone_nr = new JTextField(6);
 	String text2 = zone_nr.getText();
-	int  zone_nrInt= Integer.parseInt(text2);
+	int  zone_nrInt= Integer.parseInt(text2);   */
 	
 	private JTextField preferences = new JTextField(100);
 	

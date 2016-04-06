@@ -55,7 +55,7 @@ class Parentwindow2 extends JFrame {
 	  private String email = "";
 	  private String adress = "";
 	  private String preferences = "";
-	  private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + name +"&password=" + pword);
+	  private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" +  name +"&password=" + pword);
 	  
 	  public Parentwindow2() {
 	    setTitle("Registrer customer");
@@ -75,7 +75,7 @@ class Parentwindow2 extends JFrame {
 	    public void actionPerformed(ActionEvent action) {
 	      if (dialog.showDialog(customer)) {
 	          try {
-	      		UserMethods.registerUser(3, customer.getFirstName(), customer.getSurName(), customer.getEmail(), customer.getAdress(), customer.getPreferences(), database);
+	      		UserMethods.registerCustomer(customer.getFirstName(), customer.getSurName(), customer.getEmail(), customer.getAdress(), customer.getPreferences(), int active, database);
 	            } catch (Exception e) {
 	      		e.printStackTrace();
 	            }

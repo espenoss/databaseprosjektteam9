@@ -46,12 +46,12 @@ public class UserMethods {
 	}
 
 	public static void registerCustomer(String firstName, String surName, String email, String adress, 
-			int zip_code, int zone_nr, String preferences, int active, Database database) throws Exception{
+		/*	int zip_code, int zone_nr, */ String preferences, int active, Database database) throws Exception{
 		
 		String statement = "INSERT INTO customer VALUES(DEFAULT, " 
 				+ aq(firstName) + aq(surName) + aq(email) 
 				+ aq(email) + aq(adress)
-				+ zip_code + ", " + zone_nr + ", " 
+			/*	+ zip_code + ", " + zone_nr + ", " */
 				+ aq(preferences) + "" + active + ");";
 
 		// Sjekk setning, fjern etter testing
@@ -63,7 +63,7 @@ public class UserMethods {
 	public static void registerCompany(String surName, String firstName, String email, String adress, 
 			int zip_code, int zone_nr, String preferences, int active, String companyName, Database database) throws Exception{
 	
-		registerCustomer(firstName, surName, email, adress, zip_code, zone_nr, preferences, active, database);
+		registerCustomer(firstName, surName, email, adress, /*zip_code, zone_nr, */ preferences, active, database);
 		
 		String[][] customerID = database.makeSingleStatement("SELECT customer_id FROM customer WHERE firstname = '" + firstName 
 				+ "' AND surname = '" + surName + "'");
