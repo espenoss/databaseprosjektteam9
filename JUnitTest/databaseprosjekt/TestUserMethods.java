@@ -103,9 +103,15 @@ public class TestUserMethods {
 		
 	}
 	
-	@Ignore
+	@Test
 	public void registerSingleOrder() {
-		fail("Not yet implemented");
+		System.out.println("Test: Regiser single order");
+		UserMethods userM = new UserMethods();
+		
+		boolean expResult = true;
+		boolean result = userM.registerSingleOrder("2016-01-03", customer_id, info, user_id, mealID, deliveryDate, quantity, database);
+		
+		assertEquals(expResult, result);
 	}
 	
 	@Ignore
