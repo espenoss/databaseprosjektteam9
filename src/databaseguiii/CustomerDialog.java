@@ -15,15 +15,13 @@ public class CustomerDialog extends MyDialog{
 	private JTextField email = new JTextField(20);
 	private JTextField adress = new JTextField(20);
 	
-/*	private JTextField zip_code = new JTextField(6);
-	String text1 = zip_code.getText();
-	int  zip_codeInt= Integer.parseInt(text1);
-	
+	private JTextField zip_code = new JTextField(6);
 	private JTextField zone_nr = new JTextField(6);
-	String text2 = zone_nr.getText();
+/*	String text2 = zone_nr.getText();
 	int  zone_nrInt= Integer.parseInt(text2);   */
 	
 	private JTextField preferences = new JTextField(100);
+	private JTextField phoneNumber = new JTextField(12);
 	
 	
 	public CustomerDialog(JFrame parent){
@@ -36,7 +34,7 @@ public class CustomerDialog extends MyDialog{
 	
 	private class CustomerDatapanel extends JPanel{
 		public CustomerDatapanel(){
-			setLayout(new GridLayout(3,2));
+			setLayout(new GridLayout(8,2));
 			add(new JLabel("First name: ", JLabel.RIGHT));
 			add(firstName);
 			
@@ -57,6 +55,9 @@ public class CustomerDialog extends MyDialog{
 			
 			add(new JLabel("Preferences: ", JLabel.RIGHT));
 			add(preferences);
+			
+			add(new JLabel("Phone number: ", JLabel.RIGHT));
+			add(phoneNumber);
 		}
 	}
 	public boolean showDialog(Customer customer){
@@ -67,6 +68,7 @@ public class CustomerDialog extends MyDialog{
 //		zip_code.setText(customer.getZipCode());
 //		zone_nr.setText(customer.getZoneNr());
 		preferences.setText(customer.getPreferences());
+		preferences.setText(customer.getPhoneNumber());
 		setOK(false);
 		pack();
 		
@@ -77,7 +79,7 @@ public class CustomerDialog extends MyDialog{
 			customer.setSurName(surName.getText());
 			customer.setEmail(email.getText());
 			customer.setAdress(adress.getText());
-//			customer.setZipCode(zip_code.getText());
+ //	    	customer.setZipCode(zip_code.getText());
 //		    customer.setZoneNr(zone_nr.getText());
 			customer.setPreferences(preferences.getText());
 			return true;
@@ -91,8 +93,17 @@ public class CustomerDialog extends MyDialog{
 		String Surname = surName.getText().trim();
 		String Email = email.getText().trim();
 		String Adress = adress.getText().trim();
-		String ZipCode = zip_code.getText().trim();
-		String ZoneNr = zone_nr.getText().trim();
+		
+		
+		
+		
+		String text1 = zip_code.getText();
+		int  zip_codeInt= Integer.parseInt(text1.trim());
+		
+		String text2 = zip_code.getText();
+		int  zone_nrInt= Integer.parseInt(text2.trim());
+		
+
 		String Preferences = preferences.getText().trim();
 		
 		if(firstName.equals("")|| surName.equals("") || email.equals("") || adress.equals("") || zip_code.equals("") || zone_nr.equals("") || preferences.equals("")){
