@@ -15,9 +15,9 @@ public class UserMethods {
 	}
 	
 	// Method for registering new user in database
-	public static boolean registerUser(int userType, String name, String password, Database database) throws Exception{
+	public static boolean registerUser(String userID, int userType, String name, String password, Database database) throws Exception{
 		
-		String statement = "INSERT INTO user VALUES(DEFAULT, " 
+		String statement = "INSERT INTO user VALUES(" + aq(userID) 
 				+ userType + ", '" + name + "', '" + password + "');";
 
 		return database.makeSingleStatement(statement);
@@ -104,7 +104,12 @@ public class UserMethods {
 		return true;
 	}
 	
-	
+	public static boolean registerMeal(String name, String instructions, int available, int price, int discount, int discountLim, Database database){
+		
+		String statement = "INSERT INTO meal VALUES(DEFAULT, ";
+		
+		return false;
+	}
 	
 	/*
 	public boolean registerSubscription(String delivery_date, int quantity, String fromDate, String toDate, String subName);	
@@ -115,18 +120,19 @@ public class UserMethods {
 	public static void main(String[] args) throws Exception{
 		// testkode
 		
-		String username = "espenme";
-		String password = "16Sossosem06";
+		String username = "";
+		String password = "";
 		Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + username + "&password=" + password);
 		
-		String testStr = "test";
+		UserMethods.registerUser("espenme", 1, "Espen Meland", "asd", database);
+		
 		
 //		UserMethods.registerCustomer("surname", "firstname", "aabbccdd", "email", "veigata", 1111, 1, "None", 1, database);
 //		UserMethods.registerCompany("Meland", "Espen", "aabbccdd", "asd@asd", "Haga", 1234, 1, "Vegetarisk", 1, "Hask", database);		
 		
 		
 		
-		UserMethods.viewAllCompanies(database);
+/*		UserMethods.viewAllCompanies(database);
 		
 		String[][] resultat = database.getLastResult();
 		
@@ -136,7 +142,7 @@ public class UserMethods {
 			}
 			System.out.println();
 		}
-		
+*/		
 //		System.out.println(UserMethods.logIn("Espen", "asd", database));
 		
 //		UserMethods.registerSingleOrder("2012-03-02", 10001, "Her er info om bestilingen", 1, 1, "2012-12-12", 1, database);
