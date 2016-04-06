@@ -31,11 +31,11 @@ public class UserMethods {
 		
 	}	
 	
-	public static int logIn(String name, String password, Database database) throws Exception{
+	public static int logIn(String userID, String password, Database database) throws Exception{
 		
 		String[][] userType = null;
 		
-		database.makeSingleStatement("SELECT user_type FROM user WHERE name = '" + name + "' AND password ='" + password + "'");	
+		database.makeSingleStatement("SELECT user_type FROM user WHERE userID = '" + userID + "' AND password ='" + password + "'");	
 		
 		userType = database.getLastResult();
 		
