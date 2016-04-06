@@ -41,7 +41,7 @@ public class TestUserMethods {
 
 	@Test
 	public void testRegisterUser() throws Exception{
-		System.out.println("Test registrer new user");
+		System.out.println("Test register new user");
 		UserMethods userM = new UserMethods();
 		
 		boolean expResult = true;
@@ -59,9 +59,20 @@ public class TestUserMethods {
 		fail("Not yet implemented");
 	}
 	
-	@Ignore
-	public void testRegisterCustomer() {
-		fail("Not yet implemented");
+	@Test
+	public void testRegisterCustomer() throws Exception{
+		System.out.println("Test register customer");
+		UserMethods userM = new UserMethods();
+		
+		boolean expResult = true;
+		boolean result = userM.registerCustomer("Geir", "Larsen", "geir@larsen.no", "Erling Skakkes gate 66", 7012, 1, "ingen", 1, instance);
+		
+		assertEquals(expResult, result);
+		
+		expResult = false;
+		result = userM.registerCustomer("Geir", "Larsen", "geir@larsen.no", "Erling Skakkes gate 66", 7012, 1, "ingen", 1, instance);
+		assertEquals(expResult, result);
+		
 	}
 	
 	@Ignore
