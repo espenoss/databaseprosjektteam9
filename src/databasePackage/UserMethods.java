@@ -15,20 +15,19 @@ public class UserMethods {
 	}
 	
 	// Method for registering new user in database
-	public static void registerUser(int userType, String name, String password, Database database) throws Exception{
+	public static boolean registerUser(int userType, String name, String password, Database database) throws Exception{
 		
 		String statement = "INSERT INTO user VALUES(DEFAULT, " 
 				+ userType + ", '" + name + "', '" + password + "');";
 
-		database.makeSingleStatement(statement);
-		
-		// Sjekk setning, fjern etter testing
-		System.out.println(statement);
+		return database.makeSingleStatement(statement);
 	}
 
 	public static String[][] viewAllUsers(Database database) throws Exception{
 		
-		return database.makeSingleStatement("SELECT user_id, user_type, name FROM user");
+		database.makeSingleStatement("SELECT user_id, user_type, name FROM user");
+		
+		return database.getLastResult();
 		
 	}	
 	
@@ -36,7 +35,9 @@ public class UserMethods {
 		
 		String[][] userType = null;
 		
-		userType = database.makeSingleStatement("SELECT user_type FROM user WHERE name = '" + name + "' AND password ='" + password + "'");	
+		database.makeSingleStatement("SELECT user_type FROM user WHERE name = '" + name + "' AND password ='" + password + "'");	
+		
+		userType = database.getLastResult();
 		
 		if(userType.length == 0){ // If no such user or password is incorrect
 			return -1;
@@ -45,7 +46,7 @@ public class UserMethods {
 		}
 	}
 
-	public static void registerCustomer(String firstName, String surName, String email, String adress, 
+	public static boolean registerCustomer(String firstName, String surName, String email, String adress, 
 			int zip_code, int zone_nr, String preferences, int active, Database database) throws Exception{
 		
 		String statement = "INSERT INTO customer VALUES(DEFAULT, " 
@@ -53,44 +54,41 @@ public class UserMethods {
 				+ aq(email) + aq(adress)
 				+ zip_code + ", " + zone_nr + ", " 
 				+ aq(preferences) + "" + active + ");";
-
-		// Sjekk setning, fjern etter testing
-		System.out.println(statement);
 		
-		database.makeSingleStatement(statement);
+		return database.makeSingleStatement(statement);
 	}
 	
-	public static void registerCompany(String surName, String firstName, String email, String adress, 
+	public static boolean registerCompany(String surName, String firstName, String email, String adress, 
 			int zip_code, int zone_nr, String preferences, int active, String companyName, Database database) throws Exception{
 	
 		registerCustomer(firstName, surName, email, adress, zip_code, zone_nr, preferences, active, database);
 		
-		String[][] customerID = database.makeSingleStatement("SELECT MAX(customer_id) FROM customer");
+		database.makeSingleStatement("SELECT MAX(customer_id) FROM customer");
+		
+		String[][] customerID = database.getLastResult();
 				
 		String statement = "INSERT INTO company VALUES("
 				+ aq(customerID[0][0]) + "'" + companyName + "');";		
-
-		// Sjekk setning, fjern etter testing
-		System.out.println(statement);		
 		
-		database.makeSingleStatement(statement);
+		return database.makeSingleStatement(statement);
 	}
 	
 
-	public static void registerSingleOrder(String order_date, int customer_id, String info, int user_id, int mealID, String deliveryDate, int quantity, Database database) throws Exception{
+	public static boolean registerSingleOrder(String order_date, int customer_id, String info, int user_id, int mealID, String deliveryDate, int quantity, Database database) throws Exception{
 		
 		String statement = "INSERT INTO food_order VALUES(DEFAULT, "
 				+ aq(order_date) + customer_id + "," + aq(info) + user_id + ");";
-//		database.makeSingleStatement(statement);
-//		System.out.println(statement);
+		if(!database.makeSingleStatement(statement)) return false;
 
-		String orderID = database.makeSingleStatement("SELECT MAX(order_id) FROM food_order")[0][0];
+		if(!database.makeSingleStatement("SELECT MAX(order_id) FROM food_order")) return false;
+		
+		String orderID = database.getLastResult()[0][0];
 		
 		statement = "INSERT INTO ordered_meal VALUES("
 				+ aq(orderID) + mealID + "," + aq(deliveryDate) + quantity + "," + 0 + "," + 0 + ");";
-		database.makeSingleStatement(statement);
-		System.out.println(statement);
+		if(!database.makeSingleStatement(statement)) return false;		
 		
+		return true;
 	}
 
 	

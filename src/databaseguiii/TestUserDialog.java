@@ -32,7 +32,7 @@ class Parentwindow extends JFrame {
     public void actionPerformed(ActionEvent action) {
       if (dialog.showDialog(user)) {
           try {
-      		UserMethods.registerUser(3, user.getUsername(), user.getPassword(), database);
+      		UserMethods.registerUser(Integer.parseInt(user.getRole()), user.getUsername(), user.getPassword(), database);
             } catch (Exception e) {
       		e.printStackTrace();
             }

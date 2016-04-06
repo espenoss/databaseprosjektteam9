@@ -4,16 +4,22 @@ import java.util.*;
 
 public class Database {		
 		private final String dbDriver; 
-		private final String dbName;    
+		private final String dbName;
+		private String[][] lastResult = null;
 		
 		public Database(String dbDriver, String dbName){
 			this.dbDriver = dbDriver;
 			this.dbName = dbName;
 	}
-	
-	// Executes a statement and returns any results as a two dimensional String array
-	public String[][] makeSingleStatement(String statement) throws Exception{
 
+	public String[][] getLastResult() {
+		return lastResult;
+	}	
+		
+	// Executes a statement and returns any results as a two dimensional String array
+	public boolean makeSingleStatement(String statement) throws Exception{
+
+		boolean success = true;
 		ArrayList<String[]> values = new ArrayList<String[]>();		
 		Connection connection = null;
 		Statement sqlStatement = null;
@@ -43,10 +49,11 @@ public class Database {
 						values.get(x)[y] = result.getString(y+1);	// MySQL column numbering begins at 1
 					}
 					x++;
-				}
+				}	
 			}
 		}catch(SQLException e){
 			Cleaner.printMessage(e, "makeSingleStatement()");
+			success = false;
 		}finally{
 			// close database connections
 			Cleaner.closeResSet(result);
@@ -55,15 +62,16 @@ public class Database {
 		}
 
 		// Convert from arraylist to array
-		String[][] r = new String[values.size()][];
-		values.toArray(r);
+		lastResult= new String[values.size()][];
+		values.toArray(lastResult);
 		
-		return r;
+		return success;
 	}
 	
 	// Executes a transaction from list of update statements
-	public void makeUpdateTransaction(String[] statements) throws Exception{
+	public boolean makeUpdateTransaction(String[] statements) throws Exception{
 		
+		boolean success = true;
 		Connection connection = null;
 		Statement sqlStatement = null;
 
@@ -85,37 +93,15 @@ public class Database {
 		}catch(SQLException e){
 			Cleaner.rollback(connection);
 			Cleaner.printMessage(e, "makeSingleStatement()");
+			success = false;
 		}finally{
 			// close database connections
 			connection.setAutoCommit(true);
 			Cleaner.closeStatement(sqlStatement);
 			Cleaner.closeConnection(connection);
 		}
-	}
 		
-	public static void main(String[] args) throws Exception{
-
-		// testkode
-		
-		String username = "";
-		String password = "";
-		Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + username + "&password=" + password);
-		
-		String statement = "SELECT * FROM byer";
-		
-		String[][] result = database.makeSingleStatement(statement);
-		
-		for(int i = 0; i < result.length; i++){
-			for(int y = 0; y < result[i].length; y++){
-				System.out.print(result[i][y] + " ");
-			}
-			System.out.print("\n");			
-		}
-		
-		
-		
-//		String statement2 = "INSERT INTO byer VALUES(5, 'Narvik')";		
-//		database.makeSingleStatement(statement2);		
+		return success;
 	}
 	
 }
