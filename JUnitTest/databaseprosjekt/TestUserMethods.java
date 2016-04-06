@@ -8,15 +8,16 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class TestUserMethods {
+	private static Database instance;
+	
+	public TestUserMethods(){
+	}
+
 	
 	@BeforeClass
 	// opprett databaseforbindelse
 	public static void setUpClass(){
-		String brukernavn = "marith1";
-		String passord = "tgp8sBZA";
-		String databasenavn = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + brukernavn + "?user=" + brukernavn + "&password=" + passord;
-		
-		Database database = new Database("com.mysql.jdbc.Driver", databasenavn);
+
 	}
 	
 	@AfterClass
@@ -27,18 +28,30 @@ public class TestUserMethods {
 	
 	@Before
 	public void beforeTest(){
-	
+		String brukernavn = "marith1";
+		String passord = "tgp8sBZA";
+		String databasenavn = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + brukernavn + "?user=" + brukernavn + "&password=" + passord;
 		
+		Database instance = new Database("com.mysql.jdbc.Driver", databasenavn);
 	}
 	
 	@After
 	public void afterTest(){
-	
 	}
 
 	@Test
-	public void testRegisterUser() {
-		fail("Not yet implemented");
+	public void testRegisterUser() throws Exception{
+		System.out.println("Test registrer new user");
+		UserMethods userM = new UserMethods();
+		
+		boolean expResult = true;
+		boolean result = userM.registerUser(3, "Hanne", "1234", instance);
+		
+		assertEquals(expResult, result);
+		
+		expResult = false; 
+		result = userM.registerUser(3, "Hanne", "1234", instance);
+		assertEquals(expResult, result);
 	}
 	
 	@Ignore
