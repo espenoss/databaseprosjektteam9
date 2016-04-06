@@ -19,6 +19,13 @@ public class CustomerDialog extends MyDialog{
 	String text1 = zip_code.getText();
 	int  zip_codeInt= Integer.parseInt(text1);
 	
+	private JTextField zone_nr = new JTextField(6);
+	String text2 = zone_nr.getText();
+	int  zone_nrInt= Integer.parseInt(text2);
+	
+	private JTextField preferences = new JTextField(100);
+	
+	
 	public CustomerDialog(JFrame parent){
 		super(parent, "Person");
 		add(new JPanel(), BorderLayout.NORTH);
@@ -44,20 +51,35 @@ public class CustomerDialog extends MyDialog{
 			
 			add(new JLabel("Zip Code: ", JLabel.RIGHT));
 			add(zip_code);
+			
+			add(new JLabel("Zone Number: ", JLabel.RIGHT));
+			add(zone_nr);
+			
+			add(new JLabel("Preferences: ", JLabel.RIGHT));
+			add(preferences);
 		}
 	}
 	public boolean showDialog(Customer customer){
-		firstName.setText(user.getUsername());
-		roleField.setText(user.getRole());
-		passwordField.setText(user.getPassword());
+		firstName.setText(customer.getFirstName());
+		surName.setText(customer.getSurName());
+		email.setText(customer.getEmail());
+		adress.setText(customer.getAdress());
+//		zip_code.setText(customer.getZipCode());
+//		zone_nr.setText(customer.getZoneNr());
+		preferences.setText(customer.getPreferences());
 		setOK(false);
 		pack();
-		usernameField.requestFocusInWindow();
+		
+		firstName.requestFocusInWindow();
 		setVisible(true);
 		if(isOK()){
-			user.setUsername(usernameField.getText());
-			user.setPassword(roleField.getText());
-			user.setPassword(passwordField.getText());
+			customer.setFirstName(firstName.getText());
+			customer.setSurName(surName.getText());
+			customer.setEmail(email.getText());
+			customer.setAdress(adress.getText());
+//			customer.setZipCode(zip_code.getText());
+//		    customer.setZoneNr(zone_nr.getText());
+			customer.setPreferences(preferences.getText());
 			return true;
 		}else{
 			return false;
@@ -65,11 +87,16 @@ public class CustomerDialog extends MyDialog{
 	}
 	
 	protected boolean okData(){
-		String username = usernameField.getText().trim();
-		String role = roleField.getText().trim();
-		String password = passwordField.getText().trim();
-		if(username.equals("")|| password.equals("") || role.equals("")){
-			showMessageDialog(UserDialog.this, "Username, role and password must be given.");
+		String Firstname = firstName.getText().trim();
+		String Surname = surName.getText().trim();
+		String Email = email.getText().trim();
+		String Adress = adress.getText().trim();
+		String ZipCode = zip_code.getText().trim();
+		String ZoneNr = zone_nr.getText().trim();
+		String Preferences = preferences.getText().trim();
+		
+		if(firstName.equals("")|| surName.equals("") || email.equals("") || adress.equals("") || zip_code.equals("") || zone_nr.equals("") || preferences.equals("")){
+			showMessageDialog(CustomerDialog.this, "All information must be given.");
 			/*if(!username.equals("")){
 				usernameField.requestFocusInWindow();
 			}else{
