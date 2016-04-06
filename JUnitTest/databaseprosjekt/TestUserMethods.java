@@ -5,7 +5,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TestUser {
+public class TestUserMethods {
+	
+	
 	
 	@Before
 	public void beforeTest(){
