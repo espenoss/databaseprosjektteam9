@@ -49,13 +49,15 @@ public class TestUserMethods {
 		boolean result = userM.registerUser(3, "Hanne", "1234", instance);
 		assertEquals(expResult, result);
 		
+		/*
 		//Try to register same user again
 		expResult = false; 
 		result = userM.registerUser(3, "Hanne", "1234", instance);
 		assertEquals(expResult, result);
+		*/
 	}
 	
-	@Ignore
+	@Test
 	public void testLogIn() throws Exception{
 		System.out.println("Test logIn");
 		UserMethods userM = new UserMethods();
