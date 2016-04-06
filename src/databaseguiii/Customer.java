@@ -25,7 +25,9 @@ public class Customer implements java.io.Serializable{
 	public void setSurName(String surName){
 		this.surName=surName;
 	}
-	
+	public void setAdress(String adress){
+		this.adress=adress;
+	}
 	public void setEmail(String email){
 		this.email=email;
 	}
