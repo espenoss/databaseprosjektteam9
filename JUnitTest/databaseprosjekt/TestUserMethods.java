@@ -46,15 +46,15 @@ public class TestUserMethods {
 		
 		//Register new user
 		boolean expResult = true;
-		boolean result = userM.registerUser(3, "Hanne", "1234", instance);
+		boolean result = userM.registerUser("Hanne", 3, "Hanne Hansen", "1234", instance);
 		assertEquals(expResult, result);
 		
-		/*
+		//(String userID, int userType, String name, String password, Database database)
+		
 		//Try to register same user again
 		expResult = false; 
-		result = userM.registerUser(3, "Hanne", "1234", instance);
+		result = userM.registerUser("Hanne", 3, "Hanne H", "1234", instance);
 		assertEquals(expResult, result);
-		*/
 	}
 	
 	@Test
@@ -63,7 +63,7 @@ public class TestUserMethods {
 		UserMethods userM = new UserMethods();
 		
 		//try to log in
-		userM.registerUser(3, "Marie", "1234", instance);
+		userM.registerUser("Marie", 3, "Marie M", "1234", instance);
 		int result = userM.logIn("Marie", "1234", instance);
 		int expResult = 3;
 		assertEquals(expResult, result);
