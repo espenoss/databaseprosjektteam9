@@ -113,7 +113,7 @@ public class TestUserMethods {
 		UserMethods userM = new UserMethods();
 		
 		boolean expResult = true;
-		boolean result = userM.registerSingleOrder("2016-01-03", 1, "none", "Marie", 3, "2016-01-04", 4, instance);
+		boolean result = userM.registerSingleOrder("2016-01-03", 1, "none", "Marie", 1, "2016-01-04", 4, instance);
 		
 		assertEquals(expResult, result);
 	}
