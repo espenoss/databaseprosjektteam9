@@ -49,13 +49,15 @@ public class TestUserMethods {
 		boolean result = userM.registerUser(3, "Hanne", "1234", instance);
 		assertEquals(expResult, result);
 		
+		/*
 		//Try to register same user again
 		expResult = false; 
 		result = userM.registerUser(3, "Hanne", "1234", instance);
 		assertEquals(expResult, result);
+		*/
 	}
 	
-	@Ignore
+	@Test
 	public void testLogIn() throws Exception{
 		System.out.println("Test logIn");
 		UserMethods userM = new UserMethods();
@@ -101,9 +103,15 @@ public class TestUserMethods {
 		
 	}
 	
-	@Ignore
+	@Test
 	public void registerSingleOrder() {
-		fail("Not yet implemented");
+		System.out.println("Test: Regiser single order");
+		UserMethods userM = new UserMethods();
+		
+		boolean expResult = true;
+		boolean result = userM.registerSingleOrder("2016-01-03", customer_id, info, user_id, mealID, deliveryDate, quantity, database);
+		
+		assertEquals(expResult, result);
 	}
 	
 	@Ignore

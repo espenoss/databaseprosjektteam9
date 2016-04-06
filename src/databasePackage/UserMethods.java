@@ -46,10 +46,11 @@ public class UserMethods {
 		}
 	}
 
-	public static boolean registerCustomer(String firstName, String surName, String email, String adress, 
-			int zip_code, int zone_nr, String preferences, int active, Database database) throws Exception{		
+	public static boolean registerCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
+			int zip_code, int zone_nr, String preferences, int active, Database database) throws Exception{
+		
 		String statement = "INSERT INTO customer VALUES(DEFAULT, " 
-				+ aq(firstName) + aq(surName) + aq(email) 
+				+ aq(surName) + aq(firstName) + aq(phoneNumber) 
 				+ aq(email) + aq(adress)
 			/*	+ zip_code + ", " + zone_nr + ", " */
 				+ aq(preferences) + "" + active + ");";
@@ -57,10 +58,10 @@ public class UserMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
-	public static boolean registerCompany(String surName, String firstName, String email, String adress, 
+	public static boolean registerCompany(String surName, String firstName, String phoneNumber,String email, String adress, 
 			int zip_code, int zone_nr, String preferences, int active, String companyName, Database database) throws Exception{
 	
-		registerCustomer(firstName, surName, email, adress, /*zip_code, zone_nr, */ preferences, active, database);
+		registerCustomer(firstName, surName, phoneNumber, email, adress, zip_code, zone_nr, preferences, active, database);
 		
 		database.makeSingleStatement("SELECT MAX(customer_id) FROM customer");
 		
@@ -72,6 +73,11 @@ public class UserMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
+	public static String[][] viewAllCustomers(Database database) throws Exception{		
+		database.makeSingleStatement("SELECT * FROM customer");
+		
+		return database.getLastResult();
+	}
 
 	public static boolean registerSingleOrder(String order_date, int customer_id, String info, int user_id, int mealID, String deliveryDate, int quantity, Database database) throws Exception{
 		
@@ -90,7 +96,6 @@ public class UserMethods {
 		return true;
 	}
 
-	
 	/*
 	public boolean registerSubscription(String delivery_date, int quantity, String fromDate, String toDate, String subName);
 	
@@ -112,10 +117,14 @@ public class UserMethods {
 		
 		String testStr = "test";
 		
-		//UserMethods.registerCustomer(testStr, testStr, testStr, testStr, 1111, 1111, testStr, 1, database);
-		//UserMethods.registerCompany("Meland", "Espen", "asd@asd", "Haga", 123, 5, "Vegetarisk", 1, "Hask", database);		
+		UserMethods.registerCustomer("surname", "firstname", "aabbccdd", "email", "veigata", 1111, 1, "None", 1, database);
+		UserMethods.registerCompany("Meland", "Espen", "aabbccdd", "asd@asd", "Haga", 1234, 1, "Vegetarisk", 1, "Hask", database);		
 		
-/*		String[][] resultat = UserMethods.viewAllCustomers(database);
+		
+		/*
+		UserMethods.viewAllCustomers(database);
+		
+		String[][] resultat = database.getLastResult();
 		
 		for(int x=0;x<resultat.length; x++){
 			for(int y=0;y<resultat[x].length;y++){
@@ -123,10 +132,10 @@ public class UserMethods {
 			}
 			System.out.println();
 		}
-*/
+		*/
 //		System.out.println(UserMethods.logIn("Espen", "asd", database));
 		
-		UserMethods.registerSingleOrder("2012-03-02", 10001, "Her er info om bestilingen", 1, 1, "2012-12-12", 1, database);
+//		UserMethods.registerSingleOrder("2012-03-02", 10001, "Her er info om bestilingen", 1, 1, "2012-12-12", 1, database);
 	}
 }
 
