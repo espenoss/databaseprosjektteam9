@@ -44,11 +44,12 @@ public class TestUserMethods {
 		System.out.println("Test registrer new user");
 		UserMethods userM = new UserMethods();
 		
+		//Register new user
 		boolean expResult = true;
 		boolean result = userM.registerUser(3, "Hanne", "1234", instance);
-		
 		assertEquals(expResult, result);
 		
+		//Try to register same user again
 		expResult = false; 
 		result = userM.registerUser(3, "Hanne", "1234", instance);
 		assertEquals(expResult, result);
