@@ -114,7 +114,7 @@ public class TestUserMethods {
 		assertEquals(expResult, result);
 	}
 	
-	@Test
+	@Ignore
 	public void testRegisterMeal(){
 		
 	}
