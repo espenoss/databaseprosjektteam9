@@ -102,11 +102,23 @@ public class UserMethods {
 		return true;
 	}
 	
-	public static boolean registerMeal(String name, String instructions, int available, int price, int discount, int discountLim, Database database) throws Exception{
+	public static boolean registerIngredient(String name, int quantity ,Database database) throws Exception{
+		
+		String statement = "INSERT INTO ingredient VALUES(DEFAULT, "
+				+ aq(name) + quantity + ");";
+		
+		return database.makeSingleStatement(statement);
+	}
+	
+	public static boolean registerMeal(String name, String instructions, int available, int price, int discount, int discountLim, int[] ingredientIDs, Database database) throws Exception{
 		
 		String statement = "INSERT INTO meal VALUES(DEFAULT, "
 				+ aq(name) + aq(instructions) + available + ", " + price + ", " + discount + ", " + discountLim + ");";
 				
+		for(int i=0;i<ingredientIDs.length;i++){
+			// registrer ingredienser i meal_ingredient			
+		}
+		
 		return database.makeSingleStatement(statement);
 	}
 	
@@ -133,8 +145,8 @@ public class UserMethods {
 		Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + username + "&password=" + password);
 		String[][] resultat = null;
 		
+//		UserMethods.registerIngredients("Kjøtt", 5, database);
 //		UserMethods.registerMeal("Mais", "ingenting", 1, 123, 10, 12, database);
-	
 //		UserMethods.viewMeals(database);
 
 /*		resultat = database.getLastResult();		
