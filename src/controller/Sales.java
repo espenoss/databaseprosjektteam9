@@ -6,10 +6,13 @@ public class Sales extends User {
 		super(name, pword);
 	}
 
-	public boolean registerNewOrder(String orderinfo){
+	public boolean registerNewOrder(int customerID, int ){
+		
+		
+		
+		
 		boolean success = false;
 		
-		// opprett ny ordre i database
 		
 		return success;
 	}

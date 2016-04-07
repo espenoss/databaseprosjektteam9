@@ -1,6 +1,6 @@
 package databasePackage;
 
-public class UserMethods {
+public class UserMethods { 
 	
 	// User types
 	public static final int U_ADMIN = 0;
@@ -17,7 +17,7 @@ public class UserMethods {
 	// Method for registering new user in database
 	public static boolean registerUser(String userID, int userType, String name, String password, Database database) throws Exception{
 		
-		String statement = "INSERT INTO user VALUES(" + aq(userID) 
+		String statement = "INSERT INTO user VALUES(" + aq(userID)  
 				+ userType + ", '" + name + "', '" + password + "');";
 
 		return database.makeSingleStatement(statement);
@@ -195,7 +195,7 @@ public class UserMethods {
 		
 		
 		
-//		UserMethods.registerIngredients("Kjøtt", 5, database);
+//		UserMethods.registerIngredients("Kjï¿½tt", 5, database);
 //		UserMethods.registerMeal("Mais", "ingenting", 1, 123, 10, 12, database);
 //		UserMethods.viewMeals(database);
 

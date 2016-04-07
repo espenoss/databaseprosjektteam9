@@ -4,12 +4,13 @@ import databasePackage.*;
 public class Ingredient {
 	public final int ingID; 
 	public String ingName;
-	public int quantity;
+	public int storageQuantity;
+	public String unit;
 	
 	public Ingredient(int ingID, String ingName, int quantity){
 		this.ingID = ingID;
 		this.ingName = ingName;
-		this.quantity = quantity;
+		this.storageQuantity = quantity;
 	}
 	
 	public int getIngID(){
@@ -21,7 +22,11 @@ public class Ingredient {
 	}
 	
 	public int getQuantity(){
-		return quantity;
+		return storageQuantity;
+	}
+	
+	public String getUnit(){
+		return unit;
 	}
 	
 	public void setIngName(String ingName){
@@ -31,6 +36,10 @@ public class Ingredient {
 	
 	public void setQuantity(int quantity){
 		//endre info i databasen her? 
-		this.quantity = quantity;
+		this.storageQuantity = quantity;
+	}
+	
+	public String toString(){
+		return "Ingredient: "+ingName+". Quantity: "+storageQuantity +" "+unit;
 	}
 }
