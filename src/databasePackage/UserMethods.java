@@ -46,9 +46,10 @@ public class UserMethods {
 		}
 	}
 
-	public static int registerCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
+	public static boolean registerCustomer(int customerID, String surName, String firstName, String phoneNumber, String email, String adress, 
 			int zip_code, int zone_nr, String preferences, int active, Database database) throws Exception{
 		
+<<<<<<< HEAD
 		for(int i=0; i<5; i++){
 			String statement = "SELECT MAX(customer_id) FROM customer);";
 			database.makeSingleStatement(statement);
@@ -60,12 +61,24 @@ public class UserMethods {
 					+ aq(preferences) + "" + active + ");";
 			if(database.makeSingleStatement(statement)) return customerID;
 		}
+=======
+		String statement = "INSERT INTO customer VALUES(" + customerID + ", " 
+				+ aq(surName) + aq(firstName) + aq(phoneNumber) 
+				+ aq(email) + aq(adress)
+				+ zip_code + ", " + zone_nr + ", " 
+				+ aq(preferences) + "" + active + ");";
+>>>>>>> branch 'master' of https://github.com/espenoss/databaseprosjektteam9.git
 		
-		return -1;
+		return database.makeSingleStatement(statement);
 	}
 	
-	public static boolean registerCompanyToCustomer(int customerID, String companyName, Database database) throws Exception{
+	public static boolean registerCompany(int customerID, String surName, String firstName, String phoneNumber,String email, String adress, 
+			int zip_code, int zone_nr, String preferences, int active, String companyName, Database database) throws Exception{
+	
+		registerCustomer(customerID, firstName, surName, phoneNumber, email, adress, zip_code, zone_nr, preferences, active, database);
 		
+		database.makeSingleStatement("SELECT MAX(customer_id) FROM customer");
+						
 		String statement = "INSERT INTO company VALUES("
 				+ customerID + ",'" + companyName + "');";		
 		
@@ -86,6 +99,7 @@ public class UserMethods {
 	}
 	
 	
+<<<<<<< HEAD
 	public static int registerOrder(String order_date, int customer_id, String info, 
 			String user_id, Database database) throws Exception{
 	
@@ -104,22 +118,65 @@ public class UserMethods {
 	public static boolean addMealToOrder(String orderID, String mealID, String deliveryDate, int quantity,boolean readyDelivery, boolean delivered, Database database) throws Exception{
 		
 		String statement = "INSERT INTO ordered_meal VALUES("
+=======
+	public static boolean registerSingleOrder(int orderID, String order_date, int customer_id, String info, 
+			String user_id, int mealID, String deliveryDate, int quantity, Database database) throws Exception{
+		
+		String statement = "INSERT INTO food_order VALUES(" + orderID + ", "
+				+ aq(order_date) + customer_id + "," + aq(info) + "'" + user_id + "');";
+		System.out.println(statement);
+		if(!database.makeSingleStatement(statement)) return false;
+	
+		statement = "INSERT INTO ordered_meal VALUES("
+>>>>>>> branch 'master' of https://github.com/espenoss/databaseprosjektteam9.git
 				+ orderID + "," + mealID + "," + aq(deliveryDate) + quantity + "," + 0 + "," + 0 + ");";
+		System.out.println(statement);
+		if(!database.makeSingleStatement(statement)) return false;		
+		
+		return true;
+	}
+	
+	public static boolean registerIngredient(String name, int quantity ,Database database) throws Exception{
+		
+		String statement = "INSERT INTO ingredient VALUES(DEFAULT, "
+				+ aq(name) + quantity + ");";
 		
 		return database.makeSingleStatement(statement);
 	}
 	
+<<<<<<< HEAD
 	public static int registerIngredient(String name, float quantity, String unit, Database database) throws Exception{
 
 		for(int i=0; i<5; i++){
 			String statement = "SELECT MAX(ingredient_id) FROM ingredient;";
+=======
+	public static boolean registerMeal(String name, String instructions, int available, int price, int discount, int discountLim, int[] ingredientIDs, int[] ingredientQuantities, Database database) throws Exception{
+		
+		String statement = "INSERT INTO meal VALUES(DEFAULT, "
+				+ aq(name) + aq(instructions) + available + ", " + price + ", " + discount + ", " + discountLim + ");";
+			
+		database.makeSingleStatement(statement);
+		statement = "SELECT MAX(meal_id)FROM meal";
+		
+		database.makeSingleStatement(statement);
+		
+		String mealID = database.getLastResult()[0][0];
+		
+		for(int i=0;i<ingredientIDs.length;i++){
+			statement = "INSERT INTO meal_ingredient VALUES(" 
+		+ aq(mealID) + ingredientIDs[i] + "," + ingredientQuantities[i] + ");";
+>>>>>>> branch 'master' of https://github.com/espenoss/databaseprosjektteam9.git
 			database.makeSingleStatement(statement);
+<<<<<<< HEAD
 			int ingredientID = Integer.parseInt(database.getLastResult()[0][0]) + 1;
 			statement = "INSERT INTO ingredient VALUES("
 					+ ingredientID + "," + aq(name) + quantity + ", '" + unit + "');"; 
 			if(database.makeSingleStatement(statement)) return ingredientID;
+=======
+>>>>>>> branch 'master' of https://github.com/espenoss/databaseprosjektteam9.git
 		}
 		
+<<<<<<< HEAD
 		return -1;
 	}
 	
@@ -143,6 +200,9 @@ public class UserMethods {
 		String statement = "INSERT INTO meal_ingredient VALUES(" 
 	+ mealID + ", " + ingredientID + "," + ingredientQuantity + ");";
 		return database.makeSingleStatement(statement);
+=======
+		return true;
+>>>>>>> branch 'master' of https://github.com/espenoss/databaseprosjektteam9.git
 	}
 	
 	public static String[][] viewMeals(Database database) throws Exception{
@@ -154,6 +214,7 @@ public class UserMethods {
 		return database.getLastResult();
 	}
 	
+
 	public static int registerZone(String zoneName, Database database) throws Exception{
 		
 		for(int i=0; i<5; i++){
@@ -166,9 +227,8 @@ public class UserMethods {
 		}
 		return -1;
 	}
-	
-	
-	public static int registerSubscription(String subName, Database database) throws Exception{		
+
+public static int registerSubscription(String subName, Database database) throws Exception{		
 		for(int i=0; i<5; i++){
 			String statement = "SELECT MAX(sub_id) FROM subscription_plan;";
 			database.makeSingleStatement(statement);
@@ -188,9 +248,9 @@ public class UserMethods {
 		
 		return database.makeSingleStatement(statement);
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/espenoss/databaseprosjektteam9.git
 	
-		
-	@SuppressWarnings("unused")
 	public static void main(String[] args) throws Exception{
 		// testkode
 		
@@ -199,9 +259,15 @@ public class UserMethods {
 		Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + username + "&password=" + password);
 		String[][] resultat = null;
 		
+<<<<<<< HEAD
 		UserMethods.registerOrder("2016-01-03", 10000, "none", "Marie", database);
 		
 //		UserMethods.registerIngredients("Kjøtt", 5, database);
+=======
+		UserMethods.registerSingleOrder(2, "2012-12-12", 10000, "Ingen", "espenme", 1, "2012-12-12", 1, database);
+		
+//		UserMethods.registerIngredients("Kjï¿½tt", 5, database);
+>>>>>>> branch 'master' of https://github.com/espenoss/databaseprosjektteam9.git
 //		UserMethods.registerMeal("Mais", "ingenting", 1, 123, 10, 12, database);
 //		UserMethods.viewMeals(database);
 
