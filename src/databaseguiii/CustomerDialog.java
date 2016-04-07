@@ -78,7 +78,7 @@ public class CustomerDialog extends MyDialog{
 		setOK(false);
 		pack();
 		
-		firstName.requestFocusInWindow();
+		customerID.requestFocusInWindow();
 		setVisible(true);
 		if(isOK()){
 			//customer.setCustomerID(customer.getText());
@@ -100,9 +100,6 @@ public class CustomerDialog extends MyDialog{
 		String Surname = surName.getText().trim();
 		String Email = email.getText().trim();
 		String Adress = adress.getText().trim();
-		
-		
-		
 
 		String text1 = zip_code.getText();
 		int  zip_codeInt= Integer.parseInt(text1.trim());
@@ -115,7 +112,6 @@ public class CustomerDialog extends MyDialog{
 		int  customer_id_Int= Integer.parseInt(text3.trim());
 		
 		
-
 		String Preferences = preferences.getText().trim();
 		
 		if(customerID.equals("") || firstName.equals("")|| surName.equals("") || email.equals("") || adress.equals("") || zip_code.equals("") || zone_nr.equals("") || preferences.equals("")){

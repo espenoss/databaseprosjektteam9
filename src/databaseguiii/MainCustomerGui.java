@@ -22,7 +22,7 @@ class Parentwindow2 extends JFrame {
 	  private String adress = "";
 	  private String phoneNumber = "";
 	  private String preferences = "";
-	  private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/ninameed?user=ninameed&password=1Le5YPPr");
+	  private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/mariashc?user=mariashc&password=rGBlmJ91");
 	  
 	  public Parentwindow2() {
 	    setTitle("Registrer customer");
@@ -42,7 +42,9 @@ class Parentwindow2 extends JFrame {
 	    public void actionPerformed(ActionEvent action) {
 	      if (dialog.showDialog(customer)) {
 	          try {
-	      		UserMethods.registerCustomer(customer.getCustomerID(), customer.getFirstName(), customer.getSurName(), customer.getEmail(), customer.getAdress(), customer.getPreferences(), customer.getZipCode(), customer.getZoneNr(), customer.getPhoneNumber(), 1, database);
+	      		UserMethods.registerCustomer(customer.getCustomerID(), customer.getFirstName(), customer.getSurName(), 
+	      				customer.getEmail(), customer.getAdress(), customer.getPreferences(), customer.getZipCode(), 
+	      				customer.getZoneNr(), customer.getPhoneNumber(), 1, database);
 	            } catch (Exception e) {
 	      		e.printStackTrace();
 	            }
@@ -80,7 +82,7 @@ class Parentwindow2 extends JFrame {
 	class MainCustomerGui {
 	  static public void main(String[] args) {
 		Parentwindow2 test = new Parentwindow2();
-	    test.setSize(300, 200);  //For å få litt størrelse på vinduet
+	    test.setSize(300, 200);  //For ï¿½ fï¿½ litt stï¿½rrelse pï¿½ vinduet
 	    test.setVisible(true);
 	  }   
 	} 
