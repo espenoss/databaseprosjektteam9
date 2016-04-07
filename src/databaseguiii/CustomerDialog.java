@@ -10,6 +10,8 @@ import javax.swing.JTextField;
 import static javax.swing.JOptionPane.*;
 
 public class CustomerDialog extends MyDialog{
+
+	private JTextField customerID = new JTextField(20);
 	private JTextField firstName = new JTextField(20);
 	private JTextField surName = new JTextField(20);
 	private JTextField email = new JTextField(20);
@@ -34,7 +36,10 @@ public class CustomerDialog extends MyDialog{
 	
 	private class CustomerDatapanel extends JPanel{
 		public CustomerDatapanel(){
-			setLayout(new GridLayout(8,2));
+			setLayout(new GridLayout(9,2));
+			add(new JLabel("Customer ID: ", JLabel.RIGHT));
+			add(customerID);
+			
 			add(new JLabel("First name: ", JLabel.RIGHT));
 			add(firstName);
 			
@@ -61,6 +66,7 @@ public class CustomerDialog extends MyDialog{
 		}
 	}
 	public boolean showDialog(Customer customer){
+	//	customerID.setText(customer.getCustomerID());
 		firstName.setText(customer.getFirstName());
 		surName.setText(customer.getSurName());
 		email.setText(customer.getEmail());
@@ -75,6 +81,7 @@ public class CustomerDialog extends MyDialog{
 		firstName.requestFocusInWindow();
 		setVisible(true);
 		if(isOK()){
+			//customer.setCustomerID(customer.getText());
 			customer.setFirstName(firstName.getText());
 			customer.setSurName(surName.getText());
 			customer.setEmail(email.getText());
@@ -96,7 +103,7 @@ public class CustomerDialog extends MyDialog{
 		
 		
 		
-		
+
 		String text1 = zip_code.getText();
 		int  zip_codeInt= Integer.parseInt(text1.trim());
 		
@@ -104,9 +111,14 @@ public class CustomerDialog extends MyDialog{
 		int  zone_nrInt= Integer.parseInt(text2.trim());
 		
 
+		String text3 = customerID.getText();
+		int  customer_id_Int= Integer.parseInt(text3.trim());
+		
+		
+
 		String Preferences = preferences.getText().trim();
 		
-		if(firstName.equals("")|| surName.equals("") || email.equals("") || adress.equals("") || zip_code.equals("") || zone_nr.equals("") || preferences.equals("")){
+		if(customerID.equals("") || firstName.equals("")|| surName.equals("") || email.equals("") || adress.equals("") || zip_code.equals("") || zone_nr.equals("") || preferences.equals("")){
 			showMessageDialog(CustomerDialog.this, "All information must be given.");
 			/*if(!username.equals("")){
 				usernameField.requestFocusInWindow();
