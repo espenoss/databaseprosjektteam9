@@ -3,29 +3,38 @@ package databaseguiii;
 import databaseguiii.User;
 
 public class User implements java.io.Serializable{
-	private String username;
+	private String userID;
+	private String name;
 	private String password;
-	private String role;
+	private int userType;
 	
-	public User(String username, String role, String password){
-		this.username=username;
-		this.role=role;
+	public User(String useID,int userType, String name,String password){
+		this.userID=userID;
+		this.userType=userType;
+		this.name=name;
 		this.password=password;
+	}	
+	public void setUseID(String userID){
+		this.userID=userID;
 	}
-	public void setUsername(String username){
-		this.username=username;
+	public void setName(String name){
+		this.name=name;
 	}
-	public void setRole(String role){
-		this.role = role;
+	public void setUserType(int userType){
+		this.userType = userType;
 	}
 	public void setPassword(String password){
 		this.password=password;
 	}
-	public String getUsername(){
-		return username;
+	public String getUserID(){
+		return userID;
 	}
-	public String getRole(){
-		return role;
+	
+	public String getName(){
+		return name;
+	}
+	public int getUserType(){
+		return userType;
 	}
 	public String getPassword(){
 		return password;
@@ -38,9 +47,9 @@ public class User implements java.io.Serializable{
 			return true;
 		}
 		User p=(User)obj;
-		return (username==p.getUsername()&&password==p.getPassword());
+		return (userID==p.getUserID() && name==p.getName()&&userType==p.getUserType()&&password==p.getPassword());
 	}
 	public String toString(){
-		return username+" "+ role +" "+password;
+		return userID+""+ name+" "+ userType +" "+password;
 	}
 }
