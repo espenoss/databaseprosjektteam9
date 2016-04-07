@@ -1,5 +1,5 @@
 package databaseguiii;
-
+//noe
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
@@ -10,8 +10,9 @@ import javax.swing.JTextField;
 import static javax.swing.JOptionPane.*;
 
 public class UserDialog extends MyDialog{
+	private JTextField userIDfield = new JTextField(10);
+	private JTextField userTypeField = new JTextField(10);
 	private JTextField usernameField = new JTextField(20);
-	private JTextField roleField = new JTextField(20);
 	private JTextField passwordField = new JTextField(20);
 	
 	public UserDialog(JFrame parent){
@@ -24,12 +25,16 @@ public class UserDialog extends MyDialog{
 	
 	private class UserDatapanel extends JPanel{
 		public UserDatapanel(){
-			setLayout(new GridLayout(3,2));
+			setLayout(new GridLayout(4,2));
+			add(new JLabel("user ID: ", JLabel.RIGHT));
+			add(userIDfield);
+			
+			add(new JLabel("user type: ", JLabel.RIGHT));
+			add(userTypeField);
+			
 			add(new JLabel("username: ", JLabel.RIGHT));
 			add(usernameField);
 			
-			add(new JLabel("role: ", JLabel.RIGHT));
-			add(roleField);
 
 			add(new JLabel("password: ", JLabel.RIGHT));
 			add(passwordField);
@@ -38,17 +43,20 @@ public class UserDialog extends MyDialog{
 		}
 	}
 	public boolean showDialog(User user){
-		usernameField.setText(user.getUsername());
-		roleField.setText(user.getRole());
+		userIDfield.setText(user.getUserID());
+	//	userTypeField.setText(user.getUserType());
+		usernameField.setText(user.getName());
 		passwordField.setText(user.getPassword());
 		setOK(false);
 		pack();
 		usernameField.requestFocusInWindow();
 		setVisible(true);
 		if(isOK()){
-			user.setUsername(usernameField.getText());
-			user.setPassword(roleField.getText());
+			user.setName(usernameField.getText());
+//			user.setUserType(userTypeField.getText());
+	
 			user.setPassword(passwordField.getText());
+			user.setUserID(userIDfield.getText());
 			return true;
 		}else{
 			return false;
@@ -56,10 +64,9 @@ public class UserDialog extends MyDialog{
 	}
 	
 	protected boolean okData(){
-		String username = usernameField.getText().trim();
-		String role = roleField.getText().trim();
+		String name = usernameField.getText().trim();
 		String password = passwordField.getText().trim();
-		if(username.equals("")|| password.equals("") || role.equals("")){
+		if(name.equals("")|| password.equals("")){
 			showMessageDialog(UserDialog.this, "Username, role and password must be given.");
 			/*if(!username.equals("")){
 				usernameField.requestFocusInWindow();
@@ -69,9 +76,9 @@ public class UserDialog extends MyDialog{
 			return false;
 			}else{*/
 		//		return true;
-			}
+			}   
 		return true;
-		}	
+		}
 	}
 	
 
