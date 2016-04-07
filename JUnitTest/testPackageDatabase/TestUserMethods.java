@@ -95,7 +95,7 @@ public class TestUserMethods {
 		System.out.println("Test: register company");
 		
 		boolean expResult = true;
-		boolean result = UserMethods.registerCompanyToCustomer(1, "Franks blomster", database);
+		boolean result = UserMethods.registerCompanyToCustomer(10000, "Franks blomster", database);
 		
 		assertEquals(expResult, result);
 		
