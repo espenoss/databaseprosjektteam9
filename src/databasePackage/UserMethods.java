@@ -89,13 +89,13 @@ public class UserMethods {
 			String user_id, int mealID, String deliveryDate, int quantity, Database database) throws Exception{
 		
 		String statement = "INSERT INTO food_order VALUES(" + orderID + ", "
-				+ aq(order_date) + customer_id + "," + aq(info) + user_id + ");";
+				+ aq(order_date) + customer_id + "," + aq(info) + "'" + user_id + "');";
+		System.out.println(statement);
 		if(!database.makeSingleStatement(statement)) return false;
-
-		if(!database.makeSingleStatement("SELECT MAX(order_id) FROM food_order")) return false;
-		
+	
 		statement = "INSERT INTO ordered_meal VALUES("
 				+ orderID + "," + mealID + "," + aq(deliveryDate) + quantity + "," + 0 + "," + 0 + ");";
+		System.out.println(statement);
 		if(!database.makeSingleStatement(statement)) return false;		
 		
 		return true;
@@ -146,12 +146,12 @@ public class UserMethods {
 	public static void main(String[] args) throws Exception{
 		// testkode
 		
-		String username = "";
-		String password = "";
+		String username = "espenme";
+		String password = "16Sossosem06";
 		Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + username + "&password=" + password);
 		String[][] resultat = null;
 		
-		UserMethods.registerSingleOrder(1, "12-12-2012", 1, "Ingen", "espenme", 1, "12-12-2012", 1, database);
+		UserMethods.registerSingleOrder(2, "2012-12-12", 10000, "Ingen", "espenme", 1, "2012-12-12", 1, database);
 		
 //		UserMethods.registerIngredients("Kjøtt", 5, database);
 //		UserMethods.registerMeal("Mais", "ingenting", 1, 123, 10, 12, database);
