@@ -8,7 +8,7 @@ public class User implements java.io.Serializable{
 	private String password;
 	private int userType;
 	
-	public User(String useID,int userType, String name,String password){
+	public User(String userID,int userType, String name,String password){
 		this.userID=userID;
 		this.userType=userType;
 		this.name=name;
