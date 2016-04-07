@@ -102,14 +102,13 @@ public class UserMethods {
 		return -1;
 	}
 
-	public static boolean addMealToOrder(String orderID, String mealID, String deliveryDate, int quantity,boolean readyDelivery, boolean delivered, Database database) throws Exception{
+	public static boolean addMealToOrder(int orderID, int mealID, String deliveryDate, int quantity,boolean readyDelivery, boolean delivered, Database database) throws Exception{
 		
 		String statement = "INSERT INTO ordered_meal VALUES("
 				+ orderID + "," + mealID + "," + aq(deliveryDate) + quantity + "," + 0 + "," + 0 + ");";
 		System.out.println(statement);
-		if(!database.makeSingleStatement(statement)) return false;		
 		
-		return true;
+		return database.makeSingleStatement(statement);
 	}
 	
 	public static int registerIngredient(String name, float quantity , String unit,Database database) throws Exception{
@@ -173,7 +172,7 @@ public class UserMethods {
 		return -1;
 	}
 
-	public static int registerSubscription(String subName, Database database) throws Exception{		
+	public static int registerSubscriptionPlan(String subName, Database database) throws Exception{		
 		for(int i=0; i<5; i++){
 			String statement = "SELECT MAX(sub_id) FROM subscription_plan;";
 			database.makeSingleStatement(statement);
@@ -186,7 +185,16 @@ public class UserMethods {
 		return -1;
 	}
 	
-
+	public static boolean addSubscriptionToOrder(int orderID, int quantitySub, String fromDate, String toDate, String subID, Database database) throws Exception{		
+		String statement = "INSERT INTO sub_order VALUES(" + orderID + "," 
+			+ "," + quantitySub + "," + aq(fromDate) + aq(toDate) + "'" + subID + "');";			
+		return database.makeSingleStatement(statement);
+	}
+	
+	public static boolean addMealToPlan(int ){
+		
+	}
+	
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws Exception{
