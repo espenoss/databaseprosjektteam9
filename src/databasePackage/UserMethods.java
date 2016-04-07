@@ -85,18 +85,17 @@ public class UserMethods {
 	}
 	
 	
-	public static boolean registerSingleOrder(String order_date, int customer_id, String info, String user_id, int mealID, String deliveryDate, int quantity, Database database) throws Exception{
+	public static boolean registerSingleOrder(int orderID, String order_date, int customer_id, String info, 
+			String user_id, int mealID, String deliveryDate, int quantity, Database database) throws Exception{
 		
-		String statement = "INSERT INTO food_order VALUES(DEFAULT, "
+		String statement = "INSERT INTO food_order VALUES(" + orderID + ", "
 				+ aq(order_date) + customer_id + "," + aq(info) + user_id + ");";
 		if(!database.makeSingleStatement(statement)) return false;
 
 		if(!database.makeSingleStatement("SELECT MAX(order_id) FROM food_order")) return false;
 		
-		String orderID = database.getLastResult()[0][0];
-		
 		statement = "INSERT INTO ordered_meal VALUES("
-				+ aq(orderID) + mealID + "," + aq(deliveryDate) + quantity + "," + 0 + "," + 0 + ");";
+				+ orderID + "," + mealID + "," + aq(deliveryDate) + quantity + "," + 0 + "," + 0 + ");";
 		if(!database.makeSingleStatement(statement)) return false;		
 		
 		return true;
@@ -114,7 +113,14 @@ public class UserMethods {
 		
 		String statement = "INSERT INTO meal VALUES(DEFAULT, "
 				+ aq(name) + aq(instructions) + available + ", " + price + ", " + discount + ", " + discountLim + ");";
-				
+			
+		database.makeSingleStatement(statement);
+		statement = "SELECT MAX(meal_id)FROM meal";
+		
+		database.makeSingleStatement(statement);
+		
+		String mealID = database.getLastResult()[0][0];
+		
 		for(int i=0;i<ingredientIDs.length;i++){
 			// registrer ingredienser i meal_ingredient			
 		}
@@ -144,6 +150,8 @@ public class UserMethods {
 		String password = "";
 		Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + username + "&password=" + password);
 		String[][] resultat = null;
+		
+		UserMethods.registerSingleOrder(1, "12-12-2012", 1, "Ingen", "espenme", 1, "12-12-2012", 1, database);
 		
 //		UserMethods.registerIngredients("Kjøtt", 5, database);
 //		UserMethods.registerMeal("Mais", "ingenting", 1, 123, 10, 12, database);
