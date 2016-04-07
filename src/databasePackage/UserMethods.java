@@ -109,7 +109,7 @@ public class UserMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
-	public static boolean registerMeal(String name, String instructions, int available, int price, int discount, int discountLim, int[] ingredientIDs, Database database) throws Exception{
+	public static boolean registerMeal(String name, String instructions, int available, int price, int discount, int discountLim, int[] ingredientIDs, int[] ingredientQuantities, Database database) throws Exception{
 		
 		String statement = "INSERT INTO meal VALUES(DEFAULT, "
 				+ aq(name) + aq(instructions) + available + ", " + price + ", " + discount + ", " + discountLim + ");";
@@ -122,10 +122,12 @@ public class UserMethods {
 		String mealID = database.getLastResult()[0][0];
 		
 		for(int i=0;i<ingredientIDs.length;i++){
-			// registrer ingredienser i meal_ingredient			
+			statement = "INSERT INTO meal_ingredient VALUES(" 
+		+ aq(mealID) + ingredientIDs[i] + "," + ingredientQuantities[i] + ");";
+			database.makeSingleStatement(statement);
 		}
 		
-		return database.makeSingleStatement(statement);
+		return true;
 	}
 	
 	public static String[][] viewMeals(Database database) throws Exception{

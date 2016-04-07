@@ -8,7 +8,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class TestUserMethods {
-	private static Database instance;
+	private static Database database;
+	private static UserMethods instance;
 	
 	public TestUserMethods(){
 	}
@@ -28,11 +29,12 @@ public class TestUserMethods {
 	
 	@Before
 	public void beforeTest(){
-		String brukernavn = "marith1";
-		String passord = "tgp8sBZA";
-		String databasenavn = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + brukernavn + "?user=" + brukernavn + "&password=" + passord;
+		String username = "marith1";
+		String password = "tgp8sBZA";
+		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
 		
-		instance = new Database("com.mysql.jdbc.Driver", databasenavn);
+		database = new Database("com.mysql.jdbc.Driver", databasename);
+		instance = new UserMethods();
 	}
 	
 	@After
@@ -42,43 +44,41 @@ public class TestUserMethods {
 	@Test
 	public void testRegisterUser() throws Exception{
 		System.out.println("Test registrer new user");
-		UserMethods userM = new UserMethods();
 		
 		//Register new user
 		boolean expResult = true;
-		boolean result = userM.registerUser("Hanne", 3, "Hanne Hansen", "1234", instance);
+		boolean result = instance.registerUser("Hanne", 3, "Hanne Hansen", "1234", database);
 		assertEquals(expResult, result);
 		
 		//(String userID, int userType, String name, String password, Database database)
 		
 		//Try to register same user again
 		expResult = false; 
-		result = userM.registerUser("Hanne", 3, "Hanne H", "1234", instance);
+		result = instance.registerUser("Hanne", 3, "Hanne H", "1234", database);
 		assertEquals(expResult, result);
 	}
 	
 	@Test
 	public void testLogIn() throws Exception{
 		System.out.println("Test logIn");
-		UserMethods userM = new UserMethods();
 		
 		//try to log in
-		userM.registerUser("Marie", 3, "Marie M", "1234", instance);
+		instance.registerUser("Marie", 3, "Marie M", "1234", database);
 		
-		int result = userM.logIn("Marie", "1234", instance);
+		int result = instance.logIn("Marie", "1234", database);
 		int expResult = 3;
 		assertEquals(expResult, result);
 		
 		
 		//login with wrong password
 		expResult = -1; 
-		result = userM.logIn("Marie", "  ", instance);
+		result = instance.logIn("Marie", "  ", database);
 		assertEquals(expResult, result);
 		
 		
 		//login with nonexcisting user
 		expResult = -1; 
-		result = userM.logIn("Marit", "1234", instance);
+		result = instance.logIn("Marit", "1234", database);
 		assertEquals(expResult, result);
 		
 	}
@@ -86,10 +86,9 @@ public class TestUserMethods {
 	@Test
 	public void testRegisterCustomer() throws Exception{
 		System.out.println("Test register customer");
-		UserMethods userM = new UserMethods();
 		
 		boolean expResult = true;
-		boolean result = userM.registerCustomer(100, "Larsen", "Geir", "73123456", "geir@larsen.no", "Erling Skakkes gate 66", 7012, 1, "none", 1, instance);
+		boolean result = instance.registerCustomer(1, "Larsen", "Geir", "73123456", "geir@larsen.no", "Erling Skakkes gate 66", 7012, 1, "none", 1, database);
 		
 		assertEquals(expResult, result);
 		
@@ -98,10 +97,9 @@ public class TestUserMethods {
 	@Test
 	public void testRegisterCompany() throws Exception{
 		System.out.println("Test: register company");
-		UserMethods userM = new UserMethods();
 		
 		boolean expResult = true;
-		boolean result = userM.registerCompany(101, "Hansen", "Abraham", "73309090", "ab.hansen@franksblomster.com", "Bakkegata 123", 7014, 3, "none", 1, "Franks blomster", instance);
+		boolean result = instance.registerCompany(2, "Hansen", "Abraham", "73309090", "ab.hansen@franksblomster.com", "Bakkegata 123", 7014, 3, "none", 1, "Franks blomster", database);
 		
 		assertEquals(expResult, result);
 		
@@ -110,12 +108,23 @@ public class TestUserMethods {
 	@Test
 	public void registerSingleOrder() throws Exception{
 		System.out.println("Test: Regiser single order");
-		UserMethods userM = new UserMethods();
+		
 		
 		boolean expResult = true;
-		boolean result = userM.registerSingleOrder(1,"2016-01-03", 1, "none", "Marie", 1, "2016-01-04", 4, instance);
+		boolean result = instance.registerSingleOrder(1,"2016-01-03", 1, "none", "Marie", 1, "2016-01-04", 4, database);
 		
 		assertEquals(expResult, result);
+	}
+	
+	@Test 
+	public void testRegisterIngredient() throws Exception{
+		System.out.println("Test registerIngredient");
+		
+		boolean result = instance.registerIngredient("Kylling", 3, database);
+		boolean expResult = true;
+		
+		assertEquals(expResult, result);
+		
 	}
 	
 	@Ignore
