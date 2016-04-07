@@ -8,11 +8,13 @@ import databaseguiii.UserDialog;
 import databasePackage.*;
 
 class Parentwindow extends JFrame {
-  private User user = new User("", "","");
+  private User user = new User("",0, "","");
   private UserDialog dialog = new UserDialog(this);
+  private String userID="";
   private String name = "";
-  private String pword = "";
-  private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + name +"&password=" + pword);
+  private int userType=0;
+  private String password = "";
+  private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + name +"&password=" + password);
   
   public Parentwindow() {
     setTitle("Login");
@@ -32,7 +34,7 @@ class Parentwindow extends JFrame {
     public void actionPerformed(ActionEvent action) {
       if (dialog.showDialog(user)) {
           try {
-      		UserMethods.registerUser(Integer.parseInt(user.getRole()), user.getUsername(), user.getPassword(), database);
+      		UserMethods.registerUser(user.getUserID(), user.getUserType(), user.getName(), user.getPassword(), database);
             } catch (Exception e) {
       		e.printStackTrace();
             }
