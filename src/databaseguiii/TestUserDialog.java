@@ -14,7 +14,7 @@ class Parentwindow extends JFrame {
   private String name = "";
   private int userType=0;
   private String password = "";
-  private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + name +"&password=" + password);
+  private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/ninameed?user=ninameed&password=1Le5YPPr");
   
   public Parentwindow() {
     setTitle("Login");
