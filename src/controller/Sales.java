@@ -1,19 +1,31 @@
 package controller;
 
+import databasePackage.*;
+
+import javax.swing.JOptionPane;
+import java.util.ArrayList;
+
 public class Sales extends User {
 	
 	public Sales(String name, String pword) {
 		super(name, pword);
 	}
 
-	public boolean registerNewOrder(int customerID, int ){
-		
-		
-		
-		
+	public boolean registerNewOrder(int customerID, String date, String deliveryDate, String info, String userID, ArrayList<Meal> meals, Database database)throws Exception{
 		boolean success = false;
 		
+		int orderID = UserMethods.registerOrder(date, customerID, info, userID, database);
 		
+		for (Meal aMeal : meals){
+			String quantityRead = JOptionPane.showInputDialog("How many of "+aMeal.getMealName()+" should be registerd?");
+			int quantity = Integer.parseInt(quantityRead);
+			
+			if(!UserMethods.addMealToOrder(orderID, aMeal.getMealID(), deliveryDate, quantity, false, false, database)){
+				
+			}
+		}
+		
+
 		return success;
 	}
 	
