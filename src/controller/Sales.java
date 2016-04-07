@@ -1,4 +1,4 @@
-package userPackage;
+package controller;
 
 public class Sales extends User {
 	

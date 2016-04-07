@@ -1,4 +1,4 @@
-package userPackage;
+package controller;
 
 public abstract class User{
 
@@ -23,7 +23,7 @@ public abstract class User{
 	}
 
 	public String viewFoodOrders(){
-		// Skal spørre database
+		// Skal spï¿½rre database
 		return "Food orders:\n";
 	}
 	
