@@ -140,9 +140,20 @@ public class UserMethods {
 		return true;
 	}
 	
-	/*
-	public boolean registerSubscription(String delivery_date, int quantity, String fromDate, String toDate, String subName);	
-	*/
+	
+	public static int registerSubscription(String subName, Database database) throws Exception{		
+		for(int i=0; i<5; i++){
+			String statement = "SELECT MAX(sub_id) FROM subscription_plan);";
+			database.makeSingleStatement(statement);
+			int subID = Integer.parseInt(database.getLastResult()[0][0]) + 1;
+			statement = "INSERT INTO subscription_plan VALUES("
+					+ subID + ", '" + subName + "')";
+			if(!database.makeSingleStatement(statement)) return subID;
+		}
+		
+		return -1;
+	}
+	
 		
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws Exception{
