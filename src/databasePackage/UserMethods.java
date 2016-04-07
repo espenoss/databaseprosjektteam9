@@ -58,7 +58,7 @@ public class UserMethods {
 					+ aq(email) + aq(adress)
 					+ zip_code + ", " + zone_nr + ", " 
 					+ aq(preferences) + "" + active + ");";
-			if(!database.makeSingleStatement(statement)) return customerID;
+			if(database.makeSingleStatement(statement)) return customerID;
 		}
 		
 		return -1;
@@ -90,12 +90,12 @@ public class UserMethods {
 			String user_id, Database database) throws Exception{
 	
 		for(int i=0; i<5; i++){
-			String statement = "SELECT MAX(order_id) FROM food_order);";
+			String statement = "SELECT MAX(order_id) FROM food_order;";
 			database.makeSingleStatement(statement);
 			int orderID = Integer.parseInt(database.getLastResult()[0][0]) + 1;
 			statement = "INSERT INTO food_order VALUES(" + orderID + ", "
-				+ aq(order_date) + customer_id + "," + aq(info) + "'" + user_id + "');";
-			if(!database.makeSingleStatement(statement)) return orderID;
+				+ aq(order_date) + customer_id + ", " + aq(info) + "'" + user_id + "');";
+			if(database.makeSingleStatement(statement)) return orderID;
 		}
 		
 		return -1;
@@ -109,15 +109,15 @@ public class UserMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
-	public static int registerIngredient(String name, int quantity ,Database database) throws Exception{
+	public static int registerIngredient(String name, float quantity, String unit, Database database) throws Exception{
 
 		for(int i=0; i<5; i++){
-			String statement = "SELECT MAX(ingredient_id) FROM ingredient);";
+			String statement = "SELECT MAX(ingredient_id) FROM ingredient;";
 			database.makeSingleStatement(statement);
-			int orderID = Integer.parseInt(database.getLastResult()[0][0]) + 1;
-			statement = "INSERT INTO ingredient VALUES(DEFAULT, "
-					+ aq(name) + quantity + ");"; 
-			if(!database.makeSingleStatement(statement)) return orderID;
+			int ingredientID = Integer.parseInt(database.getLastResult()[0][0]) + 1;
+			statement = "INSERT INTO ingredient VALUES("
+					+ ingredientID + "," + aq(name) + quantity + ", '" + unit + "');"; 
+			if(database.makeSingleStatement(statement)) return ingredientID;
 		}
 		
 		return -1;
@@ -126,21 +126,19 @@ public class UserMethods {
 	public static int registerMeal(String name, String instructions, int available, int price, int discount, int discountLim, Database database) throws Exception{
 
 		for(int i=0; i<5; i++){
-			String statement = "SELECT MAX(meal_id) FROM meal);";
+			String statement = "SELECT MAX(meal_id) FROM meal;";
 			database.makeSingleStatement(statement);
 			int mealID = Integer.parseInt(database.getLastResult()[0][0]) + 1;
 			statement = "INSERT INTO meal VALUES(" + mealID
 					+ aq(name) + aq(instructions) + available 
 					+ ", " + price + ", " + discount + ", " + discountLim + ");";
-			if(!database.makeSingleStatement(statement)) return mealID;
+			if(database.makeSingleStatement(statement)) return mealID;
 		}
 		
 		return -1;		
-	
-
 	}
 	
-	public static boolean addIngredientToMeal(int mealID, int ingredientID, int ingredientQuantity, Database database) throws Exception{
+	public static boolean addIngredientToMeal(int mealID, int ingredientID, float ingredientQuantity, Database database) throws Exception{
 				
 		String statement = "INSERT INTO meal_ingredient VALUES(" 
 	+ mealID + ", " + ingredientID + "," + ingredientQuantity + ");";
@@ -159,12 +157,12 @@ public class UserMethods {
 	public static int registerZone(String zoneName, Database database) throws Exception{
 		
 		for(int i=0; i<5; i++){
-			String statement = "SELECT MAX(zone_nr) FROM zone);";
+			String statement = "SELECT MAX(zone_nr) FROM zone;";
 			database.makeSingleStatement(statement);
 			int zoneNr = Integer.parseInt(database.getLastResult()[0][0]) + 1;
 			statement = "INSERT INTO zone VALUES("
 					+ zoneNr + ", '" + zoneName + "');";
-			if(!database.makeSingleStatement(statement)) return zoneNr;
+			if(database.makeSingleStatement(statement)) return zoneNr;
 		}
 		return -1;
 	}
@@ -172,15 +170,23 @@ public class UserMethods {
 	
 	public static int registerSubscription(String subName, Database database) throws Exception{		
 		for(int i=0; i<5; i++){
-			String statement = "SELECT MAX(sub_id) FROM subscription_plan);";
+			String statement = "SELECT MAX(sub_id) FROM subscription_plan;";
 			database.makeSingleStatement(statement);
 			int subID = Integer.parseInt(database.getLastResult()[0][0]) + 1;
 			statement = "INSERT INTO subscription_plan VALUES("
 					+ subID + ", '" + subName + "')";
-			if(!database.makeSingleStatement(statement)) return subID;
+			if(database.makeSingleStatement(statement)) return subID;
 		}
 		
 		return -1;
+	}
+	
+	public static boolean registerSubscriptionToOrder(int orderID, int quantitySub, String fromDate, String toDate, String subID, Database database) throws Exception{
+		
+		String statement = "INSERT INTO sub_order VALUES(" 
+				+ orderID + ", " + quantitySub + ", " + aq(fromDate) + aq(toDate) + subID + ");";
+		
+		return database.makeSingleStatement(statement);
 	}
 	
 		
@@ -188,12 +194,12 @@ public class UserMethods {
 	public static void main(String[] args) throws Exception{
 		// testkode
 		
-		String username = "";
-		String password = "";
+		String username = "espenme";
+		String password = "16Sossosem06";
 		Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + username + "&password=" + password);
 		String[][] resultat = null;
 		
-		
+		UserMethods.registerOrder("2016-01-03", 10000, "none", "Marie", database);
 		
 //		UserMethods.registerIngredients("Kjøtt", 5, database);
 //		UserMethods.registerMeal("Mais", "ingenting", 1, 123, 10, 12, database);
