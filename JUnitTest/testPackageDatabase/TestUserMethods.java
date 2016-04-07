@@ -120,7 +120,7 @@ public class TestUserMethods {
 	public void testRegisterIngredient() throws Exception{
 		System.out.println("Test registerIngredient");
 		
-		boolean result = instance.registerIngredient("Kylling", 3, database);
+		boolean result = instance.registerIngredient("Fish", 3, database);
 		boolean expResult = true;
 		
 		assertEquals(expResult, result);
@@ -128,7 +128,15 @@ public class TestUserMethods {
 	}
 	
 	@Ignore
-	public void testRegisterMeal(){
+	public void testRegisterMeal() throws Exception{
+		System.out.println("Test registerMeal");
+		
+		int[] ingredients = {1, 2, 3};
+		int[] quantity = {1, 10, 15};
+		
+		boolean result = instance.registerMeal("Chicken pasta", "Make it!", 1, 200, 0, 0, ingredients, quantity, database);
+		boolean expResult = true;
+		assertEquals(expResult, result);
 		
 	}
 	
