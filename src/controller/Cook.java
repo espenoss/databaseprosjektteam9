@@ -1,9 +1,10 @@
 package controller;
+import databasePackage.*;
 
 public class Cook extends User {
 
-	public Cook(String userID,int userType, String name,String pword) {
-		super(userID, userType, name, pword);
+	public Cook(String userID,int userType, String name,String pword, Database database) {
+		super(userID, userType, name, pword, database);
 	}
 	
 	public boolean markAsReady(){
@@ -12,6 +13,17 @@ public class Cook extends User {
 		// oppdater ordre i database
 		
 		return success;
+	}
+	
+	public void createMeal(Meal meal) throws Exception{
+		// register meal and put it in database
+		// opprett tabell 
+		int mealID = QueryMethods.registerMeal(meal.getMealName(), meal.getInstructions(), meal.getAvailable(), meal.getPrice(), meal.getDiscount(), meal.getDiscountLimit(), database);
+										
+	}
+	
+	public void addIngredient(){
+		
 	}
 	
 	@Override
