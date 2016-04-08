@@ -34,7 +34,7 @@ class Parentwindow extends JFrame {
     public void actionPerformed(ActionEvent action) {
       if (dialog.showDialog(user)) {
           try {
-      		UserMethods.registerUser(user.getUserID(), user.getUserType(), user.getName(), user.getPassword(), database);
+      		QueryMethods.registerUser(user.getUserID(), user.getUserType(), user.getName(), user.getPassword(), database);
             } catch (Exception e) {
       		e.printStackTrace();
             }
@@ -53,7 +53,7 @@ class Parentwindow extends JFrame {
 		  String[][] dbData = null;
 		  
 		  try {
-			  dbData = UserMethods.viewAllUsers(database);
+			  dbData = QueryMethods.viewAllUsers(database);
 		  } catch (Exception e) {
 			  e.printStackTrace();
 		  }

@@ -1,6 +1,6 @@
 package databasePackage;
 
-public class UserMethods {
+public class QueryMethods {
 	
 	// User types
 	public static final int U_ADMIN = 0;
@@ -209,7 +209,7 @@ public class UserMethods {
 		Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + username + "&password=" + password);
 		String[][] resultat = null;
 		
-		UserMethods.registerOrder("2016-01-03", 10000, "none", "Marie", database);
+		QueryMethods.registerOrder("2016-01-03", 10000, "none", "Marie", database);
 		
 //		UserMethods.registerIngredients("Kjøtt", 5, database);
 		

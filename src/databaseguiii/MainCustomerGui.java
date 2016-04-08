@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import databasePackage.Database;
-import databasePackage.UserMethods;
+import databasePackage.QueryMethods;
 import databaseguiii.Customer;
 import databaseguiii.CustomerDialog;
 //import databaseguiii.Parentwindow.ButtonListener;
@@ -42,7 +42,7 @@ class Parentwindow2 extends JFrame {
 	    public void actionPerformed(ActionEvent action) {
 	      if (dialog.showDialog(customer)) {
 	          try {
-	      		UserMethods.registerCustomer(customer.getCustomerID(), customer.getFirstName(), customer.getSurName(), 
+	      		QueryMethods.registerCustomer(customer.getCustomerID(), customer.getFirstName(), customer.getSurName(), 
 	      				customer.getEmail(), customer.getAdress(), customer.getPreferences(), customer.getZipCode(), 
 	      				customer.getZoneNr(), customer.getPhoneNumber(), 1, database);
 	            } catch (Exception e) {
@@ -63,7 +63,7 @@ class Parentwindow2 extends JFrame {
 			  String[][] dbData = null;
 			  
 			  try {
-				  dbData = UserMethods.viewAllUsers(database);
+				  dbData = QueryMethods.viewAllUsers(database);
 			  } catch (Exception e) {
 				  e.printStackTrace();
 			  }

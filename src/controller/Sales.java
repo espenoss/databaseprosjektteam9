@@ -14,13 +14,13 @@ public class Sales extends User {
 	public boolean registerNewOrder(int customerID, String date, String deliveryDate, String info, String userID, ArrayList<Meal> meals, Database database)throws Exception{
 		boolean success = false;
 		
-		int orderID = UserMethods.registerOrder(date, customerID, info, userID, database);
+		int orderID = QueryMethods.registerOrder(date, customerID, info, userID, database);
 		
 		for (Meal aMeal : meals){
 			String quantityRead = JOptionPane.showInputDialog("How many of "+aMeal.getMealName()+" should be registerd?");
 			int quantity = Integer.parseInt(quantityRead);
 			
-			if(!UserMethods.addMealToOrder(orderID, aMeal.getMealID(), deliveryDate, quantity, false, false, database)){
+			if(!QueryMethods.addMealToOrder(orderID, aMeal.getMealID(), deliveryDate, quantity, false, false, database)){
 				
 			}
 		}

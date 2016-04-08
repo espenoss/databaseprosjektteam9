@@ -45,12 +45,12 @@ public class TestUserMethods {
 		
 		//Register new user
 		boolean expResult = true;
-		boolean result = UserMethods.registerUser("Hanne", 3, "Hanne Hansen", "1234", database);
+		boolean result = QueryMethods.registerUser("Hanne", 3, "Hanne Hansen", "1234", database);
 		assertEquals(expResult, result);
 				
 		//Try to register same user again
 		expResult = false; 
-		result = UserMethods.registerUser("Hanne", 3, "Hanne H", "1234", database);
+		result = QueryMethods.registerUser("Hanne", 3, "Hanne H", "1234", database);
 		assertEquals(expResult, result);
 	}
 	
@@ -59,22 +59,22 @@ public class TestUserMethods {
 		System.out.println("Test logIn");
 		
 		//try to log in
-		UserMethods.registerUser("Marie", 3, "Marie M", "1234", database);
+		QueryMethods.registerUser("Marie", 3, "Marie M", "1234", database);
 		
-		int result = UserMethods.logIn("Marie", "1234", database);
+		int result = QueryMethods.logIn("Marie", "1234", database);
 		int expResult = 3;
 		assertEquals(expResult, result);
 		
 		
 		//login with wrong password
 		expResult = -1; 
-		result = UserMethods.logIn("Marie", "  ", database);
+		result = QueryMethods.logIn("Marie", "  ", database);
 		assertEquals(expResult, result);
 		
 		
 		//login with nonexcisting user
 		expResult = -1; 
-		result = UserMethods.logIn("Marit", "1234", database);
+		result = QueryMethods.logIn("Marit", "1234", database);
 		assertEquals(expResult, result);
 		
 	}
@@ -84,7 +84,7 @@ public class TestUserMethods {
 		System.out.println("Test register customer");
 		
 		int errorResult = -1;
-		int result = UserMethods.registerCustomer("Larsen", "Geir", "73123456", "geir@larsen.no", "Erling Skakkes gate 66", 7012, 1, "none", 1, database);
+		int result = QueryMethods.registerCustomer("Larsen", "Geir", "73123456", "geir@larsen.no", "Erling Skakkes gate 66", 7012, 1, "none", 1, database);
 		
 		assertNotEquals(errorResult, result);
 		
@@ -95,7 +95,7 @@ public class TestUserMethods {
 		System.out.println("Test: register company");
 		
 		boolean expResult = true;
-		boolean result = UserMethods.registerCompanyToCustomer(10000, "Franks blomster", database);
+		boolean result = QueryMethods.registerCompanyToCustomer(10000, "Franks blomster", database);
 		
 		assertEquals(expResult, result);
 		
@@ -107,7 +107,7 @@ public class TestUserMethods {
 		
 		
 		int errorResult = -1;
-		int result = UserMethods.registerOrder("2016-01-03", 10000, "none", "Marie", database);
+		int result = QueryMethods.registerOrder("2016-01-03", 10000, "none", "Marie", database);
 		
 		assertNotEquals(errorResult, result);
 	}
@@ -116,7 +116,7 @@ public class TestUserMethods {
 	public void testRegisterIngredient() throws Exception{
 		System.out.println("Test registerIngredient");
 		
-		int result = UserMethods.registerIngredient("Fish", 3, "kg", database);
+		int result = QueryMethods.registerIngredient("Fish", 3, "kg", database);
 		int errorResult = -1;
 		
 		assertNotEquals(errorResult, result);
@@ -127,7 +127,7 @@ public class TestUserMethods {
 	public void testRegisterMeal() throws Exception{
 		System.out.println("Test registerMeal");
 		
-		int result = UserMethods.registerMeal("Chicken pasta", "Make it!", 1, 200, 0, 0, database);
+		int result = QueryMethods.registerMeal("Chicken pasta", "Make it!", 1, 200, 0, 0, database);
 		int errorResult = -1;
 		assertEquals(errorResult, result);
 		
