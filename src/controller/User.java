@@ -1,18 +1,20 @@
 package controller;
 
-import controller.User;
+import databasePackage.*;
 
 public class User implements java.io.Serializable{
 	private String userID;
 	private String name;
 	private String pword;
 	private int userType;
+	Database database;
 	
-	public User(String userID,int userType, String name,String pword){
+	public User(String userID,int userType, String name,String pword, Database database){
 		this.userID=userID;
 		this.userType=userType;
 		this.name=name;
 		this.pword=pword;
+		this.database = database;
 	}	
 	public void setUserID(String userID){
 		this.userID=userID;
@@ -45,10 +47,20 @@ public class User implements java.io.Serializable{
 		return "Food orders:\n";
 	}
 	
-	public String viewCustomerList(){
-		String customerList = null;
+	public Customer viewCustomerList() throws Exception{
 		
-		return customerList;
+		String[][] tempList = QueryMethods.viewAllCustomers(database);
+		
+		String res = "";
+		
+		for (int i=0;i<tempList.length;i++){
+			for(int j=0;j<tempList[i].length;j++){
+				res+=tempList[i][j];
+			}
+		}
+		System.out.println(res);
+		
+		return null;
 	}
 	
 	public String viewOrderIngredients(){
@@ -71,5 +83,16 @@ public class User implements java.io.Serializable{
 	}
 	public String toString(){
 		return userID+""+ name+" "+ userType +" "+pword;
+	}
+	
+	
+	public static void main(String[] args){
+		String username = "marith1";
+		String password = "";
+		String databaseName = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
+		String databaseDriver = "com.mysql.jdbc.Driver";
+		Database database = new Database(databaseDriver, databaseName);
+		
+		User user = new User("Hanne",1, "Hanne","1234", database);
 	}
 }
