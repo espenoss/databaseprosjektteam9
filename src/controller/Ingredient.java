@@ -21,7 +21,7 @@ public class Ingredient {
 		return ingName;
 	}
 	
-	public int getQuantity(){
+	public int getStorageQuantity(){
 		return storageQuantity;
 	}
 	
@@ -34,7 +34,7 @@ public class Ingredient {
 		this.ingName=ingName;
 	}
 	
-	public void setQuantity(int quantity){
+	public void setStorageQuantity(int quantity){
 		//endre info i databasen her? 
 		this.storageQuantity = quantity;
 	}
