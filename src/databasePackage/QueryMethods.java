@@ -23,12 +23,32 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 
-	public static String[][] viewAllUsers(Database database) throws Exception{
-		
+	public static boolean updateUser(String userID, int userType, String name, String password, Database database) throws Exception{
+		String statement = "UPDATE user SET "
+				+ "user_id =" + aq(userID)
+				+ "user_type =" + userType + ","
+				+ "name = " + aq(name)
+				+ "password = '" + password + "' " 
+				+ "WHERE user_id = '" + userID + "';";
+		return database.makeSingleStatement(statement);
+	}
+	
+	public static boolean removeUser(String userID, Database database) throws Exception{
+		String statement = "DELETE FROM user WHERE user_id = '" + userID + "';";
+		return database.makeSingleStatement(statement);
+	}
+
+	public static String[] viewUser(String userID, Database database) throws Exception{
+		String statement = "SELECT user_id, user_type, name FROM user WHERE user_id = '" + userID + "');";
+		System.out.println(statement);		
+		database.makeSingleStatement(statement);
+		return database.getLastResult()[0];
+	}	
+	
+	public static String[][] viewAllUsers(Database database) throws Exception{		
 		database.makeSingleStatement("SELECT user_id, user_type, name FROM user");
 		
-		return database.getLastResult();
-		
+		return database.getLastResult();		
 	}	
 	
 	public static int logIn(String userID, String password, Database database) throws Exception{
@@ -63,6 +83,14 @@ public class QueryMethods {
 				
 		return -1;
 	}
+
+	public static boolean updateCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
+			int zip_code, int zone_nr, String preferences, int active, Database database) throws Exception{
+			
+		String statement = "";
+		
+		return database.makeSingleStatement(statement);
+	}	
 	
 	public static boolean registerCompanyToCustomer(int customerID, String companyName, Database database) throws Exception{
 			
