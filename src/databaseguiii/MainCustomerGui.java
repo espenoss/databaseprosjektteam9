@@ -15,7 +15,7 @@ import databaseguiii.CustomerDialog;
 class Parentwindow2 extends JFrame {
 	  private Customer customer = new Customer(0, "", "", "", "", "", 0, 0, "");
 	  private CustomerDialog dialog = new CustomerDialog(this);
-	  private String customerID = "";
+	  private String customerID = ""; //Må tas bort, er kun for bedriftskunder. Trenger company name i bedriftskunde klassenkkk
 	  private String firstName = "";
 	  private String surName = "";
 	  private String email = "";
@@ -42,9 +42,8 @@ class Parentwindow2 extends JFrame {
 	    public void actionPerformed(ActionEvent action) {
 	      if (dialog.showDialog(customer)) {
 	          try {
-	      		UserMethods.registerCustomer(customer.getCustomerID(), customer.getFirstName(), customer.getSurName(), 
-	      				customer.getEmail(), customer.getAdress(), customer.getPreferences(), customer.getZipCode(), 
-	      				customer.getZoneNr(), customer.getPhoneNumber(), 1, database);
+	      		UserMethods.registerCustomer(customer.getSurName(), customer.getFirstName(), customer.getPhoneNumber(),  
+	      				customer.getEmail(), customer.getAdress(),customer.getZipCode(), customer.getZoneNr(), customer.getPreferences(), 1, database);
 	            } catch (Exception e) {
 	      		e.printStackTrace();
 	            }
