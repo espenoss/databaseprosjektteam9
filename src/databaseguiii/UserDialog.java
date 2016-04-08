@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import controller.User;
+
 import static javax.swing.JOptionPane.*;
 
 public class UserDialog extends MyDialog{

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Sales extends User {
 	
 	public Sales(String name, String pword) {
-		super(name, pword);
+		super(name, password);
 	}
 
 	public boolean registerNewOrder(int customerID, String date, String deliveryDate, String info, String userID, ArrayList<Meal> meals, Database database)throws Exception{
