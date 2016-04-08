@@ -11,7 +11,7 @@ public class Cook extends User {
 		super(userID, userType, name, pword, database);
 	}
 	
-	public boolean markAsReady(){
+	public boolean markAsReadyForDelivery(){
 		boolean success = false;
 		
 		// oppdater ordre i database
