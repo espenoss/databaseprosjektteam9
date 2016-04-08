@@ -43,7 +43,7 @@ class Parentwindow2 extends JFrame {
 	      if (dialog.showDialog(customer)) {
 	          try {
 
-	      		QueryMethods.registerCustomer(customer.getCustomerID(), customer.getFirstName(), customer.getSurName(), 
+	      		QueryMethods.registerCustomer(customer.getFirstName(), customer.getSurName(), 
 	      				customer.getEmail(), customer.getAdress(), customer.getPreferences(), customer.getZipCode(), 
 	      				customer.getZoneNr(), customer.getPhoneNumber(), 1, database);
 	            } catch (Exception e) {
