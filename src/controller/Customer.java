@@ -1,4 +1,4 @@
-package databaseguiii;
+package controller;
 
 
 public class Customer implements java.io.Serializable{
