@@ -49,7 +49,7 @@ public class UserDialog extends MyDialog{
 		userIDfield.setText(user.getUserID());
 	//	userTypeField.setText(user.getUserType());
 		usernameField.setText(user.getName());
-		passwordField.setText(user.getPassword());
+		passwordField.setText(user.getPword());
 		setOK(false);
 		pack();
 		userIDfield.requestFocusInWindow();

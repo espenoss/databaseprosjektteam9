@@ -35,7 +35,7 @@ class Parentwindow extends JFrame {
     public void actionPerformed(ActionEvent action) {
       if (dialog.showDialog(user)) {
           try {
-      		QueryMethods.registerUser(user.getUserID(), user.getUserType(), user.getName(), user.getPassword(), database);
+      		QueryMethods.registerUser(user.getUserID(), user.getUserType(), user.getName(), user.getPword(), database);
             } catch (Exception e) {
       		e.printStackTrace();
             }
