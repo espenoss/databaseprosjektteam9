@@ -191,8 +191,12 @@ public class UserMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
-	public static boolean addMealToPlan(int ){
+	public static boolean addMealToPlan(int subID, int mealID, int weekdayNr, String weekday, Database database) throws Exception{
 		
+		String statement = "INSERT INTO sub_meals_day VALUES(" + subID + ", " 
+		+ mealID + "," + weekdayNr + ", '" + weekday + "');";
+			
+		return database.makeSingleStatement(statement);
 	}
 	
 	
@@ -200,8 +204,8 @@ public class UserMethods {
 	public static void main(String[] args) throws Exception{
 		// testkode
 		
-		String username = "espenme";
-		String password = "16Sossosem06";
+		String username = "";
+		String password = "";
 		Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + username + "&password=" + password);
 		String[][] resultat = null;
 		
