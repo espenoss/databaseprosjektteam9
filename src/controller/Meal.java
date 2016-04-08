@@ -12,7 +12,7 @@ public class Meal {
 	private int discount;
 	private int discountLimit; // fjerne?
 	
-	public Meal(int mealID, String mealName, String instructions, boolean available, int price, int discount, int discountLimit){
+	public Meal(int mealID, String mealName, String instructions, int available, int price, int discount, int discountLimit){
 		this.mealID = mealID;
 		this.mealName = mealName;
 		this.instructions = instructions;

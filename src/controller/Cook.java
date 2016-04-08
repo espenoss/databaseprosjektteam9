@@ -19,7 +19,7 @@ public class Cook extends User {
 		// register meal and put it in database
 		// opprett tabell 
 		int mealID = QueryMethods.registerMeal(meal.getMealName(), meal.getInstructions(), meal.getAvailable(), meal.getPrice(), meal.getDiscount(), meal.getDiscountLimit(), database);
-										
+		
 	}
 	
 	public void addIngredient(){
