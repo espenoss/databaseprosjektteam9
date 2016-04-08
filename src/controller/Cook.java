@@ -2,8 +2,8 @@ package controller;
 
 public class Cook extends User {
 
-	public Cook(String name, String pword) {
-		super(name, pword);
+	public Cook(String userID,int userType, String name,String pword) {
+		super(userID, userType, name, pword);
 	}
 	
 	public boolean markAsReady(){

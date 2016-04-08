@@ -2,8 +2,8 @@ package controller;
 
 public class Driver extends User {
 	
-	public Driver(String name, String pword) {
-		super(name, pword);
+	public Driver(String userID,int userType, String name,String pword) {
+		super(userID, userType, name, pword);
 	}
 	
 	public boolean markDelivered(int orderIndex){

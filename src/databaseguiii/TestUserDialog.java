@@ -3,7 +3,8 @@ package databaseguiii;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import databaseguiii.User;
+
+import controller.User;
 import databaseguiii.UserDialog;
 import databasePackage.*;
 

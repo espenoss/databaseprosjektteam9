@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controller.Customer;
+import controller.*;
 
 import static javax.swing.JOptionPane.*;
 

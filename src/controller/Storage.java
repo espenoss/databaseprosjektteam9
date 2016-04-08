@@ -2,8 +2,8 @@ package controller;
 
 public class Storage extends User {
 
-	public Storage(String name, String pword) {
-		super(name, pword);
+	public Storage(String userID,int userType, String name,String pword) {
+		super(userID, userType, name, pword);
 	}
 	
 	public boolean registerDelivery(String orderinfo){

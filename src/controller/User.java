@@ -1,29 +1,47 @@
 package controller;
 
-public abstract class User{
+import controller.User;
 
+public class User implements java.io.Serializable{
+	private String userID;
 	private String name;
 	private String pword;
+	private int userType;
 	
-	User(String name, String pword){
-		this.name = name;
-		this.pword = pword;
+	public User(String userID,int userType, String name,String pword){
+		this.userID=userID;
+		this.userType=userType;
+		this.name=name;
+		this.pword=pword;
+	}	
+	public void setUserID(String userID){
+		this.userID=userID;
+	}
+	public void setName(String name){
+		this.name=name;
+	}
+	public void setUserType(int userType){
+		this.userType = userType;
+	}
+	public void setPassword(String pword){
+		this.pword=pword;
+	}
+	public String getUserID(){
+		return userID;
 	}
 	
-	public String getPword() {
-		return pword;
-	}
-
-	public void setPword(String pword) {
-		this.pword = pword;
-	}
-
-	public String getName() {
+	public String getName(){
 		return name;
 	}
-
+	public int getUserType(){
+		return userType;
+	}
+	public String getPword(){
+		return pword;
+	}
+	
 	public String viewFoodOrders(){
-		// Skal sp�rre database
+		// Skal sporre database
 		return "Food orders:\n";
 	}
 	
@@ -41,8 +59,17 @@ public abstract class User{
 		return ingredients;
 	}
 	
-	public String toString(){
-		return "Employee info:\n" + name;
+	public boolean equals(Object obj){
+		if(!(obj instanceof User)){
+			return false;
+		}
+		if(this==obj){
+			return true;
+		}
+		User p=(User)obj;
+		return (userID==p.getUserID() && name==p.getName()&&userType==p.getUserType()&&pword==p.getPword());
 	}
-	
+	public String toString(){
+		return userID+""+ name+" "+ userType +" "+pword;
+	}
 }

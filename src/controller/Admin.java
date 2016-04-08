@@ -2,8 +2,8 @@ package controller;
 
 public class Admin extends User {
 	
-	public Admin(String name, String pword, String userTitle) {
-		super(name, pword);
+	public Admin(String userID,int userType, String name,String pword) {
+		super(userID, userType, name, pword);
 	}
 
 	public boolean registerUser(){
