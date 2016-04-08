@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 
 
 class LogInGui extends JFrame /*implements ActionListener*/{
-	private JTextField username = new JTextField(20);
+	private JTextField userID = new JTextField(20);
 	private JTextField password = new JTextField(20);
 	private JLabel message = new JLabel("Log in information");
 	
@@ -50,8 +50,8 @@ class LogInGui extends JFrame /*implements ActionListener*/{
 			JButton button = (JButton)event.getSource();
 			String buttonName = button.getText();
 			if (buttonName.equals("Sign in")){
-			String name = username.getText();
-			message.setText(name + " have successfully logged in ");	
+			String userid = userID.getText();
+			message.setText(userid + " have successfully logged in ");	
 			add(message, BorderLayout.PAGE_END);
 			}
 		}
@@ -66,9 +66,9 @@ class LogInGui extends JFrame /*implements ActionListener*/{
 	private class UserInput extends JPanel{
 		public UserInput(){
 			setLayout(new GridLayout(2,2,5,5));
-			JLabel text = new JLabel("Username: ", JLabel.RIGHT);
+			JLabel text = new JLabel("UserID: ", JLabel.RIGHT);
 			add(text);
-			add(username);
+			add(userID);
 			text = new JLabel("Password: ", JLabel.RIGHT);
 			add(text);
 			add(password);
