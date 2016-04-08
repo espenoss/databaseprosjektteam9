@@ -14,21 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import java.text.*;
-import javax.swing.event.*;
-
-
 import controller.*;
-import databasePackage.Database;
-
-
 
 class LogInGui extends JFrame implements ActionListener{
-//	public void actionPerformed(ActionEvent event)
 	private JTextField userID = new JTextField(20);
 	private JTextField password = new JTextField(20);
 	private JLabel message = new JLabel("Log in information");
@@ -39,8 +27,6 @@ class LogInGui extends JFrame implements ActionListener{
 		}
 		return false;
 	} */
-	
-	
 	
 	public LogInGui(String title){
 		setTitle(title);
@@ -60,11 +46,6 @@ class LogInGui extends JFrame implements ActionListener{
 	}
 	
 	
-	
-	
-	
-	
-	
 	public static int authenticate(String userID, String password) throws Exception{
 		LogIn logIn = new LogIn();
 	
@@ -77,10 +58,12 @@ class LogInGui extends JFrame implements ActionListener{
 			JButton button = (JButton)event.getSource();
 			String buttonName = button.getText();
 			try {
-				if (authenticate("", "") !=  -1){
+				if (authenticate(userID.getText(), password.getText()) !=  -1){
 				String userid = userID.getText();
 				message.setText(userid + " have successfully logged in ");	
 				add(message, BorderLayout.PAGE_END);
+				}else{
+					message.setText("Wrong username or password");	
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -88,16 +71,18 @@ class LogInGui extends JFrame implements ActionListener{
 			}
 		}
 	}    
+	
 	/*
 	 * Argumentene til GridLayout() er:
 	 * antall rader, antall kolonner,
 	 * horisontal avstand mellom rutene og vertikal avstand mellom rutene
 	 * de to siste i antall piksler
 	 */
+	
 	private class UserInput extends JPanel{
 		public UserInput(){
 			setLayout(new GridLayout(2,2,5,5));
-			JLabel text = new JLabel("UserID: ", JLabel.RIGHT);
+			JLabel text = new JLabel("Username: ", JLabel.RIGHT);
 			add(text);
 			add(userID);
 			text = new JLabel("Password: ", JLabel.RIGHT);
@@ -108,14 +93,10 @@ class LogInGui extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 }
 
  
-
-	
-
 class MainLogInGui{
 	public static void main(String[] args){
 		LogInGui window = new LogInGui("Log In");
