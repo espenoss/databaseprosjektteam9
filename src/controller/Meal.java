@@ -34,6 +34,10 @@ public class Meal {
 		return instructions;
 	}
 	
+	public ArrayList<Ingredient> getIngredients(){
+		return ingredients;
+	}
+	
 	public int getAvailable(){
 		return available;
 	}

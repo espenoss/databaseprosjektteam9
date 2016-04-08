@@ -1,4 +1,8 @@
 package controller;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import databasePackage.*;
 
 public class Cook extends User {
@@ -15,15 +19,21 @@ public class Cook extends User {
 		return success;
 	}
 	
-	public void createMeal(Meal meal) throws Exception{
-		// register meal and put it in database
-		// opprett tabell 
+	public boolean createMeal(Meal meal) throws Exception{
 		int mealID = QueryMethods.registerMeal(meal.getMealName(), meal.getInstructions(), meal.getAvailable(), meal.getPrice(), meal.getDiscount(), meal.getDiscountLimit(), database);
+		if(mealID < 0){
+			JOptionPane.showMessageDialog(null,"Something went wrong, please try again");
+			return false;
+		} 
 		
-	}
-	
-	public void addIngredient(){
-		
+		ArrayList<Ingredient> ingredient = meal.getIngredients();
+		for(int i = 0; i < ingredient.size(); i++){
+			if(!QueryMethods.addIngredientToMeal(mealID, ingredient.get(i).getIngID(), Float.parseFloat(JOptionPane.showInputDialog("Ingredient quantity: ")), database)){
+			// OBBBBBSSSSS Husk å lag metode for å håndtere float til tekst
+				JOptionPane.showMessageDialog(null, "Could not register ingredient "+ ingredient.get(i).getIngName());
+			}
+		}
+		return true;
 	}
 	
 	@Override
