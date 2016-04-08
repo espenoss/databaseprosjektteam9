@@ -1,31 +1,24 @@
 package controller;
 
-import controller.User;
+import java.util.ArrayList;
+
+import databasePackage.*;
 
 public class User implements java.io.Serializable{
 	private String userID;
 	private String name;
 	private String pword;
 	private int userType;
+	Database database;
 	
-	public User(String userID,int userType, String name,String pword){
+	public User(String userID,int userType, String name,String pword, Database database){
 		this.userID=userID;
 		this.userType=userType;
 		this.name=name;
 		this.pword=pword;
+		this.database = database;
 	}	
-	public void setUserID(String userID){
-		this.userID=userID;
-	}
-	public void setName(String name){
-		this.name=name;
-	}
-	public void setUserType(int userType){
-		this.userType = userType;
-	}
-	public void setPassword(String pword){
-		this.pword=pword;
-	}
+
 	public String getUserID(){
 		return userID;
 	}
@@ -40,15 +33,81 @@ public class User implements java.io.Serializable{
 		return pword;
 	}
 	
+	public Database getDatabase(){
+		return database;
+		
+	}
+	
+	public void setUserID(String userID){
+		this.userID=userID;
+	}
+	public void setName(String name){
+		this.name=name;
+	}
+	public void setUserType(int userType){
+		this.userType = userType;
+	}
+	public void setPassword(String pword){
+		this.pword=pword;
+	}
+	
+	
+	
 	public String viewFoodOrders(){
 		// Skal sporre database
 		return "Food orders:\n";
 	}
 	
-	public String viewCustomerList(){
-		String customerList = null;
+	public ArrayList<Customer> viewCustomerList() throws Exception{
 		
-		return customerList;
+		String[][] list = QueryMethods.viewAllCustomers(database);
+		System.out.println("hva er dette?: "+list[0][9]);
+		
+		Customer tempCustomer;
+		ArrayList<Customer> customerList = new ArrayList<Customer>();
+		
+		System.out.println("Liste lengde: "+list[0].length);
+		/*
+		for(int i=0; i<list.length; i++){
+			if (Integer.parseInt(list[i][10])==1){
+				int customerId = Integer.parseInt(list[i][0]); //0
+				//1 first name
+				//2 sur name
+				//3 phonenumber
+				//4 email
+				//5 adress
+				int zipCode = Integer.parseInt(list[i][6]); //6
+				int zoneNr = Integer.parseInt(list[i][7]); //7
+				//8 preferences
+				
+				tempCustomer = new Customer(customerId, list[i][1],list[i][2],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8]);
+				customerList.add(tempCustomer);
+				
+			}
+
+			
+
+		}
+		*/
+		
+				
+		//Customer(int customerID, String firstName, String surName, String phoneNumber,
+		// 			String email, String adress, int zip_code, int zone_nr, String preferences)
+		/*
+		 * 	customer_id INTEGER NOT NULL,
+			surname VARCHAR(30),
+			firstname VARCHAR(30),
+			phone_number CHAR(8),
+			email VARCHAR(50),
+			adress VARCHAR(100),
+			zip_code  INTEGER NOT NULL,
+			zone_nr  INTEGER NOT NULL,
+			preferences VARCHAR(100),
+			active BOOLEAN,
+		 */
+
+		
+		return null;//customerList;
 	}
 	
 	public String viewOrderIngredients(){
@@ -71,5 +130,20 @@ public class User implements java.io.Serializable{
 	}
 	public String toString(){
 		return userID+""+ name+" "+ userType +" "+pword;
+	}
+	
+	
+	public static void main(String[] args) throws Exception{
+		String username = "marith1";
+		String password = "tgp8sBZA";
+		String databaseName = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
+		String databaseDriver = "com.mysql.jdbc.Driver";
+		Database database = new Database(databaseDriver, databaseName);
+		
+		User user = new User("Hanne", 1, "Hanne","1234", database);
+		
+		//res = 
+		
+		System.out.println(user.viewCustomerList());
 	}
 }

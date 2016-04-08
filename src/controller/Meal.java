@@ -6,16 +6,18 @@ public class Meal {
 	private int mealID;
 	private String mealName;
 	private String instructions;
-	private boolean available;
+	private int available;
+	private int price;
 	private ArrayList<Float> ingQuantity;
 	private int discount;
 	private int discountLimit; // fjerne?
 	
-	public Meal(int mealID, String mealName, String instructions, boolean available, int discount, int discountLimit){
+	public Meal(int mealID, String mealName, String instructions, int available, int price, int discount, int discountLimit){
 		this.mealID = mealID;
 		this.mealName = mealName;
 		this.instructions = instructions;
 		this.available = available;
+		this.price = price;
 		this.discount = discount;
 		this.discountLimit = discountLimit;
 	}
@@ -32,8 +34,16 @@ public class Meal {
 		return instructions;
 	}
 	
-	public boolean getAvailable(){
+	public ArrayList<Ingredient> getIngredients(){
+		return ingredients;
+	}
+	
+	public int getAvailable(){
 		return available;
+	}
+	
+	public int getPrice(){
+		return price;
 	}
 	
 	public int getDiscount(){
