@@ -58,6 +58,7 @@ public class User implements java.io.Serializable{
 		return "Food orders:\n";
 	}
 	
+	//returns an arraylist with customer objects with all active customers
 	public ArrayList<Customer> viewCustomerList() throws Exception{
 		
 		String[][] list = QueryMethods.viewAllCustomers(database);
@@ -67,9 +68,9 @@ public class User implements java.io.Serializable{
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
 		
 		System.out.println("Liste lengde: "+list[0].length);
-		/*
+		
 		for(int i=0; i<list.length; i++){
-			if (Integer.parseInt(list[i][10])==1){
+			if (Integer.parseInt(list[i][9])==1){
 				int customerId = Integer.parseInt(list[i][0]); //0
 				//1 first name
 				//2 sur name
@@ -84,30 +85,8 @@ public class User implements java.io.Serializable{
 				customerList.add(tempCustomer);
 				
 			}
-
-			
-
 		}
-		*/
-		
-				
-		//Customer(int customerID, String firstName, String surName, String phoneNumber,
-		// 			String email, String adress, int zip_code, int zone_nr, String preferences)
-		/*
-		 * 	customer_id INTEGER NOT NULL,
-			surname VARCHAR(30),
-			firstname VARCHAR(30),
-			phone_number CHAR(8),
-			email VARCHAR(50),
-			adress VARCHAR(100),
-			zip_code  INTEGER NOT NULL,
-			zone_nr  INTEGER NOT NULL,
-			preferences VARCHAR(100),
-			active BOOLEAN,
-		 */
-
-		
-		return null;//customerList;
+		return customerList;
 	}
 	
 	public String viewOrderIngredients(){
