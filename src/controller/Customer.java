@@ -93,6 +93,6 @@ public class Customer implements java.io.Serializable{
 				&&adress==c.getAdress()&&zip_code==c.getZipCode()&&zone_nr==c.zone_nr&&preferences==c.getPreferences()&&phoneNumber==c.getPhoneNumber());
 	}
 	public String toString(){
-		return "CustomerID: "+customerID + ". First name: " + firstName+". Surname: "+ surName +".\nEmail: "+email+"Phonenr: "+phoneNumber+"\n. Adress: "+adress+". ZipCode: "+zip_code+". ZoneNr: "+zone_nr+".\nPreferences"+preferences+"\n\n";
+		return "CustomerID: "+customerID + ". First name: " + firstName+". Surname: "+ surName +"\nEmail: "+email+". Phonenr: "+phoneNumber+".\nAdress: "+adress+". ZipCode: "+zip_code+". ZoneNr: "+zone_nr+".\nPreferences: "+preferences+"\n\n";
 	}
 }

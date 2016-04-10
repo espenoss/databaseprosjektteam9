@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 class LogInGui extends JFrame /*implements ActionListener*/{
 	private JTextField userID = new JTextField(20);
-	private JTextField password = new JTextField(20);
+	private JTextField pword = new JTextField(20);
 	private JLabel message = new JLabel("Log in information");
 	
 /*	public static boolean authenticate(String username, String password){
@@ -71,7 +71,7 @@ class LogInGui extends JFrame /*implements ActionListener*/{
 			add(userID);
 			text = new JLabel("Password: ", JLabel.RIGHT);
 			add(text);
-			add(password);
+			add(pword);
 		}	
 	}
 }
