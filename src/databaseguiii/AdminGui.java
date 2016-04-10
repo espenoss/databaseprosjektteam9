@@ -41,10 +41,12 @@ class Admin extends JFrame {
       int choices = choice_list.getSelectedIndex();
       if(choices == 0){
     	  TestUserDialog.main(null);
-      }
-      
-      if(choices == 1){
+      } else if(choices == 1){
     	  MainCustomerGui.main(null);
+      }else if(choices==2){
+    	  
+      }else{
+    	  
       }
       /*
       String nyTekst = "You have now chosen " + values.length;
