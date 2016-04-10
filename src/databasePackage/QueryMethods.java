@@ -164,7 +164,6 @@ public class QueryMethods {
 		return database.getLastResult();
 	}
 	
-	
 	public static int registerOrder(String order_date, int customer_id, String info, 
 			String user_id, Database database) throws Exception{
 	
@@ -180,38 +179,116 @@ public class QueryMethods {
 		return -1;
 	}
 	
-	// ikke testet
 	public static boolean updateOrder(int orderID, String orderDate, int customerID, String info, 
 			String userID, Database database) throws Exception{
 		
 		String statement = "UPDATE food_order SET "
-				+ "order_id =" + orderID + ","
-				+ "order_date =" + aq(orderDate)
-				+ "customer_id =" + customerID
-				+ "info =" + aq(info)
-				+ "user_id ='" + userID + "'"
+				+ "order_id = " + orderID + ", "
+				+ "order_date = " + aq(orderDate)
+				+ "customer_id = " + customerID + ", "
+				+ "info = " + aq(info)
+				+ "user_id = '" + userID + "'"
 				+ " WHERE order_id = " + orderID;
 		
 		return database.makeSingleStatement(statement);
 	}
-
+	
+	public static boolean removeOrder(int orderID, Database database) throws Exception{
+		
+		String statement = "DELETE FROM food_order WHERE order_id = '" + orderID + "';";
+		
+		return database.makeSingleStatement(statement);
+	}
+	
+	public static String[] viewOrder(int orderID, Database database) throws Exception{
+		
+		String statement = "SELECT * FROM food_order WHERE order_id = " + orderID + ";";
+		
+		database.makeSingleStatement(statement);
+		
+		return database.getLastResult()[0];
+	}
+	
+	public static String[][] viewAllOrders(Database database) throws Exception{
+		
+		String statement = "SELECT * FROM food_order;";
+		
+		database.makeSingleStatement(statement);
+		
+		return database.getLastResult();
+	}	
+	
+	
+	// **** IKKE TESTET
 	public static boolean addMealToOrder(int orderID, int mealID, String deliveryDate, int quantity, 
 			boolean readyDelivery, boolean delivered, Database database) throws Exception{
 		
 		String statement = "INSERT INTO ordered_meal VALUES("
-				+ orderID + "," + mealID + "," + aq(deliveryDate) + quantity + "," + 0 + "," + 0 + ");";
-		System.out.println(statement);
+				+ orderID + "," + mealID + "," + aq(deliveryDate) 
+				+ quantity + "," + readyDelivery + "," + delivered + ");";
+		
+		return database.makeSingleStatement(statement);
+	}
+
+	public static boolean updateMealInOrder(int orderID, int mealID, String deliveryDate, int quantity, 
+			boolean readyDelivery, boolean delivered, Database database) throws Exception{
+		
+		String statement = "UPDATE ordered_meal SET "
+				+ "order_id = " + orderID + "," 
+				+ "meal_id = " + mealID + "," 
+				+ "delivery_date = " + aq(deliveryDate) 
+				+ "quantity = " + quantity + "," 
+				+ "ready_delivery = " + readyDelivery + "," 
+				+ "delivered = " + delivered + ";";
+		
+		return database.makeSingleStatement(statement);
+	}
+	 
+	public static boolean removeMealFromOrder(int orderID, int mealID, String deliveryDate, Database database) throws Exception{
+
+		String statement = "DELETE FROM ordered_meal WHERE "
+				+ "order_id =" + orderID
+				+ " AND meal_id = " + mealID
+				+ " AND delivery_date = '" + deliveryDate + "'"
+				+ ";";
+		return database.makeSingleStatement(statement);
+	}
+	
+
+	public static boolean markMealOrderAsReadyForDelivery(int orderID, int mealID, String deliveryDate,Database database) throws Exception{
+		String statement = "UPDATE ordered_meal SET ready_delivery=true "
+				+ "WHERE order_id = " + orderID 
+				+ " AND meal_id = " + mealID 
+				+ " AND delivery_date = '" + deliveryDate + "'"
+				+ ";";
 		
 		return database.makeSingleStatement(statement);
 	}
 	
-	public static boolean markOrderAsReadyForDelivery(Database database) throws Exception{
-		String statement = "UPDATE ordered_meal SET ready_delivery=true;";
+	// **** IKKE TESTET
+	public static boolean markMealOrderAsDelivered(int orderID, int mealID, String deliveryDate,Database database) throws Exception{
+		String statement = "UPDATE ordered_meal SET delivered=true"
+				+ "WHERE order_id = " + orderID 
+				+ " AND meal_id = " + mealID 
+				+ " AND delivery_date = '" + deliveryDate + "'"
+				+ ";";
 		
 		return database.makeSingleStatement(statement);
-	}
+	}	
+
+	// **** IKKE TESTET - IKKE IMPLEMENTERT		
+	public static String[][] viewMealsInOrder(int orderID, Database database) throws Exception{
+
+		String statement = "";
+		
+		database.makeSingleStatement(statement);
+		
+		return database.getLastResult();		
+	}	
 	
-	public static int registerIngredient(String name, float quantity , String unit,Database database) throws Exception{
+	// **** IKKE TESTET
+	public static int registerIngredient(String name, float quantity, 
+			String unit, Database database) throws Exception{
 		
 		for(int i=0; i<5; i++){
 			String statement = "SELECT MAX(ingredient_id) FROM ingredient;";
@@ -226,8 +303,31 @@ public class QueryMethods {
 
 	}
 	
+	// **** IKKE TESTET - IKKE IMPLEMENTERT	
+	public static boolean updateIngredient(int ingredientID, String name, float quantity, 
+			String unit, Database database){
+		
+		return false;
+	}
+	
+	// **** IKKE TESTET - IKKE IMPLEMENTERT	
+	public static boolean removeIngredient(int ingredientID, Database database){
+		return false;
+	}
+	
+	// **** IKKE TESTET - IKKE IMPLEMENTERT		
+	public static String[][] viewIngredients(Database database) throws Exception{
+		
+		String statement = "";
+		
+		database.makeSingleStatement(statement);
+		
+		return database.getLastResult();				
+	}
 
-	public static int registerMeal(String name, String instructions, boolean available, int price, int discount, int discountLim, Database database) throws Exception{
+	// **** IKKE TESTET	
+	public static int registerMeal(String name, String instructions, boolean available, int price, 
+			int discount, int discountLim, Database database) throws Exception{
 
 		for(int i=0; i<5; i++){
 			String statement = "SELECT MAX(meal_id) FROM meal;";
@@ -242,13 +342,18 @@ public class QueryMethods {
 		return -1;		
 	}
 	
-	public static boolean addIngredientToMeal(int mealID, int ingredientID, float ingredientQuantity, Database database) throws Exception{
-				
-		String statement = "INSERT INTO meal_ingredient VALUES(" 
-	+ mealID + ", " + ingredientID + "," + ingredientQuantity + ");";
-		return database.makeSingleStatement(statement);
-}
-	
+	// **** IKKE TESTET - IKKE IMPLEMENTERT		
+	public static boolean updateMeal(String name, String instructions, boolean available, int price, 
+			int discount, int discountLim, Database database) throws Exception{
+		return false;
+	}
+
+	// **** IKKE TESTET - IKKE IMPLEMENTERT	
+	public static boolean removeMeal(int mealID, Database database){
+		return false;
+	}
+
+	// **** IKKE TESTET
 	public static String[][] viewMeals(Database database) throws Exception{
 		
 		String statement = "SELECT * FROM meal";
@@ -256,9 +361,39 @@ public class QueryMethods {
 		database.makeSingleStatement(statement);
 		
 		return database.getLastResult();
+	}	
+	
+	// **** IKKE TESTET	
+	public static boolean addIngredientToMeal(int mealID, int ingredientID, float ingredientQuantity, 
+			Database database) throws Exception{
+				
+		String statement = "INSERT INTO meal_ingredient VALUES(" 
+	+ mealID + ", " + ingredientID + "," + ingredientQuantity + ");";
+		return database.makeSingleStatement(statement);
 	}
 	
+	// **** IKKE TESTET - IKKE IMPLEMENTERT		
+	public static boolean updateIngredientInMeal(int mealID, int ingredientID, float ingredientQuantity, 
+			Database database) throws Exception{
+		return false;
+	}
+	
+	// **** IKKE TESTET - IKKE IMPLEMENTERT	
+	public static boolean removeIngredientFromMeal(int mealID, int ingredientID, Database database){
+		return false;
+	}
 
+	// **** IKKE TESTET - IKKE IMPLEMENTERT		
+	public static String[][] viewIngredientsInMeal(int mealID, Database database) throws Exception{
+		
+		String statement = "";
+		
+		database.makeSingleStatement(statement);
+		
+		return database.getLastResult();		
+	}
+			
+	// **** IKKE TESTET
 	public static int registerZone(String zoneName, Database database) throws Exception{
 		
 		for(int i=0; i<5; i++){
@@ -271,7 +406,27 @@ public class QueryMethods {
 		}
 		return -1;
 	}
+	
+	// **** IKKE TESTET - IKKE IMPLEMENTERT		
+	public static boolean updateZone(int zoneID, String zoneName, Database database) throws Exception{
+		return false;
+	}
 
+	// **** IKKE TESTET - IKKE IMPLEMENTERT		
+	public static boolean removeZone(int zoneID, Database database) throws Exception{
+		return false;
+	}	
+	
+	public static String[][] viewZones(Database database) throws Exception{
+
+		String statement = "";
+		
+		database.makeSingleStatement(statement);
+		
+		return database.getLastResult();
+	}
+	
+	// **** IKKE TESTET 	
 	public static int registerSubscriptionPlan(String subName, Database database) throws Exception{		
 		for(int i=0; i<5; i++){
 			String statement = "SELECT MAX(sub_id) FROM subscription_plan;";
@@ -284,13 +439,65 @@ public class QueryMethods {
 		
 		return -1;
 	}
+
+	// **** IKKE TESTET - IKKE IMPLEMENTERT		
+	public static boolean updateSubscriptionPlan(int subID, String subName, Database database) throws Exception{		
+		return false;
+	}
 	
+	// **** IKKE TESTET - IKKE IMPLEMENTERT			
+	public static boolean removeSubscriptionPlan(int subID, Database database) throws Exception{		
+		return false;
+	}	
+	
+	// **** IKKE TESTET - IKKE IMPLEMENTERT				
+	public static String[][] viewSubscriptionPlan(int subID, Database database) throws Exception{
+
+		String statement = "";
+		
+		database.makeSingleStatement(statement);
+		
+		return database.getLastResult();
+	}
+	
+	// **** IKKE TESTET - IKKE IMPLEMENTERT				
 	public static boolean addSubscriptionToOrder(int orderID, int quantitySub, String fromDate, String toDate, String subID, Database database) throws Exception{		
 		String statement = "INSERT INTO sub_order VALUES(" + orderID + "," 
 			+ "," + quantitySub + "," + aq(fromDate) + aq(toDate) + "'" + subID + "');";			
 		return database.makeSingleStatement(statement);
 	}
 	
+	// **** IKKE TESTET - IKKE IMPLEMENTERT
+	public static boolean updateSubscriptionInOrder(int orderID, int quantitySub, String fromDate, String toDate, String subID, Database database) throws Exception{
+		return false;
+	}
+	
+	// **** IKKE TESTET - IKKE IMPLEMENTERT
+	public static boolean removeSubscriptionFromOrder(int orderID){
+		return false;
+	}
+	
+	// **** IKKE TESTET - IKKE IMPLEMENTERT				
+	public static String[] viewSubscription(int subID, Database database) throws Exception{
+
+		String statement = "";
+		
+		database.makeSingleStatement(statement);
+		
+		return database.getLastResult()[0];
+	}	
+	
+	// **** IKKE TESTET - IKKE IMPLEMENTERT				
+	public static String[][] viewSubscriptions(Database database) throws Exception{
+
+		String statement = "";
+		
+		database.makeSingleStatement(statement);
+		
+		return database.getLastResult();
+	}		
+	
+	// **** IKKE TESTET
 	public static boolean addMealToPlan(int subID, int mealID, int weekdayNr, String weekday, Database database) throws Exception{
 		
 		String statement = "INSERT INTO sub_meals_day VALUES(" + subID + ", " 
@@ -299,54 +506,25 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
-	
-	@SuppressWarnings("unused")
-	public static void main(String[] args) throws Exception{
-		// testkode
-		
-		String username = "";
-		String password = "";
-		Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=" + username + "&password=" + password);
-		String[][] resultat = null;
-		
-		QueryMethods.registerOrder("2016-01-03", 10000, "none", "Marie", database);
-		
-//		UserMethods.registerIngredients("Kjøtt", 5, database);
-		
-//		UserMethods.registerIngredients("Kjï¿½tt", 5, database);
-//		UserMethods.registerMeal("Mais", "ingenting", 1, 123, 10, 12, database);
-//		UserMethods.viewMeals(database);
-
-/*		resultat = database.getLastResult();		
-		
-		for(int x=0;x<resultat.length; x++){
-			for(int y=0;y<resultat[x].length;y++){
-				System.out.print(resultat[x][y] + " ");
-			}
-			System.out.println();
-		}		
-*/		
-//		UserMethods.registerUser("espenme", 1, "Espen Meland", "asd", database);
-		
-		
-//		UserMethods.registerCustomer(11, "surname", "firstname", "aabbccdd", "email", "veigata", 1111, 1, "None", 1, database);
-//		UserMethods.registerCompany(12, "Meland", "Espen", "aabbccdd", "asd@asd", "Haga", 1234, 1, "Vegetarisk", 1, "Hask", database);		
-		
-		
-		
-/*		UserMethods.viewAllCompanies(database);
-		
-		
-		for(int x=0;x<resultat.length; x++){
-			for(int y=0;y<resultat[x].length;y++){
-				System.out.print(resultat[x][y] + " ");
-			}
-			System.out.println();
-		}
-*/		
-//		System.out.println(UserMethods.logIn("Espen", "asd", database));
-		
-//		UserMethods.registerSingleOrder("2012-03-02", 10001, "Her er info om bestilingen", 1, 1, "2012-12-12", 1, database);
+	// **** IKKE TESTET - IKKE IMPLEMENTERT	
+	public static boolean updateMealInPlan(int subID, int mealID, int weekdayNr, String weekday, Database database) throws Exception{	
+		return false;
 	}
+	
+	// **** IKKE TESTET - IKKE IMPLEMENTERT		
+	public static boolean removeMealFromPlan(){
+		return false;
+	}
+	
+	// **** IKKE TESTET - IKKE IMPLEMENTERT				
+	public static String[][] viewMealsInPlan(int subID, Database database) throws Exception{
+
+		String statement = "";
+		
+		database.makeSingleStatement(statement);
+		
+		return database.getLastResult();
+	}	
+	
 }
 
