@@ -51,7 +51,7 @@ public class QueryMethods {
 		return database.getLastResult();		
 	}	
 	
-	public static int logIn(String userID, String password, Database database) throws Exception{
+	public static int logIn(String userID, char[] password, Database database) throws Exception{
 		
 		String[][] userType = null;
 		
