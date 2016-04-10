@@ -134,9 +134,9 @@ public class QueryMethods {
 	}	
 
 	public static boolean updateCompany(int customerID, String companyName, Database database) throws Exception{
-		String statement = "UPDATE company SET"
-				+ "company_name ='" + companyName 
-				+ " WHERE customer_id =" + customerID + "';";		
+		String statement = "UPDATE company SET "
+				+ "company_name ='" + companyName + "' "
+				+ "WHERE customer_id =" + customerID + ";";		
 		
 		return database.makeSingleStatement(statement);
 	}	
@@ -151,8 +151,6 @@ public class QueryMethods {
 	public static String[] viewCompany(int customerID, Database database) throws Exception{		
 		String statement = "SELECT *  FROM company NATURAL JOIN customer "
 				+ "WHERE company.customer_id = customer.customer_id AND company.customer_id = " + customerID;
-
-		System.out.println(statement);
 		
 		database.makeSingleStatement(statement);
 		
@@ -181,8 +179,24 @@ public class QueryMethods {
 		
 		return -1;
 	}
+	
+	// ikke testet
+	public static boolean updateOrder(int orderID, String orderDate, int customerID, String info, 
+			String userID, Database database) throws Exception{
+		
+		String statement = "UPDATE food_order SET "
+				+ "order_id =" + orderID + ","
+				+ "order_date =" + aq(orderDate)
+				+ "customer_id =" + customerID
+				+ "info =" + aq(info)
+				+ "user_id ='" + userID + "'"
+				+ " WHERE order_id = " + orderID;
+		
+		return database.makeSingleStatement(statement);
+	}
 
-	public static boolean addMealToOrder(int orderID, int mealID, String deliveryDate, int quantity, boolean readyDelivery, boolean delivered, Database database) throws Exception{
+	public static boolean addMealToOrder(int orderID, int mealID, String deliveryDate, int quantity, 
+			boolean readyDelivery, boolean delivered, Database database) throws Exception{
 		
 		String statement = "INSERT INTO ordered_meal VALUES("
 				+ orderID + "," + mealID + "," + aq(deliveryDate) + quantity + "," + 0 + "," + 0 + ");";
