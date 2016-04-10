@@ -9,16 +9,16 @@ import databaseguiii.UserDialog;
 import databasePackage.*;
 
 class Parentwindow extends JFrame {
-  private User user = new User("",0, "","");
   private UserDialog dialog = new UserDialog(this);
   private String userID="";
   private String name = "";
   private int userType=0;
   private String password = "";
   private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/ninameed?user=ninameed&password=1Le5YPPr");
+  private User user = new User("",0, "","", database); 
   
   public Parentwindow() {
-    setTitle("Login");
+    setTitle("Register new user");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLayout(new FlowLayout());
     JButton button = new JButton("Register new user");

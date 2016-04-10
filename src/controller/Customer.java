@@ -2,7 +2,7 @@ package controller;
 
 
 public class Customer implements java.io.Serializable{
-	private int customerID;
+//	private int customerID;
 	private String firstName;
 	private String surName;
 	private String email;
@@ -13,7 +13,7 @@ public class Customer implements java.io.Serializable{
 	private String phoneNumber;
 	
 	
-	public Customer(int customerID, String firstName, String surName, String phoneNumber, String email, String adress, int zip_code, int zone_nr, String preferences){
+	public Customer(/*int customerID*/ String firstName, String surName, String phoneNumber, String email, String adress, int zip_code, int zone_nr, String preferences){
 		this.firstName=firstName;
 		this.surName=surName;
 		this.email=email;
@@ -22,11 +22,11 @@ public class Customer implements java.io.Serializable{
 		this.zone_nr=zone_nr;
 		this.preferences=preferences;
 		this.phoneNumber=phoneNumber;
-		this.customerID=customerID;
+	//	this.customerID=customerID;
 	}
-	public void setCustomerID(int customerID){
+/*	public void setCustomerID(int customerID){
 		this.customerID=customerID;
-	}
+	}*/
 	public void setFirstName(String firstName){
 		this.firstName=firstName;
 	}
@@ -52,9 +52,9 @@ public class Customer implements java.io.Serializable{
 	public void setPhoneNumber(String phoneNumber){
 		this.phoneNumber=phoneNumber;
 	}
-	public int getCustomerID(){
+/*	public int getCustomerID(){
 		return customerID;
-	}
+	}*/
 	public String getFirstName(){
 		return firstName;
 	}
@@ -93,6 +93,6 @@ public class Customer implements java.io.Serializable{
 				&&adress==c.getAdress()&&zip_code==c.getZipCode()&&zone_nr==c.zone_nr&&preferences==c.getPreferences()&&phoneNumber==c.getPhoneNumber());
 	}
 	public String toString(){
-		return "CustomerID: "+customerID + ". First name: " + firstName+". Surname: "+ surName +"\nEmail: "+email+". Phonenr: "+phoneNumber+".\nAdress: "+adress+". ZipCode: "+zip_code+". ZoneNr: "+zone_nr+".\nPreferences: "+preferences+"\n\n";
+		return /*CustomerID: +customerID */" First name: " + firstName+". Surname: "+ surName +"\nEmail: "+email+". Phonenr: "+phoneNumber+".\nAdress: "+adress+". ZipCode: "+zip_code+". ZoneNr: "+zone_nr+".\nPreferences: "+preferences+"\n\n";
 	}
 }
