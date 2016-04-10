@@ -1,6 +1,9 @@
 package databaseguiii;
 
 import java.awt.BorderLayout;
+import java.awt.event.*;
+import javax.swing.*;
+
 
 //lager vindu med to felter til utfylling(brukernavn og passord).
 //bruker GridLayout.
@@ -18,7 +21,7 @@ import controller.*;
 
 class LogInGui extends JFrame implements ActionListener{
 	private JTextField userID = new JTextField(20);
-	private JTextField password = new JTextField(20);
+	private JPasswordField password = new JPasswordField(20); // må endre dette 
 	private JLabel message = new JLabel("Log in information");
 	
 /*	public static boolean authenticate(String username, String password){
@@ -46,7 +49,7 @@ class LogInGui extends JFrame implements ActionListener{
 	}
 	
 	
-	public static int authenticate(String userID, String password) throws Exception{
+	public static int authenticate(String userID, char[] password) throws Exception{
 		LogIn logIn = new LogIn();
 	
 		return logIn.logIn(userID, password);
@@ -58,7 +61,7 @@ class LogInGui extends JFrame implements ActionListener{
 			JButton button = (JButton)event.getSource();
 			String buttonName = button.getText();
 			try {
-				if (authenticate(userID.getText(), password.getText()) !=  -1){
+				if (authenticate(userID.getText(), password.getPassword()) !=  -1){
 				String userid = userID.getText();
 				message.setText(userid + " have successfully logged in ");	
 				add(message, BorderLayout.PAGE_END);
