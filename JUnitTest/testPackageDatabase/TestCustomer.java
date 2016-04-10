@@ -5,7 +5,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 
-public class testCustomerAndCompany {
+public class TestCustomer {
 
 	public Database database;
 	
@@ -19,7 +19,7 @@ public class testCustomerAndCompany {
 	}
 	
 	@Test
-	public void testCustomer() throws Exception{
+	public void customerTest() throws Exception{
 		System.out.println("Test register new customer");
 
 		String[][] customerList = QueryMethods.viewAllCustomers(database);

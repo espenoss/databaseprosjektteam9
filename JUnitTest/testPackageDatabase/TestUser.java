@@ -5,7 +5,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 
-public class testUserTable {
+public class TestUser {
 
 	public Database database;
 	
