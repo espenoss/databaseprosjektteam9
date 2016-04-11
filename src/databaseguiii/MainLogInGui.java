@@ -1,4 +1,5 @@
 package databaseguiii;
+import controller.*;
 
 import java.awt.BorderLayout;
 import java.awt.event.*;
@@ -21,7 +22,7 @@ import controller.*;
 
 class LogInGui extends JFrame implements ActionListener{
 	private JTextField userID = new JTextField(20);
-	private JPasswordField password = new JPasswordField(20); // må endre dette 
+	private JPasswordField password = new JPasswordField(20); // mï¿½ endre dette 
 	private JLabel message = new JLabel("Log in information");
 	
 /*	public static boolean authenticate(String username, String password){
@@ -57,11 +58,12 @@ class LogInGui extends JFrame implements ActionListener{
 	
 	
 	private class Buttonlistener implements ActionListener {
+		private LogIn log=new LogIn();
 		public void actionPerformed(ActionEvent event) {
 			JButton button = (JButton)event.getSource();
 			String buttonName = button.getText();
 			try {
-				if (authenticate(userID.getText(), password.getPassword()) !=  -1){
+				if (log.logIn(userID.getText(), password.getPassword()) !=  -1){
 				String userid = userID.getText();
 				message.setText(userid + " have successfully logged in ");	
 				add(message, BorderLayout.PAGE_END);

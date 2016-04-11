@@ -1,10 +1,11 @@
 package databaseguiii;
-
+import controller.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 import controller.Customer;
+import controller.LogIn;
 import databasePackage.Database;
 import databasePackage.QueryMethods;
 import databaseguiii.CustomerDialog;
@@ -13,9 +14,9 @@ import databaseguiii.CustomerDialog;
 
 
 class Parentwindow2 extends JFrame {
-	  private Customer customer = new Customer(0, "", "", "", "", "", 0, 0, "");
+	  private Customer customer = new Customer("", "", "", "", "", 0, 0, "");
 	  private CustomerDialog dialog = new CustomerDialog(this);
-	  private String customerID = ""; //Må tas bort, er kun for bedriftskunder. Trenger company name i bedriftskunde klassenkkk
+//	  private String customerID = ""; //Mï¿½ tas bort, er kun for bedriftskunder. Trenger company name i bedriftskunde klassenkkk
 	  private String firstName = "";
 	  private String surName = "";
 	  private String email = "";
@@ -39,13 +40,14 @@ class Parentwindow2 extends JFrame {
 	  }
 
 	  private class ButtonListener implements ActionListener {
+		  private RegisterCustomer newCustomer=new RegisterCustomer();
 	    public void actionPerformed(ActionEvent action) {
 	      if (dialog.showDialog(customer)) {
 	          try {
 
-	      		QueryMethods.registerCustomer(customer.getFirstName(), customer.getSurName(), 
+	        	  newCustomer.RegisterCustomer(customer.getFirstName(), customer.getSurName(), 
 	      				customer.getEmail(), customer.getAdress(), customer.getPreferences(), customer.getZipCode(), 
-	      				customer.getZoneNr(), customer.getPhoneNumber(), 1, database);
+	      				customer.getZoneNr(), customer.getPhoneNumber(), true, database);
 	            } catch (Exception e) {
 	      		e.printStackTrace();
 	            }

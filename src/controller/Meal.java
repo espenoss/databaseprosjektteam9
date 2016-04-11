@@ -6,13 +6,13 @@ public class Meal {
 	private int mealID;
 	private String mealName;
 	private String instructions;
-	private int available;
+	private boolean available;
 	private int price;
 	private ArrayList<Float> ingQuantity;
 	private int discount;
 	private int discountLimit; // fjerne?
 	
-	public Meal(int mealID, String mealName, String instructions, int available, int price, int discount, int discountLimit){
+	public Meal(int mealID, String mealName, String instructions, boolean available, int price, int discount, int discountLimit){
 		this.mealID = mealID;
 		this.mealName = mealName;
 		this.instructions = instructions;
@@ -38,7 +38,7 @@ public class Meal {
 		return ingredients;
 	}
 	
-	public int getAvailable(){
+	public boolean getAvailable(){
 		return available;
 	}
 	

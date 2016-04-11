@@ -6,12 +6,12 @@ import databasePackage.*;
 
 public class User implements java.io.Serializable{
 	private String userID;
+	private int userType;
 	private String name;
 	private String pword;
-	private int userType;
 	Database database;
 	
-	public User(String userID,int userType, String name,String pword, Database database){
+	public User(String userID, int userType, String name,String pword, Database database){
 		this.userID=userID;
 		this.userType=userType;
 		this.name=name;

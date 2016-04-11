@@ -1,4 +1,4 @@
-package databaseguiii;
+ package databaseguiii;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -9,16 +9,16 @@ import databaseguiii.UserDialog;
 import databasePackage.*;
 
 class Parentwindow extends JFrame {
-  private User user = new User("",0, "","");
   private UserDialog dialog = new UserDialog(this);
   private String userID="";
   private String name = "";
   private int userType=0;
   private String password = "";
   private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/ninameed?user=ninameed&password=1Le5YPPr");
+  private User user = new User("",0, "","", database); 
   
   public Parentwindow() {
-    setTitle("Login");
+    setTitle("Register new user");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLayout(new FlowLayout());
     JButton button = new JButton("Register new user");
@@ -73,7 +73,7 @@ class Parentwindow extends JFrame {
 class TestUserDialog {
   static public void main(String[] args) {
 	Parentwindow test = new Parentwindow();
-    test.setSize(300, 200);  // for å få litt størrelse på vinduet
+    test.setSize(300, 200);  // for ï¿½ fï¿½ litt stï¿½rrelse pï¿½ vinduet
     test.setVisible(true);
   }   
 }  
