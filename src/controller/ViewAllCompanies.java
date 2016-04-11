@@ -12,7 +12,7 @@ public class ViewAllCompanies{
 		database = new Database("com.mysql.jdbc.Driver", databasename);
 	}
 	
-	public String[][] ViewAllCompaniesList(Database database) throws Exception{
+	public String[][] ViewAllCompaniesList() throws Exception{
 		return QueryMethods.viewAllCompanies(database);
 	}
 }
