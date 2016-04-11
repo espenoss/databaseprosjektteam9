@@ -36,7 +36,7 @@ public class User implements java.io.Serializable{
 	public Database getDatabase(){
 		return database;
 		
-	}
+	}  
 	
 	public void setUserID(String userID){
 		this.userID=userID;
@@ -83,6 +83,25 @@ public class User implements java.io.Serializable{
 		}
 		return customerList;
 	}
+	
+	//returns an arraylist with customer objects with all active customers
+		public ArrayList<User> viewUserList() throws Exception{
+			
+			String[][] list = QueryMethods.viewAllUsers(database);
+			User tempUser;
+			ArrayList<User> userList = new ArrayList<User>();
+			
+			for(int i=0; i<list.length; i++){
+				if (Integer.parseInt(list[i][5])==1){
+			//		int userID = Integer.parseInt(list[i][0]); //0
+					int userType = Integer.parseInt(list[i][0]); 
+					
+					tempUser = new User(list[i][0],userType,list[i][2],list[i][3], database);
+					userList.add(tempUser);
+				}
+			}
+			return userList;
+		}
 	
 	//takes an customerId returns a single customer object, or null if not found
 	public Customer viewSingleCustomer(int customerId) throws Exception{

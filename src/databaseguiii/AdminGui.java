@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import controller.*;
+import databasePackage.Database;
 
 class Admin extends JFrame {
   private Parentwindow parentwindow;
@@ -31,7 +32,9 @@ class Admin extends JFrame {
 
   /* Lytteren fanger opp alle klikk paa linjer i listeboksen */
   private class ListeboksLytter implements ListSelectionListener {
-	 private ViewAllCustomers viewAllCustomers = new ViewAllCustomers();
+	private final Database database = null;
+	private ViewAllCustomers viewAllCustomers = new ViewAllCustomers();
+	 private User viewAllUsers = new User("", 1, "", "", database);
     public void valueChanged(ListSelectionEvent hendelse) {
       Object[] values = choice_list.getSelectedValuesList().toArray();
       int choices = choice_list.getSelectedIndex();
@@ -41,18 +44,21 @@ class Admin extends JFrame {
     	  MainCustomerGui.main(null);
       }else if(choices==2){
     	  viewAllCustomers.ViewAllCustomersList();
+		}else if(choices==3){
+	    	  try {
+				viewAllUsers.viewUserList();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-      }
-		
-    	  
-      }
-      
+    }
   }
 
-
-class AdminGui {
+ class AdminGui {
   public static void main(String[] args) {
 	  Admin etVindu = new Admin("Choose an option");
     etVindu.setVisible(true);
   }
+}
 }

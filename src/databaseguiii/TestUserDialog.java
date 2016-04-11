@@ -21,12 +21,7 @@ class Parentwindow extends JFrame {
     setTitle("Register new user");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLayout(new FlowLayout());
-    JButton button = new JButton("Register new user");
-    add(button);
-    button.addActionListener(new ButtonListener());
-    JButton button2 = new JButton("List users");
-    add(button2);
-    button2.addActionListener(new ButtonListener2());   
+    
     setLocation(300, 300); // plasserer foreldrevinduet..
     dialog.setLocation(350, 350);  // plasserer dialogen
   }
