@@ -1,8 +1,11 @@
 package controller;
 import databasePackage.*;
 
+import databasePackage.Database;
+
 public class Admin extends User {
 	
+
 	public Admin(String userID,int userType, String name,String pword, Database database) {
 		super(userID, userType, name, pword, database);
 	}

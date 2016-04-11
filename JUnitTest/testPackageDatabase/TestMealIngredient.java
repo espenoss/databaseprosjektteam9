@@ -1,0 +1,46 @@
+package testPackageDatabase;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import databasePackage.Database;
+import databasePackage.QueryMethods;
+
+public class TestMealIngredient {
+	public Database database;
+	
+	@Before
+	public void beforeTest(){
+		String username = "espenme";
+		String password = "16Sossosem06";
+		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
+		
+		database = new Database("com.mysql.jdbc.Driver", databasename);
+	}
+	
+	@Test
+	public void MealIngredientTest() throws Exception{
+
+		boolean result = QueryMethods.addIngredientToMeal(4, 1, 5, database);
+		boolean expRes = true;
+		assertEquals(expRes, result);
+		
+		result = QueryMethods.updateIngredientInMeal(4, 1, 3, database);
+		expRes = true;
+		assertEquals(expRes, result);
+		
+		String[][] view = QueryMethods.viewIngredientsInMeal(4, database);
+		for(int x=0;x<view.length;x++){
+			for(int y=0;y<view[x].length;y++){
+				System.out.print(view[x][y] + " ");
+			}
+			System.out.println("");
+		}
+		
+		result = QueryMethods.removeIngredientFromMeal(4, 1, database);
+		expRes = true;
+		assertEquals(expRes, result);		
+	}
+}

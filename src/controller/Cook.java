@@ -11,8 +11,12 @@ public class Cook extends User {
 		super(userID, userType, name, pword, database);
 	}
 	
-	public boolean markAsReadyForDelivery(){
+	public boolean markAsReadyForDelivery(Meal meal, Order order) throws Exception{
 		boolean success = false;
+		
+		if(QueryMethods.markMealOrderAsReadyForDelivery(order.getOrderID(), meal.getMealID(), order.getDeliveryDate(),database)){
+			success = true;
+		}
 		
 		// oppdater ordre i database
 		
