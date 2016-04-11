@@ -1,8 +1,8 @@
 package controller;
 
-public class textEditor {
+public class TextEditor {
 	
-	public textEditor(){
+	public TextEditor(){
 	}
 
 	public int StringToInt(String text){ // removes blank spaces and parses string to an int
