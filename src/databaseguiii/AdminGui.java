@@ -44,8 +44,19 @@ class Admin extends JFrame {
       } else if(choices == 1){
     	  MainCustomerGui.main(null);
       }else if(choices==2){
-    	  
+    	  try {
+			ViewPrivateCustomersList.main(null);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
       }else{
+    	  try {
+			ViewPrivateCustomersList.main(null);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	  
       }
       /*

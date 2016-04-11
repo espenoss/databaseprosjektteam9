@@ -123,7 +123,7 @@ public class QueryMethods {
 	public static String[][] viewAllCustomers(Database database) throws Exception{		
 		database.makeSingleStatement("SELECT * FROM customer");
 		
-		return database.getLastResult();
+		return database.getLastResult();  //Denne metoden fungerer ikke som den skal
 	}
 
 	public static boolean registerCompanyToCustomer(int customerID, String companyName, Database database) throws Exception{				
