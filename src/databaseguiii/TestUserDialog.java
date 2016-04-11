@@ -1,4 +1,4 @@
-package databaseguiii;
+ package databaseguiii;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -73,7 +73,7 @@ class Parentwindow extends JFrame {
 class TestUserDialog {
   static public void main(String[] args) {
 	Parentwindow test = new Parentwindow();
-    test.setSize(300, 200);  // for å få litt størrelse på vinduet
+    test.setSize(300, 200);  // for ï¿½ fï¿½ litt stï¿½rrelse pï¿½ vinduet
     test.setVisible(true);
   }   
 }  
