@@ -468,7 +468,7 @@ public class QueryMethods {
 
 	public static String[][] viewIngredientsInMeal(int mealID, Database database) throws Exception{
 		
-		String statement = "SELECT * FROM ingredient WHERE ingredient_id IN (SELECT ingredient_id FROM meal_ingredient WHERE meal_id = " + mealID + ")";;
+		String statement = "SELECT * FROM ingredient WHERE ingredient_id IN (SELECT ingredient_id FROM meal_ingredient WHERE meal_id = " + mealID + ")";
 		
 		database.makeSingleStatement(statement);
 		
@@ -616,36 +616,54 @@ public class QueryMethods {
 	}	
 		public static String[][] viewSubscriptions(Database database) throws Exception{
 
-		String statement = "SELECT * FROM sub_order";
+		String statement = "SELECT * FROM sub_order;";
 		
 		database.makeSingleStatement(statement);
 		
 		return database.getLastResult();
 	}		
 	
-	// **** IKKE TESTET
 	public static boolean addMealToPlan(int subID, int mealID, int weekdayNr, String weekday, Database database) throws Exception{
 		
-		String statement = "INSERT INTO sub_meals_day VALUES(" + subID + ", " 
-		+ mealID + "," + weekdayNr + ", '" + weekday + "');";
+		String statement = "INSERT INTO sub_meals_day VALUES(" 
+				+ subID + ", " 
+				+ mealID + "," 
+				+ weekdayNr + ", '" 
+				+ weekday 
+				+ "');";
 			
 		return database.makeSingleStatement(statement);
 	}
 	
-	// **** IKKE TESTET - IKKE IMPLEMENTERT	
 	public static boolean updateMealInPlan(int subID, int mealID, int weekdayNr, String weekday, Database database) throws Exception{	
-		return false;
+		
+		String statement = "UPDATE sub_meals_day SET "
+				+ "sub_id = " + subID + ", "
+				+ "meal_id = " + mealID + ", "
+				+ "weekday_nr = " + weekdayNr + ", "
+				+ "weekday = '" + weekday + "' "
+				+ "WHERE sub_id = " + subID + " "
+				+ "AND meal_id = " + mealID + " "
+				+ "AND weekday_nr = " + weekdayNr
+				+ ";";
+		
+		return database.makeSingleStatement(statement);
 	}
 	
-	// **** IKKE TESTET - IKKE IMPLEMENTERT		
-	public static boolean removeMealFromPlan(){
-		return false;
+	public static boolean removeMealFromPlan(int subID, int mealID, int weekdayNr, Database database) throws Exception{
+		
+		String statement = "DELETE FROM sub_meals_day WHERE "
+		+ "sub_id = " + subID + " "
+		+ "AND meal_id = " + mealID + " "
+		+ "AND weekday_nr = " + weekdayNr
+		+ ";";
+		
+		return database.makeSingleStatement(statement);
 	}
 	
-	// **** IKKE TESTET - IKKE IMPLEMENTERT				
 	public static String[][] viewMealsInPlan(int subID, Database database) throws Exception{
 
-		String statement = "";
+		String statement = "SELECT meal_name FROM meal WHERE meal_id IN (SELECT meal_id FROM sub_meals_day WHERE sub_id = " + subID + ")";		
 		
 		database.makeSingleStatement(statement);
 		
