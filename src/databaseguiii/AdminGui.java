@@ -4,14 +4,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import controller.*;
 
 class Admin extends JFrame {
   private Parentwindow parentwindow;
   private MainCustomerGui mainCustomerGui;
-//  private TestUserDialog testUserDialog;
   private static final String [] CHOICES =
     {"Register new user", "Register new customer", "View private customers", "View company customers"};
-  private JTextField text = new JTextField("Du har ennå ikke valgt byer.     ");
   private JList<String> choice_list = new JList<String>(CHOICES);  // Naa er listen laget!
 
   public Admin(String tittel) {
@@ -27,16 +26,13 @@ class Admin extends JFrame {
 
     ListeboksLytter lytter = new ListeboksLytter();
     choice_list.addListSelectionListener(lytter);
-
-    text.setEditable(false); // brukeren skal ikke kunne redigere i feltet
-    add(text, BorderLayout.SOUTH);
     pack();
   }
 
   /* Lytteren fanger opp alle klikk paa linjer i listeboksen */
   private class ListeboksLytter implements ListSelectionListener {
+	 private ViewAllCustomers viewAllCustomers = new ViewAllCustomers();
     public void valueChanged(ListSelectionEvent hendelse) {
-      // Object[] verdier = byliste.getSelectedValues();  - deprecated i Java 7
       Object[] values = choice_list.getSelectedValuesList().toArray();
       int choices = choice_list.getSelectedIndex();
       if(choices == 0){
@@ -44,28 +40,15 @@ class Admin extends JFrame {
       } else if(choices == 1){
     	  MainCustomerGui.main(null);
       }else if(choices==2){
-    	  try {
-			ViewPrivateCustomersList.main(null);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+    	  viewAllCustomers.ViewAllCustomersList();
 		}
-      }else{
-    	  try {
-			ViewPrivateCustomersList.main(null);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+      }
+		
     	  
       }
-      /*
-      String nyTekst = "You have now chosen " + values.length;
-      nyTekst += (values.length == 1) ? " by." :  " byer.";
-      text.setText(nyTekst);   */
-    }
+      
   }
-}
+
 
 class AdminGui {
   public static void main(String[] args) {

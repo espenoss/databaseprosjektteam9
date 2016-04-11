@@ -77,7 +77,7 @@ public class User implements java.io.Serializable{
 				int zoneNr = Integer.parseInt(list[i][7]); //7
 				//8 preferences
 				
-				tempCustomer = new Customer(customerId, list[i][1],list[i][2],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8]);
+				tempCustomer = new Customer(list[i][1],list[i][2],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8]);
 				customerList.add(tempCustomer);
 			}
 		}
@@ -94,7 +94,7 @@ public class User implements java.io.Serializable{
 				if(customerId==dbCustomerId){
 					int zipCode = Integer.parseInt(list[i][6]);
 					int zoneNr = Integer.parseInt(list[i][7]);
-					return new Customer(customerId, list[i][1],list[i][2],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8]);
+					return new Customer(list[i][1],list[i][2],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8]);
 				}
 			}
 		}

@@ -24,6 +24,7 @@ public class Cook extends User {
 	}
 	
 	public boolean createMeal(Meal meal) throws Exception{
+		TextEditor t = new TextEditor();
 		int mealID = QueryMethods.registerMeal(meal.getMealName(), meal.getInstructions(), meal.getAvailable(), meal.getPrice(), meal.getDiscount(), meal.getDiscountLimit(), database);
 		if(mealID < 0){
 			JOptionPane.showMessageDialog(null,"Something went wrong, please try again");
@@ -32,13 +33,15 @@ public class Cook extends User {
 		
 		ArrayList<Ingredient> ingredient = meal.getIngredients();
 		for(int i = 0; i < ingredient.size(); i++){
-			if(!QueryMethods.addIngredientToMeal(mealID, ingredient.get(i).getIngID(), Float.parseFloat(JOptionPane.showInputDialog("Ingredient quantity: ")), database)){
-			// OBBBBBSSSSS Husk å lag metode for å håndtere float til tekst
+			if(!QueryMethods.addIngredientToMeal(mealID, ingredient.get(i).getIngID(), t.StringToFloat(JOptionPane.showInputDialog("Ingredient quantity: ")), database)){
+			// lagt til metode for håndtering av tekst til float
 				JOptionPane.showMessageDialog(null, "Could not register ingredient "+ ingredient.get(i).getIngName());
 			}
 		}
 		return true;
 	}
+	
+	
 	
 	@Override
 	public String toString() {

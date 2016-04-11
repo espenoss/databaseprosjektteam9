@@ -17,8 +17,10 @@ public class Sales extends User {
 		int orderID = QueryMethods.registerOrder(date, customerID, info, userID, database);
 		
 		for (Meal aMeal : meals){
+			TextEditor t = new TextEditor();
 			String quantityRead = JOptionPane.showInputDialog("How many of "+aMeal.getMealName()+" should be registerd?");
-			int quantity = Integer.parseInt(quantityRead);
+			int quantity = t.StringToInt(quantityRead);
+			//int quantity = Integer.parseInt(quantityRead);
 			
 			if(!QueryMethods.addMealToOrder(orderID, aMeal.getMealID(), deliveryDate, quantity, false, false, database)){
 				

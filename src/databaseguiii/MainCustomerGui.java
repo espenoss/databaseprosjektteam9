@@ -26,28 +26,13 @@ class Parentwindow2 extends JFrame {
 	  private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/mariashc?user=mariashc&password=rGBlmJ91");
 	  
 	  public Parentwindow2() {
-	    setTitle("Registrer customer");
-	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    setLayout(new FlowLayout());
-	    JButton button = new JButton("Register new customer");
-	    add(button);
-	    button.addActionListener(new ButtonListener());
-	    JButton button2 = new JButton("List customers");
-	    add(button2);
-	    button2.addActionListener(new ButtonListener2());   
-	    setLocation(300, 300); // plasserer foreldrevinduet..
-	    dialog.setLocation(350, 350);  // plasserer dialogen
-	  }
-
-	  private class ButtonListener implements ActionListener {
-		  private RegisterCustomer newCustomer=new RegisterCustomer();
-	    public void actionPerformed(ActionEvent action) {
+	    
+	 RegisterCustomer newCustomer = new RegisterCustomer();
 	      if (dialog.showDialog(customer)) {
 	          try {
-
 	        	  newCustomer.RegisterCustomer(customer.getFirstName(), customer.getSurName(), 
-	      				customer.getEmail(), customer.getAdress(), customer.getPreferences(), customer.getZipCode(), 
-	      				customer.getZoneNr(), customer.getPhoneNumber(), true, database);
+	        	  customer.getEmail(), customer.getAdress(), customer.getPreferences(), customer.getZipCode(), 
+	      		  customer.getZoneNr(), customer.getPhoneNumber(), true, database);
 	            } catch (Exception e) {
 	      		e.printStackTrace();
 	            }
@@ -55,32 +40,16 @@ class Parentwindow2 extends JFrame {
 	        System.out.println("Cancelled");
 	      }
 	      System.out.println(customer); //bruker toString().
-	    }
-	  }
-	  
-	  private class ButtonListener2 implements ActionListener {
-		  public void actionPerformed(ActionEvent action) {
-			  
-			  String text = "Customer List:\n";
-
-			  String[][] dbData = null;
-			  
-			  try {
-				  dbData = QueryMethods.viewAllUsers(database);
-			  } catch (Exception e) {
-				  e.printStackTrace();
-			  }
-			
-			for(int x=0;x<dbData.length; x++){
-				for(int y=0;y<dbData[x].length;y++){
-					text += dbData[x][y] + " ";
-				}
-				text += "\n";
-			}
-			JOptionPane.showMessageDialog(null, text);
-		  }
-	  }	    
-	}
+	    
+	    setTitle("Registrer customer");
+	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    setLayout(new FlowLayout());
+	    
+	   
+	    setLocation(300, 300); // plasserer foreldrevinduet..
+	    dialog.setLocation(350, 350);  // plasserer dialogen
+	  }  
+}
 
 	class MainCustomerGui {
 	  static public void main(String[] args) {
