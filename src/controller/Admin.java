@@ -1,9 +1,10 @@
 package controller;
+import databasePackage.*;
 
 public class Admin extends User {
 	
-	public Admin(String userID,int userType, String name,String pword) {
-		super(userID, userType, name, pword);
+	public Admin(String userID,int userType, String name,String pword, Database database) {
+		super(userID, userType, name, pword, database);
 	}
 
 	public boolean registerUser(){
