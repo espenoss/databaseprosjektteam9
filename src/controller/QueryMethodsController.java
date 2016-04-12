@@ -6,8 +6,7 @@ import javax.swing.JOptionPane;
 import databasePackage.*;
 
 public class QueryMethodsController implements java.io.Serializable{
-	private Database database = new Database(null, null);
-	private User user = new User("", 1, "", "", database);
+	
 	
 	//Registrerer ny bruker
 	public boolean RegisterUser(String userID, int userType, String name,String pword, Database database) throws Exception{
@@ -119,7 +118,7 @@ public class QueryMethodsController implements java.io.Serializable{
 	
 	public static void main(String[] args) throws Exception{
 		QueryMethodsController queryMethodsController = new QueryMethodsController();
-		String username = "espenme";
+/*		String username = "espenme";
 		String passingword = "16Sossosem06";
 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
 		String databaseDriver = "com.mysql.jdbc.Driver";
