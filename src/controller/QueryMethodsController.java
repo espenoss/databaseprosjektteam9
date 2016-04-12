@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 import databasePackage.*;
 
 public class QueryMethodsController implements java.io.Serializable{
-	
 	String username = "espenme";
 	String passingword = "16Sossosem06";
 	String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
@@ -123,24 +122,8 @@ public class QueryMethodsController implements java.io.Serializable{
 	
 	public static void main(String[] args) throws Exception{
 		QueryMethodsController queryMethodsController = new QueryMethodsController();
-/*		String username = "espenme";
-		String passingword = "16Sossosem06";
-		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
-		String databaseDriver = "com.mysql.jdbc.Driver";
-		Database database = new Database(databaseDriver, databasename); 
-		//		Database database = null;
-		
-		/*		String username = "espenme";
-		String password = "16Sossosem06";
-		String databaseName = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
-		String databaseDriver = "com.mysql.jdbc.Driver";
-		Database database = new Database(databaseDriver, databaseName);   */
-		
-	//	User user = new User("Hanne", 1, "Hanne","1234", database);
+
 		System.out.println("Enkelt bruker: ");
-//		System.out.println("Enkelt bruker: "+queryMethodsController.viewSingleCustomer(10000));
-//		System.out.println(queryMethodsController.viewCustomerList());
-		
 	}
 	
 }
