@@ -7,6 +7,11 @@ import databasePackage.*;
 
 public class QueryMethodsController implements java.io.Serializable{
 	
+	String username = "espenme";
+	String passingword = "16Sossosem06";
+	String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
+	String databaseDriver = "com.mysql.jdbc.Driver";
+	Database database = new Database(databaseDriver, databasename); 
 	
 	//Registrerer ny bruker
 	public boolean RegisterUser(String userID, int userType, String name,String pword, Database database) throws Exception{
@@ -28,11 +33,11 @@ public class QueryMethodsController implements java.io.Serializable{
 			ArrayList<User> userList = new ArrayList<User>();
 			
 			for(int i=0; i<list.length; i++){
-				if (Integer.parseInt(list[i][5])==1){
+				if (Integer.parseInt(list[i][1])==1){
 			//		int userID = Integer.parseInt(list[i][0]); //0
-					int userType = Integer.parseInt(list[i][0]); 
+					int userType = Integer.parseInt(list[i][1]); 
 					
-					tempUser = new User(list[i][0],userType,list[i][2],list[i][3], database);
+					tempUser = new User(list[i][0],userType,list[i][2], null, database);
 					userList.add(tempUser);
 				}
 			}
