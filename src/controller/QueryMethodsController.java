@@ -113,8 +113,8 @@ public class QueryMethodsController implements java.io.Serializable{
 		return QueryMethods.viewAllCompanies(database);
 	}
 	
-	
-	public String viewFoodOrders(){
+	//Kan denne metoden returnere en ArrayList, slik at vi kan bruke den i Gui?
+	public String viewFoodOrders(){  
 		// Skal sporre database
 		return "Food orders:\n";
 	}
