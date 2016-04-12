@@ -1,10 +1,10 @@
  package databaseguiii;
+ import controller.*;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import controller.User;
 import databaseguiii.UserDialog;
 import databasePackage.*;
 
@@ -17,31 +17,30 @@ class Parentwindow extends JFrame {
   private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/ninameed?user=ninameed&password=1Le5YPPr");
   private User user = new User("",0, "","", database); 
   
-  public Parentwindow() {
-    setTitle("Register new user");
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setLayout(new FlowLayout());
-    
-    setLocation(300, 300); // plasserer foreldrevinduet..
-    dialog.setLocation(350, 350);  // plasserer dialogen
-  }
-
-  private class ButtonListener implements ActionListener {
-    public void actionPerformed(ActionEvent action) {
+  
+ public Parentwindow() {
+	  QueryMethodsController queryMethodsController = new QueryMethodsController();
       if (dialog.showDialog(user)) {
           try {
-      		QueryMethods.registerUser(user.getUserID(), user.getUserType(), user.getName(), user.getPword(), database);
+        	  queryMethodsController.RegisterUser(user.getUserID(), user.getUserType(), user.getName(), user.getPword(), database);
             } catch (Exception e) {
       		e.printStackTrace();
             }
       } else {
         System.out.println("Cancelled");
       }
-      System.out.println(user); // bruker toString()
-    }
-  }
+      System.out.println(user); //bruker toString().
+    
+    setTitle("Registrer user");
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setLayout(new FlowLayout());
+    
+   
+    setLocation(300, 300); // plasserer foreldrevinduet..
+    dialog.setLocation(350, 350);  // plasserer dialogen
+  } 
   
-  private class ButtonListener2 implements ActionListener {
+/*  private class ButtonListener2 implements ActionListener {
 	  public void actionPerformed(ActionEvent action) {
 		  
 		  String text = "Userlist:\n";
@@ -62,7 +61,7 @@ class Parentwindow extends JFrame {
 		}
 		JOptionPane.showMessageDialog(null, text);
 	  }
-  }	    
+  }	  */  
 }
 
 class TestUserDialog {

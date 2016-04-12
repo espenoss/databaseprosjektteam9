@@ -24,7 +24,7 @@ public class Cook extends User {
 	}
 	
 	public boolean createMeal(Meal meal) throws Exception{
-		TextEditor t = new TextEditor();
+	//	TextEditor t = new TextEditor(); //Dette fungerer ikke som den skal, må noe importeres?
 		int mealID = QueryMethods.registerMeal(meal.getMealName(), meal.getInstructions(), meal.getAvailable(), meal.getPrice(), meal.getDiscount(), meal.getDiscountLimit(), database);
 		if(mealID < 0){
 			JOptionPane.showMessageDialog(null,"Something went wrong, please try again");
@@ -39,6 +39,15 @@ public class Cook extends User {
 			}
 		}
 		return true;
+	}
+
+	
+	public String viewOrderIngredients(){
+		String ingredients = null;
+		
+		// hent ingredienser fra database
+		
+		return ingredients;
 	}
 	
 	

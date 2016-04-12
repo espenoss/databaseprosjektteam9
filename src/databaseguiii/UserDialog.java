@@ -19,7 +19,7 @@ public class UserDialog extends MyDialog{
 	private JTextField passwordField = new JTextField(20);
 	
 	public UserDialog(JFrame parent){
-		super(parent, "Person");
+		super(parent, "New user");
 		add(new JPanel(), BorderLayout.NORTH);
 		add(new UserDatapanel(),BorderLayout.CENTER);
 		add(getButtonPanel(),BorderLayout.SOUTH);
@@ -29,17 +29,17 @@ public class UserDialog extends MyDialog{
 	private class UserDatapanel extends JPanel{
 		public UserDatapanel(){
 			setLayout(new GridLayout(4,2));
-			add(new JLabel("user ID: ", JLabel.RIGHT));
+			add(new JLabel("Username: ", JLabel.RIGHT));
 			add(userIDfield);
 			
-			add(new JLabel("user type: ", JLabel.RIGHT));
+			add(new JLabel("User type: ", JLabel.RIGHT));
 			add(userTypeField);
 			
-			add(new JLabel("username: ", JLabel.RIGHT));
+			add(new JLabel("Name: ", JLabel.RIGHT));
 			add(usernameField);
 			
 
-			add(new JLabel("password: ", JLabel.RIGHT));
+			add(new JLabel("Password: ", JLabel.RIGHT));
 			add(passwordField);
 			
 			

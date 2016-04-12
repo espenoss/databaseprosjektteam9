@@ -11,7 +11,7 @@ class Admin extends JFrame {
   private Parentwindow parentwindow;
   private MainCustomerGui mainCustomerGui;
   private static final String [] CHOICES =
-    {"Register new user", "Register new customer", "View private customers", "View company customers"};
+    {"Register new user", "View all users", "Register new customer", "View private customers", "View company customers"};
   private JList<String> choice_list = new JList<String>(CHOICES);  // Naa er listen laget!
 
   public Admin(String tittel) {
@@ -30,28 +30,36 @@ class Admin extends JFrame {
     pack();
   }
 
-  /* Lytteren fanger opp alle klikk paa linjer i listeboksen */
+  /* Lytteren fanger opp alle klikk paa linjer i listeboksen */ 
   private class ListeboksLytter implements ListSelectionListener {
 	private final Database database = null;
-	private ViewAllCustomers viewAllCustomers = new ViewAllCustomers();
+	private QueryMethodsController queryMethodsController = new QueryMethodsController();
 	 private User viewAllUsers = new User("", 1, "", "", database);
     public void valueChanged(ListSelectionEvent hendelse) {
       Object[] values = choice_list.getSelectedValuesList().toArray();
       int choices = choice_list.getSelectedIndex();
       if(choices == 0){
     	  TestUserDialog.main(null);
-      } else if(choices == 1){
-    	  MainCustomerGui.main(null);
-      }else if(choices==2){
-    	  viewAllCustomers.ViewAllCustomersList();
-		}else if(choices==3){
-	    	  try {
-				viewAllUsers.viewUserList();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+      }else if(choices==1){
+    	  try {
+			queryMethodsController.viewUserList();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+      	} else if(choices == 2){
+    	  MainCustomerGui.main(null);
+      }else if(choices==3){
+    	  queryMethodsController.ViewAllCustomersList();
+		}
+      else if(choices==4){
+    	  try {
+			queryMethodsController.ViewAllCompaniesList();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+      }
     }
   }
 }

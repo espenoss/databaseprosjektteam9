@@ -2,6 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import databasePackage.*;
 
 public class User implements java.io.Serializable{
@@ -52,82 +54,6 @@ public class User implements java.io.Serializable{
 	}
 	
 	
-	
-	public String viewFoodOrders(){
-		// Skal sporre database
-		return "Food orders:\n";
-	}
-	
-	//returns an arraylist with customer objects with all active customers
-	public ArrayList<Customer> viewCustomerList() throws Exception{
-		
-		String[][] list = QueryMethods.viewAllCustomers(database);
-		Customer tempCustomer;
-		ArrayList<Customer> customerList = new ArrayList<Customer>();
-		
-		for(int i=0; i<list.length; i++){
-			if (Integer.parseInt(list[i][9])==1){
-				int customerId = Integer.parseInt(list[i][0]); //0
-				//1 first name
-				//2 sur name
-				//3 phonenumber
-				//4 email
-				//5 adress
-				int zipCode = Integer.parseInt(list[i][6]); //6
-				int zoneNr = Integer.parseInt(list[i][7]); //7
-				//8 preferences
-				
-				tempCustomer = new Customer(list[i][1],list[i][2],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8]);
-				customerList.add(tempCustomer);
-			}
-		}
-		return customerList;
-	}
-	
-	//returns an arraylist with customer objects with all active customers
-		public ArrayList<User> viewUserList() throws Exception{
-			
-			String[][] list = QueryMethods.viewAllUsers(database);
-			User tempUser;
-			ArrayList<User> userList = new ArrayList<User>();
-			
-			for(int i=0; i<list.length; i++){
-				if (Integer.parseInt(list[i][5])==1){
-			//		int userID = Integer.parseInt(list[i][0]); //0
-					int userType = Integer.parseInt(list[i][0]); 
-					
-					tempUser = new User(list[i][0],userType,list[i][2],list[i][3], database);
-					userList.add(tempUser);
-				}
-			}
-			return userList;
-		}
-	
-	//takes an customerId returns a single customer object, or null if not found
-	public Customer viewSingleCustomer(int customerId) throws Exception{
-		String[][] list = QueryMethods.viewAllCustomers(database);
-		
-		for(int i=0; i<list.length; i++){
-			if (Integer.parseInt(list[i][9])==1){
-				int dbCustomerId = Integer.parseInt(list[i][0]);
-				if(customerId==dbCustomerId){
-					int zipCode = Integer.parseInt(list[i][6]);
-					int zoneNr = Integer.parseInt(list[i][7]);
-					return new Customer(list[i][1],list[i][2],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8]);
-				}
-			}
-		}
-		return null;
-	}
-	
-	public String viewOrderIngredients(){
-		String ingredients = null;
-		
-		// hent ingredienser fra database
-		
-		return ingredients;
-	}
-	
 	public boolean equals(Object obj){
 		if(!(obj instanceof User)){
 			return false;
@@ -143,17 +69,6 @@ public class User implements java.io.Serializable{
 	}
 	
 	
-	public static void main(String[] args) throws Exception{
-		String username = "marith1";
-		String password = "tgp8sBZA";
-		String databaseName = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
-		String databaseDriver = "com.mysql.jdbc.Driver";
-		Database database = new Database(databaseDriver, databaseName);
-		
-		User user = new User("Hanne", 1, "Hanne","1234", database);
-		
-		System.out.println("Enkelt bruker: "+user.viewSingleCustomer(10000));
-		System.out.println(user.viewCustomerList());
-		
-	}
+	
+	
 }

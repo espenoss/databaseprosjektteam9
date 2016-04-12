@@ -1,9 +1,11 @@
 package controller;
 
+import databasePackage.Database;
+
 public class Driver extends User {
 	
-	public Driver(String userID,int userType, String name,String pword) {
-		super(userID, userType, name, pword);
+	public Driver(String userID,int userType, String name,String pword, Database database) {
+		super(userID, userType, name, pword, database);
 	}
 	
 	public boolean markDelivered(int orderIndex){

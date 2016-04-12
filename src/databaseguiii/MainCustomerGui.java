@@ -26,11 +26,10 @@ class Parentwindow2 extends JFrame {
 	  private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/mariashc?user=mariashc&password=rGBlmJ91");
 	  
 	  public Parentwindow2() {
-	    
-	 RegisterCustomer newCustomer = new RegisterCustomer();
+		  QueryMethodsController queryMethodsController = new QueryMethodsController();
 	      if (dialog.showDialog(customer)) {
 	          try {
-	        	  newCustomer.RegisterCustomer(customer.getFirstName(), customer.getSurName(), 
+	        	  queryMethodsController.RegisterCustomer(customer.getFirstName(), customer.getSurName(), 
 	        	  customer.getEmail(), customer.getAdress(), customer.getPreferences(), customer.getZipCode(), 
 	      		  customer.getZoneNr(), customer.getPhoneNumber(), true, database);
 	            } catch (Exception e) {

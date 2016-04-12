@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class Sales extends User {
 	
-	public Sales(String userID,int userType, String name,String pword) {
-		super(userID, userType, name, pword);
+	public Sales(String userID,int userType, String name,String pword, Database database) {
+		super(userID, userType, name, pword, database);
 	}
 
 	public boolean registerNewOrder(int customerID, String date, String deliveryDate, String info, String userID, ArrayList<Meal> meals, Database database)throws Exception{
@@ -17,7 +17,7 @@ public class Sales extends User {
 		int orderID = QueryMethods.registerOrder(date, customerID, info, userID, database);
 		
 		for (Meal aMeal : meals){
-			TextEditor t = new TextEditor();
+	//		TextEditor t = new TextEditor();
 			String quantityRead = JOptionPane.showInputDialog("How many of "+aMeal.getMealName()+" should be registerd?");
 			int quantity = t.StringToInt(quantityRead);
 			//int quantity = Integer.parseInt(quantityRead);
