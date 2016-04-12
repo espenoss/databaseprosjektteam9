@@ -49,6 +49,14 @@ public class QueryMethods {
 		return database.getLastResult()[0];
 	}	
 	
+	// View list of all users. 
+	// Returns a list of all users in database in a two-dimensional String array
+	// First index is row, second is column
+	// Columns by second index:
+	// 0 : user_id - String
+	// 1 : user_type - int
+	// 2 : name - String
+	// 3 : password - String
 	public static String[][] viewAllUsers(Database database) throws Exception{		
 		database.makeSingleStatement("SELECT user_id, user_type, name FROM user");
 		
@@ -128,6 +136,19 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
+	// View single customer information. 
+	// Returns a customer information in a String array
+	// Columns by index:
+	// 0 : customer_id - int
+	// 1 : surname - String
+	// 2 : firstname - String
+	// 3 : phone_number - String
+	// 4 : email - String
+	// 5 : adress - String
+	// 6 : zip_code - int
+	// 7 : zone_nr - int
+	// 8 : preferences - String
+	// 9 : active - boolean
 	public static String[] viewCustomer(int customerID, Database database) throws Exception{		
 		String statement = "SELECT * FROM customer WHERE customer_id ="
 				+ customerID + ";";
@@ -136,7 +157,21 @@ public class QueryMethods {
 		
 		return database.getLastResult()[0];
 	}	
-	
+
+	// View list of all customer information. 
+	// Returns a list of all customers in database in a two-dimensional String array
+	// First index is row, second is column
+	// Columns by second index:
+	// 0 : customer_id - int
+	// 1 : surname - String
+	// 2 : firstname - String
+	// 3 : phone_number - String
+	// 4 : email - String
+	// 5 : adress - String
+	// 6 : zip_code - int
+	// 7 : zone_nr - int
+	// 8 : preferences - String
+	// 9 : active - boolean
 	public static String[][] viewAllCustomers(Database database) throws Exception{		
 		database.makeSingleStatement("SELECT * FROM customer");
 		
@@ -167,6 +202,20 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 
+	// View list of single company together with customer information. 
+	// Returns information about company in String array
+	// Columns by index:
+	// 0 : customer_id - int
+	// 1 : company_name - String
+	// 2 : surname - String
+	// 3 : firstname - String
+	// 4 : phone_number - String
+	// 5 : email - String
+	// 6 : adress - String
+	// 7 : zip_code - int
+	// 8 : zone_nr - int
+	// 9 : preferences - String
+	// 10 : active - boolean
 	public static String[] viewCompany(int customerID, Database database) throws Exception{		
 		String statement = "SELECT *  FROM company NATURAL JOIN customer "
 				+ "WHERE company.customer_id = customer.customer_id AND company.customer_id = " + customerID;
@@ -176,6 +225,21 @@ public class QueryMethods {
 		return database.getLastResult()[0];	
 	}
 	
+	// View list of all companies together with customer information. 
+	// Returns a list of all companies in database in a two-dimensional String array
+	// First index is row, second is column
+	// Columns by second index:
+	// 0 : customer_id - int
+	// 1 : company_name - String
+	// 2 : surname - String
+	// 3 : firstname - String
+	// 4 : phone_number - String
+	// 5 : email - String
+	// 6 : adress - String
+	// 7 : zip_code - int
+	// 8 : zone_nr - int
+	// 9 : preferences - String
+	// 10 : active - boolean
 	public static String[][] viewAllCompanies(Database database) throws Exception{		
 		database.makeSingleStatement("SELECT *  FROM company NATURAL JOIN customer "
 				+ "WHERE company.customer_id = customer.customer_id");
@@ -238,7 +302,16 @@ public class QueryMethods {
 		
 		return database.getLastResult()[0];
 	}
-	
+
+	// View list of all food orders.
+	// Returns a list of all food orders in database in a two-dimensional String array
+	// First index is row, second is column
+	// Columns by second index:
+	// 0 : order_id - int
+	// 1 : order_date - String
+	// 2 : customer_id - int
+	// 3 : info - String
+	// 4 : user_id - String
 	public static String[][] viewAllOrders(Database database) throws Exception{
 		
 		String statement = "SELECT * FROM food_order;";
@@ -361,6 +434,13 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
+	// View list of ingredients. Returns a list of all ingredients in database in a two-dimensional String array
+	// First index is row, second is column
+	// Columns:
+	// 0 : ingredient_id - int
+	// 1 : name - String
+	// 2 : quantity - int
+	// 3 : unit - String
 	public static String[][] viewIngredients(Database database) throws Exception{
 		
 		String statement = "SELECT * FROM ingredient";
@@ -422,6 +502,16 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 
+	// View list of meals. Returns a list of all meals in database in a two-dimensional String array
+	// First index is row, second is column
+	// Columns:
+	// 0 : meal_id - int
+	// 1 : meal_name - String
+	// 2 : instructions - String
+	// 3 : available - boolean
+	// 4 : price - int
+	// 5 : discount - int
+	// 6 : discount_lim - int
 	public static String[][] viewMeals(Database database) throws Exception{
 		
 		String statement = "SELECT * FROM meal";
@@ -466,6 +556,14 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 
+	// View ingredients in a meal
+	// Returns list of ingredients in a meal in a two-dimensional String array
+	// First index is row, second is column
+	// Columns by second index:
+	// 0 : ingredient_id - int
+	// 1 : name - String
+	// 2 : quantity - int
+	// 3 : unit - String
 	public static String[][] viewIngredientsInMeal(int mealID, Database database) throws Exception{
 		
 		String statement = "SELECT * FROM ingredient WHERE ingredient_id IN (SELECT ingredient_id FROM meal_ingredient WHERE meal_id = " + mealID + ")";
