@@ -120,14 +120,6 @@ public class User implements java.io.Serializable{
 		return null;
 	}
 	
-	public String viewOrderIngredients(){
-		String ingredients = null;
-		
-		// hent ingredienser fra database
-		
-		return ingredients;
-	}
-	
 	public boolean equals(Object obj){
 		if(!(obj instanceof User)){
 			return false;

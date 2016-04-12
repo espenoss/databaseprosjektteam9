@@ -54,11 +54,10 @@ class Admin extends JFrame {
 		}
     }
   }
-
+}
  class AdminGui {
   public static void main(String[] args) {
 	  Admin etVindu = new Admin("Choose an option");
     etVindu.setVisible(true);
   }
-}
 }
