@@ -14,16 +14,20 @@ import databaseguiii.CustomerDialog;
 
 
 class Parentwindow2 extends JFrame {
-	  private Customer customer = new Customer("", "", "", "", "", 0, 0, "");
+	  private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/mariashc?user=mariashc&password=rGBlmJ91");
+	  private Customer customer = new Customer(0, "", "", "", "", "", 0, 0, "", true);
 	  private CustomerDialog dialog = new CustomerDialog(this);
-//	  private String customerID = ""; //M� tas bort, er kun for bedriftskunder. Trenger company name i bedriftskunde klassenkkk
+	  private int customerID = 1; //M� tas bort, er kun for bedriftskunder. Trenger company name i bedriftskunde klassenkkk
 	  private String firstName = "";
 	  private String surName = "";
 	  private String email = "";
 	  private String adress = "";
+	  private int zip_code = 1;
+	  private int zone_nr = 1;
 	  private String phoneNumber = "";
 	  private String preferences = "";
-	  private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/mariashc?user=mariashc&password=rGBlmJ91");
+	  private boolean active = true;
+	 
 	  
 	  public Parentwindow2() {
 		  QueryMethodsController queryMethodsController = new QueryMethodsController();
