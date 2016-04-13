@@ -1,8 +1,6 @@
 package controller;
 import databasePackage.*;
 
-import databasePackage.Database;
-
 public class Admin extends User {
 	
 
@@ -16,6 +14,11 @@ public class Admin extends User {
 		// register ny bruker i databasen
 		
 		return success;
+	}
+	
+	//Registrerer ny bruker
+	public boolean RegisterUser(String userID, int userType, String name,String pword, Database database) throws Exception{
+		return QueryMethods.registerUser(userID, userType, name, pword, database);
 	}
 	
 	public String getStatistics(){
