@@ -40,15 +40,16 @@ class DriverGui extends JFrame {
 		
 		
 		public void valueChanged(ListSelectionEvent hendelse) {
+			
 			Object[] values = choice_list.getSelectedValuesList().toArray();
 			int choices = choice_list.getSelectedIndex();
 			if(choices == 0){
 				driver.generateDeliveryPlan();
   
-			} /*else if(choices==1){
-				driver.markDelivered(int orderIndex);
+			} else if(choices==1){
+				driver.markDelivered();
 				  
-			}  */
+			} 
 		} 
 	}
 }
