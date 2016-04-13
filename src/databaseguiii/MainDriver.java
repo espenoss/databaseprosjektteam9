@@ -34,21 +34,22 @@ class DriverGui extends JFrame {
 
   /* Lytteren fanger opp alle klikk paa linjer i listeboksen */
 	private class ListeboksLytter implements ListSelectionListener {
+		private int orderIndex;
 		private final Database database = null;
-	//	private Driver driver = new  Driver (userID, userType, name, pword, database);
 		private Driver driver = new Driver("", 1, "", "", database);
 		
 		
 		public void valueChanged(ListSelectionEvent hendelse) {
+			
 			Object[] values = choice_list.getSelectedValuesList().toArray();
 			int choices = choice_list.getSelectedIndex();
 			if(choices == 0){
 				driver.generateDeliveryPlan();
   
-			} /*else if(choices==1){
-				driver.markDelivered(int orderIndex);
+			} else if(choices==1){
+				driver.markDelivered(orderIndex);
 				  
-			}  */
+			} 
 		} 
 	}
 }

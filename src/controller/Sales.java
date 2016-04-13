@@ -17,10 +17,9 @@ public class Sales extends User {
 		int orderID = QueryMethods.registerOrder(date, customerID, info, userID, database);
 		
 		for (Meal aMeal : meals){
-	//		TextEditor t = new TextEditor();
+			TextEditor t = new TextEditor();
 			String quantityRead = JOptionPane.showInputDialog("How many of "+aMeal.getMealName()+" should be registerd?");
 			int quantity = t.StringToInt(quantityRead);
-			//int quantity = Integer.parseInt(quantityRead);
 			
 			if(!QueryMethods.addMealToOrder(orderID, aMeal.getMealID(), deliveryDate, quantity, false, false, database)){
 				
@@ -48,22 +47,28 @@ public class Sales extends User {
 		return success;
 	}
 	
-	public boolean registerNewCustomer(String customerinfo){
-		boolean success = false;
+	//Register new customer
+	public Customer RegisterCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
+			int zip_code, int zone_nr, String preferences, boolean active, Database database) throws Exception{
+		int customerID = QueryMethods.registerCustomer(surName, firstName, phoneNumber, email, adress, zip_code, zone_nr, preferences, active, database);
 		
-		// opprett ny kunde i database
+		if (customerID<0){
+			return null;
+		}
 		
-		return success;		
+		return new Customer(customerID,firstName,surName,phoneNumber,email,adress,zip_code,zone_nr,preferences,true);
 	}
+		
 	
+	/*
 	public boolean changeCustomerInfo(String customerinfo){
 		boolean success = false;
 		
 		// generer meny, hent nye verdier,
 		// lagre i database
-		
 		return success;				
 	}
+	*/
 	
 	public boolean registerPackageDeal(){
 		boolean success = false;

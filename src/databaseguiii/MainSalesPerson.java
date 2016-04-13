@@ -1,4 +1,5 @@
 package databaseguiii;
+import databasePackage.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -12,12 +13,13 @@ class SalesPersonGui extends JFrame {
   private MainCustomerGui mainCustomerGui;
   private static final String [] CHOICES =
     {"Register new user","Change user information", "View all users", "Register new customer","Register new company",
-    		"Change customer information", "View private customers", "View company customers","Register new food order","Change food order"};
+    		"Change customer information", "View private customers", "View company customers","Remove customer","Register new food order","Change food order"};
   private JList<String> choice_list = new JList<String>(CHOICES);  // Naa er listen laget!
 
   public SalesPersonGui(String tittel) {
     setTitle(tittel);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    Font bigText = new Font("SansSerif", Font.PLAIN, 30);
 
     JLabel ledetekst = new JLabel("Choose one of the following options.");
     add(ledetekst, BorderLayout.NORTH);
@@ -28,7 +30,8 @@ class SalesPersonGui extends JFrame {
 
     ListeboksLytter lytter = new ListeboksLytter();
     choice_list.addListSelectionListener(lytter);
-    pack();
+    choice_list.setFont(bigText);
+    setSize(700, 700);
   }
 
   /* Lytteren fanger opp alle klikk paa linjer i listeboksen */ 
@@ -69,8 +72,12 @@ class SalesPersonGui extends JFrame {
 			e.printStackTrace();
 		}
       }else if(choices==8){
+    	 
+    	  //metoden remove customer
+      }
+      else if(choices==9){
     	  //metoden for a registrere en ny bestilling
-      }else if(choices==9){
+      }else if(choices==10){
     	  //motoden for a endre bestilling
       }
     }
