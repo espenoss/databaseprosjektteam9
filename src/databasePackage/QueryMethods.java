@@ -276,8 +276,6 @@ public class QueryMethods {
 			String userID, Database database) throws Exception{
 		
 		String statement = "UPDATE food_order SET "
-				+ "order_id = " + orderID + ", "
-				+ "order_date = " + aq(orderDate)
 				+ "customer_id = " + customerID + ", "
 				+ "info = " + aq(info)
 				+ "user_id = '" + userID + "'"
@@ -326,12 +324,17 @@ public class QueryMethods {
 			boolean readyDelivery, boolean delivered, Database database) throws Exception{
 		
 		String statement = "INSERT INTO ordered_meal VALUES("
-				+ orderID + "," + mealID + "," + aq(deliveryDate) 
-				+ quantity + "," + readyDelivery + "," + delivered + ");";
+				+ orderID + "," 
+				+ mealID + "," 
+				+ aq(deliveryDate) 
+				+ quantity + "," 
+				+ readyDelivery + "," 
+				+ delivered + ");";
 		
 		return database.makeSingleStatement(statement);
 	}
 
+	// **** IKKE TESTET
 	public static boolean updateMealInOrder(int orderID, int mealID, String deliveryDate, int quantity, 
 			boolean readyDelivery, boolean delivered, Database database) throws Exception{
 		
@@ -341,7 +344,11 @@ public class QueryMethods {
 				+ "delivery_date = " + aq(deliveryDate) 
 				+ "quantity = " + quantity + "," 
 				+ "ready_delivery = " + readyDelivery + "," 
-				+ "delivered = " + delivered + ";";
+				+ "delivered = " + delivered 
+				+ "WHERE order_id =" + orderID
+				+ " AND meal_id = " + mealID
+				+ " AND delivery_date = '" + deliveryDate + "'"
+				+";";
 		
 		return database.makeSingleStatement(statement);
 	}
@@ -481,7 +488,6 @@ public class QueryMethods {
 			int discount, int discountLim, Database database) throws Exception{
 		
 		String statement = "UPDATE meal SET "
-				+ "meal_id = " + mealID + ", "
 				+ "meal_name = " + aq(mealName)
 				+ "instructions = " + aq(instructions)
 				+ "available = " + available + ", "
@@ -535,8 +541,6 @@ public class QueryMethods {
 			Database database) throws Exception{
 		
 		String statement = "UPDATE meal_ingredient SET "
-				+ "meal_id = " + mealID + ", "
-				+ "ingredient_id = " + ingredientID + ", "
 				+ "quantity = " + quantity + " "
 				+ "WHERE meal_id =" + mealID + " "
 				+ "AND ingredient_id = " + ingredientID
@@ -596,7 +600,6 @@ public class QueryMethods {
 	public static boolean updateZone(int zoneID, String zoneName, Database database) throws Exception{
 		
 		String statement = "UPDATE zone SET "
-				+ "zone_nr = " + zoneID + ", "
 				+ "zone_name = '" + zoneName + "' "
 				+ "WHERE zone_nr = " + zoneID
 				+ ";";
@@ -644,7 +647,6 @@ public class QueryMethods {
 	public static boolean updateSubscriptionPlan(int subID, String subName, Database database) throws Exception{		
 		
 		String statement = "UPDATE subscription_plan SET "
-				+ "sub_id = " + subID + ", "
 				+ "sub_name = '" + subName + "' "
 				+ "WHERE sub_id = " + subID 
 				+";";
@@ -668,7 +670,6 @@ public class QueryMethods {
 		return database.getLastResult();
 	}
 	
-	// **** IKKE TESTET
 	public static boolean addSubscriptionToOrder(int orderID, int quantitySub, String fromDate, String toDate, 
 			int subID, Database database) throws Exception{		
 		String statement = "INSERT INTO sub_order VALUES(" 
@@ -685,7 +686,6 @@ public class QueryMethods {
 			int subID, Database database) throws Exception{
 		
 		String statement = "UPDATE sub_order SET "
-				+ "order_id = " + orderID + ", "
 				+ "quantity_sub = " + quantitySub + ", "
 				+ "from_date = " + aq(fromDate)
 				+ "to_date = " + aq(toDate)
@@ -732,11 +732,19 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
+	// **** IKKE TESTET
+	public static String[][] viewOrdersBydeliveryDate(java.sql.Date deliveryDate, Database database) throws Exception{
+		
+		String statement = "SELECT * FROM food_order NATURAL JOIN ordered_meal where food_order.order_id = ordered_meal.order_id AND delivery_date = '" + deliveryDate + "';";
+		
+		database.makeSingleStatement(statement);
+		
+		return database.getLastResult();
+	}
+	
 	public static boolean updateMealInPlan(int subID, int mealID, int weekdayNr, String weekday, Database database) throws Exception{	
 		
 		String statement = "UPDATE sub_meals_day SET "
-				+ "sub_id = " + subID + ", "
-				+ "meal_id = " + mealID + ", "
 				+ "weekday_nr = " + weekdayNr + ", "
 				+ "weekday = '" + weekday + "' "
 				+ "WHERE sub_id = " + subID + " "
