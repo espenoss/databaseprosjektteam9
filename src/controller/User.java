@@ -1,9 +1,8 @@
 package controller;
 
 import java.util.ArrayList;
-
+import java.util.Date;
 import javax.swing.JOptionPane;
-
 import databasePackage.*;
 
 public class User implements java.io.Serializable{
@@ -53,11 +52,29 @@ public class User implements java.io.Serializable{
 		this.pword=pword;
 	}
 	
+	// 0 : order_id - int
+	// 1 : order_date - String
+	// 2 : customer_id - int
+	// 3 : info - String
+	// 4 : user_id - String
 	
 	
-	public String viewFoodOrders(){
-		// Skal sporre database
-		return "Food orders:\n";
+	public ArrayList<Order> viewFoodOrders(Date date) throws Exception{
+		
+		
+		String[][] orderT = QueryMethods.viewOrdersByDeliveryDate(date, database);
+		Order tempOrder;
+		ArrayList<Order> OrderList = new ArrayList<Order>();
+		TextEditor t = new TextEditor();
+		
+		for(int i=0; i<orderT.length;i++){
+			int orderID = t.StringToInt(orderT[i][0]);
+			int customerID = t.StringToInt(orderT[i][2]);
+			
+			tempOrder = new Order(orderID,orderT[i])
+		}
+		
+		return null;
 	}
 	
 	//returns an arraylist with customer objects with all active customers
