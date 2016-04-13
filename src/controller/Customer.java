@@ -89,7 +89,7 @@ public class Customer implements java.io.Serializable{
 		return zip_code;
 	}
 	public int getZoneNr(){
-		return zoneNr;
+		return zone_nr;
 	}
 	public String getPreferences(){
 		return preferences;
