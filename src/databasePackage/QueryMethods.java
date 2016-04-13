@@ -113,7 +113,6 @@ public class QueryMethods {
 			int zipCode, int zoneNr, String preferences, boolean active, Database database) throws Exception{
 			
 		String statement = "UPDATE customer SET "
-				+ "customer_id =" + customerID + ","
 				+ "surname =" + aq(surName)
 				+ "firstname =" + aq(firstName)
 				+ "phone_number =" + aq(phoneNumber)

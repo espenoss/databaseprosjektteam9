@@ -1,6 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
 import databasePackage.Database;
+import databasePackage.QueryMethods;
 
 // import java.sql.Date;
 
@@ -11,6 +13,7 @@ public class Order {
 	private int customerID;
 	private String info;
 	private String userID;
+	private ArrayList<Meal> meals;
 	
 	public Order(int orderID, String orderDate, String deliveryDate, int customerID, String info, String userID){
 		this.orderID = orderID;
@@ -20,6 +23,12 @@ public class Order {
 		this.info = info;
 		this.userID = userID;
 	}
+
+	public boolean markMealAsReady(int index, Database database) throws Exception{
+		return QueryMethods.markMealOrderAsDelivered(orderID, meals.get(index).getMealID(), deliveryDate, database);
+	}
+	
+	
 	
 	public int getOrderID(){
 		return orderID;

@@ -6,6 +6,7 @@ public class Database {
 		private final String dbDriver; 
 		private final String dbName;
 		private String[][] lastResult = null;
+		private String [][][] lastResults = null;
 		
 		public Database(String dbDriver, String dbName){
 			this.dbDriver = dbDriver;
@@ -15,7 +16,11 @@ public class Database {
 	public String[][] getLastResult() {
 		return lastResult;
 	}	
-		
+
+	public String[][][] getLastResults() {
+		return lastResults;
+	}
+	
 	// Executes a statement and returns any results as a two dimensional String array
 	public boolean makeSingleStatement(String statement) throws Exception{
 
@@ -24,7 +29,8 @@ public class Database {
 		Connection connection = null;
 		Statement sqlStatement = null;
 		ResultSet result = null;
-
+		lastResult = null;
+		
 		// instantiate driver
 		Class.forName(dbDriver);
 		
@@ -49,7 +55,10 @@ public class Database {
 						values.get(x)[y] = result.getString(y+1);	// MySQL column numbering begins at 1
 					}
 					x++;
-				}	
+				}
+				// Convert from arraylist to array
+				lastResult= new String[values.size()][];
+				values.toArray(lastResult);
 			}
 		}catch(SQLException e){
 			Cleaner.printMessage(e, "makeSingleStatement()");
@@ -60,21 +69,20 @@ public class Database {
 			Cleaner.closeStatement(sqlStatement);
 			Cleaner.closeConnection(connection);
 		}
-
-		// Convert from arraylist to array
-		lastResult= new String[values.size()][];
-		values.toArray(lastResult);
 		
 		return success;
 	}
 	
-	// Executes a transaction from list of update statements
-	public boolean makeUpdateTransaction(String[] statements) throws Exception{
-		
-		boolean success = true;
-		Connection connection = null;
-		Statement sqlStatement = null;
+	// Executes a transaction from list of statements
+	public boolean makeTransaction(String[] statements) throws Exception{
 
+		boolean success = true;		
+		ArrayList<String[][]> valueSet = new ArrayList<String[][]>();		
+		Connection connection = null;
+		Statement sqlStatement = null;		
+		ResultSet result = null;
+		lastResults = null;
+		
 		// instantiate driver
 		Class.forName(dbDriver);
 		
@@ -84,12 +92,40 @@ public class Database {
 			sqlStatement = connection.createStatement();
 			connection.setAutoCommit(false);
 			
-			// Assume only update statements in transaction
+			// Execute statements and collect results
 			for(int i=0; i<statements.length; i++){
-				sqlStatement.executeUpdate(statements[i]); 
+				if(sqlStatement.execute(statements[i])){
+					// if resultset is returned, get results, check number of columns
+					ArrayList<String[]> values = new ArrayList<String[]>();
+					result = sqlStatement.getResultSet();					
+					ResultSetMetaData resultMeta = result.getMetaData();	
+					int noCol = resultMeta.getColumnCount();
+
+					// collect results in arraylist of string arrays				
+					int x = 0;
+					while(result.next()){
+						values.add(new String[noCol]);
+						for(int y = 0; y < noCol; y++){
+							values.get(x)[y] = result.getString(y+1);	// MySQL column numbering begins at 1
+						}
+						x++;
+					}
+					// Add results from query to result list
+					String[][] temp = new String[values.size()][];
+					values.toArray(temp);
+					valueSet.add(temp);
+					Cleaner.closeResSet(result);
+				}				
 			}
+
+			// Store results from transaction
+			String[][][] temp = new String[valueSet.size()][][];
+			valueSet.toArray(temp);
+			lastResults = temp;
+
 			// Commit changes if everything went well
 			connection.commit();
+			
 		}catch(SQLException e){
 			Cleaner.rollback(connection);
 			Cleaner.printMessage(e, "makeSingleStatement()");
@@ -97,6 +133,7 @@ public class Database {
 		}finally{
 			// close database connections
 			connection.setAutoCommit(true);
+			Cleaner.closeResSet(result);			
 			Cleaner.closeStatement(sqlStatement);
 			Cleaner.closeConnection(connection);
 		}
@@ -132,4 +169,34 @@ public class Database {
         }
         return ok;
     }
+	
+	public static void main(String[] args) throws Exception{
+		String dbDriver = "com.mysql.jdbc.Driver";
+		String username = "espenme";
+		String password = "16Sossosem06";
+		String dbName = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
+		
+		Database database = new Database(dbDriver, dbName);
+		
+		String[][][] results = null;
+		
+		String[] statements = new String[2];
+		
+		statements[0] = "SELECT * FROM user";
+		statements[1] = "SELECT * FROM customer";
+
+		database.makeTransaction(statements);
+		
+		results = database.getLastResults();
+		
+		for(int x=0;x<results.length;x++){
+			for(int y=0;y<results[x].length;y++){
+				for(int z=0;z<results[x][y].length;z++){
+					System.out.print(results[x][y][z] + " ");
+				}
+				System.out.println("");
+			}
+			System.out.println("");
+		}		
+	}
 }
