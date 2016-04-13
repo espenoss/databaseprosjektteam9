@@ -12,8 +12,7 @@ class SalesPersonGui extends JFrame {
   private Parentwindow parentwindow;
   private MainCustomerGui mainCustomerGui;
   private static final String [] CHOICES =
-    {"Register new user","Change user information", "View all users", "Register new customer","Register new company",
-    		"Change customer information", "View private customers", "View company customers","Remove customer","Register new food order","Change food order"};
+    {"Register new customer","Register new company", "View private customers", "View company customers","Change customer information","Remove customer","Register new food order","Change food order"};
   private JList<String> choice_list = new JList<String>(CHOICES);  // Naa er listen laget!
 
   public SalesPersonGui(String tittel) {
@@ -43,42 +42,24 @@ class SalesPersonGui extends JFrame {
       Object[] values = choice_list.getSelectedValuesList().toArray();
       int choices = choice_list.getSelectedIndex();
       if(choices == 0){
-    	  TestUserDialog.main(null);
+    	  MainCustomerGui.main(null);
       }else if(choices==1){
-    	  ////metoden for å endre info til en bruker
+    	  ////metoden for å registrere en ny bedrift
       }
       else if(choices==2){
-    	  try {
-			queryMethodsController.viewUserList();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		///view private customers
       	} else if(choices == 3){
-    	  MainCustomerGui.main(null);
+      		 //view company customers
       }else if(choices==4){
-    	  //metoden for a registrere en bedrift
+    	 //change customer info
       }else if(choices==5){
-    	  //metoden for a endre info til en kundre
+    	  //remove customer
       }
       	else if(choices==6){
-    	  queryMethodsController.ViewAllCustomersList();
+    	  //register food order
 		}
       else if(choices==7){
-    	  try {
-			queryMethodsController.ViewAllCompaniesList();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-      }else if(choices==8){
-    	 
-    	  //metoden remove customer
-      }
-      else if(choices==9){
-    	  //metoden for a registrere en ny bestilling
-      }else if(choices==10){
-    	  //motoden for a endre bestilling
+    	 //change food order
       }
     }
   }
