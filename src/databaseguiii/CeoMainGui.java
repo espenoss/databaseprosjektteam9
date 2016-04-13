@@ -11,7 +11,7 @@ class CeoGui extends JFrame {
   private Parentwindow parentwindow;
   private MainCustomerGui mainCustomerGui;
   private static final String [] CHOICES =
-    {"Retrieve statistics"};
+    {"Register user", "Retrieve statistics"};
   private JList<String> choice_list = new JList<String>(CHOICES);  // Naa er listen laget!
 
   public CeoGui(String tittel) {

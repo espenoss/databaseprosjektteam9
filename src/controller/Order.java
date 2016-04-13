@@ -1,6 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
 import databasePackage.Database;
+import databasePackage.QueryMethods;
 
 // import java.sql.Date;
 
@@ -11,6 +13,7 @@ public class Order {
 	private int customerID;
 	private String info;
 	private String userID;
+	private ArrayList<Meal> meals;
 	
 	public Order(int orderID, String orderDate, String deliveryDate, int customerID, String info, String userID){
 		this.orderID = orderID;
@@ -20,6 +23,14 @@ public class Order {
 		this.info = info;
 		this.userID = userID;
 	}
+
+	public boolean markMealAsReady(int index, Database database) throws Exception{
+		return QueryMethods.markMealOrderAsReadyForDelivery(orderID, meals.get(index).getMealID(), deliveryDate, database);
+	}
+	
+	public boolean markMealAsDelivered(int index, Database database) throws Exception{
+		return QueryMethods.markMealOrderAsDelivered(orderID, meals.get(index).getMealID(), deliveryDate, database);
+	}	
 	
 	public int getOrderID(){
 		return orderID;
@@ -45,10 +56,28 @@ public class Order {
 		return userID;
 	}
 	
+	public void addMeal(Meal meal){
+		meals.add(meal);
+	}
+	
+	public Meal getMeal(int index){
+		if(meals.size() > 0) return meals.get(index);
+		else return null;
+	}
+	
+	public Meal[] getMeals(){
+		Meal[] temp = new Meal[meals.size()];
+		return temp;
+	}
+	
 	public String toString(){
 		String res = "";
 		res += "OrderID: " + orderID + ". Orderdate: " + orderDate + ". Delivery date: " + deliveryDate
-				+ ". Info: " + info;
+				+ ". Info: " + info + "\n";
+		res += "Meals: \n";
+		for(Meal m:meals){
+			res += "   " + m.toString() + "\n";
+		}
 		return res;
 		
 	}

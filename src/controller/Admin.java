@@ -21,6 +21,8 @@ public class Admin extends User {
 		return QueryMethods.registerUser(userID, userType, name, pword, database);
 	}
 	
+	
+	
 	public String getStatistics(){
 		String statistics = null;
 		
