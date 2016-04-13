@@ -52,9 +52,10 @@ public class Customer implements java.io.Serializable{
 	public void setPhoneNumber(String phoneNumber){
 		this.phoneNumber=phoneNumber;
 	}
-/*	public int getCustomerID(){
+
+	public int getCustomerID(){
 		return customerID;
-	}*/
+	}
 	public String getFirstName(){
 		return firstName;
 	}
@@ -93,6 +94,6 @@ public class Customer implements java.io.Serializable{
 				&&adress==c.getAdress()&&zip_code==c.getZipCode()&&zone_nr==c.zone_nr&&preferences==c.getPreferences()&&phoneNumber==c.getPhoneNumber());
 	}
 	public String toString(){
-		return /*CustomerID: +customerID */" First name: " + firstName+". Surname: "+ surName +"\nEmail: "+email+". Phonenr: "+phoneNumber+".\nAdress: "+adress+". ZipCode: "+zip_code+". ZoneNr: "+zone_nr+".\nPreferences: "+preferences+"\n\n";
+		return "CustomerID: " +customerID+" First name: " + firstName+". Surname: "+ surName +"\nEmail: "+email+". Phonenr: "+phoneNumber+".\nAdress: "+adress+". ZipCode: "+zip_code+". ZoneNr: "+zone_nr+".\nPreferences: "+preferences+"\n\n";
 	}
 }

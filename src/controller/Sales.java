@@ -48,13 +48,12 @@ public class Sales extends User {
 		return success;
 	}
 	
-	public boolean registerNewCustomer(String customerinfo){
-		boolean success = false;
-		
-		// opprett ny kunde i database
-		
-		return success;		
+	//Registrerer ny kunde
+	public int RegisterCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
+			int zip_code, int zone_nr, String preferences, boolean active, Database database) throws Exception{
+		return QueryMethods.registerCustomer(surName, firstName, phoneNumber, email, adress, zip_code, zone_nr, preferences, active, database);
 	}
+	
 	
 	public boolean changeCustomerInfo(String customerinfo){
 		boolean success = false;
