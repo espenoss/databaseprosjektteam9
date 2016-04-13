@@ -1,4 +1,5 @@
 package databaseguiii;
+import databasePackage.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -12,7 +13,7 @@ class SalesPersonGui extends JFrame {
   private MainCustomerGui mainCustomerGui;
   private static final String [] CHOICES =
     {"Register new user","Change user information", "View all users", "Register new customer","Register new company",
-    		"Change customer information", "View private customers", "View company customers","Register new food order","Change food order"};
+    		"Change customer information", "View private customers", "View company customers","Remove customer","Register new food order","Change food order"};
   private JList<String> choice_list = new JList<String>(CHOICES);  // Naa er listen laget!
 
   public SalesPersonGui(String tittel) {
@@ -69,8 +70,12 @@ class SalesPersonGui extends JFrame {
 			e.printStackTrace();
 		}
       }else if(choices==8){
+    	 
+    	  //metoden remove customer
+      }
+      else if(choices==9){
     	  //metoden for a registrere en ny bestilling
-      }else if(choices==9){
+      }else if(choices==10){
     	  //motoden for a endre bestilling
       }
     }
