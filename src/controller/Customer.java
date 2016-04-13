@@ -2,7 +2,7 @@ package controller;
 
 
 public class Customer implements java.io.Serializable{
-//	private int customerID;
+	private int customerID;
 	private String firstName;
 	private String surName;
 	private String email;
@@ -13,7 +13,7 @@ public class Customer implements java.io.Serializable{
 	private String phoneNumber;
 	
 	
-	public Customer(/*int customerID*/ String firstName, String surName, String phoneNumber, String email, String adress, int zip_code, int zone_nr, String preferences){
+	public Customer(int customerID, String firstName, String surName, String phoneNumber, String email, String adress, int zip_code, int zone_nr, String preferences){
 		this.firstName=firstName;
 		this.surName=surName;
 		this.email=email;
@@ -22,11 +22,11 @@ public class Customer implements java.io.Serializable{
 		this.zone_nr=zone_nr;
 		this.preferences=preferences;
 		this.phoneNumber=phoneNumber;
-	//	this.customerID=customerID;
-	}
-/*	public void setCustomerID(int customerID){
 		this.customerID=customerID;
-	}*/
+	}
+	public void setCustomerID(int customerID){
+		this.customerID=customerID;
+	}
 	public void setFirstName(String firstName){
 		this.firstName=firstName;
 	}
