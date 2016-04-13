@@ -56,7 +56,7 @@ public class Sales extends User {
 			return null;
 		}
 		
-		return new Customer(customerID,firstName,surName,phoneNumber,email,adress,zip_code,zone_nr,preferences);
+		return new Customer(customerID,firstName,surName,phoneNumber,email,adress,zip_code,zone_nr,preferences,true);
 	}
 		
 	

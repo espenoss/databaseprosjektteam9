@@ -14,11 +14,12 @@ public class TestCompany {
 	
 	@Before
 	public void beforeTest(){
+		String dbDriver = "com.mysql.jdbc.Driver";
 		String username = "espenme";
 		String password = "16Sossosem06";
 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
 		
-		database = new Database("com.mysql.jdbc.Driver", databasename);
+		database = new Database(dbDriver, databasename);
 	}
 	
 	@Test
