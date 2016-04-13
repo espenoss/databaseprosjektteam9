@@ -1,5 +1,7 @@
 package controller;
 
+import databasePackage.Database;
+import databasePackage.QueryMethods;
 
 public class Customer implements java.io.Serializable{
 	private int customerID;
@@ -11,9 +13,10 @@ public class Customer implements java.io.Serializable{
 	private int zone_nr;
 	private String preferences;
 	private String phoneNumber;
+	private boolean active;
 	
 	
-	public Customer(int customerID, String firstName, String surName, String phoneNumber, String email, String adress, int zip_code, int zone_nr, String preferences){
+	public Customer(int customerID, String firstName, String surName, String phoneNumber, String email, String adress, int zip_code, int zone_nr, String preferences, boolean active){
 		this.firstName=firstName;
 		this.surName=surName;
 		this.email=email;
@@ -23,34 +26,48 @@ public class Customer implements java.io.Serializable{
 		this.preferences=preferences;
 		this.phoneNumber=phoneNumber;
 		this.customerID=customerID;
+		this.active = active;
 	}
 	public void setCustomerID(int customerID){
 		this.customerID=customerID;
 	}
-	public void setFirstName(String firstName){
+	public String setFirstName(String firstName){
 		this.firstName=firstName;
+		return firstName;
 	}
-	public void setSurName(String surName){
+	public String setSurName(String surName){
 		this.surName=surName;
+		return surName;
 	}
-	public void setAdress(String adress){
+	public String setAdress(String adress){
 		this.adress=adress;
+		return adress;
 	}
-	public void setEmail(String email){
+	public String setEmail(String email){
 		this.email=email;
+		return email;
 	}
 	
-	public void setZipCode(int zip_code){
+	public int setZipCode(int zip_code){
 		this.zip_code=zip_code;
+		return zip_code;
 	}
-	public void setZoneNr(int zone_nr){
+	public int setZoneNr(int zone_nr){
 		this.zone_nr=zone_nr;
+		return zone_nr;
 	}
-	public void setPreferences(String preferences){
+	public String setPreferences(String preferences){
 		this.preferences=preferences;
+		return preferences;
 	}
-	public void setPhoneNumber(String phoneNumber){
+	public String setPhoneNumber(String phoneNumber){
 		this.phoneNumber=phoneNumber;
+		return phoneNumber;
+	}
+	
+	public boolean setActive(boolean active){
+		this.active = active;
+		return active;
 	}
 
 	public int getCustomerID(){
@@ -79,6 +96,17 @@ public class Customer implements java.io.Serializable{
 	}
 	public String getPhoneNumber(){
 		return phoneNumber;
+	}
+	
+	public boolean getActive(){
+		return active;
+	}
+	
+	public boolean updateCustomer(int customerID, String newSurName, String newFirstName, String newPhoneNumber, String newEmail, String newAdress, int newZipCode, int newZoneNr, String newPreferences, boolean newActive, Database database) throws Exception{
+		if(QueryMethods.updateCustomer(customerID, setSurName(newSurName), setFirstName(newFirstName), setPhoneNumber(newPhoneNumber), setEmail(newEmail), setAdress(newAdress), setZipCode(newZipCode), setZoneNr(newZoneNr), setPreferences(newPreferences), setActive(newActive), database)){
+			return true;
+		}
+		return false;
 	}
 	
 	
