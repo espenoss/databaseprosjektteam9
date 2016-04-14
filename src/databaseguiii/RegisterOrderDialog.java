@@ -51,10 +51,10 @@ public class RegisterOrderDialog extends MyDialog{
 		}
 	}
 	public boolean showDialog(){
-		
 		String text = customerIdField.getText();
 		editor.StringToInt(text);
-		text.(order.getCustomerID());
+		Object order;
+		text.(sales.getCustomerID());
 		
 		
 		
