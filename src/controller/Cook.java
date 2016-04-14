@@ -32,9 +32,8 @@ public class Cook extends User {
 		return true;
 	}
 	
-	//
-	public boolean createSubscriptionPlan(){
-		return false;
+	public int registerSubPlan(String name,Database database) throws Exception{
+		return QueryMethods.registerSubscriptionPlan(name, database);
 	}
 	
 	@Override
