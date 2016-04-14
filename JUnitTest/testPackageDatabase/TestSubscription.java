@@ -28,7 +28,7 @@ public class TestSubscription {
 		String[][] subscriptions = QueryMethods.viewSubscriptionPlans(database);
 		// select last entry
 		String[] sub = subscriptions[subscriptions.length-1];
-				
+		
 		// attempt to register new info about existing entry
 		boolean exp = QueryMethods.updateSubscriptionPlan(Integer.parseInt(sub[0]), sub[1], database);
 		assertEquals(true, exp);		
