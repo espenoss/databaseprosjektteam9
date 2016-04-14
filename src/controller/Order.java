@@ -13,7 +13,7 @@ public class Order {
 	private String info;
 	private String userID;
 	private ArrayList<Meal> meals;
-	private SubscriptionPlan subPlan = null;
+	private SubPlan subPlan = null;
 	
 	public Order(int orderID, String orderDate, String deliveryDate, int customerID, String info, String userID){
 		this.orderID = orderID;
@@ -85,12 +85,12 @@ public class Order {
 		
 		for(int i=0;i<mealT.length;i++){			
 			for(int j=0;j<meals.size();j++){		//Checks if meal is in arrayList already
-				if (meals.get(j).getMealID()==t.StringToInt(mealT[i][0])){
+				if (meals.get(j).getMealID()==t.stringToInt(mealT[i][0])){
 					check=true;
 				}
 			}
 			if (!check){							//Adds meal to arrayList if check is false
-				meals.add(new Meal(t.StringToInt(mealT[i][0]),mealT[i][1],mealT[i][2],true, t.StringToInt(mealT[i][4])));
+				meals.add(new Meal(t.stringToInt(mealT[i][0]),mealT[i][1],mealT[i][2],true, t.stringToInt(mealT[i][4])));
 			}
 			check=false;
 		}
