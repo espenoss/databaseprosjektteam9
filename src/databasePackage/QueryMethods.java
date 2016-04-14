@@ -851,7 +851,21 @@ public class QueryMethods {
 		database.makeSingleStatement(statement);
 		
 		return database.getLastResult();
-	}	
+	}
+	
+	public static String[][] generateDeliveryList(String currentDate, Database database) throws Exception{
+		
+		String statement = "SELECT a.meal_name, b.adress "
+				+ "FROM meal AS a, customer AS b, (SELECT a.meal_id, b.customer_id FROM "
+				+ "ordered_meal AS a, "
+				+ "food_order AS b WHERE a.delivery_date = '" + currentDate + "' "
+				+ "AND a.order_id = b.order_id) AS c "
+				+ "WHERE a.meal_id = c.meal_id AND b.customer_id = c.customer_id";
+		
+		database.makeSingleStatement(statement);
+		
+		return database.getLastResult();
+	}
 	
 }
 
