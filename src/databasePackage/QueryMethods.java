@@ -27,6 +27,7 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 
+	// Update user information
 	public static boolean updateUser(String userID, int userType, String name, String password, Database database) throws Exception{
 		String statement = "UPDATE user SET "
 				+ "user_id =" + aq(userID)
@@ -37,11 +38,19 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
+	// Delete user entry from database
 	public static boolean removeUser(String userID, Database database) throws Exception{
 		String statement = "DELETE FROM user WHERE user_id = '" + userID + "';";
 		return database.makeSingleStatement(statement);
 	}
 
+	// View single user
+	// Returns information on user in database in a String array
+	// Columns by second index:
+	// 0 : user_id - String
+	// 1 : user_type - int
+	// 2 : name - String
+	// 3 : password - String
 	public static String[] viewUser(String userID, Database database) throws Exception{
 		String statement = "SELECT user_id, user_type, name FROM user WHERE user_id = '" + userID + "';";
 		System.out.println(statement);		
@@ -62,7 +71,8 @@ public class QueryMethods {
 		
 		return database.getLastResult();		
 	}	
-	
+
+	// Confirms user details
 	public static int logIn(String userID, char[] password, Database database) throws Exception{
 		
 		String[][] userType = null;
@@ -71,27 +81,31 @@ public class QueryMethods {
 		
 		userType = database.getLastResult();
 		
-		if(userType.length == 0){ // If no such user or password is incorrect
+		if(userType == null){ // If no such user or password is incorrect
 			return -1;
 		}else{
 			return Integer.parseInt(userType[0][0]);
 		}
 	}
 
+	// Register new customer in database
 	public static int registerCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
 			int zip_code, int zone_nr, String preferences, boolean active, Database database) throws Exception{
 		
+		// Attempt to generate new ID five times
 		for(int i=0; i<5; i++){
-
+			// Fetch highest currrent ID
 			String statement = "SELECT MAX(customer_id) FROM customer;";
 			database.makeSingleStatement(statement);
-			
+
+			// If no current entries, ID will be 10000			
 			String highestID = database.getLastResult()[0][0];
-			int customerID = 1;			
+			int customerID = 10000;
 			if(highestID != null){
 				customerID = Integer.parseInt(highestID) + 1;
 			}
 
+			// Insert entry into database, return generated ID
 			statement = "INSERT INTO customer VALUES(" 
 					+ customerID + ", " 
 					+ aq(surName) 
@@ -109,6 +123,7 @@ public class QueryMethods {
 		return -1;
 	}
 
+	// Update customer information
 	public static boolean updateCustomer(int customerID, String surName, String firstName, String phoneNumber, String email, String adress, 
 			int zipCode, int zoneNr, String preferences, boolean active, Database database) throws Exception{
 			
@@ -177,6 +192,7 @@ public class QueryMethods {
 		return database.getLastResult();  //Denne metoden fungerer ikke som den skal
 	}
 
+	// Register company in database. Needs ID of exissting customer to succeed
 	public static boolean registerCompanyToCustomer(int customerID, String companyName, Database database) throws Exception{				
 		String statement = "INSERT INTO company VALUES("
 				+ customerID + ",'" 
@@ -186,6 +202,7 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}	
 
+	// Update customer info in database
 	public static boolean updateCompany(int customerID, String companyName, Database database) throws Exception{
 		String statement = "UPDATE company SET "
 				+ "company_name ='" + companyName + "' "
@@ -194,6 +211,7 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}	
 	
+	// Delete customer entry from database
 	public static boolean removeCompany(int customerID, Database database) throws Exception{
 
 		String statement ="DELETE FROM company WHERE customer_id =" + customerID + ";";
@@ -246,6 +264,7 @@ public class QueryMethods {
 		return database.getLastResult();
 	}
 	
+	// Register new order in database
 	public static int registerOrder(String order_date, int customer_id, String info, 
 			String user_id, Database database) throws Exception{
 	
@@ -272,6 +291,7 @@ public class QueryMethods {
 		return -1;
 	}
 	
+	// Update order info
 	public static boolean updateOrder(int orderID, String orderDate, int customerID, String info, 
 			String userID, Database database) throws Exception{
 		
@@ -284,6 +304,7 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
+	// Remove order from database
 	public static boolean removeOrder(int orderID, Database database) throws Exception{
 		
 		String statement = "DELETE FROM food_order WHERE order_id = '" + orderID + "';";
@@ -291,6 +312,14 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
+	// View list of a food order.
+	// Returns food order in a String array
+	// Columns by index:
+	// 0 : order_id - int
+	// 1 : order_date - String
+	// 2 : customer_id - int
+	// 3 : info - String
+	// 4 : user_id - String
 	public static String[] viewOrder(int orderID, Database database) throws Exception{
 		
 		String statement = "SELECT * FROM food_order WHERE order_id = " + orderID + ";";
@@ -320,6 +349,7 @@ public class QueryMethods {
 	
 	
 	// **** IKKE TESTET
+	// Connect meal to order. Both must exisst in database to succeed
 	public static boolean addMealToOrder(int orderID, int mealID, String deliveryDate, int quantity, 
 			boolean readyDelivery, boolean delivered, Database database) throws Exception{
 		
@@ -335,6 +365,7 @@ public class QueryMethods {
 	}
 
 	// **** IKKE TESTET
+	// Update info about meal in order
 	public static boolean updateMealInOrder(int orderID, int mealID, String deliveryDate, int quantity, 
 			boolean readyDelivery, boolean delivered, Database database) throws Exception{
 		
@@ -353,6 +384,7 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 	 
+	// Remove meal from order
 	public static boolean removeMealFromOrder(int orderID, int mealID, String deliveryDate, Database database) throws Exception{
 
 		String statement = "DELETE FROM ordered_meal WHERE "
@@ -363,7 +395,7 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
-
+	// Mark meal in order as ready for delivery
 	public static boolean markMealOrderAsReadyForDelivery(int orderID, int mealID, String deliveryDate,Database database) throws Exception{
 		String statement = "UPDATE ordered_meal SET ready_delivery=true "
 				+ "WHERE order_id = " + orderID 
@@ -374,6 +406,7 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
+	// Mark meal in order as delivered
 	public static boolean markMealOrderAsDelivered(int orderID, int mealID, String deliveryDate,Database database) throws Exception{
 		String statement = "UPDATE ordered_meal SET delivered=true "
 				+ "WHERE order_id = " + orderID 
@@ -385,6 +418,12 @@ public class QueryMethods {
 	}	
 
 	// legge til bestillingsinfo?
+	// Returns all meals in an order in a two-dimensional String array
+	// First index is row, second is column
+	// Columns by second index:
+	// 0 : meal_id - int
+	// 1 : meal_name - String
+	// 2 : instructions - String
 	public static String[][] viewMealsInOrder(int orderID, Database database) throws Exception{
 
 		String statement = "SELECT * FROM meal WHERE meal_id IN (SELECT meal_id FROM ordered_meal WHERE order_id = " + orderID + ")";

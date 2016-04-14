@@ -1,8 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
-import databasePackage.Database;
-import databasePackage.QueryMethods;
+import databasePackage.*;
 
 // import java.sql.Date;
 
@@ -68,6 +67,10 @@ public class Order {
 	public Meal[] getMeals(){
 		Meal[] temp = new Meal[meals.size()];
 		return temp;
+	}
+	
+	public boolean updateOrder(Database database) throws Exception{
+		return QueryMethods.updateOrder(orderID, orderDate, customerID, info, userID, database);
 	}
 	
 	public String toString(){
