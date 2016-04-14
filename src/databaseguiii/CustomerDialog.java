@@ -80,7 +80,7 @@ public class CustomerDialog extends MyDialog{
 	
 	
 	public CustomerDialog(JFrame parent){
-		super(parent, "Person");
+		super(parent, "Customer");
 		add(new JPanel(), BorderLayout.NORTH);
 		add(new CustomerDatapanel(),BorderLayout.CENTER);
 		add(getButtonPanel(),BorderLayout.SOUTH);

@@ -3,14 +3,9 @@ import controller.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
-import controller.Customer;
-import controller.LogIn;
 import databasePackage.Database;
 import databasePackage.QueryMethods;
 import databaseguiii.CustomerDialog;
-//import databaseguiii.Parentwindow.ButtonListener;
-//import databaseguiii.Parentwindow.ButtonListener2;
 
 class Parentwindow2 extends JFrame {
 	  private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/mariashc?user=mariashc&password=rGBlmJ91");
@@ -26,7 +21,7 @@ class Parentwindow2 extends JFrame {
 		  
 		  
 		  try {
-			sales.RegisterCustomer(dialog2.getSurNameText(), dialog2.getFirstNameText(), dialog2.getPhoneNrText(), dialog2.getEmailText(), dialog2.getAdressText(), dialog2.getZip_codeText(),
+			sales.registerCustomer(dialog2.getSurNameText(), dialog2.getFirstNameText(), dialog2.getPhoneNrText(), dialog2.getEmailText(), dialog2.getAdressText(), dialog2.getZip_codeText(),
 					  dialog2.getZone_nrText(), dialog2.getPrefencesText(), dialog2.getActive(), database);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

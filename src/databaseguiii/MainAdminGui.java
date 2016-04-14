@@ -10,8 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import controller.QueryMethodsController;
-import controller.User;
+import controller.*;
 import databasePackage.Database;
 
 class AdminGui extends JFrame {
@@ -42,10 +41,11 @@ class AdminGui extends JFrame {
 
 	  /* Lytteren fanger opp alle klikk paa linjer i listeboksen */ 
 	  private class ListeboksLytter implements ListSelectionListener {
-		private final Database database = null;
-		private QueryMethodsController queryMethodsController = new QueryMethodsController();
-		 private User viewAllUsers = new User("", 1, "", "", database);
-	    public void valueChanged(ListSelectionEvent hendelse) {
+		  private final Database database = null;
+		  private Admin admin = new Admin("", 1, "", "", database);
+		  private Sales sales = new Sales("", 1, "", "", database);
+//		  private User viewAllUsers = new User("", 1, "", "", database);
+		  public void valueChanged(ListSelectionEvent hendelse) {
 	      Object[] values = choice_list.getSelectedValuesList().toArray();
 	      int choices = choice_list.getSelectedIndex();
 	      if(choices == 0){
@@ -55,7 +55,7 @@ class AdminGui extends JFrame {
 	      }
 	      else if(choices==2){
 	    	  try {
-				queryMethodsController.viewUserList();
+				admin.viewUserList();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -65,16 +65,15 @@ class AdminGui extends JFrame {
 	      }else if(choices==4){
 	    	  //metoden for a registrere en bedrift
 	      }else if(choices==5){
-	    	  //metoden for a endre info til en kundre
+	    	  //metoden for a endre info til en kunde
 	      }
 	      	else if(choices==6){
-	    	  queryMethodsController.ViewAllCustomersList();
+	    	  admin.viewCustomerList();
 			}
 	      else if(choices==7){
 	    	  try {
-				queryMethodsController.ViewAllCompaniesList();
+	//			admin.ViewAllCompaniesList(); 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	      }else if(choices==8){
@@ -82,12 +81,13 @@ class AdminGui extends JFrame {
 	    	  //metoden remove customer
 	      }
 	      else if(choices==9){
-	    	  //metoden for a registrere en ny bestilling
+	    	  sales.registerNewOrder();
+	    	  //Mangler vinduet som skal registrere ordrene
 	      }else if(choices==10){
 	    	  //motoden for a endre bestilling
 	      }
 	      else if(choices==11){
-	    	  //motoden for a hente ut statistikk
+	    	  //metoden for a hente ut statistikk
 	    }
 	  }
 	 }
