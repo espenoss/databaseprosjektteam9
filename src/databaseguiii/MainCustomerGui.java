@@ -14,44 +14,32 @@ import databaseguiii.CustomerDialog;
 
 class Parentwindow2 extends JFrame {
 	  private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/mariashc?user=mariashc&password=rGBlmJ91");
-	  private Customer customer = new Customer(0, "", "", "", "", "", 0, 0, "", true);
-	  private CustomerDialog dialog = new CustomerDialog(this);
-//	  private int customerID = 1; //M� tas bort, er kun for bedriftskunder. Trenger company name i bedriftskunde klassenkkk
-	  private String firstName = "";
-	  private String surName = "";
-	  private String email = "";
-	  private String adress = "";
-	  private int zip_code = 1;
-	  private int zone_nr = 1;
-	  private String phoneNumber = "";
-	  private String preferences = "";
-	  private boolean active = true;
+	  Sales sales = new Sales("", 0, "", "", database);
 	 
 	  
 	  public Parentwindow2() {
-		  Sales sales = new Sales("", 0, "", "", database);
-	      if (dialog.showDialog(customer)) {
-	          try {
-	        	  sales.RegisterCustomer(customer.getFirstName(), customer.getSurName(), 
-	        	  customer.getEmail(), customer.getAdress(), customer.getPreferences(), customer.getZipCode(), 
-	      		  customer.getZoneNr(), customer.getPhoneNumber(), true, database);
-	            } catch (Exception e) {
-	      		e.printStackTrace();
-	            }
-	      } else {
-	        System.out.println("Cancelled");
-	      }
-	      System.out.println(customer); //bruker toString().
-	    
-	    setTitle("Registrer customer");
-	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    setLayout(new FlowLayout());
-	    
-	   
-	    setLocation(300, 300); // plasserer foreldrevinduet..
-	    dialog.setLocation(350, 350);  // plasserer dialogen
-	  }  
-}
+		  CustomerDialog dialog2 = new CustomerDialog(this);
+		  dialog2.setVisible(true);
+		  
+	/*	  String surName, String firstName, String phoneNumber, String email, String adress, 
+			int zip_code, int zone_nr, String preferences, boolean active, Database database  */
+		  
+		  
+		  try {
+			sales.RegisterCustomer(dialog2.getSurNameText(), dialog2.getFirstNameText(), dialog2.getPhoneNrText(), dialog2.getEmailText(), dialog2.getAdressText(), dialog2.getZip_codeText(),
+					  dialog2.getZone_nrText(), dialog2.getPrefencesText(), dialog2.getActive(), database);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  setTitle("Registrer customer");
+		  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		  setLayout(new FlowLayout());
+		  setLocation(300, 300); // plasserer foreldrevinduet..
+		  dialog2.setLocation(350, 350);  // plasserer dialogen
+	 } 
+}  
+
 
 	class MainCustomerGui {
 	  static public void main(String[] args) {

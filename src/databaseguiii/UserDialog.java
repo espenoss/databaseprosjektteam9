@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -16,10 +17,10 @@ import static javax.swing.JOptionPane.*;
 public class UserDialog extends MyDialog{
 
 	private TextEditor editor = new TextEditor();
-	
 	private JTextField userIDfield = new JTextField(10);
 	String user_id_text = userIDfield.getText();
 	
+
 	private final String userRoles[] = {"Admin", "Cook", "Driver", "Sales", "Storage"}; 
 	JComboBox userList = new JComboBox(userRoles);
 	int user_type_int = userList.getSelectedIndex();
