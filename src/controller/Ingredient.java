@@ -39,8 +39,8 @@ public class Ingredient {
 		return quantity;
 	}
 	
-	public boolean updateStorage(int ingredientID, String newName, float newQuantity, String unit, Database database) throws Exception{
-		if(QueryMethods.updateIngredient(ingredientID, setIngName(newName), setStorageQuantity(newQuantity), unit, database)){
+	public boolean updateStorage(int ingredientID, String ingName, float quantity, String unit, Database database) throws Exception{
+		if(QueryMethods.updateIngredient(ingredientID, setIngName(ingName), setStorageQuantity(quantity), unit, database)){
 			return true;
 		}else {
 			System.out.println("Could not update ingredient");
