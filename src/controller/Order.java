@@ -1,8 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
-import databasePackage.Database;
-import databasePackage.QueryMethods;
+import databasePackage.*;
 
 // import java.sql.Date;
 
@@ -78,6 +77,10 @@ public class Order {
 		return temp;
 	}
 	
+	public boolean updateOrder(Database database) throws Exception{
+		return QueryMethods.updateOrder(orderID, orderDate, customerID, info, userID, database);
+	}
+	
 	public String toString(){
 		String res = "";
 		res += "OrderID: " + orderID + ". Orderdate: " + orderDate + ". Delivery date: " + deliveryDate
@@ -87,6 +90,15 @@ public class Order {
 			res += "   " + m.toString() + "\n";
 		}
 		return res;
+		
+	}
+	
+	static public void main(String[] arg){
+		
+	    java.util.Date utilDate = new java.util.Date();
+	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+		
+		System.out.println(sqlDate);
 		
 	}
 	
