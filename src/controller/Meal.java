@@ -63,14 +63,16 @@ public class Meal {
 		ingQuantity.add(quantity);
 	}
 	
+	
+	//FINISHED (Must be tested)
 	//Fetches ingredient information from database belonging to this meal. 
 	public void fetchIngredients(Database database) throws Exception{
 		String[][] ingT = QueryMethods.viewIngredientsInMeal(mealID, database);
 		TextEditor t = new TextEditor();
 		
 		for (int i=0;i<ingT.length;i++){
-			ingredients.add(new Ingredient(t.StringToInt(ingT[i][0]), ingT[i][1], t.StringToFloat(ingT[i][3])));
-			ingQuantity.add(t.StringToFloat(ingT[i][0]));
+			ingredients.add(new Ingredient(t.StringToInt(ingT[i][0]), ingT[i][1], t.StringToFloat(ingT[i][3]),ingT[i][4]));
+			ingQuantity.add(t.StringToFloat(ingT[i][2]));
 		}
 	}
 	

@@ -73,6 +73,34 @@ public class Order {
 		return QueryMethods.updateOrder(orderID, orderDate, customerID, info, userID, database);
 	}
 	
+	
+	
+	// 0 : meal_id - int
+	// 1 : meal_name - String
+	// 2 : instructions - String
+	
+	public void fetchMeals(Database database) throws Exception{
+		String[][] mealT = QueryMethods.viewMealsInOrder(orderID, database);
+		TextEditor t = new TextEditor();
+		
+		for(int i=0;i<mealT.)
+	}
+	
+	
+	
+	//FINISHED (Must be tested)
+	//Fetches ingredient information from database belonging to this meal. 
+	public void fetchIngredients(Database database) throws Exception{
+		String[][] ingT = QueryMethods.viewIngredientsInMeal(mealID, database);
+		TextEditor t = new TextEditor();
+		
+		for (int i=0;i<ingT.length;i++){
+			ingredients.add(new Ingredient(t.StringToInt(ingT[i][0]), ingT[i][1], t.StringToFloat(ingT[i][3]),ingT[i][4]));
+			ingQuantity.add(t.StringToFloat(ingT[i][2]));
+		}
+	}
+	
+	
 	public String toString(){
 		String res = "";
 		res += "OrderID: " + orderID + ". Orderdate: " + orderDate + ". Delivery date: " + deliveryDate
@@ -82,7 +110,6 @@ public class Order {
 			res += "   " + m.toString() + "\n";
 		}
 		return res;
-		
 	}
 	
 	static public void main(String[] arg){
