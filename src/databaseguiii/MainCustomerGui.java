@@ -106,8 +106,8 @@ class Parentwindow2 extends JFrame {
 		  setTitle("Registrer customer");
 		  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		  setLayout(new FlowLayout());
-		  setLocation(300, 300); // plasserer foreldrevinduet..
-		  dialog.setLocation(350, 350);  // plasserer dialogen
+		  setLocation(300, 300); 
+		  dialog.setLocation(350, 350);  
 	 } 
 }  
 
@@ -115,8 +115,6 @@ class Parentwindow2 extends JFrame {
 	class MainCustomerGui {
 	  static public void main(String[] args) {
 		Parentwindow2 test = new Parentwindow2();
-//	    test.setSize(300, 200);  
-//	    test.setVisible(true);
 	  }   
 	} 
 
