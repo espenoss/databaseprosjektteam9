@@ -5,7 +5,6 @@ import databasePackage.*;
 
 public class Admin extends User {
 	
-
 	public Admin(String userID,int userType, String name,String pword, Database database) {
 		super(userID, userType, name, pword, database);
 	}
@@ -19,6 +18,9 @@ public class Admin extends User {
 		return(QueryMethods.updateUser(userID, userType, name, pword, database));
 	}
 	
+	
+	
+	// MÅ LAGES !! 
 	public String getStatistics(){
 		String statistics = null;
 		
@@ -27,7 +29,7 @@ public class Admin extends User {
 		return statistics;
 	}
 	
-	//returns an arraylist with customer objects with all active customers
+	//returns an arraylist with customer objects with all active users
 	public ArrayList<User> viewUserList() throws Exception{
 		
 		String[][] list = QueryMethods.viewAllUsers(database);
@@ -45,6 +47,8 @@ public class Admin extends User {
 		}
 		return userList;
 	}
+	
+	
 	
 	@Override
 	public String toString() {

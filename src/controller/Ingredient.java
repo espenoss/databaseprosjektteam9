@@ -30,16 +30,15 @@ public class Ingredient {
 		return unit;
 	}
 	
-	public String setIngName(String ingName){
+	public void setIngName(String ingName){
 		this.ingName=ingName;
-		return ingName;
 	}
 	
-	public float setStorageQuantity(float quantity){ 
+	public void setStorageQuantity(float quantity){ 
 		this.storageQuantity = quantity;
-		return quantity;
 	}
 	
+	//Register information to database
 	public boolean updateStorage(Database database) throws Exception{
 		return(QueryMethods.updateIngredient(ingID, ingName, storageQuantity, unit, database));
 	}

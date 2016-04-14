@@ -32,8 +32,12 @@ public class Cook extends User {
 		return true;
 	}
 	
-	public int registerSubPlan(String name,Database database) throws Exception{
-		return QueryMethods.registerSubscriptionPlan(name, database);
+	
+	//Registers new empty subscription plan
+	public SubPlan registerSubPlan(String name,Database database) throws Exception{
+		int subPlanID = QueryMethods.registerSubscriptionPlan(name, database);
+		
+		return new SubPlan(subPlanID, name);
 	}
 	
 	@Override
@@ -44,5 +48,4 @@ public class Cook extends User {
 		
 		return s;
 	}
-	
 }

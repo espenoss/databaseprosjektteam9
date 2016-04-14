@@ -13,7 +13,7 @@ public class Order {
 	private String info;
 	private String userID;
 	private ArrayList<Meal> meals;
-	private SubPlan subPlan = null;
+
 	
 	public Order(int orderID, String orderDate, String deliveryDate, int customerID, String info, String userID){
 		this.orderID = orderID;
@@ -24,14 +24,6 @@ public class Order {
 		this.userID = userID;
 	}
 
-	public boolean markMealAsReady(int index, Database database) throws Exception{
-		return QueryMethods.markMealOrderAsReadyForDelivery(orderID, meals.get(index).getMealID(), deliveryDate, database);
-	}
-	
-	public boolean markMealAsDelivered(int index, Database database) throws Exception{
-		return QueryMethods.markMealOrderAsDelivered(orderID, meals.get(index).getMealID(), deliveryDate, database);
-	}	
-	
 	public int getOrderID(){
 		return orderID;
 	}
@@ -56,10 +48,6 @@ public class Order {
 		return userID;
 	}
 	
-	public void addMeal(Meal meal){
-		meals.add(meal);
-	}
-	
 	public Meal getMeal(int index){
 		if(meals.size() > 0) return meals.get(index);
 		else return null;
@@ -70,6 +58,24 @@ public class Order {
 		return temp;
 	}
 	
+	
+	// LAG SET-METODER
+	
+	public void addMeal(Meal meal){
+		meals.add(meal);
+	}
+	
+	//Marks meal as ready for delivery to customer, given index of meal in mealArray
+	public boolean markMealAsReady(int index, Database database) throws Exception{
+		return QueryMethods.markMealOrderAsReadyForDelivery(orderID, meals.get(index).getMealID(), deliveryDate, database);
+	}
+	
+	//Marks meal as delivered to customer, given index of meal in mealArray
+	public boolean markMealAsDelivered(int index, Database database) throws Exception{
+		return QueryMethods.markMealOrderAsDelivered(orderID, meals.get(index).getMealID(), deliveryDate, database);
+	}	
+	
+	//Register information to databasee
 	public boolean updateOrder(Database database) throws Exception{
 		return QueryMethods.updateOrder(orderID, orderDate, customerID, info, userID, database);
 	}
@@ -108,6 +114,9 @@ public class Order {
 		return res;
 	}
 	
+	
+	
+	//TEST TEST TEST 
 	static public void main(String[] arg){
 		
 	    java.util.Date utilDate = new java.util.Date();
