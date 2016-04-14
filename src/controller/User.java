@@ -71,9 +71,10 @@ public class User implements java.io.Serializable{
 			int orderID = t.StringToInt(orderT[i][0]);
 			int customerID = t.StringToInt(orderT[i][2]);
 			
-			tempOrder = new Order(orderID,orderT[i])
+			tempOrder = new Order(orderID,orderT[i],deliveryDate,customerID,info,userID);
 		}
 		
+		//(int orderID, String orderDate, String deliveryDate, int customerID, String info, String userID)
 		return null;
 	}
 	
