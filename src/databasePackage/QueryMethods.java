@@ -424,6 +424,8 @@ public class QueryMethods {
 	// 0 : meal_id - int
 	// 1 : meal_name - String
 	// 2 : instructions - String
+	// 3 : available - boolean
+	// 4 : price - int
 	public static String[][] viewMealsInOrder(int orderID, Database database) throws Exception{
 
 		String statement = "SELECT * FROM meal WHERE meal_id IN (SELECT meal_id FROM ordered_meal WHERE order_id = " + orderID + ")";
