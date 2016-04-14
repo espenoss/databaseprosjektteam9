@@ -71,8 +71,8 @@ public class Meal {
 		TextEditor t = new TextEditor();
 		
 		for (int i=0;i<ingT.length;i++){
-			ingredients.add(new Ingredient(t.StringToInt(ingT[i][0]), ingT[i][1], t.StringToFloat(ingT[i][3]),ingT[i][4]));
-			ingQuantity.add(t.StringToFloat(ingT[i][2]));
+			ingredients.add(new Ingredient(t.stringToInt(ingT[i][0]), ingT[i][1], t.stringToFloat(ingT[i][3]),ingT[i][4]));
+			ingQuantity.add(t.stringToFloat(ingT[i][2]));
 		}
 	}
 	
