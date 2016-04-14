@@ -13,6 +13,7 @@ public class Order {
 	private String info;
 	private String userID;
 	private ArrayList<Meal> meals;
+	private SubscriptionPlan subPlan = null;
 	
 	public Order(int orderID, String orderDate, String deliveryDate, int customerID, String info, String userID){
 		this.orderID = orderID;

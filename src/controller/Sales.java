@@ -33,6 +33,7 @@ public class Sales extends User {
 		
 		return success;
 	}
+	
 
 	public boolean changeFoodOrder(String orderinfo){
 		boolean success = false;
@@ -43,6 +44,7 @@ public class Sales extends User {
 		return success;
 	}
 	
+	
 	//FINISHED
 	//Register new customer
 	public Customer RegisterCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
@@ -52,31 +54,9 @@ public class Sales extends User {
 		if (customerID<0){
 			return null;
 		}
-		
 		return new Customer(customerID,firstName,surName,phoneNumber,email,adress,zip_code,zone_nr,preferences,true);
 	}
-		
 	
-	/*
-	public boolean changeCustomerInfo(String customerinfo){
-		boolean success = false;
-		
-		// generer meny, hent nye verdier,
-		// lagre i database
-		return success;				
-	}
-	*/
-	
-	public boolean registerPackageDeal(){
-		boolean success = false;
-		
-		// retrieve package from database
-		// select package
-		// display package
-		// receive customer info
-		
-		return success;						
-	}
 		
 	@Override
 	public String toString() {

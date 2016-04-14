@@ -11,6 +11,9 @@ public class Cook extends User {
 		super(userID, userType, name, pword, database);
 	}
 	
+	
+	//FINISHED must be tested
+	//Lets the cook register a new meal
 	public boolean createMeal(Meal meal) throws Exception{
 		TextEditor t = new TextEditor(); 
 		int mealID = QueryMethods.registerMeal(meal.getMealName(), meal.getInstructions(), meal.getAvailable(), meal.getPrice(), database);
@@ -27,6 +30,11 @@ public class Cook extends User {
 			}
 		}
 		return true;
+	}
+	
+	//
+	public boolean createSubscriptionPlan(){
+		return false;
 	}
 	
 	@Override

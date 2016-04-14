@@ -87,14 +87,8 @@ public class User implements java.io.Serializable{
 		for(int i=0; i<list.length; i++){
 			if (Integer.parseInt(list[i][9])==1){
 				int customerId = Integer.parseInt(list[i][0]); //0
-				//1 first name
-				//2 sur name
-				//3 phonenumber
-				//4 email
-				//5 adress
 				int zipCode = Integer.parseInt(list[i][6]); //6
 				int zoneNr = Integer.parseInt(list[i][7]); //7
-				//8 preferences
 				
 				tempCustomer = new Customer(customerId, list[i][1],list[i][2],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8],true);
 				customerList.add(tempCustomer);
