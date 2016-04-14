@@ -10,7 +10,6 @@ public class Admin extends User {
 		super(userID, userType, name, pword, database);
 	}
 
-
 	//Registrerer ny bruker
 	public boolean registerUser(String userID, int userType, String name,String pword, Database database) throws Exception{
 		return QueryMethods.registerUser(userID, userType, name, pword, database);

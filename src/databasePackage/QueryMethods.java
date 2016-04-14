@@ -77,11 +77,13 @@ public class QueryMethods {
 		
 		String[][] userType = null;
 		
-		database.makeSingleStatement("SELECT user_type FROM user WHERE user_id = '" + userID + "' AND password ='" + password.toString() + "'");	
+		String statement = "SELECT user_type FROM user WHERE user_id = '" + userID + "' AND password ='" + String.valueOf(password) + "'";
+		
+		database.makeSingleStatement(statement);	
 		
 		userType = database.getLastResult();
 		
-		if(userType == null){ // If no such user or password is incorrect
+		if(userType.length == 0){ // If no such user or password is incorrect
 			return -1;
 		}else{
 			return Integer.parseInt(userType[0][0]);
