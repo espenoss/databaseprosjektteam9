@@ -95,7 +95,7 @@ class AdminGui extends JFrame {
 
 	 class MainAdminGui {
 	  public static void main(String[] args) {
-		  SalesPersonGui etVindu = new SalesPersonGui("Choose an option");
-	    etVindu.setVisible(true);
+		  AdminGui window = new AdminGui("Choose an option");
+		  window.setVisible(true);
 	  }
 	 }
