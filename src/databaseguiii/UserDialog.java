@@ -17,10 +17,6 @@ import static javax.swing.JOptionPane.*;
 public class UserDialog extends MyDialog{
 
 	private TextEditor editor = new TextEditor();
-	private static final String [] CHOICES =
-		{"Admin", "Cook", "Driver"};
-	private JList<String> choice_list = new JList<String>(CHOICES);
-	
 	private JTextField userIDfield = new JTextField(10);
 	String user_id_text = userIDfield.getText();
 	
