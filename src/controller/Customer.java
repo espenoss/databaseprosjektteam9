@@ -108,6 +108,7 @@ public class Customer implements java.io.Serializable{
 	}
 
 	
+	//Register information to database
 	public boolean updateCustomer(Database database) throws Exception{
 		if(QueryMethods.updateCustomer(customerID, surName, firstName, phoneNumber, email, adress, zipCode, zoneNr, preferences, active, database)){
 			return true;

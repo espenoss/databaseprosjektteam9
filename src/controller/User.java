@@ -49,7 +49,7 @@ public class User implements java.io.Serializable{
 	}
 	
 	
-	//Må testes
+	//FINISHED --- MÅ TESTES
 	//Returns an arraylist with orderObjects containing belonging meal objects. 
 	public ArrayList<Order> viewFoodOrders(java.sql.Date date) throws Exception{
 		
@@ -72,7 +72,7 @@ public class User implements java.io.Serializable{
 	}
 	
 	
-	//FINISHED
+	//FINISHED --- MÅ TESTES
 	//returns an arraylist with customer objects with all active customers
 	public ArrayList<Customer> viewCustomerList() throws Exception{
 		
@@ -94,7 +94,7 @@ public class User implements java.io.Serializable{
 	}
 	
 	
-	//FINISHED
+	//FINISHED --- MÅ TESTES
 	//takes an customerId returns a single customer object, or null if not found
 	public Customer viewSingleCustomer(int customerId) throws Exception{
 		String[][] list = QueryMethods.viewAllCustomers(database);
