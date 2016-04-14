@@ -59,25 +59,31 @@ public class User implements java.io.Serializable{
 	// 4 : user_id - String
 	
 	
-	public ArrayList<Order> viewFoodOrders(Date date) throws Exception{
+	
+	//Må testes, lager midlertidig bare ordreobject UTEN måltid.
+	public ArrayList<Order> viewFoodOrders(java.sql.Date date) throws Exception{
 		
-		
-		String[][] orderT = QueryMethods.viewOrdersByDeliveryDate(date, database);
+		String[][] orderT = QueryMethods.viewOrdersBydeliveryDate(date, database);
 		Order tempOrder;
-		ArrayList<Order> OrderList = new ArrayList<Order>();
+		ArrayList<Order> orderList = new ArrayList<Order>();
 		TextEditor t = new TextEditor();
 		
 		for(int i=0; i<orderT.length;i++){
 			int orderID = t.StringToInt(orderT[i][0]);
 			int customerID = t.StringToInt(orderT[i][2]);
 			
-			tempOrder = new Order(orderID,orderT[i],deliveryDate,customerID,info,userID);
+			tempOrder = new Order(orderID,orderT[i][1],orderT[i][2],customerID,orderT[i][4],userID);
+			//Legge til måltid til ordre her??
+			
+			orderList.add(tempOrder);
 		}
 		
 		//(int orderID, String orderDate, String deliveryDate, int customerID, String info, String userID)
-		return null;
+		return orderList;
 	}
 	
+	
+	//FINISHED
 	//returns an arraylist with customer objects with all active customers
 	public ArrayList<Customer> viewCustomerList() throws Exception{
 		
@@ -104,6 +110,8 @@ public class User implements java.io.Serializable{
 		return customerList;
 	}
 	
+	
+	//FINISHED
 	//takes an customerId returns a single customer object, or null if not found
 	public Customer viewSingleCustomer(int customerId) throws Exception{
 		String[][] list = QueryMethods.viewAllCustomers(database);
@@ -114,20 +122,24 @@ public class User implements java.io.Serializable{
 				if(customerId==dbCustomerId){
 					int zipCode = Integer.parseInt(list[i][6]);
 					int zoneNr = Integer.parseInt(list[i][7]);
-					return new Customer(customerId, list[i][1],list[i][2],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8]);
+					return new Customer(customerId, list[i][1],list[i][2],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8],true);
 				}
 			}
 		}
 		return null;
 	}
 	
-	public String viewOrderIngredients(){
-		String ingredients = null;
-		
-		// hent ingredienser fra database
-		
-		return ingredients;
+	
+	public String viewOrderIngredients() throws Exception{
+		String res = "";
+			String[][] temp = QueryMethods.viewIngredients(database);
+			for (int i = 0; i < temp.length; i++){
+				res += temp[i];
+			}
+			return res;
 	}
+	
+	
 	
 	public boolean equals(Object obj){
 		if(!(obj instanceof User)){
@@ -139,11 +151,17 @@ public class User implements java.io.Serializable{
 		User p=(User)obj;
 		return (userID==p.getUserID() && name==p.getName()&&userType==p.getUserType()&&pword==p.getPword());
 	}
+	
+	
 	public String toString(){
 		return userID+""+ name+" "+ userType +" "+pword;
 	}
 	
 	
+	
+	
+	
+	//TEST
 	public static void main(String[] args) throws Exception{
 		String username = "marith1";
 		String password = "tgp8sBZA";

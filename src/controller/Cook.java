@@ -42,14 +42,7 @@ public class Cook extends User {
 	}
 
 	
-	public String viewOrderIngredients() throws Exception{
-		String res = "";
-			String[][] temp = QueryMethods.viewIngredients(database);
-			for (int i = 0; i < temp.length; i++){
-				res += temp[i];
-			}
-			return res;
-	}
+
 	
 	
 	

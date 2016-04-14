@@ -11,7 +11,7 @@ public class Sales extends User {
 		super(userID, userType, name, pword, database);
 	}
 
-	public boolean registerNewOrder(int customerID, String date, String deliveryDate, String info, String userID, ArrayList<Meal> meals, Database database)throws Exception{
+	public Order registerNewOrder(int customerID, String date, String deliveryDate, String info, String userID, ArrayList<Meal> meals, Database database)throws Exception{
 		boolean success = false;
 		
 		int orderID = QueryMethods.registerOrder(date, customerID, info, userID, database);
@@ -27,7 +27,7 @@ public class Sales extends User {
 		}
 		
 
-		return success;
+		return null;
 	}
 	
 	public boolean registerSubscription(String orderinfo){
