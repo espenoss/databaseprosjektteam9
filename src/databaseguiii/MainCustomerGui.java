@@ -31,7 +31,7 @@ class Parentwindow2 extends JFrame {
 			private String phoneNumber;
 			private boolean active;
 	//		private boolean isCompany;
-		//	private String companyName;
+	//		private String companyName;
 			
 			
 			public CustomerDialog(JFrame parent){
