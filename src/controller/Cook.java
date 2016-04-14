@@ -11,18 +11,6 @@ public class Cook extends User {
 		super(userID, userType, name, pword, database);
 	}
 	
-/*	public boolean markAsReadyForDelivery(Meal meal, Order order) throws Exception{
-		boolean success = false;
-		
-		if(QueryMethods.markMealOrderAsReadyForDelivery(order.getOrderID(), meal.getMealID(), order.getDeliveryDate(),database)){
-			success = true;
-		}
-		
-		// oppdater ordre i database
-		
-		return success;
-	}
-*/	
 	public boolean createMeal(Meal meal) throws Exception{
 		TextEditor t = new TextEditor(); 
 		int mealID = QueryMethods.registerMeal(meal.getMealName(), meal.getInstructions(), meal.getAvailable(), meal.getPrice(), meal.getDiscount(), meal.getDiscountLimit(), database);
@@ -42,7 +30,7 @@ public class Cook extends User {
 	}
 
 	
-	public String viewOrderIngredients() throws Exception{
+/*	public String viewOrderIngredients() throws Exception{
 		String res = "";
 			String[][] temp = QueryMethods.viewIngredients(database);
 			for (int i = 0; i < temp.length; i++){
@@ -51,7 +39,7 @@ public class Cook extends User {
 			return res;
 	}
 	
-	
+*/	
 	
 	@Override
 	public String toString() {

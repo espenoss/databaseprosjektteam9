@@ -30,13 +30,18 @@ public class Ingredient {
 	}
 	
 	public void setIngName(String ingName){
-		//endre info i databasen her?
 		this.ingName=ingName;
 	}
 	
-	public void setStorageQuantity(int quantity){
-		//endre info i databasen her? 
+	public void setStorageQuantity(int quantity){ 
 		this.storageQuantity = quantity;
+	}
+	
+	public boolean updateStorage(){
+		// hvis ingrediensen eksisterer, oppdater antall i databasen
+		// dersom den ikke eksisterer, registrer ny ingrediens
+		//boolean updateIngredient(int ingredientID, String name, float quantity, String unit, Database database)
+		// int registerIngredient(String name, float quantity, String unit, Database database)	
 	}
 	
 	public String toString(){
