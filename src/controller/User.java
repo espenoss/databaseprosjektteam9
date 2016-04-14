@@ -102,13 +102,14 @@ public class User implements java.io.Serializable{
 	//takes an customerId returns a single customer object, or null if not found
 	public Customer viewSingleCustomer(int customerId) throws Exception{
 		String[][] list = QueryMethods.viewAllCustomers(database);
+		TextEditor t = new TextEditor();
 		
 		for(int i=0; i<list.length; i++){
 			if (Integer.parseInt(list[i][9])==1){
-				int dbCustomerId = Integer.parseInt(list[i][0]);
+				int dbCustomerId = t.StringToInt(list[i][0]);
 				if(customerId==dbCustomerId){
-					int zipCode = Integer.parseInt(list[i][6]);
-					int zoneNr = Integer.parseInt(list[i][7]);
+					int zipCode = t.StringToInt((list[i][6]);
+					int zoneNr = t.StringToInt((list[i][7]);
 					return new Customer(customerId, list[i][1],list[i][2],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8],true);
 				}
 			}
