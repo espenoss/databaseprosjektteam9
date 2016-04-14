@@ -83,9 +83,12 @@ public class Order {
 		String[][] mealT = QueryMethods.viewMealsInOrder(orderID, database);
 		TextEditor t = new TextEditor();
 		
-		for(int i=0;i<mealT.)
+		for(int i=0;i<mealT.length;i++){
+			meals.add(new Meal())
+		}
 	}
 	
+	//(int mealID, String mealName, String instructions, boolean available, int price)
 	
 	
 	//FINISHED (Must be tested)

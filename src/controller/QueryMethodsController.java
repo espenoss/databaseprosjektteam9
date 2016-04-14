@@ -5,6 +5,9 @@ import javax.swing.JOptionPane;
 
 import databasePackage.*;
 
+// --- SKAL SLETTES! ---
+
+
 public class QueryMethodsController implements java.io.Serializable{
 	String username = "espenme";
 	String passingword = "16Sossosem06";
