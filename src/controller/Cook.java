@@ -24,7 +24,7 @@ public class Cook extends User {
 		
 		ArrayList<Ingredient> ingredient = meal.getIngredients();
 		for(int i = 0; i < ingredient.size(); i++){
-			if(!QueryMethods.addIngredientToMeal(mealID, ingredient.get(i).getIngID(), t.StringToFloat(JOptionPane.showInputDialog("Ingredient quantity: ")), database)){
+			if(!QueryMethods.addIngredientToMeal(mealID, ingredient.get(i).getIngID(), t.stringToFloat(JOptionPane.showInputDialog("Ingredient quantity: ")), database)){
 			// lagt til metode for håndtering av tekst til float
 				JOptionPane.showMessageDialog(null, "Could not register ingredient "+ ingredient.get(i).getIngName());
 			}
