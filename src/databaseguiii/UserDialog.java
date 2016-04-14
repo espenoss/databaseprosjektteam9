@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
 
 import controller.*;
 
@@ -23,10 +24,10 @@ public class UserDialog extends MyDialog{
 	private JTextField userIDfield = new JTextField(10);
 	String user_id_text = userIDfield.getText();
 	
-	private JTextField userTypeField = new JTextField(10);
-	String user_type_text = userTypeField.getText();
-	int user_type_int = editor.StringToInt(user_type_text);
-     
+
+	private final String userRoles[] = {"Admin", "Cook", "Driver", "Sales", "Storage"}; 
+	JComboBox userList = new JComboBox(userRoles);
+	int user_type_int = userList.getSelectedIndex();
 	
 	private JTextField usernameField = new JTextField(20);
 	String user_name_text = usernameField.getText();
@@ -65,7 +66,7 @@ public class UserDialog extends MyDialog{
 			add(userIDfield);
 			
 			add(new JLabel("User type: ", JLabel.RIGHT));
-			add(userTypeField);
+			add(userList);
 			
 			add(new JLabel("Name: ", JLabel.RIGHT));
 			add(usernameField);
