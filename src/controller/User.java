@@ -23,7 +23,6 @@ public class User implements java.io.Serializable{
 	public String getUserID(){
 		return userID;
 	}
-	
 	public String getName(){
 		return name;
 	}
@@ -33,12 +32,9 @@ public class User implements java.io.Serializable{
 	public String getPword(){
 		return pword;
 	}
-	
 	public Database getDatabase(){
 		return database;
-		
 	}
-	
 	public void setUserID(String userID){
 		this.userID=userID;
 	}
@@ -63,8 +59,8 @@ public class User implements java.io.Serializable{
 		TextEditor t = new TextEditor();
 		
 		for(int i=0; i<orderT.length;i++){
-			int orderID = t.StringToInt(orderT[i][0]);
-			int customerID = t.StringToInt(orderT[i][2]);
+			int orderID = t.stringToInt(orderT[i][0]);
+			int customerID = t.stringToInt(orderT[i][2]);
 			
 			tempOrder = new Order(orderID,orderT[i][1],orderT[i][2],customerID,orderT[i][4],userID);
 			tempOrder.fetchMeals(database);
@@ -105,11 +101,11 @@ public class User implements java.io.Serializable{
 		TextEditor t = new TextEditor();
 		
 		for(int i=0; i<list.length; i++){
-			if (Integer.parseInt(list[i][9])==1){
-				int dbCustomerId = t.StringToInt(list[i][0]);
+			if (t.stringToInt(list[i][9])==1){
+				int dbCustomerId = t.stringToInt(list[i][0]);
 				if(customerId==dbCustomerId){
-					int zipCode = t.StringToInt((list[i][6]);
-					int zoneNr = t.StringToInt((list[i][7]);
+					int zipCode = t.stringToInt(list[i][6]);
+					int zoneNr = t.stringToInt(list[i][7]);
 					return new Customer(customerId, list[i][1],list[i][2],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8],true);
 				}
 			}
@@ -117,7 +113,7 @@ public class User implements java.io.Serializable{
 		return null;
 	}
 	
-	
+	//Lists orderIngredients as String
 	public String viewOrderIngredients() throws Exception{
 		String res = "";
 			String[][] temp = QueryMethods.viewIngredients(database);

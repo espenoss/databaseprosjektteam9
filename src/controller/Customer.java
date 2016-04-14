@@ -128,6 +128,11 @@ public class Customer implements java.io.Serializable{
 				&&adress==c.getAdress()&&zipCode==c.getZipCode()&&zoneNr==c.zoneNr&&preferences==c.getPreferences()&&phoneNumber==c.getPhoneNumber());
 	}
 	public String toString(){
-		return "CustomerID: " +customerID+" First name: " + firstName+". Surname: "+ surName +"\nEmail: "+email+". Phonenr: "+phoneNumber+".\nAdress: "+adress+". ZipCode: "+zipCode+". ZoneNr: "+zoneNr+".\nPreferences: "+preferences+"\n\n";
+		String res = "CustomerID: " +customerID+" First name: " + firstName+". Surname: "+ surName +"\nEmail: "+email+". Phonenr: "+phoneNumber+".\nAdress: "+adress+". ZipCode: "+zipCode+". ZoneNr: "+zoneNr+".\nPreferences: "+preferences+"\n";
+		if (isCompany){
+			res+="Company name: "+companyName+"\n";
+		}
+		res+="\n";
+		return res;
 	}
 }
