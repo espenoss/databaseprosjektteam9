@@ -16,7 +16,7 @@ class Parentwindow2 extends JFrame {
 	  private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/mariashc?user=mariashc&password=rGBlmJ91");
 	  private Customer customer = new Customer(0, "", "", "", "", "", 0, 0, "", true);
 	  private CustomerDialog dialog = new CustomerDialog(this);
-	  private int customerID = 1; //M� tas bort, er kun for bedriftskunder. Trenger company name i bedriftskunde klassenkkk
+//	  private int customerID = 1; //M� tas bort, er kun for bedriftskunder. Trenger company name i bedriftskunde klassenkkk
 	  private String firstName = "";
 	  private String surName = "";
 	  private String email = "";
