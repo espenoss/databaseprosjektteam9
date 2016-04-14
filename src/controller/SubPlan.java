@@ -3,15 +3,26 @@ package controller;
 import databasePackage.Database;
 import databasePackage.QueryMethods;
 
+/* Subscription plan
+ * A set plan made by the cook 
+ * Can contain different meals Mon - Sun
+ * 
+ * for example lunch delivery mon - fri
+ * or dinner delivery mon/wed/fri/sun 
+ * etc
+ * 
+ * Days set as "null" has no delivery 
+ * Customers can subscribe to a plan, but not change it
+ */
+
 class SubPlan {
 	private int subPlanID;
 	private String name;
 	private Meal[] meals = new Meal[7]; // [i] = null if no delivery that day
 	
-	public SubPlan(int subPlanID, String name, Meal[] meals){
+	public SubPlan(int subPlanID, String name){
 		this.subPlanID = subPlanID;
 		this.name = name;
-		this.meals = meals;
 	}
 	
 	public int getSubPlanID(){
@@ -22,27 +33,43 @@ class SubPlan {
 		return name;
 	}
 	
+	public Meal[] getMeals(){
+		return meals;
+	}
+	
 	public void setName(String newName){
 		name = newName;
 	}
 	
-	public String getMeals(){
+	//Lists subsriction plan 
+	public String getMealsAsText(){
 		String res = "";
 		for(int i = 0; i < meals.length; i++){
 			res += meals.toString();
 		}
 		return res;
 	}
-	
-	public boolean updateSubPlan(Database database) throws Exception{
-		return QueryMethods.updateSubscriptionPlan(subPlanID, name, database);
+
+	//Adds new meal to subscription plan, given a weekday where mon = 1 and sun = 7
+	public boolean addMealToSubPlan(Meal meal, int weekdayNumber){
+		if (weekdayNumber<=meals.length){
+			meals[weekdayNumber-1]=meal;
+			return true;
+		}
+		return false;
 	}
 	
-	public void addMealToSubPlan(Meal meal, int index){
-		for(int i = 0; i < meals.length; i++){
-			if(i==index){
-				meal = meals[i];
-			}
+	//Removes meal from plan
+	public boolean removeMealFromPlan(int weekdayNumber){
+		if (weekdayNumber<=meals.length){
+			meals[weekdayNumber-1]=null;
+			return true;
 		}
+		return false;
+	}
+	
+	//Registers information to database
+	public boolean updateSubPlan(Database database) throws Exception{
+		return QueryMethods.updateSubscriptionPlan(subPlanID, name, database);
 	}
 }
