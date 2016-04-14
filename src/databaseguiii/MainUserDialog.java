@@ -18,7 +18,7 @@ class Parentwindow extends JFrame {
 	 UserDialog dialog = new UserDialog(this);
 	 dialog.setVisible(true);
 	 dialog.setLocation(350, 350);  // plasserer dialogen  
-	 admin.RegisterUser(dialog.getUserId(), dialog.getUserType(), dialog.getUserName(), dialog.getPword(), database);
+	 admin.registerUser(dialog.getUserId(), dialog.getUserType(), dialog.getUserName(), dialog.getPword(), database);
 	 setTitle("Registrer user");
 	 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	 setLayout(new FlowLayout());

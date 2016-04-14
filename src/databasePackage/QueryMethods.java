@@ -424,6 +424,8 @@ public class QueryMethods {
 	// 0 : meal_id - int
 	// 1 : meal_name - String
 	// 2 : instructions - String
+	// 3 : available - boolean
+	// 4 : price - int
 	public static String[][] viewMealsInOrder(int orderID, Database database) throws Exception{
 
 		String statement = "SELECT * FROM meal WHERE meal_id IN (SELECT meal_id FROM ordered_meal WHERE order_id = " + orderID + ")";
@@ -614,7 +616,8 @@ public class QueryMethods {
 		
 		return database.getLastResult();		
 	}
-			
+
+	// Register new zone in database
 	public static int registerZone(String zoneName, Database database) throws Exception{
 		
 		for(int i=0; i<5; i++){
@@ -636,6 +639,7 @@ public class QueryMethods {
 		return -1;
 	}
 	
+	// Update zone entry in database
 	public static boolean updateZone(int zoneID, String zoneName, Database database) throws Exception{
 		
 		String statement = "UPDATE zone SET "
@@ -646,6 +650,7 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 
+	// Delete zone entry in database
 	public static boolean removeZone(int zoneID, Database database) throws Exception{
 		
 		String statement = "DELETE FROM zone WHERE zone_nr = " + zoneID + ";";
@@ -653,6 +658,12 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}	
 	
+	// View zones in database
+	// Returns list zones in a two-dimensional String array
+	// First index is row, second is column
+	// Columns by second index:
+	// 0 : zone_nr - int
+	// 1 : zone_name - String
 	public static String[][] viewZones(Database database) throws Exception{
 
 		String statement = "SELECT * FROM zone";
@@ -662,6 +673,7 @@ public class QueryMethods {
 		return database.getLastResult();
 	}
 	
+	// Register new subscription plan in database
 	public static int registerSubscriptionPlan(String subName, Database database) throws Exception{		
 		for(int i=0; i<5; i++){
 			String statement = "SELECT MAX(sub_id) FROM subscription_plan;";
@@ -683,6 +695,7 @@ public class QueryMethods {
 		return -1;
 	}
 
+	// Update subscription plan info
 	public static boolean updateSubscriptionPlan(int subID, String subName, Database database) throws Exception{		
 		
 		String statement = "UPDATE subscription_plan SET "
@@ -693,6 +706,7 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
+	// Remove subscription from database
 	public static boolean removeSubscriptionPlan(int subID, Database database) throws Exception{		
 		
 		String statement = "DELETE FROM subscription_plan WHERE sub_id = " + subID + ";";
@@ -700,6 +714,12 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}	
 	
+	// View all subscription plans in database
+	// Returns list of subscription plans in a two-dimensional String array
+	// First index is row, second is column
+	// Columns by second index:
+	// 0 : sub_id - int
+	// 1 : sub_name - String
 	public static String[][] viewSubscriptionPlans(Database database) throws Exception{
 
 		String statement = "SELECT * FROM subscription_plan;";
@@ -709,6 +729,7 @@ public class QueryMethods {
 		return database.getLastResult();
 	}
 	
+	// Connect subscription plan to order
 	public static boolean addSubscriptionToOrder(int orderID, int quantitySub, String fromDate, String toDate, 
 			int subID, Database database) throws Exception{		
 		String statement = "INSERT INTO sub_order VALUES(" 
@@ -721,6 +742,7 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
+	// Update subscription information in order
 	public static boolean updateSubscriptionInOrder(int orderID, int quantitySub, String fromDate, String toDate, 
 			int subID, Database database) throws Exception{
 		
@@ -735,6 +757,7 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
+	// Remove subscription from order
 	public static boolean removeSubscriptionFromOrder(int orderID, Database database) throws Exception{
 		
 		String statement = "DELETE FROM sub_order WHERE order_id = " + orderID + ";";
@@ -742,6 +765,7 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
+	// View subcription information for order
 	public static String[] viewSubscription(int orderID, Database database) throws Exception{
 
 		String statement = "SELECT * FROM sub_order WHERE order_id = " + orderID + ";";
@@ -750,7 +774,9 @@ public class QueryMethods {
 		
 		return database.getLastResult()[0];
 	}	
-		public static String[][] viewSubscriptions(Database database) throws Exception{
+	
+	// View all subscription connected to orders
+	public static String[][] viewSubscriptions(Database database) throws Exception{
 
 		String statement = "SELECT * FROM sub_order;";
 		
@@ -758,6 +784,17 @@ public class QueryMethods {
 		
 		return database.getLastResult();
 	}		
+	
+	// **** IKKE TESTET
+	public static String[][] viewActiveSubscriptions(String currentDate, Database database) throws Exception{
+		
+		String statement = "SELECT * FROM sub_order WHERE from_date <= '" + currentDate + "' "
+				+ "AND to_date >= '" + currentDate + "'";
+		
+		database.makeSingleStatement(statement);
+		
+		return database.getLastResult();
+	}
 	
 	public static boolean addMealToPlan(int subID, int mealID, int weekdayNr, String weekday, Database database) throws Exception{
 		
