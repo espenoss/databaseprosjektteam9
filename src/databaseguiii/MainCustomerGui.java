@@ -12,7 +12,6 @@ import databaseguiii.CustomerDialog;
 //import databaseguiii.Parentwindow.ButtonListener;
 //import databaseguiii.Parentwindow.ButtonListener2;
 
-
 class Parentwindow2 extends JFrame {
 	  private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/mariashc?user=mariashc&password=rGBlmJ91");
 	  private Customer customer = new Customer(0, "", "", "", "", "", 0, 0, "", true);
@@ -30,10 +29,10 @@ class Parentwindow2 extends JFrame {
 	 
 	  
 	  public Parentwindow2() {
-		  QueryMethodsController queryMethodsController = new QueryMethodsController();
+		  Sales sales = new Sales("", 0, "", "", database);
 	      if (dialog.showDialog(customer)) {
 	          try {
-	        	  queryMethodsController.RegisterCustomer(customer.getFirstName(), customer.getSurName(), 
+	        	  sales.RegisterCustomer(customer.getFirstName(), customer.getSurName(), 
 	        	  customer.getEmail(), customer.getAdress(), customer.getPreferences(), customer.getZipCode(), 
 	      		  customer.getZoneNr(), customer.getPhoneNumber(), true, database);
 	            } catch (Exception e) {

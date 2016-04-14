@@ -50,8 +50,14 @@ public class RegisterOrderDialog extends MyDialog{
 			
 		}
 	}
-	public boolean showDialog(Order order){
-		//customerIdField.setText(order.getCustomerID());
+	public boolean showDialog(){
+		
+		String text = customerIdField.getText();
+		editor.StringToInt(text);
+		text.(order.getCustomerID());
+		
+		
+		
 		dateField.setText(order.getOrderDate());
 		deliveryDateField.setText(order.getDeliveryDate());
 		infoField.setText(order.getInfo());
