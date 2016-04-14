@@ -39,6 +39,14 @@ public class TestSubscriptionOrder {
 			System.out.println("");
 		}
 		
+		view = QueryMethods.viewActiveSubscriptions("2016-04-02", database);
+		for(int x=0;x<view.length;x++){
+			for(int y=0;y<view[x].length;y++){
+				System.out.print(view[x][y] + " ");
+			}
+			System.out.println("");
+		}
+				
 		result = QueryMethods.removeSubscriptionFromOrder(10003 ,database);
 		expRes = true;
 		assertEquals(expRes, result);		

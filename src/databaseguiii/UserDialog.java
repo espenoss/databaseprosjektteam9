@@ -1,21 +1,51 @@
 package databaseguiii;
 import java.awt.BorderLayout;
+
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
 
-import controller.User;
+import controller.*;
 
 import static javax.swing.JOptionPane.*;
 
 public class UserDialog extends MyDialog{
+
+	private TextEditor editor = new TextEditor();
 	private JTextField userIDfield = new JTextField(10);
-	private JTextField userTypeField = new JTextField(10);
+	String user_id_text = userIDfield.getText();
+	
+
+	private final String userRoles[] = {"Admin", "Cook", "Driver", "Sales", "Storage"}; 
+	JComboBox userList = new JComboBox(userRoles);
+	int user_type_int = userList.getSelectedIndex();
+	
 	private JTextField usernameField = new JTextField(20);
+	String user_name_text = usernameField.getText();
+	
 	private JTextField passwordField = new JTextField(20);
+	String password_text = passwordField.getText();
+	
+	public String getUserId(){
+		return user_id_text;
+	}
+	public int getUserType(){
+		return user_type_int;
+	}
+	
+	public String getUserName(){
+		return user_name_text;
+	}
+	public String getPword(){
+		return password_text;
+	}
+	
+	
 	
 	public UserDialog(JFrame parent){
 		super(parent, "New user");
@@ -32,7 +62,7 @@ public class UserDialog extends MyDialog{
 			add(userIDfield);
 			
 			add(new JLabel("User type: ", JLabel.RIGHT));
-			add(userTypeField);
+			add(userList);
 			
 			add(new JLabel("Name: ", JLabel.RIGHT));
 			add(usernameField);
@@ -44,43 +74,6 @@ public class UserDialog extends MyDialog{
 			
 		}
 	}
-	public boolean showDialog(User user){
-		userIDfield.setText(user.getUserID());
-	//	userTypeField.setText(user.getUserType());
-		usernameField.setText(user.getName());
-		passwordField.setText(user.getPword());
-		setOK(false);
-		pack();
-		userIDfield.requestFocusInWindow();
-		setVisible(true);
-		if(isOK()){
-			user.setName(usernameField.getText());
-//			user.setUserType(userTypeField.getText());
-	
-			user.setPassword(passwordField.getText());
-			user.setUserID(userIDfield.getText());
-			return true;
-		}else{
-			return false;
-		}
-	}
-	
-	protected boolean okData(){
-		String name = usernameField.getText().trim();
-		String password = passwordField.getText().trim();
-		if(name.equals("")|| password.equals("")){
-			showMessageDialog(UserDialog.this, "Username, role and password must be given.");
-			/*if(!username.equals("")){
-				usernameField.requestFocusInWindow();
-			}else{
-				passwordField.requestFocusInWindow();
-			}
-			return false;
-			}else{*/
-		//		return true;
-			}   
-		return true;
-		}
-	}
+}
 	
 

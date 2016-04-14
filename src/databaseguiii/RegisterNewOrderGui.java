@@ -73,7 +73,7 @@ class Parentwindow3 extends JFrame {
 
 class TestUserDialog {
   static public void main(String[] args) {
-	Parentwindow test = new Parentwindow();
+	//Parentwindow test = new Parentwindow();
     test.setSize(300, 200);  // for � f� litt st�rrelse p� vinduet
     test.setVisible(true);
   }   

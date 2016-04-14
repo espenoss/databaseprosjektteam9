@@ -75,28 +75,23 @@ public class Order {
 	
 	
 	
-	// 0 : meal_id - int
-	// 1 : meal_name - String
-	// 2 : instructions - String
-	
+	//Fetches meals from database
 	public void fetchMeals(Database database) throws Exception{
+
 		String[][] mealT = QueryMethods.viewMealsInOrder(orderID, database);
 		TextEditor t = new TextEditor();
+		boolean check= false;
 		
-		for(int i=0;i<mealT.)
-	}
-	
-	
-	
-	//FINISHED (Must be tested)
-	//Fetches ingredient information from database belonging to this meal. 
-	public void fetchIngredients(Database database) throws Exception{
-		String[][] ingT = QueryMethods.viewIngredientsInMeal(mealID, database);
-		TextEditor t = new TextEditor();
-		
-		for (int i=0;i<ingT.length;i++){
-			ingredients.add(new Ingredient(t.StringToInt(ingT[i][0]), ingT[i][1], t.StringToFloat(ingT[i][3]),ingT[i][4]));
-			ingQuantity.add(t.StringToFloat(ingT[i][2]));
+		for(int i=0;i<mealT.length;i++){			
+			for(int j=0;j<meals.size();j++){		//Checks if meal is in arrayList already
+				if (meals.get(j).getMealID()==t.StringToInt(mealT[i][0])){
+					check=true;
+				}
+			}
+			if (!check){							//Adds meal to arrayList if check is false
+				meals.add(new Meal(t.StringToInt(mealT[i][0]),mealT[i][1],mealT[i][2],true, t.StringToInt(mealT[i][4])));
+			}
+			check=false;
 		}
 	}
 	

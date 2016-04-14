@@ -1,4 +1,6 @@
 package controller;
+import java.util.ArrayList;
+
 import databasePackage.*;
 
 public class Admin extends User {
@@ -8,14 +10,7 @@ public class Admin extends User {
 		super(userID, userType, name, pword, database);
 	}
 
-	/*public boolean registerUser(){
-		boolean success = true;
-		
-		// register ny bruker i databasen
-		
-		return success;
-	}*/
-	
+
 	//Registrerer ny bruker
 	public boolean registerUser(String userID, int userType, String name,String pword, Database database) throws Exception{
 		return QueryMethods.registerUser(userID, userType, name, pword, database);
@@ -33,6 +28,24 @@ public class Admin extends User {
 		return statistics;
 	}
 	
+	//returns an arraylist with customer objects with all active customers
+	public ArrayList<User> viewUserList() throws Exception{
+		
+		String[][] list = QueryMethods.viewAllUsers(database);
+		User tempUser;
+		ArrayList<User> userList = new ArrayList<User>();
+		
+		for(int i=0; i<list.length; i++){
+			if (Integer.parseInt(list[i][1])==1){
+		//		int userID = Integer.parseInt(list[i][0]); //0
+				int userType = Integer.parseInt(list[i][1]); 
+				
+				tempUser = new User(list[i][0],userType,list[i][2], null, database);
+				userList.add(tempUser);
+			}
+		}
+		return userList;
+	}
 	
 	@Override
 	public String toString() {
