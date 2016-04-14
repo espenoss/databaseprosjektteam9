@@ -55,14 +55,6 @@ public class Order {
 		return userID;
 	}
 	
-	public boolean updateOrder(int orderID, String orderDate, int newCustomerID, String newInfo, String newUserID, Database database) throws Exception{
-		if(QueryMethods.updateOrder(orderID, orderDate, newCustomerID, newInfo, newUserID, database)){
-			return true;
-		}else {
-		return false;
-		}
-	}
-	
 	public void addMeal(Meal meal){
 		meals.add(meal);
 	}
