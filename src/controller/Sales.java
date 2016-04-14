@@ -11,23 +11,19 @@ public class Sales extends User {
 		super(userID, userType, name, pword, database);
 	}
 
-	public Order registerNewOrder(int customerID, String date, String deliveryDate, String info, String userID, ArrayList<Meal> meals, Database database)throws Exception{
-		boolean success = false;
+	
+	//FINISHED
+	//registers new order, returns order object. 
+	public Order registerNewOrder(int customerID, String deliveryDate, String info, String userID, Database database)throws Exception{
 		
-		int orderID = QueryMethods.registerOrder(date, customerID, info, userID, database);
+	    java.util.Date utilDate = new java.util.Date();
+	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		
-		for (Meal aMeal : meals){
-			TextEditor t = new TextEditor();
-			String quantityRead = JOptionPane.showInputDialog("How many of "+aMeal.getMealName()+" should be registerd?");
-			int quantity = t.StringToInt(quantityRead);
-			
-			if(!QueryMethods.addMealToOrder(orderID, aMeal.getMealID(), deliveryDate, quantity, false, false, database)){
-				
-			}
-		}
+	    String dateToday = sqlDate.toString();
+		int orderID = QueryMethods.registerOrder(dateToday, customerID, info, userID, database);
 		
+		return new Order(orderID, dateToday, deliveryDate, customerID, info, userID);
 
-		return null;
 	}
 	
 	public boolean registerSubscription(String orderinfo){
@@ -47,6 +43,7 @@ public class Sales extends User {
 		return success;
 	}
 	
+	//FINISHED
 	//Register new customer
 	public Customer RegisterCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
 			int zip_code, int zone_nr, String preferences, boolean active, Database database) throws Exception{
