@@ -8,7 +8,7 @@ public class Storage extends User {
 		super(userID, userType, name, pword, database);
 	}
 	
-	public boolean registerDelivery(String orderinfo){
+	public boolean registerIngredientDelivery(String orderinfo){
 		boolean success = false;
 		
 		// oppdater database med ny info
