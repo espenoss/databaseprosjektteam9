@@ -18,7 +18,7 @@ import static javax.swing.JOptionPane.*;
 	
 
 class Parentwindow3 extends JFrame {
-  private UserDialog dialog = new UserDialog(this);
+  private RegisterOrderDialog dialog = new RegisterOrderDialog(this);
   String userID;
   int userType;
   String name;
@@ -28,16 +28,17 @@ class Parentwindow3 extends JFrame {
   
   
  public Parentwindow3() {
-	  private User user = new User("",0, "","", database); 
-      if (dialog.showDialog(sales)) {
-    	  user.registerNewOrder(user.ge   , date, deliveryDate, info, userID, meals, database)
+	 //Order order = new Order(0,"","", 0, "", ""); 
+      if (dialog.showDialog()) {
+    	  sales.registerNewOrder(order.getCustomerID(), order.getOrderDate(), order.getDeliveryDate(), order.getInfo(), 
+    			  order.getUserID(), order.getMeals(), database);
           
       } else {
         System.out.println("Cancelled");
       }
-      System.out.println(my_sales); //bruker toString().
+      System.out.println(order); //bruker toString().
     
-    setTitle("Registrer user");
+    setTitle("Registrer order");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLayout(new FlowLayout());
     

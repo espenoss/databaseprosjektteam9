@@ -7,10 +7,11 @@ public class Ingredient {
 	public float storageQuantity;
 	public String unit;
 	
-	public Ingredient(int ingID, String ingName, float quantity){
+	public Ingredient(int ingID, String ingName, float quantity, String unit){
 		this.ingID = ingID;
 		this.ingName = ingName;
 		this.storageQuantity = quantity;
+		this.unit = unit;
 	}
 	
 	public int getIngID(){
