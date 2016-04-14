@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -15,6 +16,9 @@ import static javax.swing.JOptionPane.*;
 public class UserDialog extends MyDialog{
 
 	private TextEditor editor = new TextEditor();
+	private static final String [] CHOICES =
+		{"Admin", "Cook", "Driver"};
+	private JList<String> choice_list = new JList<String>(CHOICES);
 	
 	private JTextField userIDfield = new JTextField(10);
 	String user_id_text = userIDfield.getText();
@@ -22,6 +26,7 @@ public class UserDialog extends MyDialog{
 	private JTextField userTypeField = new JTextField(10);
 	String user_type_text = userTypeField.getText();
 	int user_type_int = editor.StringToInt(user_type_text);
+     
 	
 	private JTextField usernameField = new JTextField(20);
 	String user_name_text = usernameField.getText();
@@ -35,6 +40,7 @@ public class UserDialog extends MyDialog{
 	public int getUserType(){
 		return user_type_int;
 	}
+	
 	public String getUserName(){
 		return user_name_text;
 	}
