@@ -4,10 +4,10 @@ import databasePackage.*;
 public class Ingredient {
 	public final int ingID; 
 	public String ingName;
-	public int storageQuantity;
+	public float storageQuantity;
 	public String unit;
 	
-	public Ingredient(int ingID, String ingName, int quantity){
+	public Ingredient(int ingID, String ingName, float quantity){
 		this.ingID = ingID;
 		this.ingName = ingName;
 		this.storageQuantity = quantity;
@@ -21,7 +21,7 @@ public class Ingredient {
 		return ingName;
 	}
 	
-	public int getStorageQuantity(){
+	public float getStorageQuantity(){
 		return storageQuantity;
 	}
 	
@@ -29,14 +29,23 @@ public class Ingredient {
 		return unit;
 	}
 	
-	public void setIngName(String ingName){
-		//endre info i databasen her?
+	public String setIngName(String ingName){
 		this.ingName=ingName;
+		return ingName;
 	}
 	
-	public void setStorageQuantity(int quantity){
-		//endre info i databasen her? 
+	public float setStorageQuantity(float quantity){ 
 		this.storageQuantity = quantity;
+		return quantity;
+	}
+	
+	public boolean updateStorage(int ingredientID, String newName, float newQuantity, String unit, Database database) throws Exception{
+		if(QueryMethods.updateIngredient(ingredientID, setIngName(newName), setStorageQuantity(newQuantity), unit, database)){
+			return true;
+		}else {
+			System.out.println("Could not update ingredient");
+			return false;
+		}
 	}
 	
 	public String toString(){
