@@ -12,7 +12,7 @@ public class Sales extends User {
 	}
 
 	
-	//FINISHED
+	//FINISHED --- NOT TESTED
 	//registers new order, returns order object. 
 	public Order registerNewOrder(int customerID, String deliveryDate, String info, String userID, Database database)throws Exception{
 		
@@ -26,6 +26,8 @@ public class Sales extends User {
 
 	}
 	
+	
+	//--- MÅ LAGES!! ---
 	public boolean registerSubscriptionOrder(String orderinfo){
 		boolean success = false;
 		
@@ -35,7 +37,7 @@ public class Sales extends User {
 	}
 	
 	
-	//FINISHED
+	//FINISHED --- NOT TESTED
 	//Register new customer
 	public Customer registerCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
 			int zip_code, int zone_nr, String preferences, boolean active, Database database) throws Exception{
@@ -47,6 +49,16 @@ public class Sales extends User {
 		return new Customer(customerID,firstName,surName,phoneNumber,email,adress,zip_code,zone_nr,preferences,true);
 	}
 	
+	//FINISHED --- NOT TESTED
+	//Register company
+	public boolean registerCompanyToCustomer(Customer customer, String companyName) throws Exception{
+		boolean ok = QueryMethods.registerCompanyToCustomer(customer.getCustomerID(), companyName, database);
+		if(ok) {
+			customer.setCompanyName(companyName);
+			customer.setIsCompany(true);
+		}
+		return ok;
+	}
 		
 	@Override
 	public String toString() {
