@@ -8,6 +8,7 @@ public class Storage extends User {
 		super(userID, userType, name, pword, database);
 	}
 	
+	// Skal vi ha Storage, eller skal alt ligge i Ingredient?
 	public boolean registerIngredientDelivery(String orderinfo){
 		boolean success = false;
 		
