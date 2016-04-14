@@ -52,15 +52,9 @@ public class User implements java.io.Serializable{
 		this.pword=pword;
 	}
 	
-	// 0 : order_id - int
-	// 1 : order_date - String
-	// 2 : customer_id - int
-	// 3 : info - String
-	// 4 : user_id - String
 	
-	
-	
-	//Må testes, lager midlertidig bare ordreobject UTEN måltid.
+	//Må testes
+	//Returns an arraylist with orderObjects containing belonging meal objects. 
 	public ArrayList<Order> viewFoodOrders(java.sql.Date date) throws Exception{
 		
 		String[][] orderT = QueryMethods.viewOrdersBydeliveryDate(date, database);
@@ -73,7 +67,7 @@ public class User implements java.io.Serializable{
 			int customerID = t.StringToInt(orderT[i][2]);
 			
 			tempOrder = new Order(orderID,orderT[i][1],orderT[i][2],customerID,orderT[i][4],userID);
-			
+			tempOrder.fetchMeals(database);
 			
 			orderList.add(tempOrder);
 		}
