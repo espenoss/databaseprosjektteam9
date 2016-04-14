@@ -1,5 +1,4 @@
 package databaseguiii;
-//noe
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 

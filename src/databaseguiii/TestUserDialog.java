@@ -39,29 +39,7 @@ class Parentwindow extends JFrame {
     setLocation(300, 300); // plasserer foreldrevinduet..
     dialog.setLocation(350, 350);  // plasserer dialogen
   } 
-  
-/*  private class ButtonListener2 implements ActionListener {
-	  public void actionPerformed(ActionEvent action) {
-		  
-		  String text = "Userlist:\n";
 
-		  String[][] dbData = null;
-		  
-		  try {
-			  dbData = QueryMethods.viewAllUsers(database);
-		  } catch (Exception e) {
-			  e.printStackTrace();
-		  }
-		
-		for(int x=0;x<dbData.length; x++){
-			for(int y=0;y<dbData[x].length;y++){
-				text += dbData[x][y] + " ";
-			}
-			text += "\n";
-		}
-		JOptionPane.showMessageDialog(null, text);
-	  }
-  }	  */  
 }
 
 class TestUserDialog {
