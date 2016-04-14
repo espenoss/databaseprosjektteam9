@@ -4,7 +4,7 @@ import databasePackage.Database;
 import databasePackage.QueryMethods;
 
 public class Customer implements java.io.Serializable{
-	private int customerID;
+	private final int customerID;
 	private String firstName;
 	private String surName;
 	private String email;
@@ -14,6 +14,8 @@ public class Customer implements java.io.Serializable{
 	private String preferences;
 	private String phoneNumber;
 	private boolean active;
+	private boolean isCompany;
+	private String companyName;
 	
 	
 	public Customer(int customerID, String firstName, String surName, String phoneNumber, String email, String adress, int zipCode, int zoneNr, String preferences, boolean active){
@@ -28,48 +30,7 @@ public class Customer implements java.io.Serializable{
 		this.customerID=customerID;
 		this.active = active;
 	}
-	public void setCustomerID(int customerID){
-		this.customerID=customerID;
-	}
-	public String setFirstName(String firstName){
-		this.firstName=firstName;
-		return firstName;
-	}
-	public String setSurName(String surName){
-		this.surName=surName;
-		return surName;
-	}
-	public String setAdress(String adress){
-		this.adress=adress;
-		return adress;
-	}
-	public String setEmail(String email){
-		this.email=email;
-		return email;
-	}
 	
-	public int setZipCode(int zip_code){
-		this.zipCode=zip_code;
-		return zip_code;
-	}
-	public int setZoneNr(int zone_nr){
-		this.zoneNr=zone_nr;
-		return zone_nr;
-	}
-	public String setPreferences(String preferences){
-		this.preferences=preferences;
-		return preferences;
-	}
-	public String setPhoneNumber(String phoneNumber){
-		this.phoneNumber=phoneNumber;
-		return phoneNumber;
-	}
-	
-	public boolean setActive(boolean active){
-		this.active = active;
-		return active;
-	}
-
 	public int getCustomerID(){
 		return customerID;
 	}
@@ -102,8 +63,53 @@ public class Customer implements java.io.Serializable{
 		return active;
 	}
 	
-	public boolean updateCustomer(int customerID, String surName, String firstName, String phoneNumber, String email, String adress, int zipCode, int zoneNr, String preferences, boolean active, Database database) throws Exception{
-		if(QueryMethods.updateCustomer(customerID, setSurName(surName), setFirstName(firstName), setPhoneNumber(phoneNumber), setEmail(email), setAdress(adress), setZipCode(zipCode), setZoneNr(zoneNr), setPreferences(preferences), setActive(active), database)){
+	public boolean getIsCompany(){
+		return isCompany;
+	}
+	
+	public String getCompanyName(){
+		return companyName;
+	}
+	
+	public void setFirstName(String firstName){
+		this.firstName=firstName;
+	}
+	public void setSurName(String surName){
+		this.surName=surName;
+	}
+	public void setAdress(String adress){
+		this.adress=adress;
+	}
+	public void setEmail(String email){
+		this.email=email;
+	}
+	public void setZipCode(int zip_code){
+		this.zipCode=zip_code;
+	}
+	public void setZoneNr(int zone_nr){
+		this.zoneNr=zone_nr;
+	}
+	public void setPreferences(String preferences){
+		this.preferences=preferences;
+	}
+	public void setPhoneNumber(String phoneNumber){
+		this.phoneNumber=phoneNumber;
+	}
+	public void setActive(boolean active){
+		this.active = active;
+	}
+	
+	public void setIsCompany(boolean isCompany){
+		this.isCompany = isCompany;
+	}
+	
+	public void setCompanyName(String compName){
+		this.companyName=compName;
+	}
+
+	
+	public boolean updateCustomer(Database database) throws Exception{
+		if(QueryMethods.updateCustomer(customerID, surName, firstName, phoneNumber, email, adress, zipCode, zoneNr, preferences, active, database)){
 			return true;
 		}
 		return false;

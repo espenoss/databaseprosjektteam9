@@ -18,65 +18,35 @@ public class Sales extends User {
 		
 	    java.util.Date utilDate = new java.util.Date();
 	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-		
 	    String dateToday = sqlDate.toString();
+	    
 		int orderID = QueryMethods.registerOrder(dateToday, customerID, info, userID, database);
 		
 		return new Order(orderID, dateToday, deliveryDate, customerID, info, userID);
 
 	}
 	
-	public boolean registerSubscription(String orderinfo){
+	public boolean registerSubscriptionOrder(String orderinfo){
 		boolean success = false;
 		
 		// opprett ny ordre i database
 		
 		return success;
 	}
-
-	public boolean changeFoodOrder(String orderinfo){
-		boolean success = false;
-		
-		// generer meny, hent nye verdier,
-		// lagre i database
-		
-		return success;
-	}
+	
 	
 	//FINISHED
 	//Register new customer
-	public Customer RegisterCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
+	public Customer registerCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
 			int zip_code, int zone_nr, String preferences, boolean active, Database database) throws Exception{
 		int customerID = QueryMethods.registerCustomer(surName, firstName, phoneNumber, email, adress, zip_code, zone_nr, preferences, active, database);
 		
 		if (customerID<0){
 			return null;
 		}
-		
 		return new Customer(customerID,firstName,surName,phoneNumber,email,adress,zip_code,zone_nr,preferences,true);
 	}
-		
 	
-	/*
-	public boolean changeCustomerInfo(String customerinfo){
-		boolean success = false;
-		
-		// generer meny, hent nye verdier,
-		// lagre i database
-		return success;				
-	}
-	*/
-	
-	public boolean registerPackageDeal(){
-		boolean success = false;
-		
-		// retrieve package from database
-		// select package
-		// display package
-		// receive customer info
-		
-		return success;						
-	}
 		
 	@Override
 	public String toString() {

@@ -52,15 +52,9 @@ public class User implements java.io.Serializable{
 		this.pword=pword;
 	}
 	
-	// 0 : order_id - int
-	// 1 : order_date - String
-	// 2 : customer_id - int
-	// 3 : info - String
-	// 4 : user_id - String
 	
-	
-	
-	//Må testes, lager midlertidig bare ordreobject UTEN måltid.
+	//Må testes
+	//Returns an arraylist with orderObjects containing belonging meal objects. 
 	public ArrayList<Order> viewFoodOrders(java.sql.Date date) throws Exception{
 		
 		String[][] orderT = QueryMethods.viewOrdersBydeliveryDate(date, database);
@@ -73,7 +67,7 @@ public class User implements java.io.Serializable{
 			int customerID = t.StringToInt(orderT[i][2]);
 			
 			tempOrder = new Order(orderID,orderT[i][1],orderT[i][2],customerID,orderT[i][4],userID);
-			
+			tempOrder.fetchMeals(database);
 			
 			orderList.add(tempOrder);
 		}
@@ -93,14 +87,8 @@ public class User implements java.io.Serializable{
 		for(int i=0; i<list.length; i++){
 			if (Integer.parseInt(list[i][9])==1){
 				int customerId = Integer.parseInt(list[i][0]); //0
-				//1 first name
-				//2 sur name
-				//3 phonenumber
-				//4 email
-				//5 adress
 				int zipCode = Integer.parseInt(list[i][6]); //6
 				int zoneNr = Integer.parseInt(list[i][7]); //7
-				//8 preferences
 				
 				tempCustomer = new Customer(customerId, list[i][1],list[i][2],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8],true);
 				customerList.add(tempCustomer);
@@ -114,13 +102,14 @@ public class User implements java.io.Serializable{
 	//takes an customerId returns a single customer object, or null if not found
 	public Customer viewSingleCustomer(int customerId) throws Exception{
 		String[][] list = QueryMethods.viewAllCustomers(database);
+		TextEditor t = new TextEditor();
 		
 		for(int i=0; i<list.length; i++){
 			if (Integer.parseInt(list[i][9])==1){
-				int dbCustomerId = Integer.parseInt(list[i][0]);
+				int dbCustomerId = t.StringToInt(list[i][0]);
 				if(customerId==dbCustomerId){
-					int zipCode = Integer.parseInt(list[i][6]);
-					int zoneNr = Integer.parseInt(list[i][7]);
+					int zipCode = t.StringToInt((list[i][6]);
+					int zoneNr = t.StringToInt((list[i][7]);
 					return new Customer(customerId, list[i][1],list[i][2],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8],true);
 				}
 			}

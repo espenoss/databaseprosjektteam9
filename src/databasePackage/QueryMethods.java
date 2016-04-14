@@ -200,7 +200,7 @@ public class QueryMethods {
 				+ "');";		
 		
 		return database.makeSingleStatement(statement);
-	}	
+	}
 
 	// Update customer info in database
 	public static boolean updateCompany(int customerID, String companyName, Database database) throws Exception{

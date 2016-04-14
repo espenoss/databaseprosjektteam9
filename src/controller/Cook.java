@@ -11,6 +11,9 @@ public class Cook extends User {
 		super(userID, userType, name, pword, database);
 	}
 	
+	
+	//FINISHED must be tested
+	//Lets the cook register a new meal
 	public boolean createMeal(Meal meal) throws Exception{
 		TextEditor t = new TextEditor(); 
 		int mealID = QueryMethods.registerMeal(meal.getMealName(), meal.getInstructions(), meal.getAvailable(), meal.getPrice(), database);
@@ -21,12 +24,16 @@ public class Cook extends User {
 		
 		ArrayList<Ingredient> ingredient = meal.getIngredients();
 		for(int i = 0; i < ingredient.size(); i++){
-			if(!QueryMethods.addIngredientToMeal(mealID, ingredient.get(i).getIngID(), t.StringToFloat(JOptionPane.showInputDialog("Ingredient quantity: ")), database)){
+			if(!QueryMethods.addIngredientToMeal(mealID, ingredient.get(i).getIngID(), t.stringToFloat(JOptionPane.showInputDialog("Ingredient quantity: ")), database)){
 			// lagt til metode for håndtering av tekst til float
 				JOptionPane.showMessageDialog(null, "Could not register ingredient "+ ingredient.get(i).getIngName());
 			}
 		}
 		return true;
+	}
+	
+	public int registerSubPlan(String name,Database database) throws Exception{
+		return QueryMethods.registerSubscriptionPlan(name, database);
 	}
 	
 	@Override

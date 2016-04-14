@@ -5,7 +5,7 @@ public class TextEditor {
 	public TextEditor(){
 	}
 
-	public int StringToInt(String text){ // removes blank spaces and parses string to an int
+	public int stringToInt(String text){ // removes blank spaces and parses string to an int
 		int i = 0;
 		if(!text.equals(null)){
 			text.trim();
@@ -19,7 +19,7 @@ public class TextEditor {
 	}
 	
 
-/*	public int StringToInt(String text){ // removes blank spaces and parses string to an int
+/*	public int stringToInt(String text){ // removes blank spaces and parses string to an int
 		int i = 0;
 		if(!text.equals(null)){
 			text.trim();
@@ -32,7 +32,7 @@ public class TextEditor {
 		return i;
 	}   */
 	
-	public float StringToFloat(String text){ // removes blank spaces and parses a string to a float
+	public float stringToFloat(String text){ // removes blank spaces and parses a string to a float
 		float i = 0;
 		if(!text.equals(null)){
 			text.trim();
