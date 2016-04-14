@@ -27,11 +27,9 @@ public class Sales extends User {
 	}
 	
 	
-	//--- MÅ LAGES!! ---
-	public boolean registerSubscriptionOrder(String orderinfo){
-		boolean success = false;
-		
-		// opprett ny ordre i database
+	//FINISHED
+	public boolean registerSubscriptionOrder(Order order, int quantitySub, String fromDate, String toDate, int subID) throws Exception{
+		boolean success = QueryMethods.addSubscriptionToOrder(order.getOrderID(), quantitySub, fromDate, toDate, subID, database);
 		
 		return success;
 	}

@@ -33,12 +33,11 @@ public class Cook extends User {
 	}
 	
 	
-	//MÅ GJØRES FERDIG
+	//Registers new empty subscription plan
 	public SubPlan registerSubPlan(String name,Database database) throws Exception{
-		int subPLanID = QueryMethods.registerSubscriptionPlan(name, database);
+		int subPlanID = QueryMethods.registerSubscriptionPlan(name, database);
 		
-		//Legg til måltid i plan????
-		return null;
+		return new SubPlan(subPlanID, name);
 	}
 	
 	@Override
