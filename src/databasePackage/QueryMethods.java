@@ -601,11 +601,14 @@ public class QueryMethods {
 	// Columns by second index:
 	// 0 : ingredient_id - int
 	// 1 : name - String
-	// 2 : quantity - int
-	// 3 : unit - String
+	// 2 : quantity - int (quantity in meal)
+	// 3 : quantity - int (qunatity in stock)
+	// 4 : unit - String
 	public static String[][] viewIngredientsInMeal(int mealID, Database database) throws Exception{
 		
-		String statement = "SELECT * FROM ingredient WHERE ingredient_id IN (SELECT ingredient_id FROM meal_ingredient WHERE meal_id = " + mealID + ")";
+		String statement = "SELECT a.ingredient_id, b.name, a.quantity, b.quantity, b.unit "
+				+ "FROM meal_ingredient AS a, ingredient AS b "
+				+ "WHERE a.ingredient_id = b.ingredient_id AND meal_id = " + mealID + ";";		
 		
 		database.makeSingleStatement(statement);
 		

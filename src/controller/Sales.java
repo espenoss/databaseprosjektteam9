@@ -11,11 +11,16 @@ public class Sales extends User {
 		super(userID, userType, name, pword, database);
 	}
 
-	public Order registerNewOrder(int customerID, String date, String deliveryDate, String info, String userID, ArrayList<Meal> meals, Database database)throws Exception{
-		boolean success = false;
+	
+	//FINISHED
+	//registers new order, returns order object. 
+	public Order registerNewOrder(int customerID, String deliveryDate, String info, String userID, Database database)throws Exception{
 		
 		int orderID = QueryMethods.registerOrder(date, customerID, info, userID, database);
 		
+		
+		
+		/*
 		for (Meal aMeal : meals){
 			TextEditor t = new TextEditor();
 			String quantityRead = JOptionPane.showInputDialog("How many of "+aMeal.getMealName()+" should be registerd?");
@@ -25,9 +30,10 @@ public class Sales extends User {
 				
 			}
 		}
+		*/
 		
+		return new Order(orderID, date, deliveryDate, customerID, info, userID);
 
-		return null;
 	}
 	
 	public boolean registerSubscription(String orderinfo){
@@ -47,6 +53,7 @@ public class Sales extends User {
 		return success;
 	}
 	
+	//FINISHED
 	//Register new customer
 	public Customer RegisterCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
 			int zip_code, int zone_nr, String preferences, boolean active, Database database) throws Exception{
