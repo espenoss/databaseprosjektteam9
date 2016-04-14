@@ -496,7 +496,7 @@ public class QueryMethods {
 	}
 
 	public static int registerMeal(String mealName, String instructions, boolean available, int price, 
-			int discount, int discountLim, Database database) throws Exception{
+			Database database) throws Exception{
 
 		for(int i=0; i<5; i++){
 			String statement = "SELECT MAX(meal_id) FROM meal;";
@@ -513,9 +513,8 @@ public class QueryMethods {
 					+ aq(mealName) 
 					+ aq(instructions) 
 					+ available + ", " 
-					+ price + ", " 
-					+ discount + ", " 
-					+ discountLim + ");";
+					+ price 					
+					+ ");";
 			
 			if(database.makeSingleStatement(statement)) return mealID;
 		}
@@ -524,15 +523,13 @@ public class QueryMethods {
 	}
 	
 	public static boolean updateMeal(int mealID, String mealName, String instructions, boolean available, int price, 
-			int discount, int discountLim, Database database) throws Exception{
+			Database database) throws Exception{
 		
 		String statement = "UPDATE meal SET "
 				+ "meal_name = " + aq(mealName)
 				+ "instructions = " + aq(instructions)
 				+ "available = " + available + ", "
-				+ "price = " + price + ", "
-				+ "discount = " + discount + ", "
-				+ "discount_lim = " + discountLim + " "
+				+ "price = " + price + " "
 				+ "WHERE meal_id =" + mealID 
 				+ ";";
 		

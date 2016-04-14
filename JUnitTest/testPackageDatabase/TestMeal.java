@@ -30,7 +30,7 @@ public class TestMeal {
 		String[] meal = meals[meals.length-1];
 				
 		// attempt to register new info about existing entry
-		boolean exp = QueryMethods.updateMeal(Integer.parseInt(meal[0]), meal[1], meal[2], false, Integer.parseInt(meal[4]), 1, 1, database);
+		boolean exp = QueryMethods.updateMeal(Integer.parseInt(meal[0]), meal[1], meal[2], false, Integer.parseInt(meal[4]), database);
 		assertEquals(true, exp);		
 		
 		// attempt to remove entry		
@@ -38,7 +38,7 @@ public class TestMeal {
 		assertEquals(true, exp);
 
 		// attempt to reregister removed entry	
-		int iexp = QueryMethods.registerMeal(meal[1], meal[2], false, Integer.parseInt(meal[4]), 1, 1, database);
+		int iexp = QueryMethods.registerMeal(meal[1], meal[2], false, Integer.parseInt(meal[4]), database);
 		assertNotEquals(-1, iexp);		
 	}
 }
