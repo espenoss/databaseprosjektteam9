@@ -13,20 +13,70 @@ import controller.*;
 import static javax.swing.JOptionPane.*;
 
 public class CustomerDialog extends MyDialog{
-
-//	private JTextField customerID = new JTextField(20);
+	private TextEditor editor = new TextEditor();
+	
 	private JTextField firstName = new JTextField(20);
+	String firstNameText = firstName.getText();
+	
 	private JTextField surName = new JTextField(20);
+	String surNameText = surName.getText();
+	
 	private JTextField email = new JTextField(20);
+	String emailText = email.getText();
+	
 	private JTextField adress = new JTextField(20);
+	String adressText = adress.getText();
 	
 	private JTextField zip_code = new JTextField(6);
+	String zip_codeText  = zip_code.getText();
+	int myIntZip = editor.StringToInt(zip_codeText);
+	
 	private JTextField zone_nr = new JTextField(6);
-/*	String text2 = zone_nr.getText();
-	int  zone_nrInt= Integer.parseInt(text2);   */
+	String zone_codeText  = zone_nr.getText();
+	int myIntZone = editor.StringToInt(zone_codeText);
 	
 	private JTextField preferences = new JTextField(100);
+	String preferencesText = preferences.getText();
+	
 	private JTextField phoneNumber = new JTextField(12);
+	String phoneNumberText = phoneNumber.getText();
+	
+	public String getFirstNameText(){
+		return firstNameText;
+	}
+	
+	public String getSurNameText(){
+		return surNameText;
+	}
+	
+	public String getEmailText(){
+		return emailText;
+	}
+	
+	public String getAdressText(){
+		return adressText;
+	}
+	
+	public int getZip_codeText(){
+		return myIntZip;
+	}
+	
+	public int getZone_nrText(){
+		return myIntZone;
+	}
+	
+	public String getPrefencesText(){
+		return preferences.getText();
+	}
+	
+	public String getPhoneNrText(){
+		return phoneNumber.getText();
+	}
+	
+	public boolean getActive(){
+		return true;
+	}
+	
 	
 	
 	public CustomerDialog(JFrame parent){
@@ -40,9 +90,7 @@ public class CustomerDialog extends MyDialog{
 	private class CustomerDatapanel extends JPanel{
 		public CustomerDatapanel(){
 			setLayout(new GridLayout(8,2));
-	/*		add(new JLabel("Customer ID: ", JLabel.RIGHT));
-			add(customerID); */
-			
+	
 			add(new JLabel("First name: ", JLabel.RIGHT));
 			add(firstName);
 			
@@ -68,68 +116,6 @@ public class CustomerDialog extends MyDialog{
 			add(phoneNumber);
 		}
 	}
-	public boolean showDialog(Customer customer){
-	//	customerID.setText(customer.getCustomerID());
-		firstName.setText(customer.getFirstName());
-		surName.setText(customer.getSurName());
-		email.setText(customer.getEmail());
-		adress.setText(customer.getAdress());
-//		zip_code.setText(customer.getZipCode());
-//		zone_nr.setText(customer.getZoneNr());
-		preferences.setText(customer.getPreferences());
-		preferences.setText(customer.getPhoneNumber());
-		setOK(false);
-		pack();
-		
-		firstName.requestFocusInWindow();
-		setVisible(true);
-		if(isOK()){
-			//customer.setCustomerID(customer.getText());
-			customer.setFirstName(firstName.getText());
-			customer.setSurName(surName.getText());
-			customer.setEmail(email.getText());
-			customer.setAdress(adress.getText());
- //	    	customer.setZipCode(zip_code.getText());
-//		    customer.setZoneNr(zone_nr.getText());
-			customer.setPreferences(preferences.getText());
-			return true;
-		}else{
-			return false;
-		}
-	}
-	
-	protected boolean okData(){
-		String Firstname = firstName.getText().trim();
-		String Surname = surName.getText().trim();
-		String Email = email.getText().trim();
-		String Adress = adress.getText().trim();
-
-		String text1 = zip_code.getText();
-		int  zip_codeInt= Integer.parseInt(text1.trim());
-		
-		String text2 = zip_code.getText();
-		int  zone_nrInt= Integer.parseInt(text2.trim());
-		
-
-/*		String text3 = customerID.getText();
-		int  customer_id_Int= Integer.parseInt(text3.trim());  */
-		
-		
-		String Preferences = preferences.getText().trim();
-		
-		if(/*customerID.equals("") || */firstName.equals("")|| surName.equals("") || email.equals("") || adress.equals("") || zip_code.equals("") || zone_nr.equals("") || preferences.equals("")){
-			showMessageDialog(CustomerDialog.this, "All information must be given.");
-			/*if(!username.equals("")){
-				usernameField.requestFocusInWindow();
-			}else{
-				passwordField.requestFocusInWindow();
-			}
-			return false;
-			}else{*/
-		//		return true;
-			}
-		return true;
-		}	
-	}
+}
 	
 
