@@ -16,23 +16,13 @@ public class Sales extends User {
 	//registers new order, returns order object. 
 	public Order registerNewOrder(int customerID, String deliveryDate, String info, String userID, Database database)throws Exception{
 		
-		int orderID = QueryMethods.registerOrder(date, customerID, info, userID, database);
+	    java.util.Date utilDate = new java.util.Date();
+	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		
+	    String dateToday = sqlDate.toString();
+		int orderID = QueryMethods.registerOrder(dateToday, customerID, info, userID, database);
 		
-		
-		/*
-		for (Meal aMeal : meals){
-			TextEditor t = new TextEditor();
-			String quantityRead = JOptionPane.showInputDialog("How many of "+aMeal.getMealName()+" should be registerd?");
-			int quantity = t.StringToInt(quantityRead);
-			
-			if(!QueryMethods.addMealToOrder(orderID, aMeal.getMealID(), deliveryDate, quantity, false, false, database)){
-				
-			}
-		}
-		*/
-		
-		return new Order(orderID, date, deliveryDate, customerID, info, userID);
+		return new Order(orderID, dateToday, deliveryDate, customerID, info, userID);
 
 	}
 	
