@@ -55,8 +55,13 @@ public class Order {
 		return temp;
 	}
 	
+	public void setOrderDate(String orderDate){
+		this.orderDate = orderDate;
+	}
 	
-	// LAG SET-METODER
+	public void setInfo(String info){
+		this.info = info;
+	}
 	
 	public void addMeal(Meal meal){
 		meals.add(meal);

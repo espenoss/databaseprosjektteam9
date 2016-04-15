@@ -50,8 +50,8 @@ public class User implements java.io.Serializable{
 	}
 	
 	
-	//IKKE FERDIG --- MÅ TESTES
-	//Legger for øyebl ikke inn info om måltid i objektene
+	//IKKE FERDIG --- Mï¿½ TESTES
+	//Legger for ï¿½yebl ikke inn info om mï¿½ltid i objektene
 	//Returns an arraylist with orderObjects containing belonging meal objects. 
 	public ArrayList<Order> viewFoodOrders(java.sql.Date date) throws Exception{
 		
@@ -146,20 +146,29 @@ public class User implements java.io.Serializable{
 			return res;
 	}
 	
-	// --- MÅ LAGES!!
+	// --- Mï¿½ LAGES!!
 	public SubPlan viewSubPlan(){
 		return null;
 	}
 	
 	
-	// --- MÅ LAGES!!
-	public Ingredient addNewIngredient(){
-		return null;
+	// Adds/registers new ingredient to database --- NOT TESTED
+	public Ingredient addNewIngredient(String name, float quantity, String unit, Database database) throws Exception{
+		int ingredientID = QMFood.registerIngredient(name, quantity, unit, database);
+		if(ingredientID<0){
+			return null;
+		} 
+		return new Ingredient(ingredientID, name, quantity, unit);
 	}
 	
-	// --- MÅ LAGES!!
-	public boolean deleteIngredient(int ingredientID){
-		return true;
+	// Deletes ingredient from database --- NOT TESTED
+	public boolean deleteIngredient(int ingredientID) throws Exception{
+		boolean ok = QMFood.removeIngredient(ingredientID, database);
+		if(ok){
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	
