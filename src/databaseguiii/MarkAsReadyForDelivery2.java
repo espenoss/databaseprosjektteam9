@@ -21,19 +21,27 @@ private JList <String> order_list;
  public ReadyForDelivery2(String tittel) {
 	 java.util.Date utilDate = new java.util.Date();
 	 java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-	 ArrayList<Order> order = null;
+	 ArrayList<Order> order = new ArrayList<>();
 
 	 setTitle(tittel);
 	 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	 
+
+	/*	skal egentlig brukes 
 	 try {
 		order = user.viewFoodOrders(sqlDate);
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-		
+*/	
+	 // testdata
+	 order.add(new Order(10000, "2016-12-12", 10001, "Biler", "espenme"));
+	 order.add(new Order(10000, "2016-12-12", 10001, "Fly", "espenme"));
+	 order.add(new Order(10000, "2016-12-12", 10001, "Baat", "espenme"));
+	 
 	 for(int i = 0; i< order.size(); i++){
-	 	model.addElement(order.get(i).toString());   
+		 // bytt når Order er ferdig
+		 model.addElement(order.get(i).getInfo());
+	 	//model.addElement(order.get(i).toString());   
 	 }
 	 order_list = new JList<>(model);
 	 
@@ -43,11 +51,10 @@ private JList <String> order_list;
 	 JScrollPane list = new JScrollPane();
 	 add(list, BorderLayout.CENTER);
 
+	 add(order_list, BorderLayout.SOUTH);
+	 
 	 Listboxlistener lytter = new Listboxlistener();
 	 order_list.addListSelectionListener(lytter);
-
-	
-	   
 	 
 	 pack();
   }
