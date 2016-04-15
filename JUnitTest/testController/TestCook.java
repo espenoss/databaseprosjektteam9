@@ -41,8 +41,8 @@ public class TestCook {
 	public void testShouldCreateMeal() throws Exception {
 		System.out.println("Test: Create meal");
 		// try to register new meal
-		Meal result = cook.createMeal(1, "Spaghetti", "Boil pasta", true, 100);
-		Meal expResult = new Meal(1, "Spaghetti", "None", true, 100);
+		Meal result = cook.createMeal("Spaghetti", "Boil pasta", true, 100);
+		Meal expResult = new Meal(1,"Spaghetti", "None", true, 100);
 		
 		assertEquals(result, expResult);
 		

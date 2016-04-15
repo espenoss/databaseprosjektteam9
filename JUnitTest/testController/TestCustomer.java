@@ -8,8 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import controller.Customer;
-import databasePackage.Database;
-import databasePackage.QMCustomer;
 
 public class TestCustomer {
 	private static Database database;
