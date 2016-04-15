@@ -11,11 +11,11 @@ public class Admin extends User {
 
 	//Registrerer ny bruker
 	public boolean registerUser(String userID, int userType, String name,String pword, Database database) throws Exception{
-		return QueryMethods.registerUser(userID, userType, name, pword, database);
+		return QMUser.registerUser(userID, userType, name, pword, database);
 	}
 	
 	public boolean updateUser(String userID, int userType, String name, String pword, Database database) throws Exception{
-		return(QueryMethods.updateUser(userID, userType, name, pword, database));
+		return(QMUser.updateUser(userID, userType, name, pword, database));
 	}
 	
 	
@@ -32,7 +32,7 @@ public class Admin extends User {
 	//returns an arraylist with customer objects with all active users
 	public ArrayList<User> viewUserList() throws Exception{
 		
-		String[][] list = QueryMethods.viewAllUsers(database);
+		String[][] list = QMUser.viewAllUsers(database);
 		User tempUser;
 		ArrayList<User> userList = new ArrayList<User>();
 		

@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import databasePackage.Database;
-import databasePackage.QueryMethods;
+import databasePackage.QMFood;
 
 public class TestZone {
 	public Database database;
@@ -25,20 +25,20 @@ public class TestZone {
 	public void zoneTest() throws Exception{
 
 		// view all entries
-		String[][] zones = QueryMethods.viewZones(database);
+		String[][] zones = QMFood.viewZones(database);
 		// select last entry
 		String[] zone = zones[2];
 				
 		// attempt to register new info about existing entry
-		boolean exp = QueryMethods.updateZone(Integer.parseInt(zone[0]), "Ny info", database);
+		boolean exp = QMFood.updateZone(Integer.parseInt(zone[0]), "Ny info", database);
 		assertEquals(true, exp);		
 		
 		// attempt to remove entry		
-		exp = QueryMethods.removeZone(Integer.parseInt(zone[0]), database);
+		exp = QMFood.removeZone(Integer.parseInt(zone[0]), database);
 		assertEquals(true, exp);
 
 		// attempt to reregister removed entry	
-		int iexp = QueryMethods.registerZone(zone[1], database);
+		int iexp = QMFood.registerZone(zone[1], database);
 		assertNotEquals(-1, iexp);		
 	}
 }

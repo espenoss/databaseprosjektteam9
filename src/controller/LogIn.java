@@ -13,7 +13,7 @@ public class LogIn {
 	}
 	
 	public int logIn(String userID, char[] password) throws Exception{
-		return QueryMethods.logIn(userID, password, database);
+		return QMUser.logIn(userID, password, database);
 	}
 }
 

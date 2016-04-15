@@ -1,7 +1,7 @@
 package controller;
 
 import databasePackage.Database;
-import databasePackage.QueryMethods;
+import databasePackage.*;
 
 public class Customer implements java.io.Serializable{
 	private final int customerID;
@@ -110,7 +110,7 @@ public class Customer implements java.io.Serializable{
 	
 	//Register information to database
 	public boolean updateCustomer(Database database) throws Exception{
-		if(QueryMethods.updateCustomer(customerID, surName, firstName, phoneNumber, email, adress, zipCode, zoneNr, preferences, active, database)){
+		if(QMCustomer.updateCustomer(customerID, surName, firstName, phoneNumber, email, adress, zipCode, zoneNr, preferences, active, database)){
 			return true;
 		}
 		return false;

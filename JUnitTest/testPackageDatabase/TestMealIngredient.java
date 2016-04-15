@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import databasePackage.Database;
-import databasePackage.QueryMethods;
+import databasePackage.QMFood;
 
 public class TestMealIngredient {
 	public Database database;
@@ -23,15 +23,15 @@ public class TestMealIngredient {
 	@Test
 	public void MealIngredientTest() throws Exception{
 
-		boolean result = QueryMethods.addIngredientToMeal(4, 1, 5, database);
+		boolean result = QMFood.addIngredientToMeal(4, 1, 5, database);
 		boolean expRes = true;
 		assertEquals(expRes, result);
 		
-		result = QueryMethods.updateIngredientInMeal(4, 1, 3, database);
+		result = QMFood.updateIngredientInMeal(4, 1, 3, database);
 		expRes = true;
 		assertEquals(expRes, result);
 		
-		String[][] view = QueryMethods.viewIngredientsInMeal(4, database);
+		String[][] view = QMFood.viewIngredientsInMeal(4, database);
 		for(int x=0;x<view.length;x++){
 			for(int y=0;y<view[x].length;y++){
 				System.out.print(view[x][y] + " ");
@@ -39,7 +39,7 @@ public class TestMealIngredient {
 			System.out.println("");
 		}
 		
-		result = QueryMethods.removeIngredientFromMeal(4, 1, database);
+		result = QMFood.removeIngredientFromMeal(4, 1, database);
 		expRes = true;
 		assertEquals(expRes, result);		
 	}

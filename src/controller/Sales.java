@@ -20,7 +20,7 @@ public class Sales extends User {
 	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 	    String dateToday = sqlDate.toString();
 	    
-		int orderID = QueryMethods.registerOrder(dateToday, customerID, info, userID, database);
+		int orderID = QMOrder.registerOrder(dateToday, customerID, info, userID, database);
 		
 		return new Order(orderID, dateToday, customerID, info, userID);
 	}
@@ -28,7 +28,7 @@ public class Sales extends User {
 	
 	//FINISHED
 	public boolean registerSubscriptionOrder(Order order, int quantitySub, String fromDate, String toDate, int subID) throws Exception{
-		boolean success = QueryMethods.addSubscriptionToOrder(order.getOrderID(), quantitySub, fromDate, toDate, subID, database);
+		boolean success = QMOrder.addSubscriptionToOrder(order.getOrderID(), quantitySub, fromDate, toDate, subID, database);
 		
 		return success;
 	}
@@ -38,7 +38,7 @@ public class Sales extends User {
 	//Register new customer
 	public Customer registerCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
 			int zip_code, int zone_nr, String preferences, boolean active, Database database) throws Exception{
-		int customerID = QueryMethods.registerCustomer(surName, firstName, phoneNumber, email, adress, zip_code, zone_nr, preferences, active, database);
+		int customerID = QMCustomer.registerCustomer(surName, firstName, phoneNumber, email, adress, zip_code, zone_nr, preferences, active, database);
 		
 		if (customerID<0){
 			return null;
@@ -49,7 +49,7 @@ public class Sales extends User {
 	//FINISHED --- NOT TESTED
 	//Register company
 	public boolean registerCompanyToCustomer(Customer customer, String companyName) throws Exception{
-		boolean ok = QueryMethods.registerCompanyToCustomer(customer.getCustomerID(), companyName, database);
+		boolean ok = QMCustomer.registerCompanyToCustomer(customer.getCustomerID(), companyName, database);
 		if(ok) {
 			customer.setCompanyName(companyName);
 			customer.setIsCompany(true);

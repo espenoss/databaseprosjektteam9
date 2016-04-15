@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.Date;
+
 import java.util.ArrayList;
 import databasePackage.*;
 
@@ -63,17 +64,17 @@ public class Order {
 	
 	//Marks meal as ready for delivery to customer, given index of meal in mealArray
 	public boolean markMealAsReady(int index, String deliveryDate, Database database) throws Exception{
-		return QueryMethods.markMealOrderAsReadyForDelivery(orderID, meals.get(index).getMealID(), deliveryDate, database);
+		return QMOrder.markMealOrderAsReadyForDelivery(orderID, meals.get(index).getMealID(), deliveryDate, database);
 	}
 	
 	//Marks meal as delivered to customer, given index of meal in mealArray
 	public boolean markMealAsDelivered(int index, String deliveryDate, Database database) throws Exception{
-		return QueryMethods.markMealOrderAsDelivered(orderID, meals.get(index).getMealID(), deliveryDate, database);
+		return QMOrder.markMealOrderAsDelivered(orderID, meals.get(index).getMealID(), deliveryDate, database);
 	}	
 	
 	//Register information to databasee
 	public boolean uploadOrder(Database database) throws Exception{
-		return QueryMethods.updateOrder(orderID, orderDate, customerID, info, userID, database);
+		return QMOrder.updateOrder(orderID, orderDate, customerID, info, userID, database);
 	}
 	
 	
@@ -81,7 +82,7 @@ public class Order {
 	//Fetches meals from database
 	public void fetchMealsByDeliveryDate(Date deliveryDate, Database database) throws Exception{
 
-		String[][] mealT = QueryMethods.viewMealsInOrderByDeliveryDate(orderID, deliveryDate, database);
+		String[][] mealT = QMOrder.viewMealsInOrderByDeliveryDate(orderID, deliveryDate, database);
 		
 		String res = "";
 		

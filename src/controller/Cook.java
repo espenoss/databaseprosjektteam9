@@ -15,7 +15,7 @@ public class Cook extends User {
 	//FINISHED is tested
 	//Lets the cook register a new meal
 	public Meal createMeal(int mealID, String mealName, String instructions, boolean available, int price) throws Exception{ 
-		mealID = QueryMethods.registerMeal(mealName, instructions, available, price, database);
+		mealID = QMFood.registerMeal(mealName, instructions, available, price, database);
 		if(mealID < 0){
 			return null;
 		}
@@ -25,7 +25,7 @@ public class Cook extends User {
 	// Finished - lacking method in User before testing
 	//Registers new empty subscription plan
 	public SubPlan registerSubPlan(String name,Database database) throws Exception{
-		int subPlanID = QueryMethods.registerSubscriptionPlan(name, database);
+		int subPlanID = QMFood.registerSubscriptionPlan(name, database);
 		
 		return new SubPlan(subPlanID, name);
 	}
