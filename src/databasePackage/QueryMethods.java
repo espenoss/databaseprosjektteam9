@@ -820,7 +820,7 @@ public class QueryMethods {
 	
 	public static String[][] viewMealsInOrderByDeliveryDate(int orderID, java.sql.Date deliveryDate, Database database) throws Exception{
 			
-		String statement = "SELECT a.meal_name, b.adress "
+		String statement = "SELECT a.*"
 				+ "FROM meal AS a, customer AS b, (SELECT a.order_id, a.meal_id, b.customer_id FROM "
 				+ "ordered_meal AS a, "
 				+ "food_order AS b WHERE a.delivery_date = '" + deliveryDate + "' "

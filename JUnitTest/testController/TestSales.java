@@ -14,6 +14,7 @@ import databasePackage.Database;
 public class TestSales {
 	private static Database database;
 	private Sales instance;
+	private Customer customer1;
 	
 	
 	@BeforeClass
@@ -46,14 +47,16 @@ public class TestSales {
 	@Before
 	public void setUp() throws Exception {
 		instance = new Sales("hanne",3,"Hanne Hansen", "123456", database);
-		Customer customer1 = new Customer("");
+		Customer customer1 = new Customer(10000,"Geir","Hansen","73329090", "geir@hansen.com",
+				"Nedre Bakklandet 61", 7014, 1,"Allergisk mot sopp", true);
 		
 	}
 	
 	@Test
 	public void testRegisterCustomer() throws Exception {
 		System.out.println("test registerCustomer");
-		Customer result = instance.registerCustomer("Hansen","Geir","73329090" , "geir@hansen.com", "Nedre Bakklandet 61", 7014, 3,"Allergisk mot sopp", true, database);
+		Customer result = instance.registerCustomer("Hansen","Geir","73329090" , "geir@hansen.com",
+				"Nedre Bakklandet 61", 7014, 1,"Allergisk mot sopp", true, database);
 		
 		Customer expResult = instance.viewSingleCustomer(result.getCustomerID());
 		
@@ -61,13 +64,15 @@ public class TestSales {
 		assertEquals(result, expResult);
 	}
 	
-	@Ignore
-	public void testRegisterCompanyToCustomer() {
+	@Test
+	public void testRegisterCompanyToCustomer() throws Exception {
 		System.out.println("Test registerCompanyToCustomer");
 		
-		instance.registerCompanyToCustomer(, companyName)
+		boolean result = instance.registerCompanyToCustomer(customer1, "Posten");
+		boolean expResult = true;
 		
-		fail("Not yet implemented");
+		assertEquals(result, expResult);
+		
 	}
 	
 	@Ignore

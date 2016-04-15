@@ -37,13 +37,10 @@ public class Admin extends User {
 		ArrayList<User> userList = new ArrayList<User>();
 		
 		for(int i=0; i<list.length; i++){
-			if (Integer.parseInt(list[i][1])==1){
-		//		int userID = Integer.parseInt(list[i][0]); //0
-				int userType = Integer.parseInt(list[i][1]); 
-				
-				tempUser = new User(list[i][0],userType,list[i][2], null, database);
-				userList.add(tempUser);
-			}
+			int userType = Integer.parseInt(list[i][1]); 
+			
+			tempUser = new User(list[i][0],userType,list[i][2], null, database);
+			userList.add(tempUser);
 		}
 		return userList;
 	}
