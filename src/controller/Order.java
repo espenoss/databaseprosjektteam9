@@ -12,7 +12,7 @@ public class Order {
 	private int customerID;
 	private String info;
 	private String userID;
-	private ArrayList<Meal> meals;
+	private ArrayList<Meal> meals = new ArrayList<Meal>();
 
 	
 	public Order(int orderID, String orderDate, int customerID, String info, String userID){
@@ -82,6 +82,17 @@ public class Order {
 	public void fetchMealsByDeliveryDate(Date deliveryDate, Database database) throws Exception{
 
 		String[][] mealT = QueryMethods.viewMealsInOrderByDeliveryDate(orderID, deliveryDate, database);
+		
+		String res = "";
+		
+		for (int i=0; i<mealT.length;i++){
+			for(int j=0;j<mealT[i].length;j++){
+				res+=j+": "+mealT[i][j]+", ";
+			}
+			System.out.println(res);
+		}
+		
+		/*
 		TextEditor t = new TextEditor();
 		boolean check= false;
 		
@@ -97,6 +108,7 @@ public class Order {
 			}
 			check=false;
 		}
+		*/
 	}
 	
 	
@@ -104,22 +116,36 @@ public class Order {
 		String res = "";
 		res += "OrderID: " + orderID + ". Orderdate: " + orderDate+ ". Info: " + info + "\n";
 		res += "Meals: \n";
+		
 		for(Meal m:meals){
 			res += "   " + m.toString() + "\n";
 		}
+		
 		return res;
 	}
 	
 	
 	
 	//TEST TEST TEST 
-	static public void main(String[] arg){
+	static public void main(String[] arg) throws Exception{
+		String username = "marith1";
+		String password = "tgp8sBZA";
+		String databaseName = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
+		String databaseDriver = "com.mysql.jdbc.Driver";
+		Database database = new Database(databaseDriver, databaseName);
 		
 	    java.util.Date utilDate = new java.util.Date();
 	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		
 		System.out.println(sqlDate);
 		
+		Order test = new Order(10000,"2016-03-01",10000,"Info", "hanneh");
+		System.out.println(test);
+		
+		java.sql.Date dato = java.sql.Date.valueOf( "2016-03-01");
+		
+		test.fetchMealsByDeliveryDate(dato, database);
+		System.out.println(test);
 	}
 	
 }
