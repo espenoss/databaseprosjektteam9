@@ -18,7 +18,7 @@ public class TestCook {
 	private Cook cook;
 	private SubPlan instance;
 	
-
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		String username = "anitakau";
@@ -27,17 +27,8 @@ public class TestCook {
 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
 		database = new Database("com.mysql.jdbc.Driver", databasename);
 		database.initiateDb();
-		/*String insert1 = "INSERT INTO ingredient VALUES(1, 'potato', 50, 'kg')";
-		String insert2 = "INSERT INTO ingredient VALUES(2, 'carrot', 30, 'kg')";
-		String insert3 = "INSERT INTO ingredient VALUES(3, 'cheese', 10, 'kg')";
-		database.makeSingleStatement(insert1);
-		database.makeSingleStatement(insert2);
-		database.makeSingleStatement(insert3);*/
-		
-		// addIngredients(Ingredient obj, float quantity)
+	
 	}
-
-
 
 	@Before
 	public void setUp() throws Exception {
@@ -60,11 +51,11 @@ public class TestCook {
 	public void testShoulRegisterSubPlan() throws Exception{
 		System.out.println("Test: Register subscriptionplan");
 		SubPlan result = cook.registerSubPlan("name", database);
-		SubPlan expResult = instance.viewSubPlan(); 	// ****ViewSubPlan må lages i user
+		SubPlan expResult = instance.viewSubPlan(); 	
+		// ****ViewSubPlan must be created in class User ****
 		
 		assertEquals(result, expResult);
-		//SubPlan registerSubPlan(String name,Database database) - registers new, empty subplan
-		// SubPlan(int subPlanID, String name){
+	
 	}
 
 }

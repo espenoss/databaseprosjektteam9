@@ -1,12 +1,13 @@
- package databaseguiii;
- import controller.*;
+package databaseguiii;
+
+import controller.*;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import databasePackage.*;
 
-class Parentwindow extends JFrame {
+class Parentwindow11 extends JFrame {
 	private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
 	private Admin admin = new Admin("",0, "","", database); 
   
@@ -64,7 +65,7 @@ class Parentwindow extends JFrame {
 		}
 	}
 		
- public Parentwindow() throws Exception { 
+ public Parentwindow11() throws Exception { 
 
 	 UserDialog dialog = new UserDialog(this);
 	 dialog.setVisible(true);
@@ -80,6 +81,6 @@ class Parentwindow extends JFrame {
 
 class MainUserDialog {
   static public void main(String[] args) throws Exception {
-	Parentwindow test = new Parentwindow();
+	Parentwindow11 test = new Parentwindow11();
   }   
 }  
