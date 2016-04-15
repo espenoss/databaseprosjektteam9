@@ -6,12 +6,15 @@ import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
 
 //Metoden registerNewOrder() ligger i Sales.java
 
@@ -24,11 +27,14 @@ class Parentwindow3 extends JFrame {
 	private class RegisterOrderDialog extends MyDialog{
 		private TextEditor editor = new TextEditor();
 		private ArrayList<Customer> customerList = new ArrayList<>();
-		private JComboBox customerSelect;	
+		private JComboBox customerSelect;
+		private SpinnerDateModel dateSelectModel = new SpinnerDateModel();
+		private JSpinner dateSelect = new JSpinner(dateSelectModel);
 		private JTextField delivery_dateField = new JTextField(10);
 		private JTextField infoField = new JTextField(10);
 		private int customerID;
-		private String deliveryDate;
+		private String deliveryDateStr;
+		private Date deliveryDate;
 		private String info;
 		
 		public RegisterOrderDialog(JFrame parent){
@@ -59,7 +65,7 @@ class Parentwindow3 extends JFrame {
 				add(customerSelect);
 			
 				add(new JLabel("Delivery date: ", JLabel.RIGHT));
-				add(delivery_dateField);
+				add(dateSelect);
 			
 				add(new JLabel("Information about the order: ", JLabel.RIGHT));
 				add(infoField);
@@ -72,11 +78,13 @@ class Parentwindow3 extends JFrame {
 			int customerIndex = customerSelect.getSelectedIndex();
 			customerID = customerList.get(customerIndex).getCustomerID();
 			
-			deliveryDate = delivery_dateField.getText();
+			deliveryDate = (Date) dateSelect.getValue();
+			deliveryDateStr
+			
 			info = infoField.getText();
 		
 			try {
-				sales.registerNewOrder(customerID, deliveryDate, info, sales.getUserID(), database);
+				sales.registerNewOrder(customerID, , info, sales.getUserID(), database);
 			}catch (Exception e) {
 				System.out.println(e.toString());
 			}

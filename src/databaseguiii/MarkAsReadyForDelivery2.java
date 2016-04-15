@@ -14,31 +14,28 @@ class ReadyForDelivery2 extends JFrame {
 
 private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
 private User user = new User("",0,"","",database);
-
-private ArrayList<String> myList;
-private JList <Order> order_list = new JList <Order>();
+private DefaultListModel<String> model = new DefaultListModel<>();
+private JList <String> order_list;
 
 
  public ReadyForDelivery2(String tittel) {
 	 java.util.Date utilDate = new java.util.Date();
 	 java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 	 ArrayList<Order> order = null;
-	try {
-		order = user.viewFoodOrders(sqlDate);
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+
 	 setTitle(tittel);
 	 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	 
-	 myList = new ArrayList<>();
+	 try {
+		order = user.viewFoodOrders(sqlDate);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
 		
 	 for(int i = 0; i< order.size(); i++){
-	 	myList.add(order.get(i).toString());   
+	 	model.addElement(order.get(i).toString());   
 	 }
-	 
-	 myList.toArray();
+	 order_list = new JList<>(model);
 	 
 	 JLabel ledetekst = new JLabel("Choose one or more meals.");
 	 add(ledetekst, BorderLayout.NORTH);
@@ -65,8 +62,6 @@ private JList <Order> order_list = new JList <Order>();
      
    }
  }
-
- 
 }
 
 class MarkAsReadyForDelivery2 {
