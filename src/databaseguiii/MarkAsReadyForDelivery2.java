@@ -17,14 +17,21 @@ private User user = new User("",0,"","",database);
 
 java.util.Date utilDate = new java.util.Date();
 java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-ArrayList <Order> order=  user.viewFoodOrders(sqlDate);
+ArrayList <Order> order =  user.viewFoodOrders(sqlDate);
+/*
 
-//private JTable order_array= new JTable();
+ArrayList<String> my_list = new ArrayList<String>();
+	
+for(int i = 0; i< order.size(); i++){
+	my_list.add(order.get(i).toString());   
+}
 private JList <Order> order_list = new JList <Order>();
 
+*/
  public ReadyForDelivery2(String tittel) {
 	 setTitle(tittel);
 	 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	 
 
 	 JLabel ledetekst = new JLabel("Choose one or more meals.");
 	 add(ledetekst, BorderLayout.NORTH);
@@ -50,7 +57,7 @@ private JList <Order> order_list = new JList <Order>();
     }
     private class LineListener implements ListSelectionListener{
     	public void valueChanged(ListSelectionEvent event){
-    		int line = 
+    	//	int line = 
     	} 
     }
   }
