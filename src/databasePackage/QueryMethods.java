@@ -811,9 +811,24 @@ public class QueryMethods {
 	}
 	
 	// **** IKKE TESTET
-	public static String[][] viewOrdersBydeliveryDate(java.sql.Date deliveryDate, Database database) throws Exception{
+	public static String[][] viewOrdersByDeliveryDate(java.sql.Date deliveryDate, Database database) throws Exception{
 		
 		String statement = "SELECT * FROM food_order NATURAL JOIN ordered_meal where food_order.order_id = ordered_meal.order_id AND delivery_date = '" + deliveryDate + "';";
+		
+		database.makeSingleStatement(statement);
+		
+		return database.getLastResult();
+	}
+	
+	// **** IKKE TESTET - IKKE IMPLEMENTERT
+	public static String[][] viewMealsInOrderByDeliveryDate(int orderID, java.sql.Date deliveryDate, Database database) throws Exception{
+			
+		String statement = "SELECT a.meal_name, b.adress "
+				+ "FROM meal AS a, customer AS b, (SELECT a.order_id, a.meal_id, b.customer_id FROM "
+				+ "ordered_meal AS a, "
+				+ "food_order AS b WHERE a.delivery_date = '" + deliveryDate + "' "
+				+ "AND a.order_id = b.order_id AND a.order_id = " + orderID + ") AS c "
+				+ "WHERE a.meal_id = c.meal_id AND b.customer_id = c.customer_id";
 		
 		database.makeSingleStatement(statement);
 		
@@ -853,7 +868,7 @@ public class QueryMethods {
 		return database.getLastResult();
 	}
 	
-	public static String[][] generateDeliveryList(String currentDate, Database database) throws Exception{
+	public static String[][] generateDeliveryList(java.sql.Date currentDate, Database database) throws Exception{
 		
 		String statement = "SELECT a.meal_name, b.adress "
 				+ "FROM meal AS a, customer AS b, (SELECT a.meal_id, b.customer_id FROM "

@@ -34,7 +34,11 @@ public class TestOrder {
 			assertEquals(order[i], orders[0][i]);
 		}
 		
-		String[][] delivery = QueryMethods.generateDeliveryList("2016-04-13", database);
+		java.text.SimpleDateFormat s = new java.text.SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date tDate = s.parse("2016-04-13");
+		java.sql.Date date = new java.sql.Date(tDate.getTime());
+		
+		String[][] delivery = QueryMethods.generateDeliveryList(date, database);
 		
 		for(int x=0;x<delivery.length;x++){
 			for(int y=0;y<delivery[x].length;y++){
@@ -42,6 +46,24 @@ public class TestOrder {
 			}
 			System.out.println("");
 		}
+		
+		delivery = QueryMethods.viewOrdersByDeliveryDate(date, database);
+		
+		for(int x=0;x<delivery.length;x++){
+			for(int y=0;y<delivery[x].length;y++){
+				System.out.print(delivery[x][y] + " ");
+			}
+			System.out.println("");
+		}
+
+		delivery = QueryMethods.viewMealsInOrderByDeliveryDate(Integer.parseInt(order[0]), date, database);
+		
+		for(int x=0;x<delivery.length;x++){
+			for(int y=0;y<delivery[x].length;y++){
+				System.out.print(delivery[x][y] + " ");
+			}
+			System.out.println("");
+		}		
 		
 		// attempt to register new info about existing entry
 		boolean exp = QueryMethods.updateOrder(Integer.parseInt(order[0]), order[1], Integer.parseInt(order[2]), "Ny info", order[4], database);
