@@ -5,8 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import databasePackage.Database;
-import databasePackage.QMFood;
+import databasePackage.*;
 
 public class TestSubscriptionOrder {
 	public Database database;
@@ -23,15 +22,15 @@ public class TestSubscriptionOrder {
 	@Test
 	public void subscriptionOrderTest() throws Exception{
 
-		boolean result = QMFood.addSubscriptionToOrder(10003, 1, "2012-12-12", "2012-12-23", 1, database);
+		boolean result = QMOrder.addSubscriptionToOrder(10003, 1, "2012-12-12", "2012-12-23", 1, database);
 		boolean expRes = true;
 		assertEquals(expRes, result);
 		
-		result = QMFood.updateSubscriptionInOrder(10003, 2, "2012-12-12", "2012-12-23", 1, database);
+		result = QMOrder.updateSubscriptionInOrder(10003, 2, "2012-12-12", "2012-12-23", 1, database);
 		expRes = true;
 		assertEquals(expRes, result);
 		
-		String[][] view = QMFood.viewSubscriptions(database);
+		String[][] view = QMFood.viewSubscriptionPlans(database);
 		for(int x=0;x<view.length;x++){
 			for(int y=0;y<view[x].length;y++){
 				System.out.print(view[x][y] + " ");
@@ -47,7 +46,7 @@ public class TestSubscriptionOrder {
 			System.out.println("");
 		}
 				
-		result = QMFood.removeSubscriptionFromOrder(10003 ,database);
+		result = QMOrder.removeSubscriptionFromOrder(10003 ,database);
 		expRes = true;
 		assertEquals(expRes, result);		
 	}

@@ -6,8 +6,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import databasePackage.Database;
-import databasePackage.QMFood;
+import databasePackage.*;
 
 public class TestCompany {
 	public Database database;
@@ -25,20 +24,20 @@ public class TestCompany {
 	@Test
 	public void companyTest() throws Exception{
 
-		String[][] companies = QMFood.viewAllCompanies(database);
-		String[] company = QMFood.viewCompany(Integer.parseInt(companies[0][0]), database);
+		String[][] companies = QMCustomer.viewAllCompanies(database);
+		String[] company = QMCustomer.viewCompany(Integer.parseInt(companies[0][0]), database);
 		
 		for(int i=0;i<company.length;i++){
 			assertEquals(company[i], companies[0][i]);
 		}
 		
-		boolean exp = QMFood.updateCompany(Integer.parseInt(company[0]), "feil navn", database);
+		boolean exp = QMCustomer.updateCompany(Integer.parseInt(company[0]), "feil navn", database);
 		assertEquals(exp, true);		
 		
-		exp = QMFood.removeCompany(Integer.parseInt(company[0]), database);
+		exp = QMCustomer.removeCompany(Integer.parseInt(company[0]), database);
 		assertEquals(exp, true);
 		
-		exp = QMFood.registerCompanyToCustomer(Integer.parseInt(company[0]), company[1], database);
+		exp = QMCustomer.registerCompanyToCustomer(Integer.parseInt(company[0]), company[1], database);
 		assertEquals(exp, true);		
 	}
 }

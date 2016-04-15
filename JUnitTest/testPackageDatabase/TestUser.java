@@ -22,11 +22,11 @@ public class TestUser {
 	public void testUser() throws Exception{
 		System.out.println("Test register new user");
 
-		QMFood.removeUser("Nils", database);		
+		QMUser.removeUser("Nils", database);		
 		
 		//Register new user
 		boolean expResult = true;
-		boolean result = QMFood.registerUser("Nils", 3, "Nils Hansen", "1234", database);
+		boolean result = QMUser.registerUser("Nils", 3, "Nils Hansen", "1234", database);
 		assertEquals(expResult, result);
 /*		
 		//Try to register same user again
@@ -35,17 +35,17 @@ public class TestUser {
 		assertEquals(expResult, result);
 */		
 		expResult = true;
-		result = QMFood.updateUser("Nils", 3, "Nils Veem", "1234", database);
+		result = QMUser.updateUser("Nils", 3, "Nils Veem", "1234", database);
 		assertEquals(expResult, result);
 
-		String[] resultString = QMFood.viewUser("Nils", database);
+		String[] resultString = QMUser.viewUser("Nils", database);
 		
 		assertEquals(resultString[0],"Nils");
 		assertEquals(resultString[1],"3");
 		assertEquals(resultString[2],"Nils Veem");		
 				
 		expResult = true;
-		result = QMFood.removeUser("Nils", database);
+		result = QMUser.removeUser("Nils", database);
 		assertEquals(expResult, result);
 		
 	}

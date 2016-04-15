@@ -6,8 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import databasePackage.Database;
-import databasePackage.QMFood;
+import databasePackage.*;
 
 public class TestZone {
 	public Database database;
@@ -25,20 +24,20 @@ public class TestZone {
 	public void zoneTest() throws Exception{
 
 		// view all entries
-		String[][] zones = QMFood.viewZones(database);
+		String[][] zones = QMCustomer.viewZones(database);
 		// select last entry
 		String[] zone = zones[2];
 				
 		// attempt to register new info about existing entry
-		boolean exp = QMFood.updateZone(Integer.parseInt(zone[0]), "Ny info", database);
+		boolean exp = QMCustomer.updateZone(Integer.parseInt(zone[0]), "Ny info", database);
 		assertEquals(true, exp);		
 		
 		// attempt to remove entry		
-		exp = QMFood.removeZone(Integer.parseInt(zone[0]), database);
+		exp = QMCustomer.removeZone(Integer.parseInt(zone[0]), database);
 		assertEquals(true, exp);
 
 		// attempt to reregister removed entry	
-		int iexp = QMFood.registerZone(zone[1], database);
+		int iexp = QMCustomer.registerZone(zone[1], database);
 		assertNotEquals(-1, iexp);		
 	}
 }
