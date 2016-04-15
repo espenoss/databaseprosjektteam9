@@ -64,7 +64,7 @@ public class TestSales {
 		assertEquals(result, expResult);
 	}
 	
-	@Ignore
+	@Test
 	public void testRegisterCompanyToCustomer() throws Exception {
 		System.out.println("Test registerCompanyToCustomer");
 		

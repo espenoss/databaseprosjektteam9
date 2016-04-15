@@ -74,8 +74,4 @@ public class Ingredient {
 		return "Ingredient: "+ingName+". Quantity: "+storageQuantity +" "+unit;
 	}
 	
-	
-	public static void main(String[] args){
-		Ingredient ing = new Ingredient()
-	}
 }
