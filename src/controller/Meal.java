@@ -2,7 +2,7 @@ package controller;
 import java.util.ArrayList;
 
 import databasePackage.Database;
-import databasePackage.QueryMethods;
+import databasePackage.QMFood;
 
 public class Meal {
 	private ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>(); 	//Lists ingredients (objects) that is used in the meal
@@ -77,7 +77,7 @@ public class Meal {
 	//FINISHED (Must be tested)
 	//Fetches ingredient information from database belonging to this meal. 
 	public void fetchIngredients(Database database) throws Exception{
-		String[][] ingT = QueryMethods.viewIngredientsInMeal(mealID, database);
+		String[][] ingT = QMFood.viewIngredientsInMeal(mealID, database);
 		TextEditor t = new TextEditor();
 		
 		for (int i=0;i<ingT.length;i++){

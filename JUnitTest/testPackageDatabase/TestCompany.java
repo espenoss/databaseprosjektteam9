@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import databasePackage.Database;
-import databasePackage.QueryMethods;
+import databasePackage.QMFood;
 
 public class TestCompany {
 	public Database database;
@@ -25,20 +25,20 @@ public class TestCompany {
 	@Test
 	public void companyTest() throws Exception{
 
-		String[][] companies = QueryMethods.viewAllCompanies(database);
-		String[] company = QueryMethods.viewCompany(Integer.parseInt(companies[0][0]), database);
+		String[][] companies = QMFood.viewAllCompanies(database);
+		String[] company = QMFood.viewCompany(Integer.parseInt(companies[0][0]), database);
 		
 		for(int i=0;i<company.length;i++){
 			assertEquals(company[i], companies[0][i]);
 		}
 		
-		boolean exp = QueryMethods.updateCompany(Integer.parseInt(company[0]), "feil navn", database);
+		boolean exp = QMFood.updateCompany(Integer.parseInt(company[0]), "feil navn", database);
 		assertEquals(exp, true);		
 		
-		exp = QueryMethods.removeCompany(Integer.parseInt(company[0]), database);
+		exp = QMFood.removeCompany(Integer.parseInt(company[0]), database);
 		assertEquals(exp, true);
 		
-		exp = QueryMethods.registerCompanyToCustomer(Integer.parseInt(company[0]), company[1], database);
+		exp = QMFood.registerCompanyToCustomer(Integer.parseInt(company[0]), company[1], database);
 		assertEquals(exp, true);		
 	}
 }

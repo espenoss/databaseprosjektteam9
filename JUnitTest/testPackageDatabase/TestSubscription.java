@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import databasePackage.Database;
-import databasePackage.QueryMethods;
+import databasePackage.QMFood;
 
 public class TestSubscription {
 	public Database database;
@@ -25,20 +25,20 @@ public class TestSubscription {
 	public void subscriptionTest() throws Exception{
 
 		// view all entries
-		String[][] subscriptions = QueryMethods.viewSubscriptionPlans(database);
+		String[][] subscriptions = QMFood.viewSubscriptionPlans(database);
 		// select last entry
 		String[] sub = subscriptions[subscriptions.length-1];
 		
 		// attempt to register new info about existing entry
-		boolean exp = QueryMethods.updateSubscriptionPlan(Integer.parseInt(sub[0]), sub[1], database);
+		boolean exp = QMFood.updateSubscriptionPlan(Integer.parseInt(sub[0]), sub[1], database);
 		assertEquals(true, exp);		
 		
 		// attempt to remove entry		
-		exp = QueryMethods.removeSubscriptionPlan(Integer.parseInt(sub[0]), database);
+		exp = QMFood.removeSubscriptionPlan(Integer.parseInt(sub[0]), database);
 		assertEquals(true, exp);
 
 		// attempt to reregister removed entry	
-		int iexp = QueryMethods.registerSubscriptionPlan(sub[1], database);
+		int iexp = QMFood.registerSubscriptionPlan(sub[1], database);
 		assertNotEquals(-1, iexp);		
 	}
 }

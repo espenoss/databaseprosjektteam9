@@ -47,7 +47,7 @@ public class TestSales {
 	@Before
 	public void setUp() throws Exception {
 		instance = new Sales("hanne",3,"Hanne Hansen", "123456", database);
-		Customer customer1 = new Customer(10000,"Geir","Hansen","73329090", "geir@hansen.com",
+		customer1 = new Customer(10000,"Geir","Hansen","73329090", "geir@hansen.com",
 				"Nedre Bakklandet 61", 7014, 1,"Allergisk mot sopp", true);
 		
 	}

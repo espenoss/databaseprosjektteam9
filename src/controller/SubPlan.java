@@ -1,7 +1,7 @@
 package controller;
 
 import databasePackage.Database;
-import databasePackage.QueryMethods;
+import databasePackage.QMFood;
 
 /* Subscription plan
  * A set plan made by the cook 
@@ -70,6 +70,6 @@ public class SubPlan {
 	
 	//Registers information to database
 	public boolean updateSubPlan(Database database) throws Exception{
-		return QueryMethods.updateSubscriptionPlan(subPlanID, name, database);
+		return QMFood.updateSubscriptionPlan(subPlanID, name, database);
 	}
 }

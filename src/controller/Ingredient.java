@@ -40,7 +40,7 @@ public class Ingredient {
 	
 	//Register information to database
 	public boolean updateStorage(Database database) throws Exception{
-		return(QueryMethods.updateIngredient(ingID, ingName, storageQuantity, unit, database));
+		return(QMFood.updateIngredient(ingID, ingName, storageQuantity, unit, database));
 	}
 	
 
