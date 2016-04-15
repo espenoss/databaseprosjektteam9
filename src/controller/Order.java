@@ -143,7 +143,8 @@ public class Order {
 		Order test = new Order(10000,"2016-03-01",10000,"Info", "hanneh");
 		System.out.println(test);
 		
-		java.sql.Date dato = java.sql.Date.valueOf( "2016-03-01");
+		java.sql.Date dato = java.sql.Date.valueOf("2016-03-01");
+		System.out.println(dato);
 		
 		test.fetchMealsByDeliveryDate(dato, database);
 		System.out.println(test);
