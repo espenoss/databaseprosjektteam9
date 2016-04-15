@@ -54,7 +54,7 @@ public class User implements java.io.Serializable{
 	//Returns an arraylist with orderObjects containing belonging meal objects. 
 	public ArrayList<Order> viewFoodOrders(java.sql.Date date) throws Exception{
 		
-		String[][] orderT = QueryMethods.viewOrdersBydeliveryDate(date, database);
+		String[][] orderT = QueryMethods.viewOrdersByDeliveryDate(date, database);
 		Order tempOrder;
 		ArrayList<Order> orderList = new ArrayList<Order>();
 		TextEditor t = new TextEditor();
