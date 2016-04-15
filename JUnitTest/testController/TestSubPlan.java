@@ -44,7 +44,7 @@ public class TestSubPlan {
 		boolean expRes = true;
 		
 		assertEquals(res, expRes);
-		// boolean addMealToSubPlan(Meal meal, int weekdayNumber)
+		
 	}
 	@Test
 	public void testShouldFailAddMealToSubPlan(){
@@ -64,7 +64,7 @@ public class TestSubPlan {
 		boolean expRes = true;
 		
 		assertEquals(res, expRes);
-		// boolean removeMealFromPlan(int weekdayNumber)
+		
 	}
 	@Test
 	public void testShouldFailRemoveMealFromPlan(){
@@ -84,6 +84,6 @@ public class TestSubPlan {
 		boolean expRes = true;
 		
 		assertEquals(res, expRes);
-		// boolean updateSubPlan(Database database)
+		
 	}
 }

@@ -14,8 +14,8 @@ public class Cook extends User {
 	
 	//FINISHED is tested
 	//Lets the cook register a new meal
-	public Meal createMeal(int mealID, String mealName, String instructions, boolean available, int price) throws Exception{ 
-		mealID = QMFood.registerMeal(mealName, instructions, available, price, database);
+	public Meal createMeal(String mealName, String instructions, boolean available, int price) throws Exception{ 
+		int mealID = QMFood.registerMeal(mealName, instructions, available, price, database);
 		if(mealID < 0){
 			return null;
 		}
