@@ -18,20 +18,6 @@ public class TextEditor {
 		return i;
 	}
 	
-
-/*	public int stringToInt(String text){ // removes blank spaces and parses string to an int
-		int i = 0;
-		if(!text.equals(null)){
-			text.trim();
-			try{
-				i = Integer.parseInt(text);
-			} catch (NumberFormatException e) {
-				System.out.println("Input not an int");
-			}
-		}
-		return i;
-	}   */
-	
 	public float stringToFloat(String text){ // removes blank spaces and parses a string to a float
 		float i = 0;
 		if(!text.equals(null)){

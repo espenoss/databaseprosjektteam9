@@ -1,17 +1,13 @@
 package testController;
 
-import databasePackage.QMUser;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import controller.LogIn;
-import controller.User;
 import databasePackage.Database;
-import databasePackage.QMUser;
 
 public class TestLogIn {
 	private static Database database;
