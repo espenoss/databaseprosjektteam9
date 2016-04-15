@@ -146,6 +146,12 @@ public class User implements java.io.Serializable{
 			return res;
 	}
 	
+	//LAG VIEW SUBSCRIPTION PLAN
+	
+	public SubPlan viewSubPlan(){
+		return null;
+	}
+	
 	
 	
 	public boolean equals(Object obj){
