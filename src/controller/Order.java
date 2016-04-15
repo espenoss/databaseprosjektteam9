@@ -76,7 +76,7 @@ public class Order {
 	}	
 	
 	//Register information to databasee
-	public boolean updateOrder(Database database) throws Exception{
+	public boolean uploadOrder(Database database) throws Exception{
 		return QueryMethods.updateOrder(orderID, orderDate, customerID, info, userID, database);
 	}
 	
