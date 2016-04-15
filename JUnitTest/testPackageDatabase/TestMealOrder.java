@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import databasePackage.Database;
-import databasePackage.QueryMethods;
+import databasePackage.QMFood;
 
 public class TestMealOrder {
 	public Database database;
@@ -27,19 +27,19 @@ public class TestMealOrder {
 		boolean expRes = true;
 		assertEquals(expRes, result);
 		
-		result = QueryMethods.updateMealInOrder(10002, 1, "2012-12-12", 3, true, true, database);
+		result = QMFood.updateMealInOrder(10002, 1, "2012-12-12", 3, true, true, database);
 		expRes = true;
 		assertEquals(expRes, result);
 		
-		result = QueryMethods.markMealOrderAsReadyForDelivery(10002, 1, "2012-12-12", database);
+		result = QMFood.markMealOrderAsReadyForDelivery(10002, 1, "2012-12-12", database);
 		expRes = true;
 		assertEquals(expRes, result);		
 
-		result = QueryMethods.markMealOrderAsDelivered(10002, 1, "2012-12-12", database);
+		result = QMFood.markMealOrderAsDelivered(10002, 1, "2012-12-12", database);
 		expRes = true;
 		assertEquals(expRes, result);		
 
-		String[][] view = QueryMethods.viewMealsInOrder(10002, database);
+		String[][] view = QMFood.viewMealsInOrder(10002, database);
 		for(int x=0;x<view.length;x++){
 			for(int y=0;y<view[x].length;y++){
 				System.out.print(view[x][y] + " ");
@@ -47,7 +47,7 @@ public class TestMealOrder {
 			System.out.println("");
 		}
 		
-		result = QueryMethods.removeMealFromOrder(10002, 1, "2012-12-12", database);
+		result = QMFood.removeMealFromOrder(10002, 1, "2012-12-12", database);
 		expRes = true;
 		assertEquals(expRes, result);		
 	}

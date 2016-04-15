@@ -55,7 +55,7 @@ public class User implements java.io.Serializable{
 	//Returns an arraylist with orderObjects containing belonging meal objects. 
 	public ArrayList<Order> viewFoodOrders(java.sql.Date date) throws Exception{
 		
-		String[][] orderT = QueryMethods.viewOrdersByDeliveryDate(date, database);
+		String[][] orderT = QMOrder.viewOrdersByDeliveryDate(date, database);
 		Order tempOrder;
 		ArrayList<Order> orderList = new ArrayList<Order>();
 		TextEditor t = new TextEditor();
@@ -79,7 +79,7 @@ public class User implements java.io.Serializable{
 	//FINISHED NOT TESTED
 	//returns an arraylist with all available meals
 	public ArrayList<Meal> viewAvailableMeals() throws Exception{
-		String[][] mealT = QueryMethods.viewMeals(database);
+		String[][] mealT = QMFood.viewMeals(database);
 		Meal tempMeal; 
 		
 		ArrayList<Meal> mealList = new ArrayList<Meal>();
@@ -100,7 +100,7 @@ public class User implements java.io.Serializable{
 	//returns an arraylist with customer objects with all active customers
 	public ArrayList<Customer> viewCustomerList() throws Exception{
 		
-		String[][] list = QueryMethods.viewAllCustomers(database);
+		String[][] list = QMCustomer.viewAllCustomers(database);
 		Customer tempCustomer;
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
 		
@@ -121,7 +121,7 @@ public class User implements java.io.Serializable{
 	//FINISHED --- MÅ TESTES
 	//takes an customerId returns a single customer object, or null if not found
 	public Customer viewSingleCustomer(int customerId) throws Exception{
-		String[][] list = QueryMethods.viewAllCustomers(database);
+		String[][] list = QMCustomer.viewAllCustomers(database);
 		
 		for(int i=0; i<list.length; i++){
 			if (t.stringToInt(list[i][9])==1){
@@ -139,7 +139,7 @@ public class User implements java.io.Serializable{
 	//Lists orderIngredients as String
 	public String viewOrderIngredients() throws Exception{
 		String res = "";
-			String[][] temp = QueryMethods.viewIngredients(database);
+			String[][] temp = QMFood.viewIngredients(database);
 			for (int i = 0; i < temp.length; i++){
 				res += temp[i];
 			}
@@ -152,6 +152,10 @@ public class User implements java.io.Serializable{
 		return null;
 	}
 	
+	
+	public Ingredient addNewIngredient(){
+		return null;
+	}
 	
 	
 	public boolean equals(Object obj){
