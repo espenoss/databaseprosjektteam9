@@ -15,24 +15,25 @@ class ReadyForDelivery2 extends JFrame {
 private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
 private User user = new User("",0,"","",database);
 
-java.util.Date utilDate = new java.util.Date();
-java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-ArrayList <Order> order =  user.viewFoodOrders(sqlDate);
-/*
-
-ArrayList<String> my_list = new ArrayList<String>();
-	
-for(int i = 0; i< order.size(); i++){
-	my_list.add(order.get(i).toString());   
-}
+private java.util.Date utilDate = new java.util.Date();
+private java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+private ArrayList<Order> order =  user.viewFoodOrders(sqlDate);
+private ArrayList<String> myList;
 private JList <Order> order_list = new JList <Order>();
 
-*/
+
  public ReadyForDelivery2(String tittel) {
 	 setTitle(tittel);
 	 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	 
-
+	 myList = new ArrayList<>();
+		
+	 for(int i = 0; i< order.size(); i++){
+	 	myList.add(order.get(i).toString());   
+	 }
+	 
+	 myList.toArray();
+	 
 	 JLabel ledetekst = new JLabel("Choose one or more meals.");
 	 add(ledetekst, BorderLayout.NORTH);
 
