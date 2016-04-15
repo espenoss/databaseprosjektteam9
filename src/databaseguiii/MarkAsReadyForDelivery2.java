@@ -11,10 +11,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 class ReadyForDelivery2 extends JFrame {
-  private static final String [] MEALS =
-    {"Spaghetti", "Steak", "Fish", "Salad"};
-  private JTextField tekst = new JTextField("You have not chosen any meals yet.     ");
-  private JList<String> meals = new JList<String>(MEALS);  // Nå er listen laget!
+  
 
   public ReadyForDelivery2(String tittel) {
     setTitle(tittel);
