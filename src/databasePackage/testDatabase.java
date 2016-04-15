@@ -9,6 +9,6 @@ public class testDatabase {
 		
 		Database database = new Database(dbDriver, dbName);
 		
-		System.out.println(database.initiateDb());
+		database.initiateDb();
 	}
 }

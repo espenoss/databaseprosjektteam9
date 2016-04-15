@@ -10,7 +10,7 @@ import controller.Ingredient;
 import databasePackage.Database;
 
 public class TestIngredient {
-	private Database database;
+	private static Database database;
 	private Ingredient ingredient;
 	
 	@BeforeClass
@@ -19,8 +19,14 @@ public class TestIngredient {
 		String password = "e82L3Dat";
 		
 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
-		Database database = new Database("com.mysql.jdbc.Driver", databasename);
+		database = new Database("com.mysql.jdbc.Driver", databasename);
 		database.initiateDb();
+		String insert1 = "INSERT INTO ingredient VALUES(1, 'potato', 50, 'kg')";
+		String insert2 = "INSERT INTO ingredient VALUES(2, 'carrot', 30, 'kg')";
+		String insert3 = "INSERT INTO ingredient VALUES(3, 'cheese', 10, 'kg')";
+		database.makeSingleStatement(insert1);
+		database.makeSingleStatement(insert2);
+		database.makeSingleStatement(insert3);
 	}
 
 	@Before
@@ -28,9 +34,9 @@ public class TestIngredient {
 	}
 
 	@Test
-	public void test() throws Exception{
+	public void testShouldUpdateStorage() throws Exception{
 		System.out.println("Update storage test");
-		ingredient = new Ingredient(1, "potato", 50, "kg");
+		ingredient = new Ingredient(1, "poteto", 150, "kg");
 		
 		boolean res = ingredient.updateStorage(database);
 		boolean expRes = true;
