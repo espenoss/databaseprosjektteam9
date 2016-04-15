@@ -17,10 +17,6 @@ private User user = new User("",0,"","",database);
 java.util.Date utilDate = new java.util.Date();
 java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 ArrayList <Order> order=  user.viewFoodOrders(sqlDate);
-//JComboBox<Order> jcbBread = new JComboBox<Order>(order);
-for(int i=0; i<order.size(); i++){
-	JComboBox.addItem(order.get(i));
-}
 
 //private JTable order_array= new JTable();
 private JList <Order> order_list = new JList <Order>();
