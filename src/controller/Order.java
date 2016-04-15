@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import databasePackage.*;
 
@@ -8,17 +9,15 @@ import databasePackage.*;
 public class Order {
 	private int orderID;
 	private String orderDate; // java.util.Date / java.sql.Date?
-	private String deliveryDate;
 	private int customerID;
 	private String info;
 	private String userID;
 	private ArrayList<Meal> meals;
 
 	
-	public Order(int orderID, String orderDate, String deliveryDate, int customerID, String info, String userID){
+	public Order(int orderID, String orderDate, int customerID, String info, String userID){
 		this.orderID = orderID;
 		this.orderDate = orderDate;
-		this.deliveryDate = deliveryDate;
 		this.customerID = customerID;
 		this.info = info;
 		this.userID = userID;
@@ -32,10 +31,7 @@ public class Order {
 		return orderDate;
 	}
 	
-	public String getDeliveryDate(){
-		return deliveryDate;
-	}
-	
+
 	public int getCustomerID(){
 		return customerID;
 	}
@@ -66,12 +62,12 @@ public class Order {
 	}
 	
 	//Marks meal as ready for delivery to customer, given index of meal in mealArray
-	public boolean markMealAsReady(int index, Database database) throws Exception{
+	public boolean markMealAsReady(int index, String deliveryDate, Database database) throws Exception{
 		return QueryMethods.markMealOrderAsReadyForDelivery(orderID, meals.get(index).getMealID(), deliveryDate, database);
 	}
 	
 	//Marks meal as delivered to customer, given index of meal in mealArray
-	public boolean markMealAsDelivered(int index, Database database) throws Exception{
+	public boolean markMealAsDelivered(int index, String deliveryDate, Database database) throws Exception{
 		return QueryMethods.markMealOrderAsDelivered(orderID, meals.get(index).getMealID(), deliveryDate, database);
 	}	
 	
@@ -83,16 +79,17 @@ public class Order {
 	
 	
 	//Fetches meals from database
-	public void fetchMeals(Database database) throws Exception{
+	public void fetchMealsByDeliveryDate(Date deliveryDate, Database database) throws Exception{
 
-		String[][] mealT = QueryMethods.viewMealsInOrder(orderID, database);
+		String[][] mealT = QueryMethods.viewMealsInOrderByDeliveryDate(orderID, deliveryDate, database);
 		TextEditor t = new TextEditor();
 		boolean check= false;
 		
 		for(int i=0;i<mealT.length;i++){			
-			for(int j=0;j<meals.size();j++){		//Checks if meal is in arrayList already
+			for(int j=0;j<meals.size();j++){		//Checks if meal is in arrayList already, replaces the meal
 				if (meals.get(j).getMealID()==t.stringToInt(mealT[i][0])){
-					check=true;
+					meals.add(j,new Meal(t.stringToInt(mealT[i][0]),mealT[i][1],mealT[i][2],true, t.stringToInt(mealT[i][4])));
+					check= true;
 				}
 			}
 			if (!check){							//Adds meal to arrayList if check is false
@@ -105,8 +102,7 @@ public class Order {
 	
 	public String toString(){
 		String res = "";
-		res += "OrderID: " + orderID + ". Orderdate: " + orderDate + ". Delivery date: " + deliveryDate
-				+ ". Info: " + info + "\n";
+		res += "OrderID: " + orderID + ". Orderdate: " + orderDate+ ". Info: " + info + "\n";
 		res += "Meals: \n";
 		for(Meal m:meals){
 			res += "   " + m.toString() + "\n";

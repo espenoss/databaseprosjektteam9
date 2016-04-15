@@ -22,7 +22,7 @@ public class Sales extends User {
 	    
 		int orderID = QueryMethods.registerOrder(dateToday, customerID, info, userID, database);
 		
-		return new Order(orderID, dateToday, deliveryDate, customerID, info, userID);
+		return new Order(orderID, dateToday, customerID, info, userID);
 	}
 	
 	
