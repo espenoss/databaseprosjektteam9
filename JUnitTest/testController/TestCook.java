@@ -47,13 +47,23 @@ public class TestCook {
 		assertEquals(result, expResult);
 		
 	}
+
+	@Test
+	public void testShouldDeleteMeal() throws Exception{
+		System.out.println("Test: Delete meal");
 		
+		boolean res = cook.deleteMeal(1);
+		boolean expRes = true;
+		
+		assertEquals(res, expRes);
+	}
+	
+	// 	****ViewSubPlan must be created in class User ****
 	@Ignore("Missing method")
 	public void testShoulRegisterSubPlan() throws Exception{
 		System.out.println("Test: Register subscriptionplan");
 		SubPlan result = cook.registerSubPlan("name", database);
 		SubPlan expResult = instance.viewSubPlan(); 	
-		// ****ViewSubPlan must be created in class User ****
 		
 		assertEquals(result, expResult);
 	
