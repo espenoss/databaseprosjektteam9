@@ -26,16 +26,6 @@ class ParentWindow extends JFrame {
 			private JTextField preferencesField = new JTextField(100);
 			private JTextField phoneNumberField = new JTextField(12);
 			
-			private String surName;
-			private String firstName;
-			private String email;
-			private String adress;
-			private int zip_code;
-			private int zone_nr;
-			private String preferences;
-			private String phoneNumber;
-			private boolean active;
-			
 			public CustomerDialog(JFrame parent){
 				super(parent, "Fill in new information about a customer");
 				add(new JPanel(), BorderLayout.NORTH);
@@ -91,26 +81,31 @@ class ParentWindow extends JFrame {
 				}
 			}
 			public boolean okData(){
-				firstName = firstNameField.getText();	
-				surName = surNameField.getText();
-				email = emailField.getText();
-				adress = adressField.getText();
+				int custIndex = customerSelect.getSelectedIndex();
+				Customer currCust = customerList.get(custIndex);				
+				
+				currCust.setFirstName(firstNameField.getText());	
+				currCust.setSurName(surNameField.getText());
+				currCust.setAdress(adressField.getText());
+				currCust.setEmail(emailField.getText());
+				currCust.setAdress(adressField.getText());
 				
 				String zip_codeText  = zip_codeField.getText();
 				int myIntZip = editor.stringToInt(zip_codeText);
-				zip_code = myIntZip;
+				currCust.setZipCode(myIntZip);
 				
 				String zone_nrText  = zone_nrField.getText();
 				int myIntZone = editor.stringToInt(zone_nrText);
-				zone_nr = myIntZone;
+				currCust.setZoneNr(myIntZone);
 				
-				preferences = preferencesField.getText();	
-				phoneNumber = phoneNumberField.getText();
+				currCust.setPreferences(preferencesField.getText());	
+				currCust.setPhoneNumber(phoneNumberField.getText());
 				
 				try {
-					customer.updateCustomer(database);
+					currCust.updateCustomer(database);
 				} catch (Exception e) {
 					System.out.println(e.toString());
+					return false;
 				}
 				return true;		
 			}
