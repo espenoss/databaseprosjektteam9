@@ -57,6 +57,8 @@ public class Meal {
 		instr = instructions;
 		return instr;
 	}
+	
+	// trenger vi disse??? 
 	public void setOrderID(int orderID){
 		this.orderID = orderID;
 	}

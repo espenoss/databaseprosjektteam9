@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Sales extends User {
 	
-	public Sales(String userID,int userType, String name,String pword, Database database) {
+	public Sales(String userID, int userType, String name, String pword, Database database) {
 		super(userID, userType, name, pword, database);
 	}
 
@@ -23,7 +23,6 @@ public class Sales extends User {
 		int orderID = QueryMethods.registerOrder(dateToday, customerID, info, userID, database);
 		
 		return new Order(orderID, dateToday, deliveryDate, customerID, info, userID);
-
 	}
 	
 	

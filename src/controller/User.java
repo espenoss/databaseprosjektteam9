@@ -50,7 +50,7 @@ public class User implements java.io.Serializable{
 	}
 	
 	
-	//FINISHED --- MÅ TESTES
+	//IKKE FERDIG --- MÅ TESTES
 	//Returns an arraylist with orderObjects containing belonging meal objects. 
 	public ArrayList<Order> viewFoodOrders(java.sql.Date date) throws Exception{
 		
