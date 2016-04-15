@@ -15,7 +15,7 @@ import databasePackage.QueryMethods;
  * Customers can subscribe to a plan, but not change it
  */
 
-class SubPlan {
+public class SubPlan {
 	private int subPlanID;
 	private String name;
 	private Meal[] meals = new Meal[7]; // [i] = null if no delivery that day
