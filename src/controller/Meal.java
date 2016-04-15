@@ -5,8 +5,8 @@ import databasePackage.Database;
 import databasePackage.QueryMethods;
 
 public class Meal {
-	private ArrayList<Ingredient> ingredients; 	//Lists ingredients (objects) that is used in the meal
-	private ArrayList<Float> ingQuantity;		//List ingredient quantity in same order as ingredients
+	private ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>(); 	//Lists ingredients (objects) that is used in the meal
+	private ArrayList<Float> ingQuantity = new ArrayList<Float>();		//List ingredient quantity in same order as ingredients
 	private int mealID;
 	private String mealName;
 	private String instructions;
