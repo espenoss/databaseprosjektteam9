@@ -30,7 +30,7 @@ public class Cook extends User {
 		return new SubPlan(subPlanID, name);
 	}
 	
-	// Deletes meal from database. --- NOT TESTED
+	// Deletes meal from database. ---  is tested
 	public boolean deleteMeal(int mealID) throws Exception{
 		boolean ok = QMFood.removeMeal(mealID, database);
 		if(ok){
