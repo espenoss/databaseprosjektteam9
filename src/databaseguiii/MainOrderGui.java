@@ -5,34 +5,31 @@ import databasePackage.Database;
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
 //Metoden registerNewOrder() ligger i Sales.java
 
 class Parentwindow3 extends JFrame {
 	private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
-	private Sales sales = new Sales("",0, "","", database); 
+	private Sales sales = new Sales("espenme",0, "Espen","hei", database); 
   
 
 	//int customerID, String deliveryDate, String info, String userID, Database database
 	private class RegisterOrderDialog extends MyDialog{
 		private TextEditor editor = new TextEditor();
-		private JTextField customer_idField = new JTextField(10);
+		private ArrayList<Customer> customerList = new ArrayList<>();
+		private JComboBox customerSelect;	
 		private JTextField delivery_dateField = new JTextField(10);
 		private JTextField infoField = new JTextField(10);
-		private JTextField userIdField = new JTextField(10);
 		private int customerID;
 		private String deliveryDate;
 		private String info;
-		private String userID;
-//		private ArrayList<Meal> meals;
-//		private int userType;
-//	    private String name;
-//		private String pword;
 		
 		public RegisterOrderDialog(JFrame parent){
 			super(parent, "New order");
@@ -46,8 +43,20 @@ class Parentwindow3 extends JFrame {
 			public OrderDatapanel(){
 				setLayout(new GridLayout(4,2));
 			
-				add(new JLabel("Customer ID: ", JLabel.RIGHT));
-				add(customer_idField);
+				try {
+					customerList = sales.viewCustomerList();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				ArrayList<String> nameList = new ArrayList<>();
+				for(Customer c: customerList){
+					nameList.add(c.getCustomerID() + " " + c.getFirstName() + " " + c.getSurName());
+				}
+				customerSelect = new JComboBox<>(nameList.toArray());
+				
+				add(new JLabel("Customer: ", JLabel.RIGHT));
+				add(customerSelect);
 			
 				add(new JLabel("Delivery date: ", JLabel.RIGHT));
 				add(delivery_dateField);
@@ -55,22 +64,19 @@ class Parentwindow3 extends JFrame {
 				add(new JLabel("Information about the order: ", JLabel.RIGHT));
 				add(infoField);
 			
-				add(new JLabel("User ID: ", JLabel.RIGHT));
-				add(userIdField);
 			}
 		}
 
 		public boolean okData(){
-			String customer_idText  = customer_idField.getText();
-			int myCustomer_id = editor.stringToInt(customer_idText);
-			customerID = myCustomer_id;
-		
+
+			int customerIndex = customerSelect.getSelectedIndex();
+			customerID = customerList.get(customerIndex).getCustomerID();
+			
 			deliveryDate = delivery_dateField.getText();
 			info = infoField.getText();
-			userID = userIdField.getText();
 		
 			try {
-				sales.registerNewOrder(customerID, deliveryDate, info, userID, database);
+				sales.registerNewOrder(customerID, deliveryDate, info, sales.getUserID(), database);
 			}catch (Exception e) {
 				System.out.println(e.toString());
 			}
