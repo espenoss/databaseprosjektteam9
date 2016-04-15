@@ -1,49 +1,57 @@
 package databaseguiii;
-
-/**
- * Viser en flervalgsliste der brukeren kan velge måltider.
- * Valgene vises under listen.
- */
-
 import java.awt.*;
+
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.event.*;
 
+import controller.*;
+import databasePackage.Database;
+
 class ReadyForDelivery2 extends JFrame {
-  private static final String [] MEALS =
-    {"Spaghetti", "Steak", "Fish", "Salad"};
-  private JTextField tekst = new JTextField("You have not chosen any meals yet.     ");
-  private JList<String> meals = new JList<String>(MEALS);  // Nå er listen laget!
 
-  public ReadyForDelivery2(String tittel) {
-    setTitle(tittel);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
+private User user = new User("",0,"","",database);
 
-    JLabel ledetekst = new JLabel("Choose one or more meals.");
-    add(ledetekst, BorderLayout.NORTH);
+java.util.Date utilDate = new java.util.Date();
+java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+ArrayList <Order> order=  user.viewFoodOrders(sqlDate);
 
-    /* Legger på rullefelt */
-    JScrollPane rullefeltMedListe = new JScrollPane(meals);
-    add(rullefeltMedListe, BorderLayout.CENTER);
+//private JTable order_array= new JTable();
+private JList <Order> order_list = new JList <Order>();
 
-    ListeboksLytter lytter = new ListeboksLytter();
-    meals.addListSelectionListener(lytter);
+ public ReadyForDelivery2(String tittel) {
+	 setTitle(tittel);
+	 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    tekst.setEditable(false); // brukeren skal ikke kunne redigere i feltet
-    add(tekst, BorderLayout.SOUTH);
-    pack();
+	 JLabel ledetekst = new JLabel("Choose one or more meals.");
+	 add(ledetekst, BorderLayout.NORTH);
+
+	 JScrollPane list = new JScrollPane();
+	 add(list, BorderLayout.CENTER);
+
+	 ListeboksLytter listener = new ListeboksLytter();
+	 order.addListSelectionListener(listener);
+	 
+	 pack();
   }
 
-  /* Lytteren fanger opp alle klikk på linjer i listeboksen */
+  /* Lytteren fanger opp alle klikk pï¿½ linjer i listeboksen */
   private class ListeboksLytter implements ListSelectionListener {
     public void valueChanged(ListSelectionEvent hendelse) {
-      Object[] verdier = meals.getSelectedValuesList().toArray();
-      String nyTekst = "Du har nå valgt " + verdier.length;
+      Object[] verdier = order.getSelectedValuesList().toArray();
+      String nyTekst = "Du har nï¿½ valgt " + verdier.length;
       
-    //Dersom vi bruker denne metoden med en ArrayList knyttet til viewFoodOrders(), må vi sette verdien lik true her
+    //Dersom vi bruker denne metoden med en ArrayList knyttet til viewFoodOrders(), mï¿½ vi sette verdien lik true her
    /*   nyTekst += (verdier.length == 1) ? " by." :  " byer.";
       tekst.setText(nyTekst);   */ 
+    }
+    private class LineListener implements ListSelectionListener{
+    	public void valueChanged(ListSelectionEvent event){
+    		int line = 
+    	} 
     }
   }
 }
