@@ -50,7 +50,7 @@ public class User implements java.io.Serializable{
 	}
 	
 	
-	//IKKE FERDIG --- MÃ… TESTES
+	//IKKE FERDIG --- MÅ TESTES
 	//Returns an arraylist with orderObjects containing belonging meal objects. 
 	public ArrayList<Order> viewFoodOrders(java.sql.Date date) throws Exception{
 		
@@ -63,8 +63,8 @@ public class User implements java.io.Serializable{
 			int orderID = t.stringToInt(orderT[i][0]);
 			int customerID = t.stringToInt(orderT[i][2]);
 			
-			tempOrder = new Order(orderID,orderT[i][1],orderT[i][2],customerID,orderT[i][4],userID);
-			tempOrder.fetchMeals(database);
+			tempOrder = new Order(orderID, orderT[i][1], customerID, orderT[i][4], userID);
+			tempOrder.fetchMealsByDeliveryDate(date, database);
 			
 			orderList.add(tempOrder);
 		}
@@ -125,7 +125,7 @@ public class User implements java.io.Serializable{
 				if(customerId==dbCustomerId){
 					int zipCode = t.stringToInt(list[i][6]);
 					int zoneNr = t.stringToInt(list[i][7]);
-					return new Customer(customerId, list[i][1],list[i][2],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8],true);
+					return new Customer(customerId, list[i][2],list[i][1],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8],true);
 				}
 			}
 		}

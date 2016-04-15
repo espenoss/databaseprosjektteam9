@@ -115,19 +115,42 @@ public class Customer implements java.io.Serializable{
 		}
 		return false;
 	}
-	
-	
-	public boolean equals(Object obj){
-		if(!(obj instanceof Customer)){
-			return false;
-		}
-		if(this==obj){
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
 			return true;
-		}
-		Customer c=(Customer)obj;
-		return (firstName==c.getFirstName()&&surName==c.getSurName()&&email==c.getEmail()
-				&&adress==c.getAdress()&&zipCode==c.getZipCode()&&zoneNr==c.zoneNr&&preferences==c.getPreferences()&&phoneNumber==c.getPhoneNumber());
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer) obj;
+		if (companyName == null) {
+			if (other.companyName != null)
+				return false;
+		} else if (!companyName.equals(other.companyName))
+			return false;
+		if (customerID != other.customerID)
+			return false;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (isCompany != other.isCompany)
+			return false;
+		if (surName == null) {
+			if (other.surName != null)
+				return false;
+		} else if (!surName.equals(other.surName))
+			return false;
+		if (zipCode != other.zipCode)
+			return false;
+		if (zoneNr != other.zoneNr)
+			return false;
+		return true;
 	}
+
 	public String toString(){
 		String res = "CustomerID: " +customerID+" First name: " + firstName+". Surname: "+ surName +"\nEmail: "+email+". Phonenr: "+phoneNumber+".\nAdress: "+adress+". ZipCode: "+zipCode+". ZoneNr: "+zoneNr+".\nPreferences: "+preferences+"\n";
 		if (isCompany){
