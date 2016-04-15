@@ -12,7 +12,7 @@ class ParentWindow extends JFrame {
 	  private Sales sales = new Sales("espenme",0, "Espen","hei", database); 
 	  Customer customer = new Customer(1,"", "", "", "", "", 1, 1,"", true);
 	  
-	  private class CustomerDialog extends MyDialog{
+	  private class CustomerDialog extends MyDialog implements ActionListener{
 			private TextEditor editor = new TextEditor();
 
 			private ArrayList<Customer> customerList = new ArrayList<>();
@@ -35,15 +35,13 @@ class ParentWindow extends JFrame {
 			private String preferences;
 			private String phoneNumber;
 			private boolean active;
-	//		private boolean isCompany;
-	//		private String companyName;
-			
 			
 			public CustomerDialog(JFrame parent){
 				super(parent, "Fill in new information about a customer");
 				add(new JPanel(), BorderLayout.NORTH);
 				add(new CustomerDatapanel(),BorderLayout.CENTER);
 				add(getButtonPanel(),BorderLayout.SOUTH);
+				customerSelect.addActionListener(this);
 				pack();
 			}
 			
@@ -115,7 +113,20 @@ class ParentWindow extends JFrame {
 					System.out.println(e.toString());
 				}
 				return true;		
-			}		
+			}
+			
+			public void actionPerformed(ActionEvent e){
+				int custIndex = customerSelect.getSelectedIndex();
+				Customer currCust = customerList.get(custIndex);
+				surNameField.setText(currCust.getSurName());
+				firstNameField.setText(currCust.getFirstName());
+				phoneNumberField.setText(currCust.getPhoneNumber());
+				emailField.setText(currCust.getEmail());
+				adressField.setText(currCust.getAdress());
+				zip_codeField.setText(Integer.toString(currCust.getZipCode()));
+				zone_nrField.setText(Integer.toString(currCust.getZoneNr()));
+				preferencesField.setText(currCust.getPreferences());
+			}
 	
 	  }
 			
@@ -126,7 +137,7 @@ class ParentWindow extends JFrame {
 		  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		  setLayout(new FlowLayout());
 		  setLocation(300, 300); 
-		  dialog.setLocation(350, 350);  
+		  dialog.setLocation(350, 350); 
 	 } 
 }  
 

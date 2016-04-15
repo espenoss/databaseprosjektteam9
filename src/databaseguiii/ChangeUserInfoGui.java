@@ -13,7 +13,7 @@ class ChangeInfo extends JFrame {
 	private Admin admin = new Admin("",0, "","", database); 
   
 
-	private class UserDialog extends MyDialog{
+	private class UserDialog extends MyDialog implements ActionListener{
 
 		private TextEditor editor = new TextEditor();
 		private JComboBox<Object> userIDfield;
@@ -41,7 +41,7 @@ class ChangeInfo extends JFrame {
 			}
 			userIDfield = new JComboBox<Object>(names.toArray());
 
-			
+			userIDfield.addActionListener(this);
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new UserDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
@@ -68,7 +68,7 @@ class ChangeInfo extends JFrame {
 		
 		public boolean okData(){
 			int userIndex = userIDfield.getSelectedIndex();	
-//			userID = 
+			userID = users.get(userIndex).getUserID();
 			userType = userList.getSelectedIndex();				
 			pword = passwordField.getText();
 			name = usernameField.getText();
@@ -79,6 +79,13 @@ class ChangeInfo extends JFrame {
 				System.out.println(e.toString());
 			}
 			return true;		
+		}
+		
+		public void actionPerformed(ActionEvent e){
+			int userIndex = userIDfield.getSelectedIndex();	
+			User currUser = users.get(userIndex);
+			userList.setSelectedItem(currUser.getUserType());
+			usernameField.setText(currUser.getName());
 		}
 	}
 		
