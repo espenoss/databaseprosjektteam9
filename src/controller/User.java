@@ -10,7 +10,7 @@ public class User implements java.io.Serializable{
 	private int userType;
 	private String name;
 	private String pword;
-	private Database database;
+	Database database;
 	private TextEditor t = new TextEditor();
 	
 	public User(String userID, int userType, String name,String pword, Database database){
