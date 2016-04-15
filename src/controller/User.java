@@ -19,7 +19,7 @@ public class User implements java.io.Serializable{
 		this.name=name;
 		this.pword=pword;
 		this.database = database;
-	}	
+	}
 
 	public String getUserID(){
 		return userID;
@@ -146,15 +146,20 @@ public class User implements java.io.Serializable{
 			return res;
 	}
 	
-	//LAG VIEW SUBSCRIPTION PLAN
-	
+	// --- MÅ LAGES!!
 	public SubPlan viewSubPlan(){
 		return null;
 	}
 	
 	
+	// --- MÅ LAGES!!
 	public Ingredient addNewIngredient(){
 		return null;
+	}
+	
+	// --- MÅ LAGES!!
+	public boolean deleteIngredient(int ingredientID){
+		return true;
 	}
 	
 	

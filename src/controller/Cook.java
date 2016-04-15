@@ -30,6 +30,12 @@ public class Cook extends User {
 		return new SubPlan(subPlanID, name);
 	}
 	
+	// ---- MÅ LAGES!!
+	public boolean deleteMeal(int mealID){
+		return false;
+	}
+	
+	
 	@Override
 	public String toString() {
 		String s = super.toString() + "\n";
