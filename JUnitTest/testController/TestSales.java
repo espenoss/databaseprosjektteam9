@@ -9,7 +9,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import controller.*;
-import controller.*;
 import databasePackage.Database;
 
 public class TestSales {
@@ -47,6 +46,7 @@ public class TestSales {
 	@Before
 	public void setUp() throws Exception {
 		instance = new Sales("hanne",3,"Hanne Hansen", "123456", database);
+		Customer customer1 = new Customer("");
 		
 	}
 	
@@ -63,6 +63,10 @@ public class TestSales {
 	
 	@Ignore
 	public void testRegisterCompanyToCustomer() {
+		System.out.println("Test registerCompanyToCustomer");
+		
+		instance.registerCompanyToCustomer(, companyName)
+		
 		fail("Not yet implemented");
 	}
 	

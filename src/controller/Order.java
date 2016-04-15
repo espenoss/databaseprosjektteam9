@@ -12,7 +12,7 @@ public class Order {
 	private int customerID;
 	private String info;
 	private String userID;
-	private ArrayList<Meal> meals;
+	private ArrayList<Meal> meals = new ArrayList<Meal>();
 
 	
 	public Order(int orderID, String orderDate, int customerID, String info, String userID){
@@ -104,9 +104,11 @@ public class Order {
 		String res = "";
 		res += "OrderID: " + orderID + ". Orderdate: " + orderDate+ ". Info: " + info + "\n";
 		res += "Meals: \n";
+		
 		for(Meal m:meals){
 			res += "   " + m.toString() + "\n";
 		}
+		
 		return res;
 	}
 	
@@ -119,6 +121,9 @@ public class Order {
 	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		
 		System.out.println(sqlDate);
+		
+		Order test = new Order(10000,"2016-03-01",10000,"Info", "hanneh");
+		System.out.println(test);
 		
 	}
 	
