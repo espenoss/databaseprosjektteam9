@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import controller.Cook;
@@ -13,21 +14,18 @@ import controller.SubPlan;
 import databasePackage.Database;
 
 public class TestCook {
-	private Database database;
-	private Meal meal;
+	private static Database database;
 	private Cook cook;
-	private Ingredient potato;
-	private Ingredient carrot;
-	private Ingredient cheese;
+	private SubPlan instance;
+	
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-//	public static void main(String[] args){
 		String username = "anitakau";
 		String password = "e82L3Dat";
 		
 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
-		Database database = new Database("com.mysql.jdbc.Driver", databasename);
+		database = new Database("com.mysql.jdbc.Driver", databasename);
 		database.initiateDb();
 		/*String insert1 = "INSERT INTO ingredient VALUES(1, 'potato', 50, 'kg')";
 		String insert2 = "INSERT INTO ingredient VALUES(2, 'carrot', 30, 'kg')";
@@ -43,40 +41,30 @@ public class TestCook {
 
 	@Before
 	public void setUp() throws Exception {
+		cook = new Cook("bob", 1,"Bob","qwerty", database);
+		instance = new SubPlan(1, "name");
 		
 	}
 	
-	// NULLPOINTEREXCEPTION
 	@Test
-	public void test() throws Exception {
-		Cook cook = new Cook("bob", 1,"Bob","qwerty", database);
-		Meal meal = new Meal(1, "soup", "Cut vegetables", true, 100);
-		
-		Ingredient potato = new Ingredient(1, "potato", 50, "kg");
-		Ingredient carrot = new Ingredient(2, "carrot", 30, "kg");
-		Ingredient cheese = new Ingredient(3, "cheese", 10, "kg");
-		
-		
-		meal.addIngredients(potato, 3);
-		meal.addIngredients(carrot, 2);
-		meal.addIngredients(cheese, 1);
-		
+	public void testShouldCreateMeal() throws Exception {
+		System.out.println("Test: Create meal");
 		// try to register new meal
-		boolean result = cook.createMeal(meal);
-		boolean expResult = true;
+		Meal result = cook.createMeal(1, "Spaghetti", "Boil pasta", true, 100);
+		Meal expResult = new Meal(1, "Spaghetti", "None", true, 100);
+		
 		assertEquals(result, expResult);
+	}
 		
-		// try to register same meal twice
-	//	boolean result1 = cook.createMeal(meal);
-	//	boolean expResult1 = false;
-	//	assertEquals(result1, expResult1);
+	@Ignore("Missing method")
+	public void testShoulRegisterSubPlan() throws Exception{
+		System.out.println("Test: Register subscriptionplan");
+		SubPlan result = cook.registerSubPlan("name", database);
+		SubPlan expResult = instance.viewSubPlan(); 	// ****ViewSubPlan må lages i user
 		
-		//boolean createMeal(Meal meal) - creates new meal
-		//Meal(int mealID, String mealName, String instructions, boolean available, int price)
-		
-		
-		
+		assertEquals(result, expResult);
 		//SubPlan registerSubPlan(String name,Database database) - registers new, empty subplan
+		// SubPlan(int subPlanID, String name){
 	}
 
 }
