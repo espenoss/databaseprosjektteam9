@@ -787,7 +787,6 @@ public class QueryMethods {
 		return database.getLastResult();
 	}		
 	
-	// **** IKKE TESTET
 	public static String[][] viewActiveSubscriptions(String currentDate, Database database) throws Exception{
 		
 		String statement = "SELECT * FROM sub_order WHERE from_date <= '" + currentDate + "' "
@@ -810,7 +809,6 @@ public class QueryMethods {
 		return database.makeSingleStatement(statement);
 	}
 	
-	// **** IKKE TESTET
 	public static String[][] viewOrdersByDeliveryDate(java.sql.Date deliveryDate, Database database) throws Exception{
 		
 		String statement = "SELECT * FROM food_order NATURAL JOIN ordered_meal where food_order.order_id = ordered_meal.order_id AND delivery_date = '" + deliveryDate + "';";
@@ -820,7 +818,6 @@ public class QueryMethods {
 		return database.getLastResult();
 	}
 	
-	// **** IKKE TESTET - IKKE IMPLEMENTERT
 	public static String[][] viewMealsInOrderByDeliveryDate(int orderID, java.sql.Date deliveryDate, Database database) throws Exception{
 			
 		String statement = "SELECT a.meal_name, b.adress "

@@ -14,31 +14,36 @@ class ReadyForDelivery2 extends JFrame {
 
 private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
 private User user = new User("",0,"","",database);
-
-private ArrayList<String> myList;
-private JList <Order> order_list = new JList <Order>();
+private DefaultListModel<String> model = new DefaultListModel<>();
+private JList <String> order_list;
 
 
  public ReadyForDelivery2(String tittel) {
 	 java.util.Date utilDate = new java.util.Date();
 	 java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-	 ArrayList<Order> order = null;
-	try {
-		order = user.viewFoodOrders(sqlDate);
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+	 ArrayList<Order> order = new ArrayList<>();
+
 	 setTitle(tittel);
 	 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+	/*	skal egentlig brukes 
+	 try {
+		order = user.viewFoodOrders(sqlDate);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+*/	
+	 // testdata
+	 order.add(new Order(10000, "2016-12-12", 10001, "Biler", "espenme"));
+	 order.add(new Order(10000, "2016-12-12", 10001, "Fly", "espenme"));
+	 order.add(new Order(10000, "2016-12-12", 10001, "Baat", "espenme"));
 	 
-	 myList = new ArrayList<>();
-		
 	 for(int i = 0; i< order.size(); i++){
-	 	myList.add(order.get(i).toString());   
+		 // bytt når Order er ferdig
+		 model.addElement(order.get(i).getInfo());
+	 	//model.addElement(order.get(i).toString());   
 	 }
-	 
-	 myList.toArray();
+	 order_list = new JList<>(model);
 	 
 	 JLabel ledetekst = new JLabel("Choose one or more meals.");
 	 add(ledetekst, BorderLayout.NORTH);
@@ -46,11 +51,10 @@ private JList <Order> order_list = new JList <Order>();
 	 JScrollPane list = new JScrollPane();
 	 add(list, BorderLayout.CENTER);
 
+	 add(order_list, BorderLayout.SOUTH);
+	 
 	 Listboxlistener lytter = new Listboxlistener();
 	 order_list.addListSelectionListener(lytter);
-
-	
-	   
 	 
 	 pack();
   }
@@ -65,8 +69,6 @@ private JList <Order> order_list = new JList <Order>();
      
    }
  }
-
- 
 }
 
 class MarkAsReadyForDelivery2 {
