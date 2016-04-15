@@ -71,6 +71,13 @@ public class User implements java.io.Serializable{
 		return orderList;
 	}
 	
+	// IKKE FERDIG
+	//returns an arraylist with all available meals
+	public ArrayList<Meal> viewAvailableMeals(){
+		String[][] mealT = QueryMethods.viewMeals(database);
+		
+		
+	}
 	
 	//FINISHED --- MÅ TESTES
 	//returns an arraylist with customer objects with all active customers
