@@ -43,6 +43,33 @@ public class Ingredient {
 		return(QueryMethods.updateIngredient(ingID, ingName, storageQuantity, unit, database));
 	}
 	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Ingredient other = (Ingredient) obj;
+		if (ingID != other.ingID)
+			return false;
+		if (ingName == null) {
+			if (other.ingName != null)
+				return false;
+		} else if (!ingName.equals(other.ingName))
+			return false;
+		if (Float.floatToIntBits(storageQuantity) != Float.floatToIntBits(other.storageQuantity))
+			return false;
+		if (unit == null) {
+			if (other.unit != null)
+				return false;
+		} else if (!unit.equals(other.unit))
+			return false;
+		return true;
+	}
+
 	public String toString(){
 		return "Ingredient: "+ingName+". Quantity: "+storageQuantity +" "+unit;
 	}

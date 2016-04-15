@@ -10,7 +10,8 @@ public class User implements java.io.Serializable{
 	private int userType;
 	private String name;
 	private String pword;
-	Database database;
+	private Database database;
+	private TextEditor t = new TextEditor();
 	
 	public User(String userID, int userType, String name,String pword, Database database){
 		this.userID=userID;
@@ -71,7 +72,26 @@ public class User implements java.io.Serializable{
 		return orderList;
 	}
 	
+	//FINISHED NOT TESTED
+	//returns an arraylist with all available meals
+	public ArrayList<Meal> viewAvailableMeals() throws Exception{
+		String[][] mealT = QueryMethods.viewMeals(database);
+		Meal tempMeal; 
+		
+		ArrayList<Meal> mealList = new ArrayList<Meal>();
+		
+		
+		for (int i=0; i<mealT.length; i++){
+			if (t.stringToInt(mealT[i][3])>0){
+				tempMeal = new Meal(t.stringToInt(mealT[i][0]), mealT[i][1], mealT[i][2], true, t.stringToInt(mealT[i][4]));
+				mealList.add(tempMeal);
+			}
+		}
+		return mealList;
+		
+	}
 	
+
 	//FINISHED --- MÅ TESTES
 	//returns an arraylist with customer objects with all active customers
 	public ArrayList<Customer> viewCustomerList() throws Exception{
@@ -81,10 +101,10 @@ public class User implements java.io.Serializable{
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
 		
 		for(int i=0; i<list.length; i++){
-			if (Integer.parseInt(list[i][9])==1){
-				int customerId = Integer.parseInt(list[i][0]); //0
-				int zipCode = Integer.parseInt(list[i][6]); //6
-				int zoneNr = Integer.parseInt(list[i][7]); //7
+			if (t.stringToInt(list[i][9])==1){
+				int customerId = t.stringToInt(list[i][0]); //0
+				int zipCode = t.stringToInt(list[i][6]); //6
+				int zoneNr = t.stringToInt(list[i][7]); //7
 				
 				tempCustomer = new Customer(customerId, list[i][1],list[i][2],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8],true);
 				customerList.add(tempCustomer);
@@ -98,7 +118,6 @@ public class User implements java.io.Serializable{
 	//takes an customerId returns a single customer object, or null if not found
 	public Customer viewSingleCustomer(int customerId) throws Exception{
 		String[][] list = QueryMethods.viewAllCustomers(database);
-		TextEditor t = new TextEditor();
 		
 		for(int i=0; i<list.length; i++){
 			if (t.stringToInt(list[i][9])==1){
