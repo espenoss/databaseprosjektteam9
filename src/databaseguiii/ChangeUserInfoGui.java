@@ -3,6 +3,8 @@
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import databasePackage.*;
 
@@ -14,21 +16,36 @@ class ChangeInfo extends JFrame {
 	private class UserDialog extends MyDialog{
 
 		private TextEditor editor = new TextEditor();
-		private JTextField userIDfield = new JTextField(10);
+		private JComboBox<Object> userIDfield;
 		private final String userRoles[] = {"Admin", "Cook", "Driver", "Sales", "Storage"}; 
-		private JComboBox userList = new JComboBox(userRoles);	
+		private JComboBox<String> userList = new JComboBox<String>(userRoles);	
 		private JTextField usernameField = new JTextField(20);		
 		private JTextField passwordField = new JTextField(20);
 		private String pword;
 		private String name;
 		private String userID;
 		private int userType;
+		private ArrayList<User> users = new ArrayList<User>();
 		
 		public UserDialog(JFrame parent){
 			super(parent, "Fill in new info about the user");
+			
+			try {
+				users = admin.viewUserList();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			ArrayList<String> names = new ArrayList<>();
+			for(User u:users){
+				names.add(u.getName());
+			}
+			userIDfield = new JComboBox<Object>(names.toArray());
+
+			
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new UserDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
+			
 			pack();
 		}
 				
@@ -50,7 +67,8 @@ class ChangeInfo extends JFrame {
 		}
 		
 		public boolean okData(){
-			userID = userIDfield.getText();	
+			int userIndex = userIDfield.getSelectedIndex();	
+//			userID = 
 			userType = userList.getSelectedIndex();				
 			pword = passwordField.getText();
 			name = usernameField.getText();
@@ -64,7 +82,7 @@ class ChangeInfo extends JFrame {
 		}
 	}
 		
- public ChangeInfo() throws Exception { 
+  public ChangeInfo() throws Exception { 
 
 	 UserDialog dialog = new UserDialog(this);
 	 dialog.setVisible(true);
