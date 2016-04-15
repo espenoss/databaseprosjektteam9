@@ -51,6 +51,7 @@ public class User implements java.io.Serializable{
 	
 	
 	//IKKE FERDIG --- MÅ TESTES
+	//Legger for øyebl ikke inn info om måltid i objektene
 	//Returns an arraylist with orderObjects containing belonging meal objects. 
 	public ArrayList<Order> viewFoodOrders(java.sql.Date date) throws Exception{
 		
@@ -59,13 +60,16 @@ public class User implements java.io.Serializable{
 		ArrayList<Order> orderList = new ArrayList<Order>();
 		TextEditor t = new TextEditor();
 		
+		System.out.println("lengde tabell: "+orderT[0].length);
+		
+		
 		for(int i=0; i<orderT.length;i++){
 			int orderID = t.stringToInt(orderT[i][0]);
 			int customerID = t.stringToInt(orderT[i][2]);
 			
-			tempOrder = new Order(orderID, orderT[i][1], customerID, orderT[i][4], userID);
-			tempOrder.fetchMealsByDeliveryDate(date, database);
+			tempOrder = new Order(t.stringToInt(orderT[i][0]), 	orderT[i][1], t.stringToInt(orderT[i][2]),  orderT[i][3], orderT[i][4]);
 			
+			//tempOrder.fetchMealsByDeliveryDate(date, database);
 			orderList.add(tempOrder);
 		}
 		
@@ -172,10 +176,17 @@ public class User implements java.io.Serializable{
 		String databaseDriver = "com.mysql.jdbc.Driver";
 		Database database = new Database(databaseDriver, databaseName);
 		
+		
 		User user = new User("Hanne", 1, "Hanne","1234", database);
 		
+		/*
 		System.out.println("Enkelt bruker: "+user.viewSingleCustomer(10000));
 		System.out.println(user.viewCustomerList());
+		*/
 		
+		java.sql.Date dato = java.sql.Date.valueOf( "2016-03-01");
+		System.out.println(dato);
+		
+		System.out.println(user.viewFoodOrders(dato));
 	}
 }
