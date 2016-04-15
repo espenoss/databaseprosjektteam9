@@ -15,14 +15,20 @@ class ReadyForDelivery2 extends JFrame {
 private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
 private User user = new User("",0,"","",database);
 
-private java.util.Date utilDate = new java.util.Date();
-private java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-private ArrayList<Order> order =  user.viewFoodOrders(sqlDate);
 private ArrayList<String> myList;
 private JList <Order> order_list = new JList <Order>();
 
 
  public ReadyForDelivery2(String tittel) {
+	 java.util.Date utilDate = new java.util.Date();
+	 java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+	 ArrayList<Order> order = null;
+	try {
+		order = user.viewFoodOrders(sqlDate);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	 setTitle(tittel);
 	 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	 
@@ -40,28 +46,27 @@ private JList <Order> order_list = new JList <Order>();
 	 JScrollPane list = new JScrollPane();
 	 add(list, BorderLayout.CENTER);
 
-	 ListeboksLytter listener = new ListeboksLytter();
-	 order.addListSelectionListener(listener);
+	 Listboxlistener lytter = new Listboxlistener();
+	 order_list.addListSelectionListener(lytter);
+
+	
+	   
 	 
 	 pack();
   }
+ 
+ /* Lytteren fanger opp alle klikk på linjer i listeboksen */
+ private class Listboxlistener implements ListSelectionListener {
+   public void valueChanged(ListSelectionEvent hendelse) {
+     // Object[] verdier = byliste.getSelectedValues();  - deprecated i Java 7
+    Object[] values = order_list.getSelectedValuesList().toArray();
+     String nyTekst = "Du har nå valgt " + values.length;
+     nyTekst += (values.length == 1) ? " by." :  " byer.";
+     
+   }
+ }
 
-  /* Lytteren fanger opp alle klikk pï¿½ linjer i listeboksen */
-  private class ListeboksLytter implements ListSelectionListener {
-    public void valueChanged(ListSelectionEvent hendelse) {
-      Object[] verdier = order.getSelectedValuesList().toArray();
-      String nyTekst = "Du har nï¿½ valgt " + verdier.length;
-      
-    //Dersom vi bruker denne metoden med en ArrayList knyttet til viewFoodOrders(), mï¿½ vi sette verdien lik true her
-   /*   nyTekst += (verdier.length == 1) ? " by." :  " byer.";
-      tekst.setText(nyTekst);   */ 
-    }
-    private class LineListener implements ListSelectionListener{
-    	public void valueChanged(ListSelectionEvent event){
-    	//	int line = 
-    	} 
-    }
-  }
+ 
 }
 
 class MarkAsReadyForDelivery2 {
