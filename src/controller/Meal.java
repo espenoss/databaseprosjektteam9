@@ -95,4 +95,25 @@ public class Meal {
 		}
 		return res;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Meal other = (Meal) obj;
+		if (mealID != other.mealID)
+			return false;
+		if (mealName == null) {
+			if (other.mealName != null)
+				return false;
+		} else if (!mealName.equals(other.mealName))
+			return false;
+		return true;
+	}
+
+
 }

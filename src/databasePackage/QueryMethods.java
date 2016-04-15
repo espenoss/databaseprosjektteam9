@@ -787,7 +787,6 @@ public class QueryMethods {
 		return database.getLastResult();
 	}		
 	
-	// **** IKKE TESTET
 	public static String[][] viewActiveSubscriptions(String currentDate, Database database) throws Exception{
 		
 		String statement = "SELECT * FROM sub_order WHERE from_date <= '" + currentDate + "' "

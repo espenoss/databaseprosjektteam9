@@ -12,27 +12,17 @@ public class Cook extends User {
 	}
 	
 	
-	//FINISHED must be tested
+	//FINISHED is tested
 	//Lets the cook register a new meal
-	public boolean createMeal(Meal meal) throws Exception{
-		TextEditor t = new TextEditor(); 
-		int mealID = QueryMethods.registerMeal(meal.getMealName(), meal.getInstructions(), meal.getAvailable(), meal.getPrice(), database);
+	public Meal createMeal(int mealID, String mealName, String instructions, boolean available, int price) throws Exception{ 
+		mealID = QueryMethods.registerMeal(mealName, instructions, available, price, database);
 		if(mealID < 0){
-			JOptionPane.showMessageDialog(null,"Something went wrong, please try again");
-			return false;
-		} 
-		
-		ArrayList<Ingredient> ingredient = meal.getIngredients();
-		for(int i = 0; i < ingredient.size(); i++){
-			if(!QueryMethods.addIngredientToMeal(mealID, ingredient.get(i).getIngID(), t.stringToFloat(JOptionPane.showInputDialog("Ingredient quantity: ")), database)){
-			// lagt til metode for håndtering av tekst til float
-				JOptionPane.showMessageDialog(null, "Could not register ingredient "+ ingredient.get(i).getIngName());
-			}
+			return null;
 		}
-		return true;
+		return new Meal(mealID, mealName, instructions, available, price);
 	}
 	
-	
+	// Finished - lacking method in User before testing
 	//Registers new empty subscription plan
 	public SubPlan registerSubPlan(String name,Database database) throws Exception{
 		int subPlanID = QueryMethods.registerSubscriptionPlan(name, database);

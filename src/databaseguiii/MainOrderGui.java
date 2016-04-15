@@ -5,7 +5,9 @@ import databasePackage.Database;
 import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JComboBox;
@@ -78,13 +80,12 @@ class Parentwindow3 extends JFrame {
 			int customerIndex = customerSelect.getSelectedIndex();
 			customerID = customerList.get(customerIndex).getCustomerID();
 			
-			deliveryDate = (Date) dateSelect.getValue();
-			deliveryDateStr
-			
+			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+			deliveryDateStr = s.format(dateSelect.getValue());
 			info = infoField.getText();
 		
 			try {
-				sales.registerNewOrder(customerID, , info, sales.getUserID(), database);
+				sales.registerNewOrder(customerID, deliveryDateStr, info, sales.getUserID(), database);
 			}catch (Exception e) {
 				System.out.println(e.toString());
 			}
