@@ -10,7 +10,7 @@ public class SubOrder extends Order {
 	
 	public SubOrder(int orderID, String orderDate, String deliveryDate, int customerID, String info, String userID,
 			String fromDate, String toDate, int subQuantity) {
-		super(orderID, orderDate, deliveryDate, customerID, info, userID);
+		super(orderID, orderDate, customerID, info, userID);
 		this.fromDate = fromDate;
 		this.toDate = toDate;
 		this.subQuantity = subQuantity;
@@ -18,7 +18,7 @@ public class SubOrder extends Order {
 	
 	//Constructor with only superclass ... 
 	public SubOrder(int orderID, String orderDate, String deliveryDate, int customerID, String info, String userID) {
-		super(orderID, orderDate, deliveryDate, customerID, info, userID);
+		super(orderID, orderDate, customerID, info, userID);
 	}
 	
 	public String getFromDate(){

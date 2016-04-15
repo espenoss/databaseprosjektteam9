@@ -45,6 +45,7 @@ public class TestCook {
 		Meal expResult = new Meal(1, "Spaghetti", "None", true, 100);
 		
 		assertEquals(result, expResult);
+		}
 	}
 		
 	@Ignore("Missing method")
