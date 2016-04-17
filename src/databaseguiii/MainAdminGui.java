@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -16,6 +17,7 @@ import databasePackage.Database;
 
 class AdminGui extends JFrame {
 	  private MainCustomerGui mainCustomerGui;
+	  private JList list = new JList();
 	  private static final String [] CHOICES =
 	    {"Register new user","Change user information", "View all users", "Register new customer","Register new company",
 	    		"Change customer information", "View private customers", "View company customers","Remove customer","Register new food order","Change food order", "Retrieve statistics"};
@@ -42,7 +44,7 @@ class AdminGui extends JFrame {
 	  private class ListeboksLytter implements ListSelectionListener {
 		  private final Database database = null;
 		  private Admin admin = new Admin("", 1, "", "", database);
-		  private Sales sales = new Sales("", 1, "", "", database);
+		  private User user = new Sales("", 1, "", "", database);
 		  
 		  public void valueChanged(ListSelectionEvent hendelse) {
 			  
@@ -63,10 +65,14 @@ class AdminGui extends JFrame {
 	      }
 	      else if(choices==2){
 	    	  try {
-				admin.viewUserList();
+	    		  String s = "";
+	    		  for(int i = 0; i < admin.viewUserList().size(); i++ ){
+	    	          s +=  admin.viewUserList().get(i) + " ";
+	    	      }
+	    		  JOptionPane.showMessageDialog(null, s, "All users: ", JOptionPane.INFORMATION_MESSAGE );
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+				}
 	      	} else if(choices == 3){
 	    	  MainCustomerGui.main(null);
 	      }else if(choices==4){
@@ -76,12 +82,17 @@ class AdminGui extends JFrame {
 	      }
 	      	else if(choices==6){
 	    	 try {
-				admin.viewCustomerList();
-			} catch (Exception e) {
+	    		 String s = "";
+		    	 for( int i = 0; i < user.viewCustomerList().size(); i++ ){
+		    	 s +=  user.viewCustomerList().get(i) + " ";
+		    	 }
+		    	 JOptionPane.showMessageDialog(null, s, "All customers: ", JOptionPane.INFORMATION_MESSAGE );
+				}
+	    	 	catch (Exception e) {
 				e.printStackTrace();
-			}
-			}
-	      else if(choices==7){
+	    	 	}
+	      	}
+	      	else if(choices==7){
 	    	  try {
 				//admin.ViewAllCompaniesList(); 
 			} catch (Exception e) {
