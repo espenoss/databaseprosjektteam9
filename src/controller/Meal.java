@@ -48,14 +48,12 @@ public class Meal {
 	}
 	
 	
-	public String setMealName(String name){
+	public void setMealName(String name){
 		name = mealName;
-		return name;
 	}
 	
-	public String setInstructions(String instr){
+	public void setInstructions(String instr){
 		instr = instructions;
-		return instr;
 	}
 	
 	// trenger vi disse??? 
