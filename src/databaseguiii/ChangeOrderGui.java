@@ -1,7 +1,9 @@
 package databaseguiii;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,16 +47,20 @@ class ChangeOrder extends JFrame {
 		}
 		private class ChangeOrderDatapanel extends JPanel{
 			public ChangeOrderDatapanel(){
-				setLayout(new GridLayout(4,2));
+				setLayout(new GridLayout(3,2));
 				try {
 					customerList = sales.viewCustomerList();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				
 				ArrayList<String> nameList = new ArrayList<>();
 				for(Customer c: customerList){
 					nameList.add(c.getCustomerID() + " " + c.getFirstName() + " " + c.getSurName());
 				}
+				customerSelect = new JComboBox<>(nameList.toArray());
+				add(new JLabel("Customer: ", JLabel.RIGHT));
+				add(customerSelect);
 				add(new JLabel("New delivery date: ", JLabel.RIGHT));
 				add(delivery_dateField);
 		
@@ -72,15 +78,35 @@ class ChangeOrder extends JFrame {
 			info = infoField.getText();
 
 			try {
-				sales.
+				//sales. mangeler metoden
 			} catch (Exception e) {
 				System.out.println(e.toString());
 			}
 			return true;		
 		}
-			
+		public void actionPerformed(ActionEvent e){
+			int custIndex = customerSelect.getSelectedIndex();
+			Customer currCust = customerList.get(custIndex);
+			delivery_dateField.setText(currCust.getSurName());
+			infoField.setText(currCust.getFirstName());
 		}
-
+	}
+	public ChangeOrder() {
+		ChangeOrderDialog dialog = new ChangeOrderDialog(this);
+			dialog.setVisible(true);
+			setTitle("Registrer customer");
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			setLayout(new FlowLayout());
+			setLocation(300, 300); 
+			dialog.setLocation(350, 350); 
+		} 
+	}  
+	
+	class ChangeOrderGui {
+	  static public void main(String[] args) throws Exception {
+		  ChangeOrder test = new ChangeOrder();
+	  } 
+	}
 				
 				
 				
