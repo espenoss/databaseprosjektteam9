@@ -2,6 +2,7 @@ package databaseguiii;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,7 +15,6 @@ import controller.*;
 import databasePackage.Database;
 
 class AdminGui extends JFrame {
-	  private Parentwindow parentwindow;
 	  private MainCustomerGui mainCustomerGui;
 	  private static final String [] CHOICES =
 	    {"Register new user","Change user information", "View all users", "Register new customer","Register new company",
@@ -29,7 +29,7 @@ class AdminGui extends JFrame {
 		  JLabel ledetekst = new JLabel("Choose one of the following options.");
 		  add(ledetekst, BorderLayout.NORTH);
 
-	    /* Legger paa rullefelt */
+	  
 		  JScrollPane rullefeltMedListe = new JScrollPane(choice_list);
 		  add(rullefeltMedListe, BorderLayout.CENTER);
 
@@ -39,40 +39,51 @@ class AdminGui extends JFrame {
 		 setSize(700, 700);
 	  }
 
-	  /* Lytteren fanger opp alle klikk paa linjer i listeboksen */ 
 	  private class ListeboksLytter implements ListSelectionListener {
 		  private final Database database = null;
 		  private Admin admin = new Admin("", 1, "", "", database);
 		  private Sales sales = new Sales("", 1, "", "", database);
-//		  private User viewAllUsers = new User("", 1, "", "", database);
+		  
 		  public void valueChanged(ListSelectionEvent hendelse) {
+			  
 	      Object[] values = choice_list.getSelectedValuesList().toArray();
 	      int choices = choice_list.getSelectedIndex();
 	      if(choices == 0){
-	    	  TestUserDialog.main(null);
+	    	  try {
+				MainUserDialog.main(null);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 	      }else if(choices==1){
-	    	  ////metoden for å endre info til en bruker
+	    	  try {
+				ChangeUserInfoGui.main(null);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 	      }
 	      else if(choices==2){
 	    	  try {
 				admin.viewUserList();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	      	} else if(choices == 3){
 	    	  MainCustomerGui.main(null);
 	      }else if(choices==4){
-	    	  //metoden for a registrere en bedrift
+	    	  RegisterCompanyToCustomer.main(null);
 	      }else if(choices==5){
-	    	  //metoden for a endre info til en kunde
+	    	  ChangeCustomerInfoGui.main(null);
 	      }
 	      	else if(choices==6){
-	    	  admin.viewCustomerList();
+	    	 try {
+				admin.viewCustomerList();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			}
 	      else if(choices==7){
 	    	  try {
-	//			admin.ViewAllCompaniesList(); 
+				//admin.ViewAllCompaniesList(); 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -81,10 +92,13 @@ class AdminGui extends JFrame {
 	    	  //metoden remove customer
 	      }
 	      else if(choices==9){
-	    	  sales.registerNewOrder();
-	    	  //Mangler vinduet som skal registrere ordrene
+	    	  MainOrderGui.main(null);
 	      }else if(choices==10){
-	    	  //motoden for a endre bestilling
+	    	  try {
+				ChangeOrderGui.main(null);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 	      }
 	      else if(choices==11){
 	    	  //metoden for a hente ut statistikk
