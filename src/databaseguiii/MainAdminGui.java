@@ -94,7 +94,11 @@ class AdminGui extends JFrame {
 	      else if(choices==9){
 	    	  MainOrderGui.main(null);
 	      }else if(choices==10){
-	    	  //motoden for a endre bestilling
+	    	  try {
+				ChangeOrderGui.main(null);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 	      }
 	      else if(choices==11){
 	    	  //metoden for a hente ut statistikk
