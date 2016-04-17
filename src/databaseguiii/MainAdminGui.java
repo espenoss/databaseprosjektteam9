@@ -67,7 +67,7 @@ class AdminGui extends JFrame {
 	    	  try {
 	    		  String s = "";
 	    		  for(int i = 0; i < admin.viewUserList().size(); i++ ){
-	    	          s +=  admin.viewUserList().get(i) + " ";
+	    	          s +=  admin.viewUserList().get(i) + " \n";
 	    	      }
 	    		  JOptionPane.showMessageDialog(null, s, "All users: ", JOptionPane.INFORMATION_MESSAGE );
 			} catch (Exception e) {
@@ -84,7 +84,7 @@ class AdminGui extends JFrame {
 	    	 try {
 	    		 String s = "";
 		    	 for( int i = 0; i < user.viewCustomerList().size(); i++ ){
-		    	 s +=  user.viewCustomerList().get(i) + " ";
+		    	 s +=  user.viewCustomerList().get(i) + " \n";
 		    	 }
 		    	 JOptionPane.showMessageDialog(null, s, "All customers: ", JOptionPane.INFORMATION_MESSAGE );
 				}
