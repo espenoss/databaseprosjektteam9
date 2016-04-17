@@ -42,7 +42,7 @@ class AdminGui extends JFrame {
 	  }
 
 	  private class ListeboksLytter implements ListSelectionListener {
-		  private final Database database = null;
+		  private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
 		  private Admin admin = new Admin("", 1, "", "", database);
 		  private User user = new Sales("", 1, "", "", database);
 		  
