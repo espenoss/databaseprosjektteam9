@@ -22,7 +22,7 @@ class AdminGui extends JFrame {
 	  private static final String [] CHOICES =
 	    {"Register new user","Change user information", "View all users", "Register new customer","Register new company",
 	    		"Change customer information", "View private customers", "View company customers","Register new food order","Change food order", "Retrieve statistics"};
-	  private JList<String> choice_list = new JList<String>(CHOICES);  // Naa er listen laget!
+	  private JList<String> choice_list = new JList<String>(CHOICES);  
 
 	  public AdminGui(String tittel) {
 		  setTitle(tittel);
