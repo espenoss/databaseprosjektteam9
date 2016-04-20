@@ -53,11 +53,6 @@ public class Meal {
 	public void setInstructions(String instr){
 		instr = instructions;
 	}
-
-	public void addIngredients(Ingredient obj, float quantity){
-		ingredients.add(obj);	
-		ingQuantity.add(quantity);
-	}
 	
 	
 	//FINISHED (Must be tested)

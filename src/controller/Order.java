@@ -31,7 +31,6 @@ public class Order {
 	public String getOrderDate(){
 		return orderDate;
 	}
-	
 
 	public int getCustomerID(){
 		return customerID;
@@ -81,8 +80,6 @@ public class Order {
 	public boolean uploadOrder(Database database) throws Exception{
 		return QMOrder.updateOrder(orderID, orderDate, customerID, info, userID, database);
 	}
-	
-	
 	
 	//Fetches meals from database
 	public void fetchMealsByDeliveryDate(Date deliveryDate, Database database) throws Exception{
