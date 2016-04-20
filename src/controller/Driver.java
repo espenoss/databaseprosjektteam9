@@ -4,8 +4,8 @@ import databasePackage.Database;
 
 public class Driver extends User {
 	
-	public Driver(String userID,int userType, String name,String pword, Database database) {
-		super(userID, userType, name, pword, database);
+	public Driver(String userID, String name, Database database) {
+		super(userID, 2, name, database);
 	}
 	
 	public boolean markDelivered(int orderIndex){

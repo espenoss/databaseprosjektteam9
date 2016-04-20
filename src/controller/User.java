@@ -9,15 +9,13 @@ public class User implements java.io.Serializable{
 	private String userID;
 	private int userType;
 	private String name;
-	private String pword;
 	Database database;
 	private TextEditor t = new TextEditor();
 	
-	public User(String userID, int userType, String name,String pword, Database database){
+	public User(String userID, int userType, String name, Database database){
 		this.userID=userID;
 		this.userType=userType;
 		this.name=name;
-		this.pword=pword;
 		this.database = database;
 	}
 
@@ -29,9 +27,6 @@ public class User implements java.io.Serializable{
 	}
 	public int getUserType(){
 		return userType;
-	}
-	public String getPword(){
-		return pword;
 	}
 	public Database getDatabase(){
 		return database;
@@ -45,10 +40,6 @@ public class User implements java.io.Serializable{
 	public void setUserType(int userType){
 		this.userType = userType;
 	}
-	public void setPassword(String pword){
-		this.pword=pword;
-	}
-	
 	
 	//IKKE FERDIG --- Mï¿½ TESTES
 	//Legger for ï¿½yebl ikke inn info om mï¿½ltid i objektene
@@ -157,11 +148,23 @@ public class User implements java.io.Serializable{
 		return null;
 	}
 	
-	//!!--- Må lages!!-----!!
-	public ArrayList<Ingredient> viewIngredients(){
-		return null;
+	//FINISHED --- Må testes
+	public ArrayList<Ingredient> viewIngredients() throws Exception{
+		String[][] ingT = QMFood.viewIngredients(database);
+		Ingredient tempIng; 
+		
+		ArrayList<Ingredient> ingList = new ArrayList<Ingredient>();
+		
+		
+		for (int i=0; i<ingT.length; i++){
+			if (t.stringToInt(ingT[i][3])>0){
+				tempIng = new Ingredient(t.stringToInt(ingT[i][0]), ingT[i][1], t.stringToFloat(ingT[i][2]), ingT[i][3]);
+				ingList.add(tempIng);
+			}
+		}
+		return ingList;
 	}
-	
+
 	//Lists orderIngredients as String
 	public String viewOrderIngredients() throws Exception{
 		String res = "";
@@ -186,7 +189,7 @@ public class User implements java.io.Serializable{
 			return true;
 		}
 		User p=(User)obj;
-		return (userID==p.getUserID() && name==p.getName()&&userType==p.getUserType()&&pword==p.getPword());
+		return (userID==p.getUserID() && name==p.getName()&&userType==p.getUserType());
 	}
 	
 	
@@ -207,7 +210,7 @@ public class User implements java.io.Serializable{
 		Database database = new Database(databaseDriver, databaseName);
 		
 		
-		User user = new User("Hanne", 1, "Hanne","1234", database);
+		User user = new User("Hanne", 1, "Hanne", database);
 		
 		/*
 		System.out.println("Enkelt bruker: "+user.viewSingleCustomer(10000));

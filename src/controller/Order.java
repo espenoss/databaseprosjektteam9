@@ -13,7 +13,7 @@ public class Order {
 	private int customerID;
 	private String info;
 	private String userID;
-	private ArrayList<Meal> meals = new ArrayList<Meal>();
+	private ArrayList<MealOrdered> meals = new ArrayList<MealOrdered>();
 
 	
 	public Order(int orderID, String orderDate, int customerID, String info, String userID){
@@ -81,21 +81,17 @@ public class Order {
 		return QMOrder.updateOrder(orderID, orderDate, customerID, info, userID, database);
 	}
 	
+	public ArrayList<Meal> viewMealsInOrderByDate(){
+		return null;
+	}
+	
+	
 	//Fetches meals from database
-	public void fetchMealsByDeliveryDate(Date deliveryDate, Database database) throws Exception{
+	public void fetchMealsInOrder(Date deliveryDate, Database database) throws Exception{
 
-		String[][] mealT = QMOrder.viewMealsInOrderByDeliveryDate(orderID, deliveryDate, database);
+		String[][] mealT = QMOrder.viewMealsInOrder(orderID, database);
 		
-		String res = "";
 		
-		for (int i=0; i<mealT.length;i++){
-			for(int j=0;j<mealT[i].length;j++){
-				res+=j+": "+mealT[i][j]+", ";
-			}
-			System.out.println(res);
-		}
-		
-		/*
 		TextEditor t = new TextEditor();
 		boolean check= false;
 		
@@ -111,7 +107,6 @@ public class Order {
 			}
 			check=false;
 		}
-		*/
 	}
 	
 	
