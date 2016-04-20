@@ -77,15 +77,15 @@ public class Order {
 		return QMOrder.updateOrder(orderID, orderDate, customerID, info, userID, database);
 	}
 	
-	public ArrayList<Meal> viewMealsInOrderByDate(java.sql.Date date, Database database) throws Exception{
+	public ArrayList<MealOrdered> viewMealsInOrderByDate(java.sql.Date date, Database database) throws Exception{
 		fetchMealsInOrder(database);
-		ArrayList<Meal> tempMeals = new ArrayList<Meal>();
+		ArrayList<MealOrdered> tempMeals = new ArrayList<MealOrdered>();
 		
 		for (int i=0; i<meals.size();i++){
 			System.out.println("Input dato: "+date);
 			System.out.println("Obj dato: "+meals.get(i).getDeliverydate());
 			
-			if (meals.get(i).getDeliverydate()==date){
+			if (meals.get(i).getDeliverydate().equals(date)){
 				tempMeals.add(meals.get(i));
 			}
 		}
@@ -106,7 +106,6 @@ public class Order {
 			
 			meals.add(new MealOrdered(t.stringToInt(mealT[i][0]), mealT[i][1], mealT[i][2], t.stringToInt(mealT[i][4]),
 					mealT[i][6], t.stringToInt(mealT[i][7]),t.stringToInt(mealT[i][5]),readyDelivery,delivered));
-			
 		}
 	}
 	//(int mealID, String mealName, String instructions, int price,
