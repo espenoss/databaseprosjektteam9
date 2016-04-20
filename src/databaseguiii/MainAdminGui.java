@@ -105,11 +105,25 @@ class AdminGui extends JFrame {
 
 	      	}
 	      	else if(choices==7){
+	      		ArrayList<Customer> c = null;
 	    	  try {
-				//admin.ViewAllCompaniesList(); 
+	    		  c=user.viewCompanyList(); 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+	    	  String[] s = new String[c.size()];
+		    	 for( int i = 0; i < c.size(); i++ ){
+		    		 s[i] = c.get(i).toString() + " ";
+		    	 }
+		    	 
+		    	 JScrollPane scrollpane = new JScrollPane(); 
+		         JList list = new JList(s);
+		         scrollpane = new JScrollPane(list);
+		         JPanel panel = new JPanel(); 
+		         panel.add(scrollpane);
+		         scrollpane.getViewport().add(list);		    	 
+		    	 JOptionPane.showMessageDialog(null, scrollpane, "All customers: ", JOptionPane.INFORMATION_MESSAGE );
+
 	      }else if(choices==8){
 	    	 
 	    	  //metoden remove customer
