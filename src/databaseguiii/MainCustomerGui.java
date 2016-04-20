@@ -90,7 +90,12 @@ class Parentwindow2 extends JFrame {
 				preferences = preferencesField.getText();	
 				phoneNumber = phoneNumberField.getText();
 				
-				active= status_list.isEnabled();
+
+				if(status_list.getSelectedIndex() == 0){
+					active = true;
+				}else{
+					active = false;
+				}
 				
 				try {
 					sales.registerCustomer(surName, firstName, phoneNumber, email, adress, 
