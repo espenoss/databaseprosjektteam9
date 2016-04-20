@@ -5,8 +5,8 @@ import databasePackage.*;
 
 public class Admin extends User {
 	
-	public Admin(String userID,int userType, String name,String pword, Database database) {
-		super(userID, userType, name, pword, database);
+	public Admin(String userID, String name, Database database) {
+		super(userID, 0, name,  database);
 	}
 
 	//Registrerer ny bruker
@@ -39,7 +39,7 @@ public class Admin extends User {
 		for(int i=0; i<list.length; i++){
 			int userType = Integer.parseInt(list[i][1]); 
 			
-			tempUser = new User(list[i][0],userType,list[i][2], null, database);
+			tempUser = new User(list[i][0],userType,list[i][2], database);
 			userList.add(tempUser);
 		}
 		return userList;

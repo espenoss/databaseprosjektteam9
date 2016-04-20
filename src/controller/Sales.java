@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class Sales extends User {
 	
-	public Sales(String userID, int userType, String name, String pword, Database database) {
-		super(userID, userType, name, pword, database);
+	public Sales(String userID, String name, Database database) {
+		super(userID, 3, name, database);
 	}
 
 	

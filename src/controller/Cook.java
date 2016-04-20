@@ -7,8 +7,8 @@ import databasePackage.*;
 
 public class Cook extends User {
 
-	public Cook(String userID,int userType, String name,String pword, Database database) {
-		super(userID, userType, name, pword, database);
+	public Cook(String userID, String name, Database database) {
+		super(userID, 1, name,  database);
 	}
 	
 	
