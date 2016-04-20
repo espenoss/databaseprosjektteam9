@@ -174,19 +174,20 @@ public class User implements java.io.Serializable{
 			return res;
 	}
 	
-	// ikke ferdig, henter bare tomme subplans.
+	// FINISHED må testes
 	public ArrayList<SubPlan> viewAllSubPlans() throws Exception{
 		String[][] subT = QMFood.viewSubscriptionPlans(database);
 		SubPlan tempSub; 
 		
 		ArrayList<SubPlan> subList = new ArrayList<SubPlan>();
 		
+		System.out.println("tabell lengde: "+subT.length);
+		System.out.println("tabell lengde2: "+subT[0].length);
+		
 		for (int i=0; i<subT.length; i++){
-			if (t.stringToInt(subT[i][3])>0){
-				tempSub = new SubPlan(t.stringToInt(subT[i][0]), subT[i][1]);
-				//HENT MÅLTID HER!!
-				subList.add(tempSub);
-			}
+			tempSub = new SubPlan(t.stringToInt(subT[i][0]), subT[i][1]);
+			tempSub.fetchMealsInPlan(database);
+			subList.add(tempSub);
 		}
 		return subList;
 	}
@@ -222,16 +223,17 @@ public class User implements java.io.Serializable{
 		
 		User user = new User("Hanne", 1, "Hanne", database);
 		
-		/*
-		System.out.println("Enkelt bruker: "+user.viewSingleCustomer(10000));
-		System.out.println(user.viewCustomerList());
-		*/
+		
+		//System.out.println("Enkelt bruker: "+user.viewSingleCustomer(10000));
+		//System.out.println(user.viewCustomerList());
+		
 		
 		java.sql.Date dato = java.sql.Date.valueOf( "2016-03-01");
 		//System.out.println(dato);
 		
 		//System.out.println(user.viewFoodOrders(dato));
-		System.out.println(user.viewCompanyList());
+		//System.out.println(user.viewCompanyList());
+		System.out.println(user.viewAllSubPlans());
 		
 	}
 }

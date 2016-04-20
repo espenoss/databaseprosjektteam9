@@ -70,11 +70,44 @@ public class SubPlan {
 	
 	public void fetchMealsInPlan(Database database) throws Exception{
 		String[][] mealT = QMFood.viewMealsInPlan(subPlanID, database);
+		Meal tempMeal;
+		TextEditor t = new TextEditor();
 		
+		for (int i=0; i<mealT.length; i++){
+			tempMeal = new Meal(t.stringToInt(mealT[i][0]), mealT[i][1], mealT[i][2], true, t.stringToInt(mealT[i][4]));
+			meals[t.stringToInt(mealT[i][6])-1] = tempMeal;
+		}
 	}
 	
 	//Registers information to database
 	public boolean updateSubPlan(Database database) throws Exception{
 		return QMFood.updateSubscriptionPlan(subPlanID, name, database);
+	}
+	
+	public String toString(){
+		String res = "Subscription plan ID: "+ subPlanID+ ", name: "+ name;
+		for (int i=0; i<7; i++){
+			if(meals[i]!= null){
+				res+="\nWeekday nr: "+(i+1)+", meal: "+meals[i].getMealName();
+			}
+			
+		}
+		res+="\n";
+		return res;
+	}
+	
+	public static void main(String[] args) throws Exception{
+		String username = "marith1";
+		String password = "tgp8sBZA";
+		String databaseName = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
+		String databaseDriver = "com.mysql.jdbc.Driver";
+		Database database = new Database(databaseDriver, databaseName);
+		
+		
+		SubPlan testSub = new SubPlan(1, "Lunsj");
+		
+		testSub.fetchMealsInPlan(database);
+		
+		System.out.println(testSub);
 	}
 }

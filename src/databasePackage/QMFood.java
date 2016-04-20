@@ -309,7 +309,7 @@ public class QMFood {
 	 
 	public static String[][] viewMealsInPlan(int subID, Database database) throws Exception{
 
-		String statement = "SELECT * FROM meal NATURAL JOIN sub_meals_day WHERE"+subID+"ORDER BY weekday_nr;";		
+		String statement = "SELECT * FROM meal NATURAL JOIN sub_meals_day WHERE sub_id="+subID+" ORDER BY weekday_nr";		
 		
 		database.makeSingleStatement(statement);
 		
