@@ -77,13 +77,24 @@ public class Order {
 		return QMOrder.updateOrder(orderID, orderDate, customerID, info, userID, database);
 	}
 	
-	public ArrayList<Meal> viewMealsInOrderByDate(){
-		return null;
+	public ArrayList<Meal> viewMealsInOrderByDate(java.sql.Date date, Database database) throws Exception{
+		fetchMealsInOrder(database);
+		ArrayList<Meal> tempMeals = new ArrayList<Meal>();
+		
+		for (int i=0; i<meals.size();i++){
+			System.out.println("Input dato: "+date);
+			System.out.println("Obj dato: "+meals.get(i).getDeliverydate());
+			
+			if (meals.get(i).getDeliverydate()==date){
+				tempMeals.add(meals.get(i));
+			}
+		}
+		return tempMeals;
 	}
 	
 	
 	//Fetches meals from database
-	public void fetchMealsInOrder(Date deliveryDate, Database database) throws Exception{
+	public void fetchMealsInOrder(Database database) throws Exception{
 		meals = new ArrayList<MealOrdered>(); //creates new empty meal arrayList
 		String[][] mealT = QMOrder.viewMealsInOrder(orderID, database);
 		
@@ -142,8 +153,10 @@ public class Order {
 		
 		java.sql.Date dato = java.sql.Date.valueOf("2016-03-01");
 		
-		test.fetchMealsInOrder(dato, database);
-		System.out.println(test);
+		test.fetchMealsInOrder(database);
+		System.out.println(test.viewMealsInOrderByDate(dato, database));
+		//System.out.println(test);
+		
 	}
 	
 }

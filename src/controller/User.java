@@ -54,7 +54,7 @@ public class User implements java.io.Serializable{
 		for(int i=0; i<orderT.length;i++){
 			tempOrder = new Order(t.stringToInt(orderT[i][0]), 	orderT[i][1], t.stringToInt(orderT[i][2]),  orderT[i][3], orderT[i][4]);
 			
-			tempOrder.fetchMealsInOrder(date, database);
+			tempOrder.fetchMealsInOrder(database);
 			orderList.add(tempOrder);
 		}
 		
@@ -150,10 +150,8 @@ public class User implements java.io.Serializable{
 		ArrayList<Ingredient> ingList = new ArrayList<Ingredient>();
 		
 		for (int i=0; i<ingT.length; i++){
-			if (t.stringToInt(ingT[i][3])>0){
-				tempIng = new Ingredient(t.stringToInt(ingT[i][0]), ingT[i][1], t.stringToFloat(ingT[i][2]), ingT[i][3]);
-				ingList.add(tempIng);
-			}
+			tempIng = new Ingredient(t.stringToInt(ingT[i][0]), ingT[i][1], t.stringToFloat(ingT[i][2]), ingT[i][3]);
+			ingList.add(tempIng);
 		}
 		return ingList;
 	}

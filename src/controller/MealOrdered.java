@@ -3,7 +3,7 @@ package controller;
 import databasePackage.*;
 
 public class MealOrdered extends Meal {
-	private String deliveryDate;
+	private java.sql.Date deliveryDate;
 	private int quantity;
 	private int orderID;
 	private boolean readyDelivery;
@@ -12,7 +12,7 @@ public class MealOrdered extends Meal {
 	public MealOrdered(int mealID, String mealName, String instructions, int price,
 			String deliveryDate, int quantity, int orderID, boolean readyDelivery, boolean delivered) {
 		super(mealID, mealName, instructions, true, price);
-		this.deliveryDate = deliveryDate;
+		this.deliveryDate = java.sql.Date.valueOf(deliveryDate);
 		this.quantity = quantity;
 		this.orderID = orderID;
 		this.readyDelivery = readyDelivery;
@@ -22,14 +22,14 @@ public class MealOrdered extends Meal {
 	public MealOrdered(Meal meal,
 			String deliveryDate, int quantity, int orderID, boolean readyDelivery, boolean delivered) {
 		super(meal.getMealID(), meal.getMealName(), meal.getInstructions(), true, meal.getPrice());
-		this.deliveryDate = deliveryDate;
+		this.deliveryDate = java.sql.Date.valueOf(deliveryDate);
 		this.quantity = quantity;
 		this.orderID = orderID;
 		this.readyDelivery = readyDelivery;
 		this.delivered = delivered;
 	}
 	
-	public String getDeliverydate(){
+	public java.sql.Date getDeliverydate(){
 		return deliveryDate;
 	}
 	
@@ -43,11 +43,12 @@ public class MealOrdered extends Meal {
 	}
 	
 	public void setDeliverydate(String deliveryDate){
-		this.deliveryDate = deliveryDate;
+		this.deliveryDate = java.sql.Date.valueOf(deliveryDate);
 	}
 	
 	public boolean uploadMealOrdered(Database database) throws Exception{
-		boolean res = QMOrder.updateMealInOrder(orderID, getMealID(), deliveryDate, quantity, readyDelivery, delivered, database);
+		String delDate = deliveryDate.toString();
+		boolean res = QMOrder.updateMealInOrder(orderID, getMealID(), delDate, quantity, readyDelivery, delivered, database);
 		return res;
 	}
 }
