@@ -9,7 +9,6 @@ public class QMUser {
 	public static final int U_COOK = 1;
 	public static final int U_DRIVER = 2;
 	public static final int U_SALES = 3;
-	public static final int U_STORAGE = 4;
 	
 
 	
@@ -72,21 +71,17 @@ public class QMUser {
 	}	
 
 	// Confirms user details
-	public static int logIn(String userID, char[] password, Database database) throws Exception{
+	public static String[] logIn(String userID, char[] password, Database database) throws Exception{
 		
-		String[][] userType = null;
+		String[][] userInfo = null;
 		
-		String statement = "SELECT user_type FROM user WHERE user_id = '" + userID + "' AND password ='" + String.valueOf(password) + "'";
+		String statement = "SELECT user_id FROM user WHERE user_id = '" + userID + "' AND password ='" + String.valueOf(password) + "'";
 		
 		database.makeSingleStatement(statement);	
 		
-		userType = database.getLastResult();
+		userInfo = database.getLastResult();
 		
-		if(userType.length == 0){ // If no such user or password is incorrect
-			return -1;
-		}else{
-			return Integer.parseInt(userType[0][0]);
-		}
+		return userInfo[0];
 	}
 	
 	

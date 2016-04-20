@@ -1,5 +1,6 @@
 package databaseguiii;
 import controller.*;
+import databasePackage.Database;
 
 import java.awt.BorderLayout;
 import java.awt.event.*;
@@ -20,17 +21,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import controller.*;
 
-class LogInGui extends JFrame implements ActionListener{
+class LogInGui extends JFrame{
+	public static final int U_ADMIN = 0;
+	public static final int U_COOK = 1;
+	public static final int U_DRIVER = 2;
+	public static final int U_SALES = 3;
 	private JTextField userID = new JTextField(20);
-	private JPasswordField password = new JPasswordField(20); // m� endre dette 
+	private JPasswordField password = new JPasswordField(20);
 	private JLabel message = new JLabel("Log in information");
-	
-/*	public static boolean authenticate(String username, String password){
-		if(username.equals("WHATEVER") && password.equals("WHATEVER")){
-			return true;
-		}
-		return false;
-	} */
+	String username = "espenme";
+	String passingword = "16Sossosem06";
+	String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
+	private Database database = new Database("com.mysql.jdbc.Driver", databasename);
 	
 	public LogInGui(String title){
 		setTitle(title);
@@ -47,32 +49,48 @@ class LogInGui extends JFrame implements ActionListener{
 		add(button, BorderLayout.CENTER);  
 		add(message, BorderLayout.PAGE_END);
 		pack();
-	}
-	
-	
-	public static int authenticate(String userID, char[] password) throws Exception{
-		LogIn logIn = new LogIn();
-	
-		return logIn.logIn(userID, password);
-	}
-	
+	}	
 	
 	private class Buttonlistener implements ActionListener {
 		private LogIn log=new LogIn();
 		public void actionPerformed(ActionEvent event) {
-			JButton button = (JButton)event.getSource();
-			String buttonName = button.getText();
+			String[] loginSuccess = null;
 			try {
-				if (log.logIn(userID.getText(), password.getPassword()) !=  -1){
-				String userid = userID.getText();
-				message.setText(userid + " have successfully logged in ");	
-				add(message, BorderLayout.PAGE_END);
-				}else{
-					message.setText("Wrong username or password");	
-				}
+				loginSuccess = log.logIn(userID.getText(), password.getPassword(), database);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+
+			if (loginSuccess.length == 1){				
+				String userid = userID.getText();
+				message.setText(userid + " has successfully logged in ");	
+				add(message, BorderLayout.PAGE_END);
+				
+				String userID = loginSuccess[0];
+				int userType = Integer.parseInt(loginSuccess[1]);
+				String userName = loginSuccess[2];
+				
+				User user = null;
+				
+				switch(userType){
+					case U_ADMIN:
+						user = new Admin(userID, userName, database);
+						new MainAdminGui();
+						break;
+					case U_COOK:
+						user = new Cook(userID, userName, database);
+						break;					
+					case U_DRIVER:
+						user = new Driver(userID, userName, database);
+						break;
+					case U_SALES:
+						user = new Sales(userID, userName, database);
+						break;						
+					default:
+				}
+			
+			}else{
+				message.setText("Wrong username or password");	
 			}
 		}
 	}    
@@ -94,10 +112,6 @@ class LogInGui extends JFrame implements ActionListener{
 			add(text);
 			add(password);
 		}	
-	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 	}
 }
 

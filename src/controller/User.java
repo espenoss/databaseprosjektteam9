@@ -9,15 +9,13 @@ public class User implements java.io.Serializable{
 	private String userID;
 	private int userType;
 	private String name;
-	private String pword;
 	Database database;
 	private TextEditor t = new TextEditor();
 	
-	public User(String userID, int userType, String name,String pword, Database database){
+	public User(String userID, int userType, String name, Database database){
 		this.userID=userID;
 		this.userType=userType;
 		this.name=name;
-		this.pword=pword;
 		this.database = database;
 	}
 
@@ -29,9 +27,6 @@ public class User implements java.io.Serializable{
 	}
 	public int getUserType(){
 		return userType;
-	}
-	public String getPword(){
-		return pword;
 	}
 	public Database getDatabase(){
 		return database;
@@ -45,10 +40,6 @@ public class User implements java.io.Serializable{
 	public void setUserType(int userType){
 		this.userType = userType;
 	}
-	public void setPassword(String pword){
-		this.pword=pword;
-	}
-	
 	
 	//IKKE FERDIG --- M� TESTES
 	//Legger for �yebl ikke inn info om m�ltid i objektene
@@ -186,7 +177,7 @@ public class User implements java.io.Serializable{
 			return true;
 		}
 		User p=(User)obj;
-		return (userID==p.getUserID() && name==p.getName()&&userType==p.getUserType()&&pword==p.getPword());
+		return (userID==p.getUserID() && name==p.getName()&&userType==p.getUserType());
 	}
 	
 	
@@ -207,7 +198,7 @@ public class User implements java.io.Serializable{
 		Database database = new Database(databaseDriver, databaseName);
 		
 		
-		User user = new User("Hanne", 1, "Hanne","1234", database);
+		User user = new User("Hanne", 1, "Hanne", database);
 		
 		/*
 		System.out.println("Enkelt bruker: "+user.viewSingleCustomer(10000));
