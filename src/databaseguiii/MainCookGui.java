@@ -40,6 +40,7 @@ class MainCookGui extends JFrame {
 			}else if(choices==1){
 				// Mark as ready gui
 			}else if(choices==2){
+				new CreateMealDialog(cook);
 					// Create new meal
 			}else if(choices == 3){
 				// View menu ingredients

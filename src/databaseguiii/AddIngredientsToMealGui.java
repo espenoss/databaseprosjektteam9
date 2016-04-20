@@ -27,12 +27,10 @@ import databasePackage.*;
 	
 	 private class AddIngredients extends MyDialog {
 		 private TextEditor editor = new TextEditor();
-		 private ArrayList<Meal> mealList = null;
+		 private ArrayList<Meal> mealList = new ArrayList<Meal>();
 		 private JComboBox mealIdSelected;
-		
-		 private ArrayList<Ingredient> ingredientsList = null;
+		 private ArrayList<Ingredient> ingredientsList = new ArrayList<Ingredient>();
 		 private JComboBox ingredientSelected;
-		
 		 private JTextField ingredient_quantityField = new JTextField(20);
 		 private float myQuantity;
 		 int mealIndex;
@@ -51,32 +49,6 @@ import databasePackage.*;
 		 private class IngredientsDatapanel extends JPanel{
 			public IngredientsDatapanel(){
 				setLayout(new GridLayout(3,2));
-				try {
-					mealList = cook.viewAvailableMeals();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				ArrayList<String> meallist = new ArrayList<>();
-				for(Meal m : mealList){
-					meallist.add(m.getMealName());
-				}
-				mealIdSelected = new JComboBox<>(meallist.toArray());
-			
-				try {
-					ingredientsList = cook.viewIngredients();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				ArrayList<String> ingredientlist = new ArrayList<>();
-				for(Ingredient i : ingredientsList){
-					ingredientlist.add(i.getIngName());
-				}
-				ingredientSelected = new JComboBox<>(ingredientlist.toArray());
-				
 				
 				add(new JLabel("Meal Id: ", JLabel.RIGHT));
 				add(mealIdSelected);
