@@ -11,7 +11,6 @@ public class MealsInOrder extends JFrame {
 	
 	private class addMealDialog extends MyDialog{
 		
-		
 		public addMealDialog(JFrame parent){
 			super(parent, "Add meal to order");
 			add(new JPanel(), BorderLayout.NORTH);
@@ -25,6 +24,7 @@ public class MealsInOrder extends JFrame {
 				
 			}
 		}
+
 	}
 	
 	public MealsInOrder(){
