@@ -178,8 +178,18 @@ public class QMOrder {
 		database.makeSingleStatement(statement);
 		
 		return database.getLastResult();		
-	}		
+	}
 	
+	public static int viewOrderPrice(int orderID, Database database) throws Exception{
+
+		String statement = "SELECT SUM(quantity*price) FROM "
+				+ "(SELECT a.quantity,b.price FROM ordered_meal AS a, meal AS b WHERE a.order_id =  " + orderID
+				+ " AND b.meal_id = a.meal_id) AS tab";
+		
+		database.makeSingleStatement(statement);
+		
+		return Integer.parseInt(database.getLastResult()[0][0]);
+	}
 	
 	public static String[][] viewOrdersByDeliveryDate(java.sql.Date deliveryDate, Database database) throws Exception{
 		
