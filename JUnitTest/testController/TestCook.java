@@ -32,7 +32,7 @@ public class TestCook {
 
 	@Before
 	public void setUp() throws Exception {
-		cook = new Cook("bob", 1,"Bob","qwerty", database);
+		cook = new Cook("bob","Bob", database);
 		instance = new SubPlan(1, "name");
 		
 	}
@@ -40,8 +40,8 @@ public class TestCook {
 	@Test
 	public void testShouldCreateMeal() throws Exception {
 		System.out.println("Test: Create meal");
-		// try to register new meal
-		Meal result = cook.createMeal("Spaghetti", "Boil pasta", true, 100);
+		
+		Meal result = cook.createMeal("Spaghetti", "Boil pasta", 100);
 		Meal expResult = new Meal(1,"Spaghetti", "None", true, 100);
 		
 		assertEquals(result, expResult);

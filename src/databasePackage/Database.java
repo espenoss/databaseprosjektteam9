@@ -220,6 +220,18 @@ public class Database {
 	      statement.executeUpdate(sqlAlterTable6);
 	      statement.executeUpdate(sqlAlterTable7);
 	      statement.executeUpdate(sqlAlterTable8);
+	      
+			String zone1 = "INSERT INTO zone VALUES(1, 'Midtbyen');";
+			String zone2 = "INSERT INTO zone VALUES(2, 'Østbyen');";
+			String zone3 = "INSERT INTO zone VALUES(3, 'Lerkendal');";
+			String zone4 = "INSERT INTO zone VALUES(4, 'Heimdal');";
+			String zone5 = "INSERT INTO zone VALUES(5, 'Byåsen');";
+			
+			makeSingleStatement(zone1);
+			makeSingleStatement(zone2);
+			makeSingleStatement(zone3);
+			makeSingleStatement(zone4);
+			makeSingleStatement(zone5);
 	     
         	ok = true;
         } catch (ClassNotFoundException e){
