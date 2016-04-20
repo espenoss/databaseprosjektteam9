@@ -62,10 +62,6 @@ public class Order {
 		this.info = info;
 	}
 	
-	public void addMeal(Meal meal, String deliveryDate){
-		meals.add(meal);
-	}
-	
 	//Marks meal as ready for delivery to customer, given index of meal in mealArray
 	public boolean markMealAsReady(int index, String deliveryDate, Database database) throws Exception{
 		return QMOrder.markMealOrderAsReadyForDelivery(orderID, meals.get(index).getMealID(), deliveryDate, database);
@@ -81,33 +77,40 @@ public class Order {
 		return QMOrder.updateOrder(orderID, orderDate, customerID, info, userID, database);
 	}
 	
-	public ArrayList<Meal>
+	public ArrayList<Meal> viewMealsInOrderByDate(){
+		return null;
+	}
 	
 	
 	//Fetches meals from database
 	public void fetchMealsInOrder(Date deliveryDate, Database database) throws Exception{
-
+		meals = new ArrayList<MealOrdered>(); //creates new empty meal arrayList
 		String[][] mealT = QMOrder.viewMealsInOrder(orderID, database);
 		
-		
 		TextEditor t = new TextEditor();
-		boolean check= false;
 		
 		for(int i=0;i<mealT.length;i++){			
-			for(int j=0;j<meals.size();j++){		//Checks if meal is in arrayList already, replaces the meal
-				if (meals.get(j).getMealID()==t.stringToInt(mealT[i][0])){
-					meals.add(j,new Meal(t.stringToInt(mealT[i][0]),mealT[i][1],mealT[i][2],true, t.stringToInt(mealT[i][4])));
-					check= true;
-				}
-			}
-			if (!check){							//Adds meal to arrayList if check is false
-				meals.add(new Meal(t.stringToInt(mealT[i][0]),mealT[i][1],mealT[i][2],true, t.stringToInt(mealT[i][4])));
-			}
-			check=false;
+			boolean readyDelivery = t.stringToInt(mealT[i][8])==1;
+			boolean delivered = t.stringToInt(mealT[i][9])==1;
+			
+			meals.add(new MealOrdered(t.stringToInt(mealT[i][0]), mealT[i][1], mealT[i][2], t.stringToInt(mealT[i][4]),
+					mealT[i][6], t.stringToInt(mealT[i][7]),t.stringToInt(mealT[i][5]),readyDelivery,delivered));
+			
 		}
-		
 	}
+	//(int mealID, String mealName, String instructions, int price,
+	//		String deliveryDate, int quantity, int orderID, boolean readyDelivery, boolean delivered)
 	
+	// 0 : meal_id - int
+	// 1 : meal_name - String
+	// 2 : instructions - String
+	// 3 : available - boolean
+	// 4 : price - int
+	// 5 : order_id - int 
+	// 6 : delivery_date - String
+	// 7 : quantity - int 
+	// 8 : ready_delivery
+	// 9 : delivered
 	
 	public String toString(){
 		String res = "";
@@ -134,15 +137,12 @@ public class Order {
 	    java.util.Date utilDate = new java.util.Date();
 	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		
-		System.out.println(sqlDate);
-		
 		Order test = new Order(10000,"2016-03-01",10000,"Info", "hanneh");
-		System.out.println(test);
+		//System.out.println(test);
 		
 		java.sql.Date dato = java.sql.Date.valueOf("2016-03-01");
-		System.out.println(dato);
 		
-		test.fetchMealsByDeliveryDate(dato, database);
+		test.fetchMealsInOrder(dato, database);
 		System.out.println(test);
 	}
 	

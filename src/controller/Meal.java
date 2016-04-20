@@ -73,10 +73,13 @@ public class Meal {
 	}
 	
 	public String toString(){
-		String res = "Meal name: ";
-		res += mealName + "\nIngredients: ";
-		for(int i=0; i<ingredients.size(); i++){
-			res += ingredients.get(i).getIngName() + ". Quantity: " + ingQuantity.get(i) + " " + ingredients.get(i).getUnit();
+		String res = "Meal name: "+mealName;
+		
+		if(ingredients.size()!=0){
+			res += mealName + "\nIngredients: ";
+			for(int i=0; i<ingredients.size(); i++){
+				res += ingredients.get(i).getIngName() + ". Quantity: " + ingQuantity.get(i) + " " + ingredients.get(i).getUnit();
+			}
 		}
 		return res;
 	}

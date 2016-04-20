@@ -171,9 +171,15 @@ public class QMOrder {
 	// 2 : instructions - String
 	// 3 : available - boolean
 	// 4 : price - int
+	// 5 : order_id - int 
+	// 6 : delivery_date - String
+	// 7 : quantity - int 
+	// 8 : ready_delivery
+	// 9 : delivered
+	
 	public static String[][] viewMealsInOrder(int orderID, Database database) throws Exception{
 
-		String statement = "SELECT * FROM meal WHERE meal_id IN (SELECT meal_id FROM ordered_meal WHERE order_id = " + orderID + ")";
+		String statement = "SELECT * FROM meal NATURAL JOIN ordered_meal WHERE order_id= "+10000+";";
 		
 		database.makeSingleStatement(statement);
 		

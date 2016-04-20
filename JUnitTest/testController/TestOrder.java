@@ -16,7 +16,8 @@ import controller.Order;
 import databasePackage.Database;
 import databaseguiii.MealsInOrder;
 
-// IKKE FERDIG
+// *******IKKE FERDIG*******
+
 public class TestOrder {
 	private static Database database;
 	private static Order order;
@@ -32,20 +33,18 @@ public class TestOrder {
 		database.initiateDb();
 		
 		String insert = "INSERT INTO user VALUES('trym123', 1, 'Trym Larsen', '1234')";
-		String insert1 = "INSERT INTO zone VALUES(4, 'Heimdal')";
-		String insert2 = "INSERT INTO customer VALUES(10, 'Henrik', 'Hansen', '73909090', 'henrik@hansen.no', 'Gateveien 1', 7098, 4, 'none', true)";
-		String insert3 = "INSERT INTO food_order VALUES(1,'2016-01-01', 10, 'none', 'trym123')";
+		String insert1 = "INSERT INTO customer VALUES(10, 'Henrik', 'Hansen', '73909090', 'henrik@hansen.no', 'Gateveien 1', 7098, 4, 'none', true)";
+		String insert2 = "INSERT INTO food_order VALUES(1,'2016-01-01', 10, 'none', 'trym123')";
 
 		database.makeSingleStatement(insert);
 		database.makeSingleStatement(insert1);
 		database.makeSingleStatement(insert2);
-		database.makeSingleStatement(insert3);
 		
 		Meal pizza = new Meal(2, "pizza", "none", true, 140);
 		meals.add(pizza);
 		order = new Order(1, "2016-01-01", 10, "none", "trym123");
 		
-		order.addMeal(pizza);
+		order.addMeal(pizza, "2016-01-01");
 	}
 
 	@Before
@@ -78,6 +77,11 @@ public class TestOrder {
 		boolean expRes = true;
 		
 		assertEquals(res, expRes);
+	}
+	
+	@Test
+	public void testShouldUploadMealInOrder() throws Exception{
+		System.out.println("Test: Upload meal in order to database");
 	}
 	 
 	// ***** METHOD NOT FINISHED IN CONTROLLER.ORDER *****
