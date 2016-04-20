@@ -21,7 +21,7 @@ class AdminGui extends JFrame {
 	  private JList list = new JList();
 	  private static final String [] CHOICES =
 	    {"Register new user","Change user information", "View all users", "Register new customer","Register new company",
-	    		"Change customer information", "View private customers", "View company customers","Remove customer","Register new food order","Change food order", "Retrieve statistics"};
+	    		"Change customer information", "View private customers", "View company customers","Register new food order","Change food order", "Retrieve statistics"};
 	  private JList<String> choice_list = new JList<String>(CHOICES);  // Naa er listen laget!
 
 	  public AdminGui(String tittel) {
@@ -124,20 +124,17 @@ class AdminGui extends JFrame {
 		         scrollpane.getViewport().add(list);		    	 
 		    	 JOptionPane.showMessageDialog(null, scrollpane, "All customers: ", JOptionPane.INFORMATION_MESSAGE );
 
-	      }else if(choices==8){
-	    	 
-	    	  //metoden remove customer
 	      }
-	      else if(choices==9){
+	      else if(choices==8){
 	    	  MainOrderGui.main(null);
-	      }else if(choices==10){
+	      }else if(choices==9){
 	    	  try {
 				ChangeOrderGui.main(null);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 	      }
-	      else if(choices==11){
+	      else if(choices==10){
 	    	  //metoden for a hente ut statistikk
 	    }
 	  }
