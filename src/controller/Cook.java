@@ -78,12 +78,7 @@ public class Cook extends User {
 	
 	// Deletes ingredient from database --- NOT TESTED
 	public boolean deleteIngredient(int ingredientID) throws Exception{
-		boolean ok = QMFood.removeIngredient(ingredientID, database);
-		if(ok){
-			return true;
-		}else {
-			return false;
-		}
+		return QMFood.removeIngredient(ingredientID, database);
 	}
 	
 	
