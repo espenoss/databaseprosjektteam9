@@ -157,6 +157,11 @@ public class User implements java.io.Serializable{
 		return null;
 	}
 	
+	//!!--- Må lages!!-----!!
+	public ArrayList<Ingredient> viewIngredients(){
+		return null;
+	}
+	
 	//Lists orderIngredients as String
 	public String viewOrderIngredients() throws Exception{
 		String res = "";
@@ -170,26 +175,6 @@ public class User implements java.io.Serializable{
 	// --- Mï¿½ LAGES!!
 	public SubPlan viewSubPlan(){
 		return null;
-	}
-	
-	
-	// Adds/registers new ingredient to database --- NOT TESTED
-	public Ingredient addNewIngredient(String name, float quantity, String unit, Database database) throws Exception{
-		int ingredientID = QMFood.registerIngredient(name, quantity, unit, database);
-		if(ingredientID<0){
-			return null;
-		} 
-		return new Ingredient(ingredientID, name, quantity, unit);
-	}
-	
-	// Deletes ingredient from database --- NOT TESTED
-	public boolean deleteIngredient(int ingredientID) throws Exception{
-		boolean ok = QMFood.removeIngredient(ingredientID, database);
-		if(ok){
-			return true;
-		}else {
-			return false;
-		}
 	}
 	
 	
@@ -233,7 +218,7 @@ public class User implements java.io.Serializable{
 		//System.out.println(dato);
 		
 		//System.out.println(user.viewFoodOrders(dato));
-		System.out.println()
+		System.out.println(user.viewCompanyList());
 		
 	}
 }

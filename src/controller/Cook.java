@@ -22,6 +22,16 @@ public class Cook extends User {
 		return new Meal(mealID, mealName, instructions, available, price);
 	}
 	
+	// Deletes meal from database. ---  is tested
+	public boolean deleteMeal(int mealID) throws Exception{
+		boolean ok = QMFood.removeMeal(mealID, database);
+		if(ok){
+			return true;
+		} else{
+		return false;
+		}
+	}
+	
 	// Finished - lacking method in User before testing
 	//Registers new empty subscription plan
 	public SubPlan registerSubPlan(String name,Database database) throws Exception{
@@ -30,13 +40,30 @@ public class Cook extends User {
 		return new SubPlan(subPlanID, name);
 	}
 	
-	// Deletes meal from database. ---  is tested
-	public boolean deleteMeal(int mealID) throws Exception{
-		boolean ok = QMFood.removeMeal(mealID, database);
+	public boolean registerIngredientDelivery(String orderinfo){
+		boolean success = false;
+		
+		// oppdater database med ny info
+		
+		return success;
+	}
+	
+	// Adds/registers new ingredient to database --- NOT TESTED
+	public Ingredient addNewIngredient(String name, float quantity, String unit, Database database) throws Exception{
+		int ingredientID = QMFood.registerIngredient(name, quantity, unit, database);
+		if(ingredientID<0){
+			return null;
+		} 
+		return new Ingredient(ingredientID, name, quantity, unit);
+	}
+	
+	// Deletes ingredient from database --- NOT TESTED
+	public boolean deleteIngredient(int ingredientID) throws Exception{
+		boolean ok = QMFood.removeIngredient(ingredientID, database);
 		if(ok){
 			return true;
-		} else{
-		return false;
+		}else {
+			return false;
 		}
 	}
 	

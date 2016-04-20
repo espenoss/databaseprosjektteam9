@@ -8,7 +8,6 @@ public class Meal {
 	private ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>(); 	//Lists ingredients (objects) that is used in the meal
 	private ArrayList<Float> ingQuantity = new ArrayList<Float>();		//List ingredient quantity in same order as ingredients
 	private int mealID;
-	private int orderID; //?? trenger vi dette?
 	private String mealName;
 	private String instructions;
 	private boolean available;
@@ -55,16 +54,6 @@ public class Meal {
 	public void setInstructions(String instr){
 		instr = instructions;
 	}
-	
-	// trenger vi disse??? 
-	public void setOrderID(int orderID){
-		this.orderID = orderID;
-	}
-	
-	public int getOrderID(){
-		return orderID;
-	}
-	
 
 	public void addIngredients(Ingredient obj, float quantity){
 		ingredients.add(obj);	
@@ -84,6 +73,10 @@ public class Meal {
 		}
 	}
 	
+	public boolean updateMealToDatabase(Database database) throws Exception{
+		boolean res = QMFood.updateMeal(mealID, mealName, instructions, available, price, database);
+		return res;
+	}
 	
 	public String toString(){
 		String res = "Meal name: ";
