@@ -84,7 +84,7 @@ class AdminGui extends JFrame {
 	    	 try {
 	    		 String s = "";
 		    	 for( int i = 0; i < user.viewCustomerList().size(); i++ ){
-		    	 s +=  user.viewCustomerList().get(i) + " \n";
+		    	 s +=  user.viewCustomerList().get(i) + " ";
 		    	 }
 		    	 JOptionPane.showMessageDialog(null, s, "All customers: ", JOptionPane.INFORMATION_MESSAGE );
 				}
