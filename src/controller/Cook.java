@@ -22,6 +22,11 @@ public class Cook extends User {
 		return new Meal(mealID, mealName, instructions, available, price);
 	}
 	
+	public boolean addIngredientToMeal(int mealID, int ingredientID, float ingredientQuantity) throws Exception{
+		boolean res = QMFood.addIngredientToMeal(mealID, ingredientID, ingredientQuantity, database);
+		return res;
+	}
+	
 	// Deletes meal from database. ---  is tested
 	public boolean deleteMeal(int mealID) throws Exception{
 		boolean ok = QMFood.removeMeal(mealID, database);
