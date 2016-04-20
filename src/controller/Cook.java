@@ -29,12 +29,7 @@ public class Cook extends User {
 	
 	// Deletes meal from database. ---  is tested //
 	public boolean deleteMeal(int mealID) throws Exception{
-		boolean ok = QMFood.removeMeal(mealID, database);
-		if(ok){
-			return true;
-		} else{
-		return false;
-		}
+		return QMFood.removeMeal(mealID, database);
 	}
 	
 	// Finished - lacking method in User before testing

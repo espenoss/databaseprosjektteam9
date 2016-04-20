@@ -218,7 +218,7 @@ public class User implements java.io.Serializable{
 		//System.out.println(user.viewCustomerList());
 		
 		
-		java.sql.Date dato = java.sql.Date.valueOf( "2016-03-01");
+		java.sql.Date dato = java.sql.Date.valueOf("2016-03-01");
 		//System.out.println(dato);
 		
 		System.out.println(user.viewFoodOrders(dato));
