@@ -14,12 +14,12 @@ public class Cook extends User {
 	
 	//FINISHED is tested
 	//Lets the cook register a new meal
-	public Meal createMeal(String mealName, String instructions, boolean available, int price) throws Exception{ 
-		int mealID = QMFood.registerMeal(mealName, instructions, available, price, database);
+	public Meal createMeal(String mealName, String instructions, int price) throws Exception{ 
+		int mealID = QMFood.registerMeal(mealName, instructions, true, price, database);
 		if(mealID < 0){
 			return null;
 		}
-		return new Meal(mealID, mealName, instructions, available, price);
+		return new Meal(mealID, mealName, instructions, true, price);
 	}
 	
 	public boolean addIngredientToMeal(int mealID, int ingredientID, float ingredientQuantity) throws Exception{
@@ -27,7 +27,7 @@ public class Cook extends User {
 		return res;
 	}
 	
-	// Deletes meal from database. ---  is tested
+	// Deletes meal from database. ---  is tested //
 	public boolean deleteMeal(int mealID) throws Exception{
 		boolean ok = QMFood.removeMeal(mealID, database);
 		if(ok){
