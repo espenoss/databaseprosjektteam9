@@ -106,7 +106,7 @@ class ParentWindow extends JFrame {
 				
 				currCust.setPreferences(preferencesField.getText());
 				currCust.setPhoneNumber(phoneNumberField.getText());
-				
+			
 				if(status_list.getSelectedIndex() == 0){
 					currCust.setActive(true);
 				}else{
