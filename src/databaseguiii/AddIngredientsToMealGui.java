@@ -18,11 +18,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import controller.*;
-import databasePackage.Database;
+import databasePackage.*;
 
  class AddIngredientsToMeal extends JFrame {
-	 private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
-	 Cook cook = new Cook("", "", database);
+	 	private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
+	 	Cook cook = new Cook("", "", database);
 	 
 	
 	 private class AddIngredients extends MyDialog {
@@ -39,17 +39,17 @@ import databasePackage.Database;
 			
 		 
 		 public AddIngredients(JFrame parent){
-			super(parent, "Select ingredients ");
-			add(new JPanel(), BorderLayout.NORTH);
-			add(new IngredientsDatapanel(),BorderLayout.CENTER);
-			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
-			}
+			 super(parent, "Select ingredients ");
+			 add(new JPanel(), BorderLayout.NORTH);
+			 add(new IngredientsDatapanel(),BorderLayout.CENTER);
+			 add(getButtonPanel(),BorderLayout.SOUTH);
+			 pack();
+		}
 		   
-	private class IngredientsDatapanel extends JPanel{
+		 private class IngredientsDatapanel extends JPanel{
 			public IngredientsDatapanel(){
-				setLayout(new GridLayout(9,2));
-		
+				setLayout(new GridLayout(3,2));
+				
 				add(new JLabel("Meal Id: ", JLabel.RIGHT));
 				add(mealIdSelected);
 
@@ -61,23 +61,23 @@ import databasePackage.Database;
 			}
 		}
 	
-	 public boolean okData(){
-		 mealIndex = mealIdSelected.getSelectedIndex();
-		 Meal currMeal = mealList.get(mealIndex);
-		 ingredientIndex = ingredientSelected.getSelectedIndex();
-		 Ingredient currIngredient = ingredientsList.get(ingredientIndex);
+		 public boolean okData(){
+			 mealIndex = mealIdSelected.getSelectedIndex();
+			 Meal currMeal = mealList.get(mealIndex);
+			 ingredientIndex = ingredientSelected.getSelectedIndex();
+			 Ingredient currIngredient = ingredientsList.get(ingredientIndex);
 		 
-		 String ingredient_quantity = ingredient_quantityField.getText();
-		 float my_quantity = editor.stringToFloat(ingredient_quantity);
-		 myQuantity = my_quantity;
+			 String ingredient_quantity = ingredient_quantityField.getText();
+			 float my_quantity = editor.stringToFloat(ingredient_quantity);
+			 myQuantity = my_quantity;
 	 
-	 try {
-		cook.addIngredientToMeal(mealIndex, ingredientIndex, myQuantity) ;
-	 }catch (Exception e) {
-			System.out.println(e.toString());
-		}
-	 return true;
-	 }
+			 try {
+				 cook.addIngredientToMeal(mealIndex, ingredientIndex, myQuantity) ;
+			 }catch (Exception e) {
+				 System.out.println(e.toString());
+			 }
+			 return true;
+		 }
 	 }
 	 public AddIngredientsToMeal(){ 
 		 AddIngredients addIngredients = new AddIngredients(this);
@@ -86,11 +86,8 @@ import databasePackage.Database;
 		 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 setLayout(new FlowLayout());
 		 setLocation(300, 300); 
-		 addIngredients.setLocation(350, 350);  
-		 
-	 }
-	 
-	 
+		 addIngredients.setLocation(350, 350);  	 
+	 }	 
 }
  
  class AddIngredientsToMealGui {
