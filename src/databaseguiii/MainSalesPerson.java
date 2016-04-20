@@ -9,7 +9,6 @@ import javax.swing.*;
 import javax.swing.event.*;
 import controller.*;
 import databasePackage.Database;
-import databaseguiii.AdminGui.ListeboksLytter;
 
 class SalesPersonGui extends JFrame {
   private MainCustomerGui mainCustomerGui;
@@ -80,13 +79,6 @@ class SalesPersonGui extends JFrame {
 	    	 JOptionPane.showMessageDialog(null, scrollpane, "All customers: ", JOptionPane.INFORMATION_MESSAGE );
 
     	}else if(choices == 3){
-    		 user.viewCompanyList();
-      }else if(choices==4){
-    	  ChangeCustomerInfoGui.main(null);      
-    	  }else if(choices==4){
-    		  MainOrderGui.main(null);
-      }
-      	else if(choices==5){
       		ArrayList<Customer> c = null;
     	  try {
     		  c=user.viewCompanyList(); 
@@ -95,7 +87,8 @@ class SalesPersonGui extends JFrame {
 		}
     	  String[] s = new String[c.size()];
 	    	 for( int i = 0; i < c.size(); i++ ){
-	    		 s[i] = c.get(i).toString() + " ";
+	    		 Customer t = c.get(i);
+	    		 s[i] = t.getCustomerID() + ", " + t.getCompanyName() + ": " + t.getSurName() + ", " + t.getFirstName() + "\n";
 	    	 }
 	    	 
 	    	 JScrollPane scrollpane = new JScrollPane(); 
@@ -105,6 +98,13 @@ class SalesPersonGui extends JFrame {
 	         panel.add(scrollpane);
 	         scrollpane.getViewport().add(list);		    	 
 	    	 JOptionPane.showMessageDialog(null, scrollpane, "All customers: ", JOptionPane.INFORMATION_MESSAGE );
+      }else if(choices==4){
+    	  ChangeCustomerInfoGui.main(null);      
+    	  }else if(choices==4){
+    		  MainOrderGui.main(null);
+      }
+      	else if(choices==5){
+      		MainOrderGui.main(null);
       	}
       	else if(choices==6){
 	    	  try {
