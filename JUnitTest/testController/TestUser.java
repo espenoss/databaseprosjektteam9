@@ -2,6 +2,7 @@ package testController;
 
 import static org.junit.Assert.*;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -12,6 +13,8 @@ import org.junit.Test;
 import controller.Customer;
 import controller.Ingredient;
 import controller.Meal;
+import controller.Order;
+import controller.SubPlan;
 import controller.User;
 import databasePackage.Database;
 
@@ -38,6 +41,10 @@ public class TestUser {
 	private static Ingredient carrot;
 	private static Ingredient cheese;
 	
+	private static ArrayList<Order> orderList = new ArrayList<Order>();
+	private static Order order1;
+	private static Order order2;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		String username = "anitakau";
@@ -55,7 +62,10 @@ public class TestUser {
 		database.makeSingleStatement(insert2);
 		database.makeSingleStatement(insert3);
 		
+		// USER
+		String userInsert = "INSERT INTO user VALUES('bob', 2, 'Bob Smidt', '1234');";
 		user = new User("bob", 2, "Bob Smidt", database);
+		database.makeSingleStatement(userInsert);
 		
 		// MEAL INSERT
 		soup = new Meal(1, "soup","none", true, 90);
@@ -116,6 +126,24 @@ public class TestUser {
 		ingredientList.add(potato);
 		ingredientList.add(carrot);
 		ingredientList.add(cheese);
+		
+		// ORDER/FOOD_ORDER INSERT
+		String insert14 = "INSERT INTO food_order VALUES(1, '2016-03-03', 10001, NULL, 'bob');";
+		String insert15 = "INSERT INTO food_order VALUES(2, '2016-04-03', 10002, NULL, 'bob')";
+		database.makeSingleStatement(insert14);
+		database.makeSingleStatement(insert15);
+		
+		String insert16 = "INSERT INTO ordered_meal VALUES(1, 1, '2016-03-03', 2, 0, 0);";
+		String insert17 = "INSERT INTO ordered_meal VALUES(2, 2, '2016-04-03', 1, 0, 0);";
+		database.makeSingleStatement(insert16);
+		database.makeSingleStatement(insert17);
+		
+		order1 = new Order(1, "2016-03-03", 10001, null, "bob");
+		order2 = new Order(2, "2016-04-03", 10002, null, "bob");
+		
+		orderList.add(order1);
+		orderList.add(order2);
+
 	}
 
 	@Before
@@ -127,16 +155,16 @@ public class TestUser {
 	public void testViewAvailableMeals() throws Exception {
 		System.out.println("Test: View available meals");
 
-		Meal res0 = mealList.get(0);
-		Meal expRes0 = soup;
+		Meal res0 = user.viewAvailableMeals().get(0);
+		Meal expRes0 = mealList.get(0);
 		assertEquals(res0, expRes0);
 		
-		Meal res1 = mealList.get(1);
-		Meal expRes1 = hamburger;
+		Meal res1 = user.viewAvailableMeals().get(1);
+		Meal expRes1 = mealList.get(1);
 		assertEquals(res1, expRes1);
 		
-		Meal res2 = mealList.get(2);
-		Meal expRes2 = sandwich;
+		Meal res2 = user.viewAvailableMeals().get(2);
+		Meal expRes2 = mealList.get(2);
 		assertEquals(res2, expRes2);
 	}
 	
@@ -193,7 +221,6 @@ public class TestUser {
 	@Test
 	public void testViewIngredients() throws Exception{
 		System.out.println("Test: View ingredients");
-		System.out.println(ingredientList.size());
 		
 		Ingredient res0 = user.viewIngredients().get(0);
 		Ingredient expRes0 = ingredientList.get(0);
@@ -208,5 +235,31 @@ public class TestUser {
 		assertEquals(res2, expRes2);
 
 	}
+	@Test
+	public void testViewFoodOrders() throws Exception {
+		System.out.println("Test: View Food orders");
+		Date date0 = java.sql.Date.valueOf("2016-03-03");
+		Date date1 = java.sql.Date.valueOf("2016-04-03");
+		
+		Order res0 = user.viewFoodOrders(date0).get(0);
+		Order expRes0 = orderList.get(0);
+		assertEquals(res0, expRes0);
+		
+		Order res1 = user.viewFoodOrders(date1).get(1);
+		Order expRes1 = orderList.get(1);
+		assertEquals(res1, expRes1);
+			
+	}
+	
+	@Test
+	public void testViewOrderIngredients(){
+//	String viewOrderIngredients()
+	}
+	
+	@Test
+	public void testViewAllSubPlans(){
+//	ArrayList<SubPlan> viewAllSubPlans()
+	}
+//	
 
 }
