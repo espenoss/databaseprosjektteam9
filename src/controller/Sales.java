@@ -25,6 +25,10 @@ public class Sales extends User {
 		return new Order(orderID, dateToday, customerID, info, userID);
 	}
 	
+	public boolean addMealToOrder(int orderID, int mealID, String deliveryDate, int quantity) throws Exception{
+		boolean res = QMOrder.addMealToOrder(orderID, mealID, deliveryDate, quantity, false, false, database);
+		return res;
+	}
 	
 	//FINISHED
 	public boolean registerSubscriptionOrder(Order order, int quantitySub, String fromDate, String toDate, int subID) throws Exception{

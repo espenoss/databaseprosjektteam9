@@ -63,6 +63,8 @@ public class TestOrder {
 			}
 			System.out.println("");
 		}		
+
+		int orderPrice = QMOrder.viewOrderPrice(Integer.parseInt(order[0]), database);
 		
 		// attempt to register new info about existing entry
 		boolean exp = QMOrder.updateOrder(Integer.parseInt(order[0]), order[1], Integer.parseInt(order[2]), "Ny info", order[4], database);

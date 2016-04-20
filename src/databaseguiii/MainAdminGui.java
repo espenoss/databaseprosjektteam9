@@ -113,7 +113,8 @@ class AdminGui extends JFrame {
 			}
 	    	  String[] s = new String[c.size()];
 		    	 for( int i = 0; i < c.size(); i++ ){
-		    		 s[i] = c.get(i).toString() + " ";
+		    		 Customer t = c.get(i);
+		    		 s[i] = t.getCustomerID() + ", " + t.getCompanyName() + ": " + t.getSurName() + ", " + t.getFirstName() + "\n";
 		    	 }
 		    	 
 		    	 JScrollPane scrollpane = new JScrollPane(); 
