@@ -95,7 +95,7 @@ public class User implements java.io.Serializable{
 				int zipCode = t.stringToInt(list[i][6]); //6
 				int zoneNr = t.stringToInt(list[i][7]); //7
 				
-				tempCustomer = new Customer(customerId, list[i][1],list[i][2],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8],true);
+				tempCustomer = new Customer(customerId, list[i][2],list[i][1],list[i][3],list[i][4],list[i][5],zipCode,zoneNr,list[i][8],true);
 				customerList.add(tempCustomer);
 			}
 		}
