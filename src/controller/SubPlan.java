@@ -68,6 +68,11 @@ public class SubPlan {
 		return false;
 	}
 	
+	public void fetchMealsInPlan(Database database) throws Exception{
+		String[][] mealT = QMFood.viewMealsInPlan(subPlanID, database);
+		
+	}
+	
 	//Registers information to database
 	public boolean updateSubPlan(Database database) throws Exception{
 		return QMFood.updateSubscriptionPlan(subPlanID, name, database);

@@ -155,7 +155,6 @@ public class User implements java.io.Serializable{
 		
 		ArrayList<Ingredient> ingList = new ArrayList<Ingredient>();
 		
-		
 		for (int i=0; i<ingT.length; i++){
 			if (t.stringToInt(ingT[i][3])>0){
 				tempIng = new Ingredient(t.stringToInt(ingT[i][0]), ingT[i][1], t.stringToFloat(ingT[i][2]), ingT[i][3]);
@@ -175,11 +174,22 @@ public class User implements java.io.Serializable{
 			return res;
 	}
 	
-	// --- Mï¿½ LAGES!!
-	public SubPlan viewSubPlan(){
-		return null;
+	// ikke ferdig, henter bare tomme subplans.
+	public ArrayList<SubPlan> viewAllSubPlans() throws Exception{
+		String[][] subT = QMFood.viewSubscriptionPlans(database);
+		SubPlan tempSub; 
+		
+		ArrayList<SubPlan> subList = new ArrayList<SubPlan>();
+		
+		for (int i=0; i<subT.length; i++){
+			if (t.stringToInt(subT[i][3])>0){
+				tempSub = new SubPlan(t.stringToInt(subT[i][0]), subT[i][1]);
+				//HENT MÅLTID HER!!
+				subList.add(tempSub);
+			}
+		}
+		return subList;
 	}
-	
 	
 	public boolean equals(Object obj){
 		if(!(obj instanceof User)){

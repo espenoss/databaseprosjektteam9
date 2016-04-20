@@ -291,9 +291,25 @@ public class QMFood {
 		return database.makeSingleStatement(statement);
 	}
 	
+	
+
+	 
+	// View all meals in subscription plan in database
+	// Returns list of meals in a two-dimensional String array ordered by weekday
+	// First index is row, second is column
+	// Columns by second index:
+	// 0 : meal_id - int
+	// 1 : meal_name - String
+	// 2 : instructions - String
+	// 3 : available - int/boolean
+	// 4 : price - int
+	// 5 : sub_id - int 
+	// 6 : weekday_nr - int
+	// 7 : weekday - String
+	 
 	public static String[][] viewMealsInPlan(int subID, Database database) throws Exception{
 
-		String statement = "SELECT meal_name FROM meal WHERE meal_id IN (SELECT meal_id FROM sub_meals_day WHERE sub_id = " + subID + ")";		
+		String statement = "SELECT * FROM meal NATURAL JOIN sub_meals_day WHERE"+subID+"ORDER BY weekday_nr;";		
 		
 		database.makeSingleStatement(statement);
 		
