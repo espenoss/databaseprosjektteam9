@@ -63,7 +63,7 @@ public class Order {
 		this.info = info;
 	}
 	
-	public void addMeal(Meal meal){
+	public void addMeal(Meal meal, String deliveryDate){
 		meals.add(meal);
 	}
 	

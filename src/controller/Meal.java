@@ -46,7 +46,6 @@ public class Meal {
 		return price;
 	}
 	
-	
 	public void setMealName(String name){
 		name = mealName;
 	}
