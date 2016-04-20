@@ -117,6 +117,27 @@ public class User implements java.io.Serializable{
 		return customerList;
 	}
 	
+	public ArrayList<Customer> viewCompanyList() throws Exception{
+		
+		String[][] list = QMCustomer.viewAllCompanies(database);
+		Customer tempCompany;
+		ArrayList<Customer> companyList = new ArrayList<Customer>();
+		
+		
+		for(int i=0; i<list.length; i++){
+			if (t.stringToInt(list[i][10])==1){
+				int customerId = t.stringToInt(list[i][0]); //0
+				int zipCode = t.stringToInt(list[i][7]); //6
+				int zoneNr = t.stringToInt(list[i][8]); //7
+				
+				tempCompany = new Customer(customerId, list[i][2],list[i][3],list[i][4],list[i][5],list[i][6],zipCode,zoneNr,list[i][9],true,list[i][1]);
+				
+				companyList.add(tempCompany);
+			}
+		}
+		return companyList;
+	}
+	
 	
 	//FINISHED --- MÅ TESTES
 	//takes an customerId returns a single customer object, or null if not found
@@ -185,7 +206,7 @@ public class User implements java.io.Serializable{
 	
 	
 	public String toString(){
-		return userID+""+ name+" "+ userType +" "+pword;
+		return "Username: "+userID+", usertype: "+userType+", name: "+name;
 	}
 	
 	
@@ -209,8 +230,10 @@ public class User implements java.io.Serializable{
 		*/
 		
 		java.sql.Date dato = java.sql.Date.valueOf( "2016-03-01");
-		System.out.println(dato);
+		//System.out.println(dato);
 		
-		System.out.println(user.viewFoodOrders(dato));
+		//System.out.println(user.viewFoodOrders(dato));
+		System.out.println()
+		
 	}
 }

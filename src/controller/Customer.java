@@ -14,7 +14,7 @@ public class Customer implements java.io.Serializable{
 	private String preferences;
 	private String phoneNumber;
 	private boolean active;
-	private boolean isCompany;
+	private boolean isCompany= false;
 	private String companyName;
 	
 	
@@ -30,6 +30,22 @@ public class Customer implements java.io.Serializable{
 		this.customerID=customerID;
 		this.active = active;
 	}
+	
+	public Customer(int customerID, String firstName, String surName, String phoneNumber, String email, String adress, int zipCode, int zoneNr, String preferences, boolean active, String companyName){
+		this.firstName=firstName;
+		this.surName=surName;
+		this.email=email;
+		this.adress=adress;
+		this.zipCode=zipCode;
+		this.zoneNr=zoneNr;
+		this.preferences=preferences;
+		this.phoneNumber=phoneNumber;
+		this.customerID=customerID;
+		this.active = active;
+		this.companyName = companyName;
+		isCompany = true;
+	}
+	
 	
 	public int getCustomerID(){
 		return customerID;

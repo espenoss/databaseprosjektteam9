@@ -25,6 +25,9 @@ class ParentWindow extends JFrame {
 			private JTextField zone_nrField = new JTextField(6);
 			private JTextField preferencesField = new JTextField(100);
 			private JTextField phoneNumberField = new JTextField(12);
+
+			private final String status[] = {"active", "unactive"}; 
+			private JComboBox status_list = new JComboBox(status);
 			
 			public CustomerDialog(JFrame parent){
 				super(parent, "Fill in new information about a customer");
@@ -37,7 +40,7 @@ class ParentWindow extends JFrame {
 			
 			private class CustomerDatapanel extends JPanel{
 				public CustomerDatapanel(){
-					setLayout(new GridLayout(9,2));
+					setLayout(new GridLayout(10,2));
 
 					try {
 						customerList = sales.viewCustomerList();
@@ -77,6 +80,9 @@ class ParentWindow extends JFrame {
 					add(new JLabel("Preferences: ", JLabel.RIGHT));
 					add(preferencesField);
 					
+					add(new JLabel("Status: ", JLabel.RIGHT));
+					add(status_list);
+					
 					
 				}
 			}
@@ -98,8 +104,14 @@ class ParentWindow extends JFrame {
 				int myIntZone = editor.stringToInt(zone_nrText);
 				currCust.setZoneNr(myIntZone);
 				
-				currCust.setPreferences(preferencesField.getText());	
+				currCust.setPreferences(preferencesField.getText());
 				currCust.setPhoneNumber(phoneNumberField.getText());
+			
+				if(status_list.getSelectedIndex() == 0){
+					currCust.setActive(true);
+				}else{
+					currCust.setActive(false);
+				}
 				
 				try {
 					currCust.updateCustomer(database);
@@ -121,6 +133,7 @@ class ParentWindow extends JFrame {
 				zip_codeField.setText(Integer.toString(currCust.getZipCode()));
 				zone_nrField.setText(Integer.toString(currCust.getZoneNr()));
 				preferencesField.setText(currCust.getPreferences());
+			
 			}
 	
 	  }
