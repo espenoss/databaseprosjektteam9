@@ -155,7 +155,6 @@ public class User implements java.io.Serializable{
 		
 		ArrayList<Ingredient> ingList = new ArrayList<Ingredient>();
 		
-		
 		for (int i=0; i<ingT.length; i++){
 			if (t.stringToInt(ingT[i][3])>0){
 				tempIng = new Ingredient(t.stringToInt(ingT[i][0]), ingT[i][1], t.stringToFloat(ingT[i][2]), ingT[i][3]);
@@ -175,11 +174,23 @@ public class User implements java.io.Serializable{
 			return res;
 	}
 	
-	// --- Mï¿½ LAGES!!
-	public SubPlan viewSubPlan(){
-		return null;
+	// FINISHED må testes
+	public ArrayList<SubPlan> viewAllSubPlans() throws Exception{
+		String[][] subT = QMFood.viewSubscriptionPlans(database);
+		SubPlan tempSub; 
+		
+		ArrayList<SubPlan> subList = new ArrayList<SubPlan>();
+		
+		System.out.println("tabell lengde: "+subT.length);
+		System.out.println("tabell lengde2: "+subT[0].length);
+		
+		for (int i=0; i<subT.length; i++){
+			tempSub = new SubPlan(t.stringToInt(subT[i][0]), subT[i][1]);
+			tempSub.fetchMealsInPlan(database);
+			subList.add(tempSub);
+		}
+		return subList;
 	}
-	
 	
 	public boolean equals(Object obj){
 		if(!(obj instanceof User)){
@@ -212,16 +223,17 @@ public class User implements java.io.Serializable{
 		
 		User user = new User("Hanne", 1, "Hanne", database);
 		
-		/*
-		System.out.println("Enkelt bruker: "+user.viewSingleCustomer(10000));
-		System.out.println(user.viewCustomerList());
-		*/
+		
+		//System.out.println("Enkelt bruker: "+user.viewSingleCustomer(10000));
+		//System.out.println(user.viewCustomerList());
+		
 		
 		java.sql.Date dato = java.sql.Date.valueOf( "2016-03-01");
 		//System.out.println(dato);
 		
 		//System.out.println(user.viewFoodOrders(dato));
-		System.out.println(user.viewCompanyList());
+		//System.out.println(user.viewCompanyList());
+		System.out.println(user.viewAllSubPlans());
 		
 	}
 }

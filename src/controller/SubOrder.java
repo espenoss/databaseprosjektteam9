@@ -44,10 +44,9 @@ public class SubOrder extends Order {
 	}
 	
 	public void setSubPlan(int subPlanID, Database database){
-		String[][] subPlanT = QMFood.viewSingleSubscriptionPlan(subPlanID, database);  // MÅ LAGES METODE I QUERYMETHODS.(hvis den ikke finnes...)
 		
 		
-		// GJØR OM TIL subPlan object
+		subPlan = null;
 	}
 
 }
