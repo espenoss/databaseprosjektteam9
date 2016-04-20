@@ -51,16 +51,10 @@ public class User implements java.io.Serializable{
 		ArrayList<Order> orderList = new ArrayList<Order>();
 		TextEditor t = new TextEditor();
 		
-		System.out.println("lengde tabell: "+orderT[0].length);
-		
-		
 		for(int i=0; i<orderT.length;i++){
-			int orderID = t.stringToInt(orderT[i][0]);
-			int customerID = t.stringToInt(orderT[i][2]);
-			
 			tempOrder = new Order(t.stringToInt(orderT[i][0]), 	orderT[i][1], t.stringToInt(orderT[i][2]),  orderT[i][3], orderT[i][4]);
 			
-			//tempOrder.fetchMealsByDeliveryDate(date, database);
+			tempOrder.fetchMealsInOrder(date, database);
 			orderList.add(tempOrder);
 		}
 		
@@ -231,9 +225,9 @@ public class User implements java.io.Serializable{
 		java.sql.Date dato = java.sql.Date.valueOf( "2016-03-01");
 		//System.out.println(dato);
 		
-		//System.out.println(user.viewFoodOrders(dato));
+		System.out.println(user.viewFoodOrders(dato));
 		//System.out.println(user.viewCompanyList());
-		System.out.println(user.viewAllSubPlans());
+		//System.out.println(user.viewAllSubPlans());
 		
 	}
 }
