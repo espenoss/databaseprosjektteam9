@@ -29,12 +29,7 @@ public class Cook extends User {
 	
 	// Deletes meal from database. ---  is tested //
 	public boolean deleteMeal(int mealID) throws Exception{
-		boolean ok = QMFood.removeMeal(mealID, database);
-		if(ok){
-			return true;
-		} else{
-		return false;
-		}
+		return QMFood.removeMeal(mealID, database);
 	}
 	
 	// Finished - lacking method in User before testing
@@ -45,6 +40,20 @@ public class Cook extends User {
 		return new SubPlan(subPlanID, name);
 	}
 	
+	// FINISHED NOT TESTED
+	public boolean addMealToSubPlan(int subID, int mealID, int weekdayNr, String weekday) throws Exception{
+		boolean res = QMFood.addMealToPlan(subID, mealID, weekdayNr, weekday, database);
+		
+		return res;
+	}
+	
+	// FINISHED NOT TESTED
+	public boolean removeMealFromPlan(int subID, int mealID, int weekdayNr) throws Exception{
+		return QMFood.removeMealFromPlan(subID, mealID, weekdayNr, database);
+		
+	}
+	
+	//MÅ LAGES!!
 	public boolean registerIngredientDelivery(String orderinfo){
 		boolean success = false;
 		
@@ -64,12 +73,7 @@ public class Cook extends User {
 	
 	// Deletes ingredient from database --- NOT TESTED
 	public boolean deleteIngredient(int ingredientID) throws Exception{
-		boolean ok = QMFood.removeIngredient(ingredientID, database);
-		if(ok){
-			return true;
-		}else {
-			return false;
-		}
+		return QMFood.removeIngredient(ingredientID, database);
 	}
 	
 	
