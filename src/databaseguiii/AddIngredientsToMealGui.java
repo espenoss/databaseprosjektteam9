@@ -1,7 +1,9 @@
 package databaseguiii;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
@@ -10,52 +12,95 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import controller.*;
 import databasePackage.Database;
 
  class AddIngredientsToMeal extends JFrame {
-	/*public boolean addIngredientToMeal(int mealID, int ingredientID, float ingredientQuantity) throws Exception{
-		boolean res = QMFood.addIngredientToMeal(mealID, ingredientID, ingredientQuantity, database);
-		return res;*/
-	  private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
-	  Sales sales = new Sales("", 0, "", "", database);
+	 private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
+	 Cook cook = new Cook("", "", database);
+	 
 	
-	private class AddIngredientsToMealDialog extends MyDialog{
-		private TextEditor editor = new TextEditor();
-		
-		private ArrayList<Meal> mealList = new ArrayList<Meal>();
-		private JComboBox mealIdSelected;
-		
-
-		private ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
-		String[] my_ingredients = (String[]) ingredients.toArray();
-		
-		private JTextField ingredient_quantityField = new JTextField(20);
-		
-		public AddIngredientsToMealDialog(JFrame parent){
-			super(parent, "Fill in new information about a customer");
+	 private class AddIngredients extends MyDialog {
+		 private TextEditor editor = new TextEditor();
+		 private ArrayList<Meal> mealList = new ArrayList<Meal>();
+		 private JComboBox mealIdSelected;
+		 private ArrayList<Ingredient> ingredientsList = new ArrayList<Ingredient>();
+		 private JComboBox ingredientSelected;
+		 private JTextField ingredient_quantityField = new JTextField(20);
+		 private float myQuantity;
+		 int mealIndex;
+		 int ingredientIndex;
+		 
+			
+		 
+		 public AddIngredients(JFrame parent){
+			super(parent, "Select ingredients ");
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new IngredientsDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			customerSelect.addActionListener(this);
 			pack();
-		}
-		private class IngredientsDatapanel extends JPanel{
+			}
+		   
+	private class IngredientsDatapanel extends JPanel{
 			public IngredientsDatapanel(){
 				setLayout(new GridLayout(9,2));
 		
-				add(new JLabel("Surname: ", JLabel.RIGHT));
-				add(surNameField);
+				add(new JLabel("Meal Id: ", JLabel.RIGHT));
+				add(mealIdSelected);
 
-				add(new JLabel("First name: ", JLabel.RIGHT));
-				add(firstNameField);
+				add(new JLabel("Ingredient Id: ", JLabel.RIGHT));
+				add(ingredientSelected);
 				
-				add(new JLabel("Phone number: ", JLabel.RIGHT));
-				add(phoneNumberField);
-	}
+				add(new JLabel("Ingredient quantity: ", JLabel.RIGHT));
+				add(ingredient_quantityField);
+			}
+		}
 	
-	
-
+	 public boolean okData(){
+		 mealIndex = mealIdSelected.getSelectedIndex();
+		 Meal currMeal = mealList.get(mealIndex);
+		 ingredientIndex = ingredientSelected.getSelectedIndex();
+		 Ingredient currIngredient = ingredientsList.get(ingredientIndex);
+		 
+		 String ingredient_quantity = ingredient_quantityField.getText();
+		 float my_quantity = editor.stringToFloat(ingredient_quantity);
+		 myQuantity = my_quantity;
+	 
+	 try {
+		cook.addIngredientToMeal(mealIndex, ingredientIndex, myQuantity) ;
+	 }catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	 return true;
+	 }
+	 }
+	 public AddIngredientsToMeal(){ 
+		 AddIngredients addIngredients = new AddIngredients(this);
+		 addIngredients.setVisible(true);
+		 setTitle("Add ingredients");
+		 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 setLayout(new FlowLayout());
+		 setLocation(300, 300); 
+		 addIngredients.setLocation(350, 350);  
+		 
+	 }
+	 
+	 
 }
+ 
+ class AddIngredientsToMealGui {
+	 static public void main(String[] args) {
+		 AddIngredientsToMeal test = new AddIngredientsToMeal();
+	 }   
+} 
+		
+		
+		  
+ 
+
+

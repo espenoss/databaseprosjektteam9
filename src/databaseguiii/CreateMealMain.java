@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controller.Cook;
+import controller.*;
 import controller.TextEditor;
 import databasePackage.Database;
 
@@ -20,7 +20,6 @@ class CreateMeal extends JFrame {
 	 private class CustomerDialog extends MyDialog{
 			private TextEditor editor = new TextEditor();
 		//	String mealName, String instructions, boolean available, int price
-			
 			private JTextField mealNameField = new JTextField(20);
 			private JTextField instructionsField = new JTextField(100);
 			private JTextField priceField = new JTextField(20);
@@ -28,6 +27,7 @@ class CreateMeal extends JFrame {
 			private String instructions;
 			private boolean available;
 			private int price;
+			
 			
 			
 			public CustomerDialog(JFrame parent){
@@ -60,6 +60,7 @@ class CreateMeal extends JFrame {
 				
 				try {
 					cook.createMeal(mealName, instructions, available, myPrice);
+					
 				} catch (Exception e) {
 					System.out.println(e.toString());
 				}
