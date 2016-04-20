@@ -34,26 +34,20 @@ class MainCookGui extends JFrame {
 	private class ListeboksLytter implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent hendelse) {
 			int choices = choice_list.getSelectedIndex();
+			try {
 			if(choices == 0){
-					
-					// View food orders
-				
+				// View food orders
 			}else if(choices==1){
-				try {
-					
-					// Mark as ready gui
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-      
+				// Mark as ready gui
 			}else if(choices==2){
-				try {
-					//
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+					// Create new meal
+			}else if(choices == 3){
+				// View menu ingredients
 			}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		} 
 	}
 }

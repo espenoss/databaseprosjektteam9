@@ -10,7 +10,7 @@ import javax.swing.event.*;
 import controller.*;
 import databasePackage.Database;
 
-class SalesPersonGui extends JFrame {
+class MainSalesPersonGui extends JFrame {
 
 	public static final int REGISTER_NEW_CUSTOMER = 0;		
 	public static final int REGISTER_NEW_COMPANY = 1;
@@ -26,7 +26,7 @@ class SalesPersonGui extends JFrame {
 	private JList<String> choice_list = new JList<String>(CHOICES);
   private Sales sales = null;
 
-  public SalesPersonGui(Sales sales) {
+  public MainSalesPersonGui(Sales sales) {
 	  this.sales = sales;
 	  setTitle("Sales control panel");
 	  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

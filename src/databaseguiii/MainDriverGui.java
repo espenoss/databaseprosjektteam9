@@ -10,14 +10,15 @@ import javax.swing.event.ListSelectionListener;
 import controller.*;
 import databasePackage.Database;
 
-class DriverGui extends JFrame {
+class MainDriverGui extends JFrame {
 	private static final String [] CHOICES =
 		{"Generate delivery plan", "Mark order as delivered"};
 	private JList<String> choice_list = new JList<String>(CHOICES);  // Naa er listen laget!
-	
+	private Driver driver = null;
 
-	public DriverGui(String tittel) {
-		setTitle(tittel);
+	public MainDriverGui(Driver driver) {
+		this.driver = driver;
+		setTitle("Driver control panel");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
 		JLabel ledetekst = new JLabel("Choose one of the following options.");
@@ -35,9 +36,6 @@ class DriverGui extends JFrame {
   /* Lytteren fanger opp alle klikk paa linjer i listeboksen */
 	private class ListeboksLytter implements ListSelectionListener {
 		private int orderIndex;
-		private final Database database = null;
-		private Driver driver = new Driver("", 1, "", "", database);
-		
 		
 		public void valueChanged(ListSelectionEvent hendelse) {
 			
@@ -45,19 +43,11 @@ class DriverGui extends JFrame {
 			int choices = choice_list.getSelectedIndex();
 			if(choices == 0){
 				driver.generateDeliveryPlan();
-  
+				// skriv ut listen også...
 			} else if(choices==1){
+				// velg hvilken ordre??
 				driver.markDelivered(orderIndex);
-				  
 			} 
 		} 
 	}
-}
-  
-  
- class MainDriver {
-  public static void main(String[] args) {
-	  DriverGui window = new DriverGui("Choose an option");
-	  window.setVisible(true);
-  }
 }

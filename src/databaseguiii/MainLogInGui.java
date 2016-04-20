@@ -76,14 +76,17 @@ class LogInGui extends JFrame{
 						admingui.setVisible(true);
 						break;
 					case U_COOK:
-						
+						MainCookGui cookgui = new MainCookGui(new Cook(userID, userName, database));
+						cookgui.setVisible(true);
 						break;					
 					case U_DRIVER:
+						MainDriverGui drivergui = new MainDriverGui(new Driver(userID, userName, database));
+						drivergui.setVisible(true);						
 						break;
 					case U_SALES:
-						MainSalesPersonGui salesGui = new MainSalesPersonGui();
+						MainSalesPersonGui salesgui = new MainSalesPersonGui(new Sales(userID, userName, database));
+						salesgui.setVisible(true);
 						break;						
-					default:
 				}
 	
 				source.setEnabled(false);
