@@ -48,26 +48,22 @@ public class User implements java.io.Serializable{
 		Order tempOrder;
 		ArrayList<Order> orderList = new ArrayList<Order>();
 		TextEditor t = new TextEditor();
-		
-		System.out.println("ordretabell lengde: "+orderT.length);
-		
+	
 		if (orderT.length==0){
 			return null;
 		}
 		
 		for(int i=0; i<orderT.length;i++){
-			
 			tempOrder = new Order(t.stringToInt(orderT[i][0]), 	orderT[i][1], t.stringToInt(orderT[i][2]),  orderT[i][3], orderT[i][4]);
 			
 			tempOrder.fetchMealsInOrder(database);
 			orderList.add(tempOrder);
-			System.out.println("Runde "+i+" arraylengde: "+orderList.size());
 		}
 		
 		return orderList;
 	}
 	
-	//FINISHED NOT TESTED
+	//FINISHED NOT TESTED 
 	//returns an arraylist with all available meals
 	public ArrayList<Meal> viewAvailableMeals() throws Exception{
 		String[][] mealT = QMFood.viewMeals(database);
