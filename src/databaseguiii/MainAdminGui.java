@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -66,8 +67,9 @@ class AdminGui extends JFrame {
 	      else if(choices==2){
 	    	  try {
 	    		  String s = "";
-	    		  for(int i = 0; i < admin.viewUserList().size(); i++ ){
-	    	          s +=  admin.viewUserList().get(i) + " \n";
+	    		  ArrayList<User> userList = admin.viewUserList();
+	    		  for(int i = 0; i < userList.size(); i++ ){
+	    	          s +=  userList.get(i).toString() + " \n";
 	    	      }
 	    		  JOptionPane.showMessageDialog(null, s, "All users: ", JOptionPane.INFORMATION_MESSAGE );
 			} catch (Exception e) {
@@ -81,16 +83,26 @@ class AdminGui extends JFrame {
 	    	  ChangeCustomerInfoGui.main(null);
 	      }
 	      	else if(choices==6){
+	      		ArrayList<Customer> c = null;
 	    	 try {
-	    		 String s = "";
-		    	 for( int i = 0; i < user.viewCustomerList().size(); i++ ){
-		    	 s +=  user.viewCustomerList().get(i) + " ";
-		    	 }
-		    	 JOptionPane.showMessageDialog(null, s, "All customers: ", JOptionPane.INFORMATION_MESSAGE );
+	    		 	c = user.viewCustomerList();
 				}
 	    	 	catch (Exception e) {
-				e.printStackTrace();
+	    	 		e.printStackTrace();
 	    	 	}
+	    		 String[] s = new String[c.size()];
+		    	 for( int i = 0; i < c.size(); i++ ){
+		    		 s[i] = c.get(i).toString() + " ";
+		    	 }
+		    	 
+		    	 JScrollPane scrollpane = new JScrollPane(); 
+		         JList list = new JList(s);
+		         scrollpane = new JScrollPane(list);
+		         JPanel panel = new JPanel(); 
+		         panel.add(scrollpane);
+		         scrollpane.getViewport().add(list);		    	 
+		    	 JOptionPane.showMessageDialog(null, scrollpane, "All customers: ", JOptionPane.INFORMATION_MESSAGE );
+
 	      	}
 	      	else if(choices==7){
 	    	  try {
