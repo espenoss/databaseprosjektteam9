@@ -14,7 +14,7 @@ public class Sales extends User {
 	
 	//FINISHED --- NOT TESTED
 	//registers new order, returns order object. 
-	public Order registerNewOrder(int customerID, String deliveryDate, String info, String userID, Database database)throws Exception{
+	public Order registerNewOrder(int customerID, String deliveryDate, String info, String userID)throws Exception{
 		
 	    java.util.Date utilDate = new java.util.Date();
 	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
@@ -41,7 +41,7 @@ public class Sales extends User {
 	//FINISHED --- NOT TESTED
 	//Register new customer
 	public Customer registerCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
-			int zip_code, int zone_nr, String preferences, boolean active, Database database) throws Exception{
+			int zip_code, int zone_nr, String preferences, boolean active) throws Exception{
 		int customerID = QMCustomer.registerCustomer(surName, firstName, phoneNumber, email, adress, zip_code, zone_nr, preferences, active, database);
 		
 		if (customerID<0){

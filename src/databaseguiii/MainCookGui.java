@@ -7,15 +7,15 @@ import javax.swing.event.*;
 import controller.*;
 import databasePackage.Database;
 
-class CookGui extends JFrame {
-	private Parentwindow parentwindow;
-	private MainCustomerGui mainCustomerGui;
+class MainCookGui extends JFrame {
 	private static final String [] CHOICES =
 		{"View food orders","Mark order as ready for delivery","Create new meal","View menu ingredients"};
-	private JList<String> choice_list = new JList<String>(CHOICES);  // Naa er listen laget!
+	private JList<String> choice_list = new JList<String>(CHOICES);
+	Cook cook = null;
 
-	public CookGui(String tittel) {
-		setTitle(tittel);
+	public MainCookGui(Cook cook) {
+		this.cook = cook;
+		setTitle("Cook control panel");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
 		JLabel ledetekst = new JLabel("Choose one of the following options.");
@@ -32,39 +32,28 @@ class CookGui extends JFrame {
 
   /* Lytteren fanger opp alle klikk paa linjer i listeboksen */
 	private class ListeboksLytter implements ListSelectionListener {
-		private final Database database = null;
-		private Cook my_cook = new Cook("", 1, "", "", database);
-		private Meal my_meal = new Meal(1, "", "", true,1,1,1);
-		private Order my_order = new Order(1, "","", 1, "","");
-	
 		public void valueChanged(ListSelectionEvent hendelse) {
-			Object[] values = choice_list.getSelectedValuesList().toArray();
 			int choices = choice_list.getSelectedIndex();
 			if(choices == 0){
+					
+					// View food orders
 				
-    	  //my_cook.();
 			}else if(choices==1){
 				try {
-					my_cook.markAsReadyForDelivery(my_meal, my_order);
+					
+					// Mark as ready gui
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
       
 			}else if(choices==2){
 				try {
-					my_cook.createMeal(my_meal);
+					//
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		} 
 	}
-}
-  
-  
- class MainCook {
-  public static void main(String[] args) {
-	  CookGui window = new CookGui("Choose an option");
-	  window.setVisible(true);
-  }
 }

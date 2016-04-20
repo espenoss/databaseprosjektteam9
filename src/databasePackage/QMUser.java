@@ -75,13 +75,17 @@ public class QMUser {
 		
 		String[][] userInfo = null;
 		
-		String statement = "SELECT user_id FROM user WHERE user_id = '" + userID + "' AND password ='" + String.valueOf(password) + "'";
+		String statement = "SELECT user_id, user_type, name FROM user WHERE user_id = '" + userID + "' AND password ='" + String.valueOf(password) + "'";
 		
 		database.makeSingleStatement(statement);	
 		
 		userInfo = database.getLastResult();
 		
-		return userInfo[0];
+		if(userInfo.length  == 0){
+			return null;
+		}else{
+			return userInfo[0];
+		}
 	}
 	
 	

@@ -7,10 +7,20 @@ import java.util.ArrayList;
 import javax.swing.*;
 import databasePackage.Database;
 
-class ChangeCustomerInfoGui extends JFrame {
-	  private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
+class ChangeCustomerInfoDialog extends JFrame {
 	  private Sales sales = null; 
-	  Customer customer = new Customer(1,"", "", "", "", "", 1, 1,"", true);
+	  Customer customer = null;
+	 
+	  public ChangeCustomerInfoDialog(Sales sales) {
+		  	this.sales = sales;
+	  		CustomerDialog dialog = new CustomerDialog(this);
+	  		dialog.setVisible(true);
+	  		setTitle("Registrer customer");
+	  		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	  		setLayout(new FlowLayout());
+	  		setLocation(300, 300); 
+	  		dialog.setLocation(350, 350); 
+	 } 
 	  
 	  private class CustomerDialog extends MyDialog implements ActionListener{
 			private TextEditor editor = new TextEditor();
@@ -28,6 +38,8 @@ class ChangeCustomerInfoGui extends JFrame {
 
 			private final String status[] = {"active", "unactive"}; 
 			private JComboBox status_list = new JComboBox(status);
+			
+			
 			
 			public CustomerDialog(JFrame parent){
 				super(parent, "Fill in new information about a customer");
@@ -114,7 +126,7 @@ class ChangeCustomerInfoGui extends JFrame {
 				}
 				
 				try {
-					currCust.updateCustomer(database);
+					currCust.updateCustomer(sales.getDatabase());
 				} catch (Exception e) {
 					System.out.println(e.toString());
 					return false;
@@ -137,23 +149,6 @@ class ChangeCustomerInfoGui extends JFrame {
 			}
 	
 	  }
-			
-	  public ChangeCustomerInfoGui(Sales sales) {
-		  	this.sales = sales;
-		  	this.database = database;
-	  		CustomerDialog dialog = new CustomerDialog(this);
-	  		dialog.setVisible(true);
-	  		setTitle("Registrer customer");
-	  		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	  		setLayout(new FlowLayout());
-	  		setLocation(300, 300); 
-	  		dialog.setLocation(350, 350); 
-	 } 
-	  	
-	 public static void main(String args[]){
-		 Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
-		 ChangeCustomerInfoGui c = new ChangeCustomerInfoGui(new Sales("","", database));
-	 }
 }  
 
 

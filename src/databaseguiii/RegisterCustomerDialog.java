@@ -5,9 +5,19 @@ import java.awt.event.*;
 import javax.swing.*;
 import databasePackage.Database;
 
-class Parentwindow2 extends JFrame {
-	  private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
-	  Sales sales = new Sales("", 0, "", "", database);
+class RegisterCustomerDialog extends JFrame {
+	  Sales sales = null;
+	  
+	  public RegisterCustomerDialog(Sales sales) {
+		  this.sales = sales;
+		  CustomerDialog dialog = new CustomerDialog(this);
+		  dialog.setVisible(true);
+		  setTitle("Registrer customer");
+		  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		  setLayout(new FlowLayout());
+		  setLocation(300, 300); 
+		  dialog.setLocation(350, 350);  
+	 } 
 	  
 	  private class CustomerDialog extends MyDialog{
 			private TextEditor editor = new TextEditor();
@@ -99,29 +109,12 @@ class Parentwindow2 extends JFrame {
 				
 				try {
 					sales.registerCustomer(surName, firstName, phoneNumber, email, adress, 
-						zip_code, zone_nr, preferences, active, database);
+						zip_code, zone_nr, preferences, active);
 				} catch (Exception e) {
 					System.out.println(e.toString());
 				}
 				return true;		
 			}
 		}
-			
-	  	public Parentwindow2() {
-		  CustomerDialog dialog = new CustomerDialog(this);
-		  dialog.setVisible(true);
-		  setTitle("Registrer customer");
-		  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		  setLayout(new FlowLayout());
-		  setLocation(300, 300); 
-		  dialog.setLocation(350, 350);  
-	 } 
 }  
-
-
-	class MainCustomerGui {
-	  static public void main(String[] args) {
-		Parentwindow2 test = new Parentwindow2();
-	  }   
-	} 
 

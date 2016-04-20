@@ -7,17 +7,27 @@ import java.awt.event.*;
 import javax.swing.*;
 import databasePackage.*;
 
-class Parentwindow11 extends JFrame {
+class RegisterUserDialog extends JFrame {
 	private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
-	private Admin admin = new Admin("",0, "","", database); 
+	private Admin user = null; 
   
+	public RegisterUserDialog(User user) throws Exception { 
+		this.user = (Admin)user;
+		UserDialog dialog = new UserDialog(this);
+		dialog.setVisible(true);
+		dialog.setLocation(350, 350);
+		setTitle("Registrer user");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new FlowLayout());
+		setLocation(300, 300); 
+	 } 
 
 	private class UserDialog extends MyDialog{
 
 		private TextEditor editor = new TextEditor();
 		private JTextField userIDfield = new JTextField(10);
 		private final String userRoles[] = {"Admin", "Cook", "Driver", "Sales", "Storage"}; 
-		private JComboBox userList = new JComboBox(userRoles);	
+		private JComboBox<String> userList = new JComboBox<String>(userRoles);	
 		private JTextField usernameField = new JTextField(20);		
 		private JTextField passwordField = new JTextField(20);
 		private String pword;
@@ -57,30 +67,11 @@ class Parentwindow11 extends JFrame {
 			name = usernameField.getText();
 			
 			try {
-				admin.registerUser(userID, userType, name, pword, database);
+				user.registerUser(userID, userType, name, pword, database);
 			} catch (Exception e) {
 				System.out.println(e.toString());
 			}
 			return true;		
 		}
 	}
-		
- public Parentwindow11() throws Exception { 
-
-	 UserDialog dialog = new UserDialog(this);
-	 dialog.setVisible(true);
-	 dialog.setLocation(350, 350);  // plasserer dialogen  
-	 setTitle("Registrer user");
-	 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	 setLayout(new FlowLayout());
-	 setLocation(300, 300); // plasserer foreldrevinduet..
-    
-  } 
-
 }
-
-class MainUserDialog {
-  static public void main(String[] args) throws Exception {
-	Parentwindow11 test = new Parentwindow11();
-  }   
-}  

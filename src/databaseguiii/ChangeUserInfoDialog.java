@@ -8,12 +8,22 @@ import java.util.ArrayList;
 import javax.swing.*;
 import databasePackage.*;
 
-class ChangeInfo extends JFrame {
+class ChangeUserInfoDialog extends JFrame {
 	private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
-	private Admin admin = new Admin("",0, "","", database); 
+	private Admin admin = null; 
   
+	public ChangeUserInfoDialog(User user) throws Exception { 
+		admin = (Admin) user;
+		UserDialog dialog = new UserDialog(this);
+		dialog.setVisible(true);
+		dialog.setLocation(350, 350);  // plasserer dialogen  
+		setTitle("Registrer user");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new FlowLayout());
+		setLocation(300, 300); // plasserer foreldrevinduet..	    
+	} 
 
-	private class UserDialog extends MyDialog implements ActionListener{
+	private class UserDialog extends MyDialog{
 
 		private TextEditor editor = new TextEditor();
 		private JComboBox<Object> userIDfield;
@@ -40,8 +50,8 @@ class ChangeInfo extends JFrame {
 				names.add(u.getName());
 			}
 			userIDfield = new JComboBox<Object>(names.toArray());
-
-			userIDfield.addActionListener(this);
+			userIDfield.addActionListener(new listListener());
+			
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new UserDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
@@ -66,6 +76,15 @@ class ChangeInfo extends JFrame {
 			}
 		}
 		
+		private class listListener implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+				int userIndex = userIDfield.getSelectedIndex();	
+				User currUser = users.get(userIndex);
+				userList.setSelectedIndex(currUser.getUserType());
+				usernameField.setText(currUser.getName());
+			}
+		}
+		
 		public boolean okData(){
 			int userIndex = userIDfield.getSelectedIndex();	
 			userID = users.get(userIndex).getUserID();
@@ -80,31 +99,6 @@ class ChangeInfo extends JFrame {
 			}
 			return true;		
 		}
-		
-		public void actionPerformed(ActionEvent e){
-			int userIndex = userIDfield.getSelectedIndex();	
-			User currUser = users.get(userIndex);
-			userList.setSelectedItem(currUser.getUserType());
-			usernameField.setText(currUser.getName());
-		}
 	}
-		
-  public ChangeInfo() throws Exception { 
-
-	 UserDialog dialog = new UserDialog(this);
-	 dialog.setVisible(true);
-	 dialog.setLocation(350, 350);  // plasserer dialogen  
-	 setTitle("Registrer user");
-	 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	 setLayout(new FlowLayout());
-	 setLocation(300, 300); // plasserer foreldrevinduet..
-    
-  } 
-
 }
 
-class ChangeUserInfoGui {
-  static public void main(String[] args) throws Exception {
-	  ChangeInfo test = new ChangeInfo();
-  } 
-}

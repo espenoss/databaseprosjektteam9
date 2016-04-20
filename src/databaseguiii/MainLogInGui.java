@@ -19,7 +19,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import controller.*;
 
 class LogInGui extends JFrame{
 	public static final int U_ADMIN = 0;
@@ -38,7 +37,6 @@ class LogInGui extends JFrame{
 		setTitle(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		
 		UserInput userID = new UserInput();
 		add(userID, BorderLayout.NORTH);
 		
@@ -52,7 +50,7 @@ class LogInGui extends JFrame{
 	}	
 	
 	private class Buttonlistener implements ActionListener {
-		private LogIn log=new LogIn();
+		private LogIn log = new LogIn();
 		public void actionPerformed(ActionEvent event) {
 			String[] loginSuccess = null;
 			try {
@@ -61,7 +59,9 @@ class LogInGui extends JFrame{
 				e.printStackTrace();
 			}
 
-			if (loginSuccess.length == 1){				
+			JButton source = (JButton)event.getSource();
+			
+			if (loginSuccess != null){							
 				String userid = userID.getText();
 				message.setText(userid + " has successfully logged in ");	
 				add(message, BorderLayout.PAGE_END);
@@ -70,37 +70,29 @@ class LogInGui extends JFrame{
 				int userType = Integer.parseInt(loginSuccess[1]);
 				String userName = loginSuccess[2];
 				
-				User user = null;
-				
 				switch(userType){
 					case U_ADMIN:
-						user = new Admin(userID, userName, database);
-						new MainAdminGui();
+						MainAdminGui admingui = new MainAdminGui(new Admin(userID, userName, database));
+						admingui.setVisible(true);
 						break;
 					case U_COOK:
-						user = new Cook(userID, userName, database);
+						
 						break;					
 					case U_DRIVER:
-						user = new Driver(userID, userName, database);
 						break;
 					case U_SALES:
-						user = new Sales(userID, userName, database);
+						MainSalesPersonGui salesGui = new MainSalesPersonGui();
 						break;						
 					default:
 				}
-			
+	
+				source.setEnabled(false);
+				
 			}else{
 				message.setText("Wrong username or password");	
 			}
 		}
 	}    
-	
-	/*
-	 * Argumentene til GridLayout() er:
-	 * antall rader, antall kolonner,
-	 * horisontal avstand mellom rutene og vertikal avstand mellom rutene
-	 * de to siste i antall piksler
-	 */
 	
 	private class UserInput extends JPanel{
 		public UserInput(){

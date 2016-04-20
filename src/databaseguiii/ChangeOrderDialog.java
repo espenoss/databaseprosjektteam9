@@ -20,11 +20,22 @@ import javax.swing.SpinnerDateModel;
 import controller.*;
 import databasePackage.Database;
 
-class ChangeOrder extends JFrame {
+class ChangeOrderDialog extends JFrame {
 	private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
-	private Sales sales = new Sales("espenme",0, "Espen","hei", database); 
+	private Sales sales = null; 
 	
-	private class ChangeOrderDialog extends MyDialog implements ActionListener{
+	public ChangeOrderDialog(Sales sales) {
+		this.sales = sales;
+		DialogWindow dialog = new DialogWindow(this);
+		dialog.setVisible(true);
+		setTitle("Registrer customer");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new FlowLayout());
+		setLocation(300, 300); 
+		dialog.setLocation(350, 350); 
+	}
+	
+	private class DialogWindow extends MyDialog implements ActionListener{
 
 		private TextEditor editor = new TextEditor();
 		private ArrayList<Customer> customerList = new ArrayList<>();
@@ -38,7 +49,7 @@ class ChangeOrder extends JFrame {
 		private Date deliveryDate;
 		private String info;
 		
-		public ChangeOrderDialog(JFrame parent){
+		public DialogWindow(JFrame parent){
 			super(parent, "Change order information");
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new ChangeOrderDatapanel(),BorderLayout.CENTER);
@@ -90,23 +101,8 @@ class ChangeOrder extends JFrame {
 			delivery_dateField.setText(currCust.getSurName());
 			infoField.setText(currCust.getFirstName());
 		}
-	}
-	public ChangeOrder() {
-		ChangeOrderDialog dialog = new ChangeOrderDialog(this);
-			dialog.setVisible(true);
-			setTitle("Registrer customer");
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setLayout(new FlowLayout());
-			setLocation(300, 300); 
-			dialog.setLocation(350, 350); 
-		} 
-	}  
-	
-	class ChangeOrderGui {
-	  static public void main(String[] args) throws Exception {
-		  ChangeOrder test = new ChangeOrder();
-	  } 
-	}
+	} 
+}  
 				
 				
 				

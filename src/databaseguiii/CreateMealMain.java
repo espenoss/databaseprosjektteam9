@@ -14,8 +14,18 @@ import controller.TextEditor;
 import databasePackage.Database;
 
 class CreateMeal extends JFrame {
-	private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
-	private Cook cook = new Cook("",0, "","", database); 
+	private Cook cook = null; 
+	
+  	public CreateMeal(Cook cook) {
+  	  this.cook = cook;
+	  CustomerDialog dialog = new CustomerDialog(this);
+	  dialog.setVisible(true);
+	  setTitle("Create meal");
+	  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	  setLayout(new FlowLayout());
+	  setLocation(300, 300); 
+	  dialog.setLocation(350, 350);  
+ } 
 		
 	 private class CustomerDialog extends MyDialog{
 			private TextEditor editor = new TextEditor();
@@ -59,28 +69,11 @@ class CreateMeal extends JFrame {
 				int myPrice = editor.stringToInt(priceFieldText);
 				
 				try {
-					cook.createMeal(mealName, instructions, available, myPrice);
+					cook.createMeal(mealName, instructions, myPrice);
 				} catch (Exception e) {
 					System.out.println(e.toString());
 				}
 				return true;		
 			}
-		}
-			
-	  	public CreateMeal() {
-		  CustomerDialog dialog = new CustomerDialog(this);
-		  dialog.setVisible(true);
-		  setTitle("Create meal");
-		  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		  setLayout(new FlowLayout());
-		  setLocation(300, 300); 
-		  dialog.setLocation(350, 350);  
-	 } 
+	}
 }  
-
-
-	class CreateMealMain {
-	  static public void main(String[] args) {
-		  CreateMeal test = new CreateMeal();
-	  }   
-	} 
