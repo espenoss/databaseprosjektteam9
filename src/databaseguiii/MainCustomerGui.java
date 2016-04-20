@@ -20,7 +20,8 @@ class Parentwindow2 extends JFrame {
 			private JTextField zone_nrField = new JTextField(6);
 			private JTextField preferencesField = new JTextField(100);
 			private JTextField phoneNumberField = new JTextField(12);
-			
+			private final String status[] = {"active", "unactive"}; 
+			private JComboBox status_list = new JComboBox(status);
 			private String surName;
 			private String firstName;
 			private String email;
@@ -30,9 +31,6 @@ class Parentwindow2 extends JFrame {
 			private String preferences;
 			private String phoneNumber;
 			private boolean active;
-	//		private boolean isCompany;
-	//		private String companyName;
-			
 			
 			public CustomerDialog(JFrame parent){
 				super(parent, "New customer");
@@ -44,7 +42,7 @@ class Parentwindow2 extends JFrame {
 			
 			private class CustomerDatapanel extends JPanel{
 				public CustomerDatapanel(){
-					setLayout(new GridLayout(8,2));
+					setLayout(new GridLayout(9,2));
 			
 					add(new JLabel("Surname: ", JLabel.RIGHT));
 					add(surNameField);
@@ -70,6 +68,8 @@ class Parentwindow2 extends JFrame {
 					add(new JLabel("Preferences: ", JLabel.RIGHT));
 					add(preferencesField);
 					
+					add(new JLabel("Status: ", JLabel.RIGHT));
+					add(status_list);
 					
 				}
 			}
@@ -89,6 +89,8 @@ class Parentwindow2 extends JFrame {
 				
 				preferences = preferencesField.getText();	
 				phoneNumber = phoneNumberField.getText();
+				
+				active= status_list.isEnabled();
 				
 				try {
 					sales.registerCustomer(surName, firstName, phoneNumber, email, adress, 
