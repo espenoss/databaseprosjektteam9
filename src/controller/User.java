@@ -206,7 +206,7 @@ public class User implements java.io.Serializable{
 	
 	
 	public String toString(){
-		return userID+""+ name+" "+ userType +" "+pword;
+		return "Username: "+userID+", usertype: "+userType+", name: "+name;
 	}
 	
 	
@@ -233,7 +233,7 @@ public class User implements java.io.Serializable{
 		//System.out.println(dato);
 		
 		//System.out.println(user.viewFoodOrders(dato));
-		System
+		System.out.println()
 		
 	}
 }

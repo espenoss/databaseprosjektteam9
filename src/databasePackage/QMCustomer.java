@@ -110,7 +110,7 @@ public class QMCustomer {
 	public static String[][] viewAllCustomers(Database database) throws Exception{		
 		database.makeSingleStatement("SELECT * FROM customer");
 		
-		return database.getLastResult();  //Denne metoden fungerer ikke som den skal
+		return database.getLastResult(); 
 	}
 
 	
