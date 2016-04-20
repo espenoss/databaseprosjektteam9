@@ -148,11 +148,23 @@ public class User implements java.io.Serializable{
 		return null;
 	}
 	
-	//!!--- Må lages!!-----!!
-	public ArrayList<Ingredient> viewIngredients(){
-		return null;
+	//FINISHED --- Må testes
+	public ArrayList<Ingredient> viewIngredients() throws Exception{
+		String[][] ingT = QMFood.viewIngredients(database);
+		Ingredient tempIng; 
+		
+		ArrayList<Ingredient> ingList = new ArrayList<Ingredient>();
+		
+		
+		for (int i=0; i<ingT.length; i++){
+			if (t.stringToInt(ingT[i][3])>0){
+				tempIng = new Ingredient(t.stringToInt(ingT[i][0]), ingT[i][1], t.stringToFloat(ingT[i][2]), ingT[i][3]);
+				ingList.add(tempIng);
+			}
+		}
+		return ingList;
 	}
-	
+
 	//Lists orderIngredients as String
 	public String viewOrderIngredients() throws Exception{
 		String res = "";

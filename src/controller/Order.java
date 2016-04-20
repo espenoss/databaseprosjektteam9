@@ -81,7 +81,9 @@ public class Order {
 		return QMOrder.updateOrder(orderID, orderDate, customerID, info, userID, database);
 	}
 	
-	public ArrayList<Meal>
+	public ArrayList<Meal> viewMealsInOrderByDate(){
+		return null;
+	}
 	
 	
 	//Fetches meals from database
@@ -105,7 +107,6 @@ public class Order {
 			}
 			check=false;
 		}
-		
 	}
 	
 	
