@@ -25,12 +25,19 @@ public class TestUser {
 	private static User user;
 	
 	private static ArrayList<Customer> customerList = new ArrayList<Customer>();
-	ArrayList<Customer> customers = new ArrayList<Customer>();
 	private static Customer geir;
 	private static Customer jensine;
 	private static Customer lise;
 	
-
+	private static ArrayList<Customer> companyList = new ArrayList<Customer>();
+	private static Customer skatteetaten;
+	private static Customer deloitte;
+	
+	private static ArrayList<Ingredient> ingredientList = new ArrayList<Ingredient>();
+	private static Ingredient potato;
+	private static Ingredient carrot;
+	private static Ingredient cheese;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		String username = "anitakau";
@@ -69,13 +76,46 @@ public class TestUser {
 		database.makeSingleStatement(insert5);
 		database.makeSingleStatement(insert6);
 		
-		geir = new Customer(10000, "Hansen", "Geir", "73329090", "geir@hansen.com", "Nedre Bakklandet 61", 7014, 1, "Allergisk mot sopp", true);
-		jensine = new Customer(10001, "Tvedt","Jensine", "73254090", "jensinetvedt@mail.com", "Byåsvegen 64", 7021, 5, null, true);
-		lise = new Customer(10002, "Andersen", "Lise Carina", "93081295", "lise@andersen.com", "Moltmyra 111", 7091, 4, "Liker ikke skalldyr", true);
+		geir = new Customer(10000, "Geir", "Hansen", "73329090", "geir@hansen.com", "Nedre Bakklandet 61", 7014, 1, "Allergisk mot sopp", true);
+		jensine = new Customer(10001, "Jensine","Tvedt", "73254090", "jensinetvedt@mail.com", "Byåsvegen 64", 7021, 5, null, true);
+		lise = new Customer(10002, "Lise Carina", "Andersen", "93081295", "lise@andersen.com", "Moltmyra 111", 7091, 4, "Liker ikke skalldyr", true);
 		
 		customerList.add(geir);
 		customerList.add(jensine);
 		customerList.add(lise);
+		
+		// COMPANY INSERT
+		String insert7 = "INSERT INTO customer VALUES(10004, 'Gjertsen', 'Laila', '22123456', 'skatteetaten@trondheim.no', 'Erling Skakkes gate 50', 7012, 1, NULL, true);";
+		String insert8 = "INSERT INTO company VALUES(10004, 'Skatteetaten');";
+		String insert9 = "INSERT INTO customer VALUES(10005, 'Smith', 'Gordon', '20203030', 'deloitte@trondheim.no', 'Dyre Halses gate 1A', 7042, 1, NULL, true);";
+		String insert10 = "INSERT INTO company VALUES(10005, 'Deloitte');";
+		
+		database.makeSingleStatement(insert7);
+		database.makeSingleStatement(insert8);
+		database.makeSingleStatement(insert9);
+		database.makeSingleStatement(insert10);
+		
+		skatteetaten = new Customer(10004, "Gjertsen", "Laila", "22123456", "skatteetaten@trondheim.no", "Erling Skakkes gate 50", 7012, 1, null, true, "Skatteetaten");
+		deloitte = new Customer(10005, "Smith", "Gordon", "20203030", "deloitte@trondheim.no", "Dyre Halses gate 1A", 7042, 1, null, true, "Deloitte");
+		
+		companyList.add(skatteetaten);
+		companyList.add(deloitte);
+		
+		// INGREDIENTS INSERT
+		String insert11 = "INSERT INTO ingredient VALUES(1, 'potato', 50, 'kg')";
+		String insert12 = "INSERT INTO ingredient VALUES(2, 'carrot', 30, 'kg')";
+		String insert13 = "INSERT INTO ingredient VALUES(3, 'cheese', 10, 'kg')";
+		database.makeSingleStatement(insert11);
+		database.makeSingleStatement(insert12);
+		database.makeSingleStatement(insert13);
+		
+		potato = new Ingredient(1, "potato", 50, "kg");
+		carrot = new Ingredient(2, "carrot", 30, "kg");
+		cheese = new Ingredient(3, "cheese", 10,"kg");
+		
+		ingredientList.add(potato);
+		ingredientList.add(carrot);
+		ingredientList.add(cheese);
 	}
 
 	@Before
@@ -87,8 +127,6 @@ public class TestUser {
 	public void testViewAvailableMeals() throws Exception {
 		System.out.println("Test: View available meals");
 
-		mealList = user.viewAvailableMeals();
-		
 		Meal res0 = mealList.get(0);
 		Meal expRes0 = soup;
 		assertEquals(res0, expRes0);
@@ -107,36 +145,68 @@ public class TestUser {
 	public void testViewCustomerList() throws Exception{
 		System.out.println("Test: View customer list");
 	
-		Customer res0 = customerList.get(0);
-		Customer expRes0 = geir;
+		Customer res0 = user.viewCustomerList().get(0);
+		Customer expRes0 = customerList.get(0);
 		assertEquals(res0, expRes0);
 		
 		Customer res1 = user.viewCustomerList().get(1);
-		Customer expRes1 = jensine;
+		Customer expRes1 = customerList.get(1);
 		assertEquals(res1, expRes1);
 		
 		Customer res2 = user.viewCustomerList().get(2);
-		Customer expRes2 = lise;
+		Customer expRes2 = customerList.get(2);
 		assertEquals(res2, expRes2);
 	}
 	
 	
 	@Test
-	public void testViewCompanyList(){
+	public void testViewCompanyList() throws Exception{
 		System.out.println("Test: View company list");
-//		ArrayList<Customer> viewCompanyList()
+		
+		Customer res0 = user.viewCompanyList().get(0);
+		Customer expRes0 = companyList.get(0);
+		assertEquals(res0, expRes0);
+		
+		Customer res1 = user.viewCompanyList().get(1);
+		Customer expRes1 = companyList.get(1);
+		assertEquals(res1, expRes1);
+
 	}
 	
 	@Test
-	public void testViewSingleCustomer(){
+	public void testViewSingleCustomer() throws Exception{
 		System.out.println("Test: view single customer");
-//		Customer viewSingleCustomer(int customerId)
+		
+		int id1 = 10001; // jensine
+		int id2 = 10002; // lise
+		
+		Customer res1 = user.viewSingleCustomer(id1);
+		Customer expRes1 = jensine;
+		assertEquals(res1, expRes1);
+	
+		Customer res2 = user.viewSingleCustomer(id2);
+		Customer expRes2 = lise;
+		assertEquals(res2, expRes2);
+		
 	}
 	
 	@Test
-	public void testViewIngredients(){
+	public void testViewIngredients() throws Exception{
 		System.out.println("Test: View ingredients");
-//		ArrayList<Ingredient> viewIngredients()
+		System.out.println(ingredientList.size());
+		
+		Ingredient res0 = user.viewIngredients().get(0);
+		Ingredient expRes0 = ingredientList.get(0);
+		assertEquals(res0, expRes0);
+		
+		Ingredient res1 = user.viewIngredients().get(1);
+		Ingredient expRes1 = ingredientList.get(1);
+		assertEquals(res1, expRes1);
+		
+		Ingredient res2 = user.viewIngredients().get(2);
+		Ingredient expRes2 = ingredientList.get(2);
+		assertEquals(res2, expRes2);
+
 	}
 
 }
