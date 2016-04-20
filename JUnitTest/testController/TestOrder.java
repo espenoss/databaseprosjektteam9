@@ -16,7 +16,8 @@ import controller.Order;
 import databasePackage.Database;
 import databaseguiii.MealsInOrder;
 
-// IKKE FERDIG
+// *******IKKE FERDIG*******
+
 public class TestOrder {
 	private static Database database;
 	private static Order order;
@@ -45,7 +46,7 @@ public class TestOrder {
 		meals.add(pizza);
 		order = new Order(1, "2016-01-01", 10, "none", "trym123");
 		
-		order.addMeal(pizza);
+		order.addMeal(pizza, "2016-01-01");
 	}
 
 	@Before
@@ -78,6 +79,11 @@ public class TestOrder {
 		boolean expRes = true;
 		
 		assertEquals(res, expRes);
+	}
+	
+	@Test
+	public void testShouldUploadMealInOrder() throws Exception{
+		System.out.println("Test: Upload meal in order to database");
 	}
 	 
 	// ***** METHOD NOT FINISHED IN CONTROLLER.ORDER *****
