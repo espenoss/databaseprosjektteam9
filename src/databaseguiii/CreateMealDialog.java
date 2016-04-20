@@ -13,12 +13,12 @@ import controller.*;
 import controller.TextEditor;
 import databasePackage.Database;
 
-class CreateMeal extends JFrame {
+class CreateMealDialog extends JFrame {
 	private Cook cook = null; 
 	
-  	public CreateMeal(Cook cook) {
+  	public CreateMealDialog(Cook cook) {
   	  this.cook = cook;
-	  CustomerDialog dialog = new CustomerDialog(this);
+	  DialogWindow dialog = new DialogWindow(this);
 	  dialog.setVisible(true);
 	  setTitle("Create meal");
 	  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,7 +27,7 @@ class CreateMeal extends JFrame {
 	  dialog.setLocation(350, 350);  
  } 
 		
-	 private class CustomerDialog extends MyDialog{
+	 private class DialogWindow extends MyDialog{
 			private TextEditor editor = new TextEditor();
 		//	String mealName, String instructions, boolean available, int price
 			private JTextField mealNameField = new JTextField(20);
@@ -40,7 +40,7 @@ class CreateMeal extends JFrame {
 			
 			
 			
-			public CustomerDialog(JFrame parent){
+			public DialogWindow(JFrame parent){
 				super(parent, "New meal");
 				add(new JPanel(), BorderLayout.NORTH);
 				add(new CustomerDatapanel(),BorderLayout.CENTER);
