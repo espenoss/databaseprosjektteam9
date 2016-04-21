@@ -74,7 +74,6 @@ public class User implements java.io.Serializable{
 		
 		String[][] orderT = QMOrder.viewAllOrdersFromCustomer(customerID, database);
 		if (orderT.length==0){
-			JOptionPane.showMessageDialog(null,"Could not find any orders for the customerID: "+customerID);
 			return null;
 		}
 

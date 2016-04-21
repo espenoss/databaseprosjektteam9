@@ -12,17 +12,27 @@ import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import controller.*;
 import databasePackage.Database;
 
 class ChangeOrderDialog extends JFrame {
 	private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
-	private Sales sales = null; 
+	private Sales sales = null;
+	private ArrayList<Order> orders = new ArrayList<>();
+	private ArrayList<Customer> customerList = new ArrayList<>();
+	private JComboBox customerSelect;
+	private JComboBox orderSelect;		
+	private SpinnerDateModel dateSelectModel = new SpinnerDateModel();
+	private JSpinner dateSelect = new JSpinner(dateSelectModel);
+	private JTextField infoField = new JTextField(10);
 	
 	public ChangeOrderDialog(Sales sales) {
 		this.sales = sales;
@@ -35,18 +45,9 @@ class ChangeOrderDialog extends JFrame {
 		dialog.setLocation(350, 350); 
 	}
 	
-	private class DialogWindow extends MyDialog implements ActionListener{
+	private class DialogWindow extends MyDialog{
 
-		private TextEditor editor = new TextEditor();
-		private ArrayList<Order> orderList = new ArrayList<>();
-		private JComboBox customerSelect;
-		private SpinnerDateModel dateSelectModel = new SpinnerDateModel();
-		private JSpinner dateSelect = new JSpinner(dateSelectModel);
-		private JTextField delivery_dateField = new JTextField(10);
-		private JTextField infoField = new JTextField(10);
-		private int customerID;
 		private String deliveryDateStr;
-		private Date deliveryDate;
 		private String info;
 		
 		public DialogWindow(JFrame parent){
@@ -58,23 +59,39 @@ class ChangeOrderDialog extends JFrame {
 		}
 		private class ChangeOrderDatapanel extends JPanel{
 			public ChangeOrderDatapanel(){
-				setLayout(new GridLayout(3,2));
+				setLayout(new GridLayout(4,2));
 				try {
-					orderList = sales.viewFoodOrders(date);
+					customerList = sales.viewCustomerList();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
+
 				ArrayList<String> nameList = new ArrayList<>();
 				for(Customer c: customerList){
 					nameList.add(c.getCustomerID() + " " + c.getFirstName() + " " + c.getSurName());
 				}
+								
+				try {
+					orders = sales.viewFoodOrdersByCustomer(customerList.get(0).getCustomerID());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				ArrayList<String> orderNameList = new ArrayList<>();
+				for(Order o: orders){
+					orderNameList.add(String.valueOf(o.getOrderID()));
+				}
+				
 				customerSelect = new JComboBox<>(nameList.toArray());
+				orderSelect = new JComboBox<>(orderNameList.toArray());
+				
 				add(new JLabel("Customer: ", JLabel.RIGHT));
 				add(customerSelect);
+				customerSelect.addActionListener(new customerListener());
+				add(new JLabel("Order: ", JLabel.RIGHT));				
+				add(orderSelect);
 				add(new JLabel("New delivery date: ", JLabel.RIGHT));
-				add(delivery_dateField);
-		
+				add(dateSelect);
 				add(new JLabel("Info: ", JLabel.RIGHT));
 				add(infoField);
 			}
@@ -84,25 +101,45 @@ class ChangeOrderDialog extends JFrame {
 			int custIndex = customerSelect.getSelectedIndex();
 			Customer currCust = customerList.get(custIndex);
 			
+			int orderIndex = orderSelect.getSelectedIndex();
+			Order currOrder = orders.get(orderIndex);
+			
 			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 			deliveryDateStr = s.format(dateSelect.getValue());
 			info = infoField.getText();
-
+			
+			currOrder.setOrderDate(deliveryDateStr);
+			currOrder.setInfo(info);
+			
 			try {
-				//sales. mangeler metoden
+				currOrder.uploadOrder(database);
 			} catch (Exception e) {
 				System.out.println(e.toString());
 			}
 			return true;		
 		}
-		public void actionPerformed(ActionEvent e){
-			int custIndex = customerSelect.getSelectedIndex();
-			Customer currCust = customerList.get(custIndex);
-			delivery_dateField.setText(currCust.getSurName());
-			infoField.setText(currCust.getFirstName());
-		}
+		
 	} 
 	
+	private class customerListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			JComboBox<String> l = (JComboBox<String>)e.getSource();
+			int selected = l.getSelectedIndex();
+			try {
+				orders = sales.viewFoodOrdersByCustomer(customerList.get(selected).getCustomerID());
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+						
+			orderSelect.removeAllItems();
+			if(orders != null){
+				for(Order o: orders){
+					orderSelect.addItem(String.valueOf(o.getOrderID()));
+				}
+			}			
+		}		
+	}
+
  	public static void main(String[] args){
  		String username = "espenme";
  		String passingword = "16Sossosem06";
@@ -111,11 +148,4 @@ class ChangeOrderDialog extends JFrame {
 		ChangeOrderDialog changeOrder = new ChangeOrderDialog(new Sales("","", database));
 		changeOrder.setVisible(true);
  	}
-}  
-				
-				
-				
-				
-				
-				
-			
+}
