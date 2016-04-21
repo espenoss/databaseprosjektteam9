@@ -77,14 +77,14 @@ public class TestCook {
 	public void testShouldAddMealToSubPlan() throws Exception{
 		System.out.println("Test 4: add meal to subscription plan");
 		
-		boolean res = cook.addMealToSubPlan(1, 1, 3, "wednesday");
+		boolean res = cook.addMealToSubPlan(1, 1, 3);
 		boolean expRes = true;
 		assertEquals(res, expRes);
 	}
 	@Test 
 	public void testShouldRemoveMealFromPlan() throws Exception{
 		System.out.println("Test 5: Remove meal from plan");
-		cook.addMealToSubPlan(1, 1, 2, "tuesday");
+		cook.addMealToSubPlan(1, 1, 2);
 		
 		
 		boolean res = cook.removeMealFromPlan(1, 1, 3);

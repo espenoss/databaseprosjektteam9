@@ -1,11 +1,9 @@
 package controller;
 
 import java.sql.Date;
-
 import java.util.ArrayList;
 import databasePackage.*;
 
-// import java.sql.Date;
 
 public class Order {
 	private int orderID;
@@ -67,10 +65,13 @@ public class Order {
 		return meals.get(index).markMealAsReady(database);
 	}
 	
-	//Marks meal as delivered to customer, given index of meal in mealArray
-	public boolean markMealAsDelivered(int index, Database database) throws Exception{
-		return meals.get(index).markMealAsDelivered(database);
+	
+	public boolean removeMealFromOrder(int index, Database database) throws Exception{
+		QMOrder.removeMealFromOrder(orderID, meals.get(index).getMealID(), meals.get(index).getDeliverydate().toString(), database);
+		fetchMealsInOrder(database);
+		return false;
 	}
+	
 	
 	//Marks all meals in order with given deliverydate as ready for delivery, returns count for 
 	public int markAllMealsAsReadyByDate(java.sql.Date date, Database database) throws Exception{
@@ -85,7 +86,6 @@ public class Order {
 		
 		return count;
 	}
-	
 	
 	
 	//Register information to databasee

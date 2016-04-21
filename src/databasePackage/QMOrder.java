@@ -87,6 +87,14 @@ public class QMOrder {
 		return database.getLastResult();
 	}	
 	
+	public static String[][] viewAllOrdersFromCustomer(int customerID, Database database) throws Exception{
+		
+		String statement = "SELECT * FROM food_order WHERE customer_id = " + customerID + ";";
+		
+		database.makeSingleStatement(statement);
+		
+		return database.getLastResult();
+	}
 	
 	// **** IKKE TESTET
 	// Connect meal to order. Both must exisst in database to succeed
@@ -201,7 +209,7 @@ public class QMOrder {
 	// Returns order id of any orders that has deliveries today
 	public static String[][] viewOrdersByDeliveryDate(java.sql.Date deliveryDate, Database database) throws Exception{
 		
-		String statement = "SELECT DISTINCT order_id FROM food_order NATURAL JOIN ordered_meal where food_order.order_id = ordered_meal.order_id AND delivery_date = '" + deliveryDate + "';";
+		String statement = "SELECT * FROM food_order NATURAL JOIN ordered_meal where food_order.order_id = ordered_meal.order_id AND delivery_date = '" + deliveryDate + "';";
 		
 		database.makeSingleStatement(statement);
 		
@@ -299,8 +307,21 @@ public class QMOrder {
 		return database.getLastResult();
 	}
 	
-	public static int calculateIncomeForPeriod(String fromDate, String toDate, Database database){
+	public static int calculateIncomeForPeriod(java.sql.Date fromDate, java.sql.Date toDate, Database database) throws Exception{
+		String statement = "SELECT SUM(price*quantity) FROM meal NATURAL JOIN ordered_meal "
+				+ "WHERE delivery_date > '" + fromDate + "' "
+				+ "AND delivery_date < '" + toDate + "' "
+				+ "AND delivered = true";
+
+		database.makeSingleStatement(statement);
 		
+		String[][] result = database.getLastResult();
+		if(result.length == 0){
+			return -1;			
+		}else{
+			return Integer.parseInt(result[0][0]);			
+		}
+
 	}
 	
 	// Puts a ' on either side and a comma at the end of a string 

@@ -28,7 +28,7 @@ class ChangeOrderDialog extends JFrame {
 		this.sales = sales;
 		DialogWindow dialog = new DialogWindow(this);
 		dialog.setVisible(true);
-		setTitle("Registrer customer");
+		setTitle("Change order");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
 		setLocation(300, 300); 
@@ -38,7 +38,7 @@ class ChangeOrderDialog extends JFrame {
 	private class DialogWindow extends MyDialog implements ActionListener{
 
 		private TextEditor editor = new TextEditor();
-		private ArrayList<Customer> customerList = new ArrayList<>();
+		private ArrayList<Order> orderList = new ArrayList<>();
 		private JComboBox customerSelect;
 		private SpinnerDateModel dateSelectModel = new SpinnerDateModel();
 		private JSpinner dateSelect = new JSpinner(dateSelectModel);
@@ -60,7 +60,7 @@ class ChangeOrderDialog extends JFrame {
 			public ChangeOrderDatapanel(){
 				setLayout(new GridLayout(3,2));
 				try {
-					customerList = sales.viewCustomerList();
+					orderList = sales.viewFoodOrders(date);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -103,6 +103,15 @@ class ChangeOrderDialog extends JFrame {
 			infoField.setText(currCust.getFirstName());
 		}
 	} 
+	
+ 	public static void main(String[] args){
+ 		String username = "espenme";
+ 		String passingword = "16Sossosem06";
+ 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
+ 		Database database = new Database("com.mysql.jdbc.Driver", databasename);
+		ChangeOrderDialog changeOrder = new ChangeOrderDialog(new Sales("","", database));
+		changeOrder.setVisible(true);
+ 	}
 }  
 				
 				

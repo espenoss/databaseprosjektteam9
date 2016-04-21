@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import databasePackage.*;
@@ -51,7 +52,7 @@ public class User implements java.io.Serializable{
 			JOptionPane.showMessageDialog(null,"Could not find anything for the date "+date);
 			return null;
 		}
-		
+
 		Order tempOrder;
 		ArrayList<Order> orderList = new ArrayList<Order>();
 		
@@ -62,8 +63,34 @@ public class User implements java.io.Serializable{
 			orderList.add(tempOrder);
 		}
 		
-		return orderList;
+		return orderList; 
 	}
+	
+	
+	//FINISHED, NOT tested
+	//View all orders with a customerID
+	//Returns arraylist with orders that contains all meals in order
+	public ArrayList<Order> viewFoodOrdersByCustomer(int customerID) throws Exception{
+		
+		String[][] orderT = QMOrder.viewAllOrdersFromCustomer(customerID, database);
+		if (orderT.length==0){
+			JOptionPane.showMessageDialog(null,"Could not find any orders for the customerID: "+customerID);
+			return null;
+		}
+
+		Order tempOrder;
+		ArrayList<Order> orderList = new ArrayList<Order>();
+		
+		for(int i=0; i<orderT.length;i++){
+			tempOrder = new Order(t.stringToInt(orderT[i][0]), 	orderT[i][1], t.stringToInt(orderT[i][2]),  orderT[i][3], orderT[i][4]);
+			
+			tempOrder.fetchMealsInOrder(database);
+			orderList.add(tempOrder);
+		}
+		
+		return orderList; 
+	}
+	
 	
 	//FINISHED NOT TESTED 
 	//Returns an arraylist with all available meals
@@ -238,7 +265,8 @@ public class User implements java.io.Serializable{
 		java.sql.Date dato = java.sql.Date.valueOf("2016-03-01");
 		//System.out.println(dato);
 		
-		System.out.println(user.viewFoodOrders(dato));
+		//System.out.println(user.viewFoodOrders(dato));
+		System.out.println(user.viewFoodOrdersByCustomer(10000));
 		//System.out.println(user.viewCompanyList());
 		//System.out.println(user.viewAllSubPlans());
 		
