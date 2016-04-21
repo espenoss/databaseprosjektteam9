@@ -17,10 +17,10 @@ import javax.swing.SpinnerDateModel;
 
 import controller.*;
 
-class RegisterSubscriptionplan extends JFrame {
+class RegisterSubscriptionPlan extends JFrame {
 	private Cook cook = null; 
 
-	public RegisterSubscriptionplan(Cook cook) {
+	public RegisterSubscriptionPlan(Cook cook) {
 		this.cook = cook;
 		DialogWindow dialog = new DialogWindow(this);
 		dialog.setVisible(true);
