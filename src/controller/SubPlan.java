@@ -67,7 +67,7 @@ public class SubPlan {
 		}
 		return false;
 	}
-	
+	 
 	public void fetchMealsInPlan(Database database) throws Exception{
 		String[][] mealT = QMFood.viewMealsInPlan(subPlanID, database);
 		Meal tempMeal;

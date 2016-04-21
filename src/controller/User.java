@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import databasePackage.*;
@@ -51,7 +52,7 @@ public class User implements java.io.Serializable{
 			JOptionPane.showMessageDialog(null,"Could not find anything for the date "+date);
 			return null;
 		}
-		
+
 		Order tempOrder;
 		ArrayList<Order> orderList = new ArrayList<Order>();
 		
@@ -62,7 +63,7 @@ public class User implements java.io.Serializable{
 			orderList.add(tempOrder);
 		}
 		
-		return orderList;
+		return orderList; 
 	}
 	
 	//FINISHED NOT TESTED 

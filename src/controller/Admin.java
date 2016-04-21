@@ -17,14 +17,16 @@ public class Admin extends User {
 	public boolean updateUser(String userID, int userType, String name, String pword, Database database) throws Exception{
 		return(QMUser.updateUser(userID, userType, name, pword, database));
 	}
-	
+	 
 	
 	
 	// MÅ LAGES !! 
 	public String getStatistics(){
 		String statistics = null;
 		
-		// hent statistikk fra databasen
+		
+		
+		QMOrder.calculateIncomeForPeriod(fromDate, toDate, database)
 		
 		return statistics;
 	}

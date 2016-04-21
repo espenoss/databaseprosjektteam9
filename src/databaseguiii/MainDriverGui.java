@@ -42,12 +42,20 @@ class MainDriverGui extends JFrame {
 			Object[] values = choice_list.getSelectedValuesList().toArray();
 			int choices = choice_list.getSelectedIndex();
 			if(choices == 0){
-				driver.generateDeliveryPlan();
-				// skriv ut listen også...
-			} else if(choices==1){
-				// velg hvilken ordre??
-				driver.markDelivered(orderIndex);
-			} 
+				new ViewDeliveryList(driver).setVisible(true);
+			}else if(choices == 1){
+				// 
+			}
 		} 
+	}
+	
+	public static void main(String[] args){
+ 		String username = "espenme";
+ 		String passingword = "16Sossosem06";
+ 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
+ 		Database database = new Database("com.mysql.jdbc.Driver", databasename);		
+		Driver driver = new Driver("","", database);
+		MainDriverGui d = new MainDriverGui(driver);
+		d.setVisible(true);
 	}
 }

@@ -186,6 +186,7 @@ public class QMOrder {
 		return database.getLastResult();		
 	}
 	
+	// Calculates the total price of an order by summing the prices of the individual meals multiplied by quantity
 	public static int viewOrderPrice(int orderID, Database database) throws Exception{
 
 		String statement = "SELECT SUM(quantity*price) FROM "
@@ -196,7 +197,8 @@ public class QMOrder {
 		
 		return Integer.parseInt(database.getLastResult()[0][0]);
 	}
-	
+
+	// Returns order id of any orders that has deliveries today
 	public static String[][] viewOrdersByDeliveryDate(java.sql.Date deliveryDate, Database database) throws Exception{
 		
 		String statement = "SELECT * FROM food_order NATURAL JOIN ordered_meal where food_order.order_id = ordered_meal.order_id AND delivery_date = '" + deliveryDate + "';";
@@ -209,7 +211,7 @@ public class QMOrder {
 	
 	public static String[][] viewMealsInOrderByDeliveryDate(int orderID, java.sql.Date deliveryDate, Database database) throws Exception{
 			
-		String statement = "SELECT a.*"
+		String statement = "SELECT a.*, b.adress "
 				+ "FROM meal AS a, customer AS b, (SELECT a.order_id, a.meal_id, b.customer_id FROM "
 				+ "ordered_meal AS a, "
 				+ "food_order AS b WHERE a.delivery_date = '" + deliveryDate + "' "
@@ -283,11 +285,13 @@ public class QMOrder {
 	
 	public static String[][] generateDeliveryList(java.sql.Date currentDate, Database database) throws Exception{
 		
-		String statement = "SELECT a.meal_name, b.adress "
-				+ "FROM meal AS a, customer AS b, (SELECT a.meal_id, b.customer_id FROM "
+		String statement = "SELECT a.meal_name, c.quantity, b.adress, b.firstname, b.surname, c.order_id, a.meal_id "
+				+ "FROM meal AS a, customer AS b, (SELECT a.meal_id, a.quantity, b.customer_id, b.order_id FROM "
 				+ "ordered_meal AS a, "
 				+ "food_order AS b WHERE a.delivery_date = '" + currentDate + "' "
-				+ "AND a.order_id = b.order_id) AS c "
+				+ "AND a.order_id = b.order_id "
+				+ "AND a.ready_delivery = true "
+				+ "AND a.delivered = false) AS c "
 				+ "WHERE a.meal_id = c.meal_id AND b.customer_id = c.customer_id";
 		
 		database.makeSingleStatement(statement);
@@ -295,9 +299,24 @@ public class QMOrder {
 		return database.getLastResult();
 	}
 	
+	public static int calculateIncomeForPeriod(java.sql.Date fromDate, java.sql.Date toDate, Database database) throws Exception{
+		String statement = "SELECT SUM(price*quantity) FROM meal NATURAL JOIN ordered_meal "
+				+ "WHERE delivery_date > '" + fromDate + "' "
+				+ "AND delivery_date < '" + toDate + "' "
+				+ "AND delivered = true";
+
+		database.makeSingleStatement(statement);
+		
+		String[][] result = database.getLastResult();
+		if(result.length == 0){
+			return -1;			
+		}else{
+			return Integer.parseInt(result[0][0]);			
+		}
+
+	}
 	
-	
-	// Puts a ' on either side and a comma at the end  of a string 
+	// Puts a ' on either side and a comma at the end of a string 
 	public static String aq(String s){
 		return "'" + s + "', ";
 	}

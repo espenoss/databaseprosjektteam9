@@ -94,7 +94,7 @@ class RegisterOrderDialog extends JFrame {
 			info = infoField.getText();
 		
 			try {
-				sales.registerNewOrder(customerID, deliveryDateStr, info, sales.getUserID());
+				sales.registerNewOrder(customerID, info, sales.getUserID());
 			}catch (Exception e) {
 				System.out.println(e.toString());
 			}
