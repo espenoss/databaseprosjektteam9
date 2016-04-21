@@ -64,7 +64,13 @@ public class TestOrder {
 			System.out.println("");
 		}		
 
-		int sumForPeriod = QMOrder.calculateIncomeForPeriod("2016-04-20", "2016-04-22", database);
+		tDate = s.parse("2016-04-20");
+		java.sql.Date fromDate = new java.sql.Date(tDate.getTime());
+		
+		tDate = s.parse("2016-04-22");
+		java.sql.Date toDate = new java.sql.Date(tDate.getTime());
+		
+		int sumForPeriod = QMOrder.calculateIncomeForPeriod(fromDate, toDate, database);
 		
 		int orderPrice = QMOrder.viewOrderPrice(Integer.parseInt(order[0]), database);
 		
