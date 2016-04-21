@@ -24,14 +24,19 @@ public class Admin extends User {
 	 
 	
 	
-	// MÃ… LAGES !! 
+	// Returns String with statistics for given year, month by month. 
+	// Calculted with prices of meals that have been delivered
 	public String getStatisticsForYear(int year) throws Exception{
 		GregorianCalendar cal = (GregorianCalendar) GregorianCalendar.getInstance();
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		
-		cal.set(Calendar.YEAR, year);		
-		int monthCount = cal.get(Calendar.MONTH);
-
+		int thisYear = cal.get(Calendar.YEAR);
+		int monthCount = 11;	
+		if(thisYear==year){
+			monthCount = cal.get(Calendar.MONTH);
+		}
+		cal.set(Calendar.YEAR, year);
+		
 		int res;
 	    int sum=0;
 	    
@@ -41,7 +46,8 @@ public class Admin extends User {
 	    
 	    
 	    String[] mNames = {"January", "February", "March", "April",
-	    					"May", "June", "July", };
+	    					"May", "June", "July", "August",
+	    					"September", "October","November", "December"};
 	    
 	    for (int i=0; i<monthCount+1;i++){
 	    	cal.set(Calendar.MONTH, i);
@@ -52,16 +58,12 @@ public class Admin extends User {
 
 	    	eDate = java.sql.Date.valueOf(format1.format(cal.getTime()));
 		    
-	    	System.out.println("måned: "+i+", start: "+sDate+", slutt: "+eDate);
-		    
 	    	res = QMOrder.calculateIncomeForPeriod(sDate, eDate, database);
 	    	text += "Income in "+mNames[i]+" is: "+res+" kr.\n";
 	    	sum+=res;
 		    
 	    }
-	    
-	    System.out.println("Total: "+ QMOrder.calculateIncomeForPeriod(java.sql.Date.valueOf("2016-01-01"), java.sql.Date.valueOf("2016-04-30"), database));
-	    
+
 	    text+="\nTotal income this year: "+sum+" kr.";
 	    return text;
 	}
@@ -104,6 +106,7 @@ public class Admin extends User {
 		
 		Admin admin = new Admin("Per","Per",database);
 		
+		System.out.println(admin.getStatisticsForYear(2015));
 		System.out.println(admin.getStatisticsForYear(2016));
 	}
 	
