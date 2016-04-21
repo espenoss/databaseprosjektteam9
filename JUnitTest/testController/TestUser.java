@@ -84,7 +84,7 @@ public class TestUser {
 		mealList.add(soup);
 		mealList.add(hamburger);
 		mealList.add(sandwich);
-		
+		 
 
 		// *** CUSTOMER INSERT ***
 		String insert4 = "INSERT INTO customer VALUES(10000, 'Hansen', 'Geir', '73329090', 'geir@hansen.com', 'Nedre Bakklandet 61', 7014, 1, 'Allergisk mot sopp', true);";
