@@ -64,6 +64,7 @@ import databasePackage.*;
 	 		private class IngredientsDatapanel extends JPanel{
 	 			public IngredientsDatapanel(){
 	 				setLayout(new GridLayout(3,2));
+	 				
 	 				try {
 		 				mealList = cook.viewAvailableMeals();
 					} catch (Exception e) {
@@ -107,13 +108,14 @@ import databasePackage.*;
 	 			float my_quantity = editor.stringToFloat(ingredient_quantity);
 			 	myQuantity = my_quantity;
 	 
-	 
 			 	try {
 			 		cook.addIngredientToMeal(mealIndex, ingredientIndex, myQuantity) ;
 			 	}catch (Exception e) {
 			 		System.out.println(e.toString());
 			 	}
+			 	
 			 	return true;
+			 	
 	 		}
 	 	}
 	
