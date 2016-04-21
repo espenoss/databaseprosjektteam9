@@ -61,8 +61,21 @@ class AddMealToSubPlanDialog extends JFrame {
  			public IngredientsDatapanel(){
  				setLayout(new GridLayout(3,2));
  				
- 				
+ 				try {
+ 					SubPlanList = cook.viewAllSubPlans();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				
+				ArrayList<String> my_sub_list = new ArrayList<>();
+				for(SubPlan plan: SubPlanList){
+					my_sub_list.add(plan.getName());
+				}
+				SubPlanSelected = new JComboBox<>(my_sub_list.toArray());
+				
+ 				add(new JLabel("Subscription Plan: ", JLabel.RIGHT));
+ 				add(SubPlanSelected);
+ 			
 				
  				try {
 	 				mealList = cook.viewAvailableMeals();
@@ -77,22 +90,7 @@ class AddMealToSubPlanDialog extends JFrame {
 				mealIdSelected = new JComboBox<>(my_list.toArray());
  				add(new JLabel("Meal Id: ", JLabel.RIGHT));
  				add(mealIdSelected);
- 				
- 				
- 				try {
- 					SubPlanList = cook.viewAllSubPlans();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
-				ArrayList<String> my_sub_list = new ArrayList<>();
-				for(SubPlan plan: SubPlanList){
-					my_sub_list.add(plan.getName());
-				}
-				SubPlanSelected = new JComboBox<>(my_sub_list.toArray());
-				
- 				add(new JLabel("Ingredient Id: ", JLabel.RIGHT));
- 				add(SubPlanSelected);
+ 		
  				
 
 				add(new JLabel("Weekday: ", JLabel.RIGHT));
