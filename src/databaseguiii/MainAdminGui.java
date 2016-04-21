@@ -2,6 +2,9 @@ package databaseguiii;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -10,8 +13,13 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.SpinnerDateModel;
+
 
 import controller.*;
 import databasePackage.Database;
@@ -22,10 +30,10 @@ class MainAdminGui extends JFrame {
 		    {"Register new user","Change user information", "View all users", "Register new customer",
 		    		"Register new company", "Change customer information", "View private customers", 
 		    		"View company customers","Register new food order","Change food order", "Retrieve statistics","View available ingredients", "View available meals", "Register new ingredient", "Register new meal", "Add ingredient to meal",
-		    		"Register subscription plan", "Add meal to sub plan"};
+		    		"Register subscription plan", "Add meal to sub plan", "View food orders"};
 		private JList<String> choice_list = new JList<String>(CHOICES);  
 		Admin admin = null;
-
+		
 		public static final int REGISTER_NEW_USER = 0;
 		public static final int CHANGE_USER_INFO = 1;
 		public static final int VIEW_ALL_USERS = 2;
@@ -44,6 +52,8 @@ class MainAdminGui extends JFrame {
 		public static final int ADD_INGREDIENT_TO_MEAL = 15;
 		public static final int REGISTER_SUB_PLAN = 16;
 		public static final int ADD_MEAL_TO_SUB_PLAN = 17;
+		public static final int VIEW_FOOD_ORDERS = 18;
+		
 
 		
 		
@@ -66,10 +76,16 @@ class MainAdminGui extends JFrame {
 			choice_list.setFont(bigText);
 			setSize(700, 700);
 		}
+		
+
 
 		private class ListeboksLytter implements ListSelectionListener {
 			private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
-		  
+			
+			private SpinnerDateModel dateSelectModel = new SpinnerDateModel();
+			private JSpinner dateSelect = new JSpinner(dateSelectModel);
+			
+			
 			public void valueChanged(ListSelectionEvent hendelse) {
 			  
 			Object[] values = choice_list.getSelectedValuesList().toArray();
@@ -218,9 +234,8 @@ class MainAdminGui extends JFrame {
 	    			new RegisterSubscriptionPlan(new Cook(admin.getUserID(), admin.getName(), database));
 	    		}else if(choices == ADD_MEAL_TO_SUB_PLAN){
 	    			new AddMealToSubPlanDialog (new Cook(admin.getUserID(), admin.getName(), database));
-	    			
-			
+	    		}else if (choices == VIEW_FOOD_ORDERS){
+	    		}
 			}
 		}
-    }
-}
+	}

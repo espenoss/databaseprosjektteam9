@@ -65,15 +65,6 @@ public class Cook extends User {
 		
 	}
 	
-	//M� LAGES!!
-	public boolean registerIngredientDelivery(String orderinfo){
-		boolean success = false;
-		
-		// oppdater database med ny info
-		
-		return success;
-	}
-	
 	// Adds/registers new ingredient to database --- NOT TESTED
 	public Ingredient addNewIngredient(String name, float quantity, String unit, Database database) throws Exception{
 		int ingredientID = QMFood.registerIngredient(name, quantity, unit, database);
