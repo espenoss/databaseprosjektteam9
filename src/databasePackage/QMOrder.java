@@ -1,5 +1,7 @@
 package databasePackage;
 
+import java.util.Arrays;
+
 //QueryMethods for orders and deliveryplan
 
 public class QMOrder {
@@ -310,15 +312,16 @@ public class QMOrder {
 	
 	public static int calculateIncomeForPeriod(java.sql.Date fromDate, java.sql.Date toDate, Database database) throws Exception{
 		String statement = "SELECT SUM(price*quantity) FROM meal NATURAL JOIN ordered_meal "
-				+ "WHERE delivery_date > '" + fromDate + "' "
-				+ "AND delivery_date < '" + toDate + "' "
+				+ "WHERE delivery_date >= '" + fromDate + "' "
+				+ "AND delivery_date <= '" + toDate + "' "
 				+ "AND delivered = true";
 
 		database.makeSingleStatement(statement);
 		
 		String[][] result = database.getLastResult();
-		if(result.length == 0){
-			return -1;			
+		
+		if(result.length == 0 || result[0][0]== null){
+			return 0;			
 		}else{
 			return Integer.parseInt(result[0][0]);			
 		}

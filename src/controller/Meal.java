@@ -60,11 +60,11 @@ public class Meal {
 	//FINISHED (Must be tested)
 	//Fetches ingredient information from database belonging to this meal. 
 	public boolean fetchIngredients(Database database) throws Exception{
+		ingredients = new ArrayList<Ingredient>();
 		TextEditor t = new TextEditor();
 		String[][] ingT = QMFood.viewIngredientsInMeal(mealID, database);
 		
 		if (ingT.length==0){
-			JOptionPane.showMessageDialog(null,"Could not find any available orders.");
 			return false;
 		}
 		
@@ -72,7 +72,7 @@ public class Meal {
 			ingredients.add(new Ingredient(t.stringToInt(ingT[i][0]), ingT[i][1], t.stringToFloat(ingT[i][3]),ingT[i][4]));
 			ingQuantity.add(t.stringToFloat(ingT[i][2]));
 		}
-		
+		 
 		return true;
 	}
 	
