@@ -13,7 +13,10 @@ import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
@@ -21,10 +24,10 @@ import javax.swing.SpinnerDateModel;
 //Metoden registerNewOrder() ligger i Sales.java
 
 class RegisterOrderDialog extends JFrame {
-	private Sales sales = null; 
+	private Admin admin = null; 
 
-	public RegisterOrderDialog(Sales sales) {
-		this.sales = sales;
+	public RegisterOrderDialog(Admin admin) {
+		this.admin = admin;
 		DialogWindow dialog = new DialogWindow(this);
 		dialog.setVisible(true);
 		setTitle("Register new order");
@@ -61,7 +64,7 @@ class RegisterOrderDialog extends JFrame {
 				setLayout(new GridLayout(4,2));
 			
 				try {
-					customerList = sales.viewCustomerList();
+					customerList = user.viewFoodOrders();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -93,12 +96,25 @@ class RegisterOrderDialog extends JFrame {
 			deliveryDateStr = s.format(dateSelect.getValue());
 			info = infoField.getText();
 		
-			try {
-				sales.registerNewOrder(customerID, info, sales.getUserID());
-			}catch (Exception e) {
-				System.out.println(e.toString());
+			ArrayList<Meal> m = null;
+	    	  try {
+	    		  m= admin.viewAvailableMeals();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			return true;
+	    	  String[] s = new String[m.size()];
+		    	 for( int i = 0; i < m.size(); i++ ){
+		    		 Meal meal = m.get(i);
+		    		 s[i] = meal.getMealName()+ "\n";
+		    	 }
+		    	 
+		    	 JScrollPane scrollpane = new JScrollPane(); 
+		         JList list = new JList(s);
+		         scrollpane = new JScrollPane(list);
+		         JPanel panel = new JPanel(); 
+		         panel.add(scrollpane);
+		         scrollpane.getViewport().add(list);		    	 
+		    	 JOptionPane.showMessageDialog(null, scrollpane, "All meals: ", JOptionPane.INFORMATION_MESSAGE );
 		}	
 	}
 }

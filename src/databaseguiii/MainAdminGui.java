@@ -33,11 +33,7 @@ class MainAdminGui extends JFrame {
 		    		"Register subscription plan", "Add meal to sub plan", "View food orders"};
 		private JList<String> choice_list = new JList<String>(CHOICES);  
 		Admin admin = null;
-		private Date date;
-		private String DateStr;
-		private JTextField dateField = new JTextField(10);
-		private String info;
-
+		
 		public static final int REGISTER_NEW_USER = 0;
 		public static final int CHANGE_USER_INFO = 1;
 		public static final int VIEW_ALL_USERS = 2;
@@ -239,9 +235,6 @@ class MainAdminGui extends JFrame {
 	    		}else if(choices == ADD_MEAL_TO_SUB_PLAN){
 	    			new AddMealToSubPlanDialog (new Cook(admin.getUserID(), admin.getName(), database));
 	    		}else if (choices == VIEW_FOOD_ORDERS){
-				SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
-				DateStr = s.format(dateSelect.getValue());
-				info = dateField.getText();
 	    		}
 			}
 		}
