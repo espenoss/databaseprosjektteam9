@@ -1,6 +1,8 @@
 package controller;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import databasePackage.Database;
 import databasePackage.QMFood;
 
@@ -57,14 +59,21 @@ public class Meal {
 	
 	//FINISHED (Must be tested)
 	//Fetches ingredient information from database belonging to this meal. 
-	public void fetchIngredients(Database database) throws Exception{
-		String[][] ingT = QMFood.viewIngredientsInMeal(mealID, database);
+	public boolean fetchIngredients(Database database) throws Exception{
 		TextEditor t = new TextEditor();
+		String[][] ingT = QMFood.viewIngredientsInMeal(mealID, database);
 		
-		for (int i=0;i<ingT.length;i++){
+		if (ingT.length==0){
+			JOptionPane.showMessageDialog(null,"Could not find any available orders.");
+			return false;
+		}
+		
+		for (int i=0; i<ingT.length; i++){
 			ingredients.add(new Ingredient(t.stringToInt(ingT[i][0]), ingT[i][1], t.stringToFloat(ingT[i][3]),ingT[i][4]));
 			ingQuantity.add(t.stringToFloat(ingT[i][2]));
 		}
+		
+		return true;
 	}
 	
 	public boolean updateMealToDatabase(Database database) throws Exception{
