@@ -21,7 +21,7 @@ import controller.*;
 import databasePackage.*;
 
  class AddIngredientsToMealGui extends JFrame {
-	 	//private Database database = new Database ("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
+	 	
 	 	Cook cook = null;
 	 	
 	 	
@@ -119,13 +119,6 @@ import databasePackage.*;
 	 		}
 	 	}
 	
-	 	public static void main(String[] args){
-	 		String username = "espenme";
-	 		String passingword = "16Sossosem06";
-	 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
-	 		Database database = new Database("com.mysql.jdbc.Driver", databasename);
-			new AddIngredientsToMealGui(new Cook("","", database));
-	 	}
  }  
 		
 		  
