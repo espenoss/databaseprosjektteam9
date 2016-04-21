@@ -70,21 +70,32 @@ public class Order {
 	//Marks meal as delivered to customer, given index of meal in mealArray
 	public boolean markMealAsDelivered(int index, Database database) throws Exception{
 		return meals.get(index).markMealAsDelivered(database);
-	}	
+	}
+	
+	public void markAllMealsAsReadyByDate(java.sql.Date date, Database database) throws Exception{
+		ArrayList<MealOrdered> meals = viewMealsInOrderByDate(date, database);
+		int count = 0;
+		boolean ok;
+		
+		for (int i=0; i<meals.size();i++){
+			ok = meals.get(i).markMealAsReady(database);
+			if (ok){
+		}
+	}
+	
+	
 	
 	//Register information to databasee
 	public boolean uploadOrder(Database database) throws Exception{
 		return QMOrder.updateOrder(orderID, orderDate, customerID, info, userID, database);
 	}
 	
+	//Makes an arrayList of all meals in an order that has a spesific delivery date. 
 	public ArrayList<MealOrdered> viewMealsInOrderByDate(java.sql.Date date, Database database) throws Exception{
 		fetchMealsInOrder(database);
 		ArrayList<MealOrdered> tempMeals = new ArrayList<MealOrdered>();
 		
 		for (int i=0; i<meals.size();i++){
-			System.out.println("Input dato: "+date);
-			System.out.println("Obj dato: "+meals.get(i).getDeliverydate());
-			
 			if (meals.get(i).getDeliverydate().equals(date)){
 				tempMeals.add(meals.get(i));
 			}
