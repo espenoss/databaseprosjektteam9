@@ -33,7 +33,8 @@ class AddMealToSubPlanDialog extends JFrame {
  		
 
 		private final String days_of_week[] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"}; 
-		private JComboBox<String> dayList = new JComboBox<String>(days_of_week);	
+		
+		private JComboBox dayList = new JComboBox(days_of_week);	
 		
  		private ArrayList<SubPlan> SubPlanList = new ArrayList<SubPlan>();
  		private JComboBox SubPlanSelected;
@@ -42,9 +43,9 @@ class AddMealToSubPlanDialog extends JFrame {
  		private JComboBox mealIdSelected;
  		
  		
- 		int my_day;
- 		int my_meal;
- 		int my_sub_plan;
+ 		private int my_day;
+ 		private int my_meal;
+ 		private int my_sub_plan;
 	 
 		
 	 
@@ -60,7 +61,9 @@ class AddMealToSubPlanDialog extends JFrame {
  			public IngredientsDatapanel(){
  				setLayout(new GridLayout(3,2));
  				
- 				  
+ 				
+				
+				
  				try {
 	 				mealList = cook.viewAvailableMeals();
 				} catch (Exception e) {
@@ -102,10 +105,11 @@ class AddMealToSubPlanDialog extends JFrame {
  		public boolean okData(){
  			my_meal = mealIdSelected.getSelectedIndex();
  			my_sub_plan =SubPlanSelected.getSelectedIndex();
- 			my_day = dayList.getSelectedIndex();
+ 			my_day = dayList.getSelectedIndex()+1;
+ 			
  
 		 	try {
-		 		cook.addMealToSubPlan(my_sub_plan, my_meal, weekdayNr)
+		 		cook.addMealToSubPlan(my_sub_plan, my_meal, my_day);
 		 	}catch (Exception e) {
 		 		System.out.println(e.toString());
 		 	}
