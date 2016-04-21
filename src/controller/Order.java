@@ -63,13 +63,13 @@ public class Order {
 	}
 	
 	//Marks meal as ready for delivery to customer, given index of meal in mealArray
-	public boolean markMealAsReady(int index, String deliveryDate, Database database) throws Exception{
-		return QMOrder.markMealOrderAsReadyForDelivery(orderID, meals.get(index).getMealID(), deliveryDate, database);
+	public boolean markMealAsReadyByIndex(int index, Database database) throws Exception{
+		return meals.get(index).markMealAsReady(database);
 	}
 	
 	//Marks meal as delivered to customer, given index of meal in mealArray
-	public boolean markMealAsDelivered(int index, String deliveryDate, Database database) throws Exception{
-		return QMOrder.markMealOrderAsDelivered(orderID, meals.get(index).getMealID(), deliveryDate, database);
+	public boolean markMealAsDelivered(int index, Database database) throws Exception{
+		return meals.get(index).markMealAsDelivered(database);
 	}	
 	
 	//Register information to databasee
