@@ -9,7 +9,7 @@ import databasePackage.Database;
 
 class MainCookGui extends JFrame {
 	private static final String [] CHOICES =
-		{"View food orders","Mark order as ready for delivery","Create new meal","View menu ingredients"};
+		{"View food orders","Mark order as ready for delivery","Create new meal", "View menu ingredients"};
 	private JList<String> choice_list = new JList<String>(CHOICES);
 	Cook cook = null;
 

@@ -36,6 +36,7 @@ public class QMOrder {
 			String userID, Database database) throws Exception{
 		
 		String statement = "UPDATE food_order SET "
+				+ "order_date = '" + orderDate + "', "
 				+ "customer_id = " + customerID + ", "
 				+ "info = " + aq(info)
 				+ "user_id = '" + userID + "'"

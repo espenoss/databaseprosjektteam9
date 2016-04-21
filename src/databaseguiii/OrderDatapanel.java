@@ -1,13 +1,10 @@
 package databaseguiii;
 
-import controller.*;
-import databasePackage.Database;
-import java.awt.*;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JComboBox;
@@ -21,7 +18,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 
-//Metoden registerNewOrder() ligger i Sales.java
+import controller.*;
 
 class RegisterOrderDialog extends JFrame {
 	private Admin admin = null; 
@@ -30,7 +27,7 @@ class RegisterOrderDialog extends JFrame {
 		this.admin = admin;
 		DialogWindow dialog = new DialogWindow(this);
 		dialog.setVisible(true);
-		setTitle("Register new order");
+		setTitle("View food orders");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
 		setLocation(300, 300); 
@@ -39,20 +36,18 @@ class RegisterOrderDialog extends JFrame {
 
 	//int customerID, String deliveryDate, String info, String userID, Database database
 	private class DialogWindow extends MyDialog{
-		private TextEditor editor = new TextEditor();
-		private ArrayList<Customer> customerList = new ArrayList<>();
-		private JComboBox customerSelect;
 		private SpinnerDateModel dateSelectModel = new SpinnerDateModel();
 		private JSpinner dateSelect = new JSpinner(dateSelectModel);
 		private JTextField delivery_dateField = new JTextField(10);
 		private JTextField infoField = new JTextField(10);
-		private int customerID;
-		private String deliveryDateStr;
-		private Date deliveryDate;
+		
+		private String DateStr;
+		private JTextField dateField = new JTextField(10);
 		private String info;
+		private Date date;
 		
 		public DialogWindow(JFrame parent){
-			super(parent, "New order");
+			super(parent, "View orders");
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new OrderDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
@@ -61,51 +56,26 @@ class RegisterOrderDialog extends JFrame {
 	
 		private class OrderDatapanel extends JPanel{
 			public OrderDatapanel(){
-				setLayout(new GridLayout(4,2));
-			
-				try {
-					customerList = user.viewFoodOrders();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				setLayout(new GridLayout(1,2));
 				
-				ArrayList<String> nameList = new ArrayList<>();
-				for(Customer c: customerList){
-					nameList.add(c.getCustomerID() + " " + c.getFirstName() + " " + c.getSurName());
-				}
-				customerSelect = new JComboBox<>(nameList.toArray());
-				
-				add(new JLabel("Customer: ", JLabel.RIGHT));
-				add(customerSelect);
-			
-				add(new JLabel("Delivery date: ", JLabel.RIGHT));
+				add(new JLabel("Date: ", JLabel.RIGHT));
 				add(dateSelect);
 			
-				add(new JLabel("Information about the order: ", JLabel.RIGHT));
-				add(infoField);
-			
+				}
 			}
-		}
-
-		public boolean okData(){
-
-			int customerIndex = customerSelect.getSelectedIndex();
-			customerID = customerList.get(customerIndex).getCustomerID();
-			
-			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
-			deliveryDateStr = s.format(dateSelect.getValue());
-			info = infoField.getText();
 		
-			ArrayList<Meal> m = null;
+		public boolean okData(){
+			ArrayList<Order> order = null;
+			
 	    	  try {
-	    		  m= admin.viewAvailableMeals();
+	    		  order = admin.viewFoodOrders(); 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	    	  String[] s = new String[m.size()];
-		    	 for( int i = 0; i < m.size(); i++ ){
-		    		 Meal meal = m.get(i);
-		    		 s[i] = meal.getMealName()+ "\n";
+	    	  String[] s = new String[order.size()];
+		    	 for( int i = 0; i < order.size(); i++ ){
+		    		 Ingredient ingredient = order.get(i);
+		    		 s[i] = ingredient.ingName+ "\n";
 		    	 }
 		    	 
 		    	 JScrollPane scrollpane = new JScrollPane(); 
@@ -114,7 +84,8 @@ class RegisterOrderDialog extends JFrame {
 		         JPanel panel = new JPanel(); 
 		         panel.add(scrollpane);
 		         scrollpane.getViewport().add(list);		    	 
-		    	 JOptionPane.showMessageDialog(null, scrollpane, "All meals: ", JOptionPane.INFORMATION_MESSAGE );
-		}	
+		    	 JOptionPane.showMessageDialog(null, scrollpane, "All ingredients: ", JOptionPane.INFORMATION_MESSAGE );
+	    	
+		}
+		}
 	}
-}
