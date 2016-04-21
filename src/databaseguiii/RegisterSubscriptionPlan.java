@@ -52,7 +52,7 @@ class RegisterSubscriptionPlan extends JFrame {
 				setLayout(new GridLayout(1,2));
 			
 			
-				add(new JLabel("Information about the order: ", JLabel.RIGHT));
+				add(new JLabel("Name of the supscription plan: ", JLabel.RIGHT));
 				add(sub_plan_nameField);
 			
 			}
