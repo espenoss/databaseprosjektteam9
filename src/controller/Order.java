@@ -1,11 +1,9 @@
 package controller;
 
 import java.sql.Date;
-
 import java.util.ArrayList;
 import databasePackage.*;
 
-// import java.sql.Date;
 
 public class Order {
 	private int orderID;
