@@ -57,6 +57,8 @@ public class TestUser {
 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
 		database = new Database("com.mysql.jdbc.Driver", databasename);
 		database.initiateDb();
+		
+		System.out.println("Total number of tests: 7");
 	
 	
 		
@@ -139,17 +141,17 @@ public class TestUser {
 		
 		// *** ORDER/FOOD_ORDER INSERT ***
 		String insert14 = "INSERT INTO food_order VALUES(1, '2016-03-03', 10001, NULL, 'bob');";
-		String insert15 = "INSERT INTO food_order VALUES(2, '2016-04-03', 10002, NULL, 'bob')";
+		String insert15 = "INSERT INTO food_order VALUES(2, '2016-03-03', 10002, NULL, 'bob')";
 		database.makeSingleStatement(insert14);
 		database.makeSingleStatement(insert15);
 		
 		String insert16 = "INSERT INTO ordered_meal VALUES(1, 1, '2016-03-03', 2, 0, 0);";
-		String insert17 = "INSERT INTO ordered_meal VALUES(2, 2, '2016-04-03', 1, 0, 0);";
+		String insert17 = "INSERT INTO ordered_meal VALUES(2, 2, '2016-03-03', 1, 0, 0);";
 		database.makeSingleStatement(insert16);
 		database.makeSingleStatement(insert17);
 		
 		order1 = new Order(1, "2016-03-03", 10001, null, "bob");
-		order2 = new Order(2, "2016-04-03", 10002, null, "bob");
+		order2 = new Order(2, "2016-03-03", 10002, null, "bob");
 		
 		orderList.add(order1);
 		orderList.add(order2);
@@ -166,6 +168,7 @@ public class TestUser {
 		
 		subPlanList.add(subPlan1);
 		subPlanList.add(subPlan2);
+		
 	}
 
 	@Before
@@ -175,7 +178,7 @@ public class TestUser {
 	
 	@Test
 	public void testViewAvailableMeals() throws Exception {
-		System.out.println("Test: View available meals");
+		System.out.println("Test 1: View available meals");
 
 		Meal res0 = user.viewAvailableMeals().get(0);
 		Meal expRes0 = mealList.get(0);
@@ -193,7 +196,7 @@ public class TestUser {
 	
 	@Test
 	public void testViewCustomerList() throws Exception{
-		System.out.println("Test: View customer list");
+		System.out.println("Test 2: View customer list");
 	
 		Customer res0 = user.viewCustomerList().get(0);
 		Customer expRes0 = customerList.get(0);
@@ -211,7 +214,7 @@ public class TestUser {
 	
 	@Test
 	public void testViewCompanyList() throws Exception{
-		System.out.println("Test: View company list");
+		System.out.println("Test 3: View company list");
 		
 		Customer res0 = user.viewCompanyList().get(0);
 		Customer expRes0 = companyList.get(0);
@@ -225,7 +228,7 @@ public class TestUser {
 	
 	@Test
 	public void testViewSingleCustomer() throws Exception{
-		System.out.println("Test: view single customer");
+		System.out.println("Test 4: view single customer");
 		
 		int id1 = 10001; // jensine
 		int id2 = 10002; // lise
@@ -247,7 +250,7 @@ public class TestUser {
 	
 	@Test
 	public void testViewIngredients() throws Exception{
-		System.out.println("Test: View ingredients");
+		System.out.println("Test 5: View ingredients");
 		
 		Ingredient res0 = user.viewIngredients().get(0);
 		Ingredient expRes0 = ingredientList.get(0);
@@ -264,14 +267,14 @@ public class TestUser {
 	}
 	@Test
 	public void testViewFoodOrders() throws Exception {
-		System.out.println("Test: View Food orders");
+		System.out.println("Test 6: View Food orders");
 		Date date0 = java.sql.Date.valueOf("2016-03-03");
-		Date date1 = java.sql.Date.valueOf("2016-04-03");
+		Date date1 = java.sql.Date.valueOf("2016-03-03");
 		
 		boolean res0 = user.viewFoodOrders(date0).get(0).equals(orderList.get(0));
 		boolean expRes0 = true;
 		assertEquals(res0, expRes0);
-		
+	 	
 		boolean res1 = user.viewFoodOrders(date1).get(1).equals(orderList.get(1));
 		boolean expRes1 = true;
 		assertEquals(res1, expRes1);
@@ -280,7 +283,7 @@ public class TestUser {
 	
 	@Test
 	public void testViewAllSubPlans() throws Exception{
-		System.out.println("Test: View all subscrition plans");
+		System.out.println("Test 7: View all subscrition plans");
 		
 		SubPlan res0 = user.viewAllSubPlans().get(0);
 		SubPlan expRes0 = subPlanList.get(0);
@@ -289,8 +292,7 @@ public class TestUser {
 		boolean res1 = user.viewAllSubPlans().get(1).equals(subPlanList.get(1));
 		boolean expRes1 = true;
 		assertEquals(res1, expRes1);
-		
-//	ArrayList<SubPlan> viewAllSubPlans()
+
 	}	
 
 }

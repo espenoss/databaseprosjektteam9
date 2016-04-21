@@ -41,7 +41,7 @@ public class User implements java.io.Serializable{
 		this.userType = userType;
 	}
 	
-	//FINISHED 
+	//FINISHED, is tested
 	//View all orders that has meals with deliverydate on the given date
 	//Returns arraylist with orders that contains all meals in order
 	public ArrayList<Order> viewFoodOrders(java.sql.Date date) throws Exception{
