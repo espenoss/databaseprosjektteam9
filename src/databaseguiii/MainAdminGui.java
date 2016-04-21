@@ -215,7 +215,7 @@ class MainAdminGui extends JFrame {
 	    		}else if (choices == ADD_INGREDIENT_TO_MEAL){
 	    			new AddIngredientsToMealGui(new Cook(admin.getUserID(), admin.getName(), database));
 	    		}else if(choices == REGISTER_SUB_PLAN){
-	    			new RegisterSubscriptionPlanDialog(new Cook(admin.getUserID(), admin.getName(), database));
+	    			new RegisterSubscriptionPlan(new Cook(admin.getUserID(), admin.getName(), database));
 	    		}else if(choices == ADD_MEAL_TO_SUB_PLAN){
 	    			new AddMealToSubPlanDialog (new Cook(admin.getUserID(), admin.getName(), database));
 	    			
@@ -223,3 +223,4 @@ class MainAdminGui extends JFrame {
 			}
 		}
     }
+}
