@@ -2,9 +2,8 @@ package databaseguiii;
 
 import controller.*;
 import databasePackage.Database;
+
 import java.awt.*;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,13 +20,11 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 
-//Metoden registerNewOrder() ligger i Sales.java
-
 class RegisterOrderDialog extends JFrame {
-	private Admin admin = null; 
+	private Sales sales = null; 
 
-	public RegisterOrderDialog(Admin admin) {
-		this.admin = admin;
+	public RegisterOrderDialog(Sales sales) {
+		this.sales = sales;
 		DialogWindow dialog = new DialogWindow(this);
 		dialog.setVisible(true);
 		setTitle("Register new order");
@@ -37,7 +34,7 @@ class RegisterOrderDialog extends JFrame {
 		dialog.setLocation(350, 350);  
 	}
 
-	//int customerID, String deliveryDate, String info, String userID, Database database
+//int customerID, String deliveryDate, String info, String userID, Database database
 	private class DialogWindow extends MyDialog{
 		private TextEditor editor = new TextEditor();
 		private ArrayList<Customer> customerList = new ArrayList<>();
@@ -64,7 +61,7 @@ class RegisterOrderDialog extends JFrame {
 				setLayout(new GridLayout(4,2));
 			
 				try {
-					customerList = user.viewFoodOrders();
+					customerList = sales.viewCustomerList();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -96,25 +93,12 @@ class RegisterOrderDialog extends JFrame {
 			deliveryDateStr = s.format(dateSelect.getValue());
 			info = infoField.getText();
 		
-			ArrayList<Meal> m = null;
-	    	  try {
-	    		  m= admin.viewAvailableMeals();
-			} catch (Exception e) {
-				e.printStackTrace();
+			try {
+				sales.registerNewOrder(customerID, info, sales.getUserID());
+			}catch (Exception e) {
+				System.out.println(e.toString());
 			}
-	    	  String[] s = new String[m.size()];
-		    	 for( int i = 0; i < m.size(); i++ ){
-		    		 Meal meal = m.get(i);
-		    		 s[i] = meal.getMealName()+ "\n";
-		    	 }
-		    	 
-		    	 JScrollPane scrollpane = new JScrollPane(); 
-		         JList list = new JList(s);
-		         scrollpane = new JScrollPane(list);
-		         JPanel panel = new JPanel(); 
-		         panel.add(scrollpane);
-		         scrollpane.getViewport().add(list);		    	 
-		    	 JOptionPane.showMessageDialog(null, scrollpane, "All meals: ", JOptionPane.INFORMATION_MESSAGE );
+			return true;
 		}	
 	}
 }
