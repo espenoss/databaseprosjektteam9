@@ -2,6 +2,8 @@ package databasePackage;
 
 
 //All query methods related to customers, companies and zones
+// MÅ TESTE REGISTER ZONE!
+
 
 public class QMCustomer {
 	
@@ -189,7 +191,8 @@ public class QMCustomer {
 		
 		return database.getLastResult();
 	}
-
+	
+	// MÅ TESTES
 	public static int registerZone(String zoneName, Database database) throws Exception{
 		
 		for(int i=0; i<5; i++){

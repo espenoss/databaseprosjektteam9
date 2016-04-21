@@ -63,28 +63,42 @@ public class Order {
 	}
 	
 	//Marks meal as ready for delivery to customer, given index of meal in mealArray
-	public boolean markMealAsReady(int index, String deliveryDate, Database database) throws Exception{
-		return QMOrder.markMealOrderAsReadyForDelivery(orderID, meals.get(index).getMealID(), deliveryDate, database);
+	public boolean markMealAsReadyByIndex(int index, Database database) throws Exception{
+		return meals.get(index).markMealAsReady(database);
 	}
 	
 	//Marks meal as delivered to customer, given index of meal in mealArray
-	public boolean markMealAsDelivered(int index, String deliveryDate, Database database) throws Exception{
-		return QMOrder.markMealOrderAsDelivered(orderID, meals.get(index).getMealID(), deliveryDate, database);
-	}	
+	public boolean markMealAsDelivered(int index, Database database) throws Exception{
+		return meals.get(index).markMealAsDelivered(database);
+	}
+	
+	//Marks all meals in order with given deliverydate as ready for delivery, returns count for 
+	public int markAllMealsAsReadyByDate(java.sql.Date date, Database database) throws Exception{
+		ArrayList<MealOrdered> meals = viewMealsInOrderByDate(date, database);
+		int count = 0;
+		boolean ok;
+		
+		for (int i=0; i<meals.size();i++){
+			ok = meals.get(i).markMealAsReady(database);
+			if (ok){count++;}
+		}
+		
+		return count;
+	}
+	
+	
 	
 	//Register information to databasee
 	public boolean uploadOrder(Database database) throws Exception{
 		return QMOrder.updateOrder(orderID, orderDate, customerID, info, userID, database);
 	}
 	
+	//Makes an arrayList of all meals in an order that has a spesific delivery date. 
 	public ArrayList<MealOrdered> viewMealsInOrderByDate(java.sql.Date date, Database database) throws Exception{
 		fetchMealsInOrder(database);
 		ArrayList<MealOrdered> tempMeals = new ArrayList<MealOrdered>();
 		
 		for (int i=0; i<meals.size();i++){
-			System.out.println("Input dato: "+date);
-			System.out.println("Obj dato: "+meals.get(i).getDeliverydate());
-			
 			if (meals.get(i).getDeliverydate().equals(date)){
 				tempMeals.add(meals.get(i));
 			}
@@ -156,6 +170,33 @@ public class Order {
 		System.out.println(test.viewMealsInOrderByDate(dato, database));
 		//System.out.println(test);
 		
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Order other = (Order) obj;
+		if (customerID != other.customerID)
+			return false;
+		if (orderDate == null) {
+			if (other.orderDate != null)
+				return false;
+		} else if (!orderDate.equals(other.orderDate))
+			return false;
+		if (orderID != other.orderID)
+			return false;
+		if (userID == null) {
+			if (other.userID != null)
+				return false;
+		} else if (!userID.equals(other.userID))
+			return false;
+		return true;
 	}
 	
 }

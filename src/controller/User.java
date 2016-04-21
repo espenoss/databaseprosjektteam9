@@ -41,17 +41,19 @@ public class User implements java.io.Serializable{
 		this.userType = userType;
 	}
 	
-	//FINISHED
+	//FINISHED, is tested
+	//View all orders that has meals with deliverydate on the given date
+	//Returns arraylist with orders that contains all meals in order
 	public ArrayList<Order> viewFoodOrders(java.sql.Date date) throws Exception{
 		
 		String[][] orderT = QMOrder.viewOrdersByDeliveryDate(date, database);
-		Order tempOrder;
-		ArrayList<Order> orderList = new ArrayList<Order>();
-		TextEditor t = new TextEditor();
-	
 		if (orderT.length==0){
+			JOptionPane.showMessageDialog(null,"Could not find anything for the date "+date);
 			return null;
 		}
+		
+		Order tempOrder;
+		ArrayList<Order> orderList = new ArrayList<Order>();
 		
 		for(int i=0; i<orderT.length;i++){
 			tempOrder = new Order(t.stringToInt(orderT[i][0]), 	orderT[i][1], t.stringToInt(orderT[i][2]),  orderT[i][3], orderT[i][4]);
@@ -64,14 +66,18 @@ public class User implements java.io.Serializable{
 	}
 	
 	//FINISHED NOT TESTED 
-	//returns an arraylist with all available meals
+	//Returns an arraylist with all available meals
 	public ArrayList<Meal> viewAvailableMeals() throws Exception{
 		String[][] mealT = QMFood.viewMeals(database);
+		
+		if (mealT.length==0){
+			JOptionPane.showMessageDialog(null,"Could not find any available orders.");
+			return null;
+		}
+		
 		Meal tempMeal; 
-		
 		ArrayList<Meal> mealList = new ArrayList<Meal>();
-		
-		
+				
 		for (int i=0; i<mealT.length; i++){
 			if (t.stringToInt(mealT[i][3])>0){
 				tempMeal = new Meal(t.stringToInt(mealT[i][0]), mealT[i][1], mealT[i][2], true, t.stringToInt(mealT[i][4]));
@@ -88,6 +94,11 @@ public class User implements java.io.Serializable{
 	public ArrayList<Customer> viewCustomerList() throws Exception{
 		
 		String[][] list = QMCustomer.viewAllCustomers(database);
+		if (list.length==0){
+			JOptionPane.showMessageDialog(null,"Could not find any customers.");
+			return null;
+		}
+		
 		Customer tempCustomer;
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
 		
@@ -107,6 +118,11 @@ public class User implements java.io.Serializable{
 	public ArrayList<Customer> viewCompanyList() throws Exception{
 		
 		String[][] list = QMCustomer.viewAllCompanies(database);
+		if (list.length==0){
+			JOptionPane.showMessageDialog(null,"Could not find any companies.");
+			return null;
+		}
+		
 		Customer tempCompany;
 		ArrayList<Customer> companyList = new ArrayList<Customer>();
 		
@@ -144,11 +160,16 @@ public class User implements java.io.Serializable{
 		return null;
 	}
 	
-	//FINISHED --- Må testes
+	//FINISHED --- Mï¿½ testes
 	public ArrayList<Ingredient> viewIngredients() throws Exception{
 		String[][] ingT = QMFood.viewIngredients(database);
-		Ingredient tempIng; 
+		if (ingT.length==0){
+			JOptionPane.showMessageDialog(null,"Could not find any ingredients.");
+			return null;
+		}
 		
+		
+		Ingredient tempIng; 
 		ArrayList<Ingredient> ingList = new ArrayList<Ingredient>();
 		
 		for (int i=0; i<ingT.length; i++){
@@ -157,26 +178,18 @@ public class User implements java.io.Serializable{
 		}
 		return ingList;
 	}
-
-	//Lists orderIngredients as String
-	public String viewOrderIngredients() throws Exception{
-		String res = "";
-			String[][] temp = QMFood.viewIngredients(database);
-			for (int i = 0; i < temp.length; i++){
-				res += temp[i];
-			}
-			return res;
-	}
 	
-	// FINISHED må testes
+	// FINISHED
 	public ArrayList<SubPlan> viewAllSubPlans() throws Exception{
 		String[][] subT = QMFood.viewSubscriptionPlans(database);
+		
+		if (subT.length==0){
+			JOptionPane.showMessageDialog(null,"Could not find any subscription plans.");
+			return null;
+		}
+		
 		SubPlan tempSub; 
-		
 		ArrayList<SubPlan> subList = new ArrayList<SubPlan>();
-		
-		System.out.println("tabell lengde: "+subT.length);
-		System.out.println("tabell lengde2: "+subT[0].length);
 		
 		for (int i=0; i<subT.length; i++){
 			tempSub = new SubPlan(t.stringToInt(subT[i][0]), subT[i][1]);

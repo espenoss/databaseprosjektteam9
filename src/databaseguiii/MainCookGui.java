@@ -21,7 +21,7 @@ class MainCookGui extends JFrame {
 		JLabel ledetekst = new JLabel("Choose one of the following options.");
 		add(ledetekst, BorderLayout.NORTH);
 
-    /* Legger paa rullefelt */
+		/* Legger paa rullefelt */
 		JScrollPane rullefeltMedListe = new JScrollPane(choice_list);
 		add(rullefeltMedListe, BorderLayout.CENTER);
 
@@ -30,7 +30,7 @@ class MainCookGui extends JFrame {
     	pack();
 	}
 
-  /* Lytteren fanger opp alle klikk paa linjer i listeboksen */
+	/* Lytteren fanger opp alle klikk paa linjer i listeboksen */
 	private class ListeboksLytter implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent hendelse) {
 			int choices = choice_list.getSelectedIndex();

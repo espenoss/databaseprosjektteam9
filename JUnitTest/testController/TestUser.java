@@ -45,6 +45,10 @@ public class TestUser {
 	private static Order order1;
 	private static Order order2;
 	
+	private static ArrayList<SubPlan> subPlanList = new ArrayList<SubPlan>();
+	private static SubPlan subPlan1;
+	private static SubPlan subPlan2;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		String username = "anitakau";
@@ -53,7 +57,18 @@ public class TestUser {
 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
 		database = new Database("com.mysql.jdbc.Driver", databasename);
 		database.initiateDb();
+		
+		System.out.println("Total number of tests: 7");
 	
+	
+		
+		// *** USER ***
+		String userInsert = "INSERT INTO user VALUES('bob', 2, 'Bob Smidt', '1234');";
+		user = new User("bob", 2, "Bob Smidt", database);
+		database.makeSingleStatement(userInsert);
+		
+		
+		// *** MEAL INSERT ***
 		String insert1 = "INSERT INTO meal VALUES(1, 'soup', 'none', true, 90)";
 		String insert2 = "INSERT INTO meal VALUES(2, 'hamburger', 'none', true, 100)";
 		String insert3 = "INSERT INTO meal VALUES(3, 'sandwich', 'none', true, 50)";
@@ -62,12 +77,6 @@ public class TestUser {
 		database.makeSingleStatement(insert2);
 		database.makeSingleStatement(insert3);
 		
-		// USER
-		String userInsert = "INSERT INTO user VALUES('bob', 2, 'Bob Smidt', '1234');";
-		user = new User("bob", 2, "Bob Smidt", database);
-		database.makeSingleStatement(userInsert);
-		
-		// MEAL INSERT
 		soup = new Meal(1, "soup","none", true, 90);
 		hamburger = new Meal(2, "hamburger", "none", true, 100);
 		sandwich = new Meal(3, "sandwich", "none", true, 50);
@@ -75,9 +84,9 @@ public class TestUser {
 		mealList.add(soup);
 		mealList.add(hamburger);
 		mealList.add(sandwich);
-		
+		 
 
-		// CUSTOMER INSERT
+		// *** CUSTOMER INSERT ***
 		String insert4 = "INSERT INTO customer VALUES(10000, 'Hansen', 'Geir', '73329090', 'geir@hansen.com', 'Nedre Bakklandet 61', 7014, 1, 'Allergisk mot sopp', true);";
 		String insert5 = "INSERT INTO customer VALUES(10001, 'Tvedt', 'Jensine', '73254090', 'jensinetvedt@mail.com', 'Byåsvegen 64', 7021, 5, NULL, true);";
 		String insert6 = "INSERT INTO customer VALUES(10002, 'Andersen', 'Lise Carina', '93081295', 'lise@andersen.com', 'Moltmyra 111', 7091, 4, 'Liker ikke skalldyr', true);";
@@ -94,7 +103,8 @@ public class TestUser {
 		customerList.add(jensine);
 		customerList.add(lise);
 		
-		// COMPANY INSERT
+		
+		// *** COMPANY INSERT ***
 		String insert7 = "INSERT INTO customer VALUES(10004, 'Gjertsen', 'Laila', '22123456', 'skatteetaten@trondheim.no', 'Erling Skakkes gate 50', 7012, 1, NULL, true);";
 		String insert8 = "INSERT INTO company VALUES(10004, 'Skatteetaten');";
 		String insert9 = "INSERT INTO customer VALUES(10005, 'Smith', 'Gordon', '20203030', 'deloitte@trondheim.no', 'Dyre Halses gate 1A', 7042, 1, NULL, true);";
@@ -111,7 +121,8 @@ public class TestUser {
 		companyList.add(skatteetaten);
 		companyList.add(deloitte);
 		
-		// INGREDIENTS INSERT
+		
+		// *** INGREDIENTS INSERT ***
 		String insert11 = "INSERT INTO ingredient VALUES(1, 'potato', 50, 'kg')";
 		String insert12 = "INSERT INTO ingredient VALUES(2, 'carrot', 30, 'kg')";
 		String insert13 = "INSERT INTO ingredient VALUES(3, 'cheese', 10, 'kg')";
@@ -127,23 +138,37 @@ public class TestUser {
 		ingredientList.add(carrot);
 		ingredientList.add(cheese);
 		
-		// ORDER/FOOD_ORDER INSERT
+		
+		// *** ORDER/FOOD_ORDER INSERT ***
 		String insert14 = "INSERT INTO food_order VALUES(1, '2016-03-03', 10001, NULL, 'bob');";
-		String insert15 = "INSERT INTO food_order VALUES(2, '2016-04-03', 10002, NULL, 'bob')";
+		String insert15 = "INSERT INTO food_order VALUES(2, '2016-03-03', 10002, NULL, 'bob')";
 		database.makeSingleStatement(insert14);
 		database.makeSingleStatement(insert15);
 		
 		String insert16 = "INSERT INTO ordered_meal VALUES(1, 1, '2016-03-03', 2, 0, 0);";
-		String insert17 = "INSERT INTO ordered_meal VALUES(2, 2, '2016-04-03', 1, 0, 0);";
+		String insert17 = "INSERT INTO ordered_meal VALUES(2, 2, '2016-03-03', 1, 0, 0);";
 		database.makeSingleStatement(insert16);
 		database.makeSingleStatement(insert17);
 		
 		order1 = new Order(1, "2016-03-03", 10001, null, "bob");
-		order2 = new Order(2, "2016-04-03", 10002, null, "bob");
+		order2 = new Order(2, "2016-03-03", 10002, null, "bob");
 		
 		orderList.add(order1);
 		orderList.add(order2);
-
+		
+		
+		// *** SUBPLAN INSERT ***
+		String insert18 = "INSERT INTO subscription_plan VALUES(1, 'Lunch plan');";
+		String insert19 = "INSERT INTO subscription_plan VALUES(2, 'Dinner plan');";
+		database.makeSingleStatement(insert18);
+		database.makeSingleStatement(insert19);
+		
+		subPlan1 = new SubPlan(1, "Lunch plan");
+		subPlan2 = new SubPlan(2, "Dinner plan");
+		
+		subPlanList.add(subPlan1);
+		subPlanList.add(subPlan2);
+		
 	}
 
 	@Before
@@ -153,7 +178,7 @@ public class TestUser {
 	
 	@Test
 	public void testViewAvailableMeals() throws Exception {
-		System.out.println("Test: View available meals");
+		System.out.println("Test 1: View available meals");
 
 		Meal res0 = user.viewAvailableMeals().get(0);
 		Meal expRes0 = mealList.get(0);
@@ -171,7 +196,7 @@ public class TestUser {
 	
 	@Test
 	public void testViewCustomerList() throws Exception{
-		System.out.println("Test: View customer list");
+		System.out.println("Test 2: View customer list");
 	
 		Customer res0 = user.viewCustomerList().get(0);
 		Customer expRes0 = customerList.get(0);
@@ -189,7 +214,7 @@ public class TestUser {
 	
 	@Test
 	public void testViewCompanyList() throws Exception{
-		System.out.println("Test: View company list");
+		System.out.println("Test 3: View company list");
 		
 		Customer res0 = user.viewCompanyList().get(0);
 		Customer expRes0 = companyList.get(0);
@@ -203,10 +228,11 @@ public class TestUser {
 	
 	@Test
 	public void testViewSingleCustomer() throws Exception{
-		System.out.println("Test: view single customer");
+		System.out.println("Test 4: view single customer");
 		
 		int id1 = 10001; // jensine
 		int id2 = 10002; // lise
+		int id3 = 19921; // no one
 		
 		Customer res1 = user.viewSingleCustomer(id1);
 		Customer expRes1 = jensine;
@@ -216,11 +242,15 @@ public class TestUser {
 		Customer expRes2 = lise;
 		assertEquals(res2, expRes2);
 		
+		Customer res3 = user.viewSingleCustomer(id3);
+		Customer expRes3 = null;
+		assertEquals(res3,expRes3);
+		
 	}
 	
 	@Test
 	public void testViewIngredients() throws Exception{
-		System.out.println("Test: View ingredients");
+		System.out.println("Test 5: View ingredients");
 		
 		Ingredient res0 = user.viewIngredients().get(0);
 		Ingredient expRes0 = ingredientList.get(0);
@@ -237,29 +267,32 @@ public class TestUser {
 	}
 	@Test
 	public void testViewFoodOrders() throws Exception {
-		System.out.println("Test: View Food orders");
+		System.out.println("Test 6: View Food orders");
 		Date date0 = java.sql.Date.valueOf("2016-03-03");
-		Date date1 = java.sql.Date.valueOf("2016-04-03");
+		Date date1 = java.sql.Date.valueOf("2016-03-03");
 		
-		Order res0 = user.viewFoodOrders(date0).get(0);
-		Order expRes0 = orderList.get(0);
+		boolean res0 = user.viewFoodOrders(date0).get(0).equals(orderList.get(0));
+		boolean expRes0 = true;
+		assertEquals(res0, expRes0);
+	 	
+		boolean res1 = user.viewFoodOrders(date1).get(1).equals(orderList.get(1));
+		boolean expRes1 = true;
+		assertEquals(res1, expRes1);
+	 		
+	}
+	
+	@Test
+	public void testViewAllSubPlans() throws Exception{
+		System.out.println("Test 7: View all subscrition plans");
+		
+		SubPlan res0 = user.viewAllSubPlans().get(0);
+		SubPlan expRes0 = subPlanList.get(0);
 		assertEquals(res0, expRes0);
 		
-		Order res1 = user.viewFoodOrders(date1).get(1);
-		Order expRes1 = orderList.get(1);
+		boolean res1 = user.viewAllSubPlans().get(1).equals(subPlanList.get(1));
+		boolean expRes1 = true;
 		assertEquals(res1, expRes1);
-			
-	}
-	
-	@Test
-	public void testViewOrderIngredients(){
-//	String viewOrderIngredients()
-	}
-	
-	@Test
-	public void testViewAllSubPlans(){
-//	ArrayList<SubPlan> viewAllSubPlans()
-	}
-//	
+
+	}	
 
 }

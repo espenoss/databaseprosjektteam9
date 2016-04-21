@@ -21,13 +21,10 @@ class MainAdminGui extends JFrame {
 		private static final String [] CHOICES =
 		    {"Register new user","Change user information", "View all users", "Register new customer",
 		    		"Register new company", "Change customer information", "View private customers", 
-		    		"View company customers","Register new food order","Change food order", "Retrieve statistics"};
+		    		"View company customers","Register new food order","Change food order", "Retrieve statistics","View available ingredients", "View available meals", "Register new ingredient", "Register new meal", "Add ingredient to meal",
+		    		"Register subscription plan", "Add meal to sub plan"};
 		private JList<String> choice_list = new JList<String>(CHOICES);  
 		Admin admin = null;
-		public static final int U_ADMIN = 0;
-		public static final int U_COOK = 1;
-		public static final int U_DRIVER = 2;
-		public static final int U_SALES = 3;
 
 		public static final int REGISTER_NEW_USER = 0;
 		public static final int CHANGE_USER_INFO = 1;
@@ -39,7 +36,17 @@ class MainAdminGui extends JFrame {
 		public static final int VIEW_COMPANY_CUSTOMERS = 7;		
 		public static final int REGISTER_NEW_ORDER = 8;
 		public static final int CHANGE_ORDER = 9;
-		public static final int RETRIEVE_STATISTICS = 10;		
+		public static final int RETRIEVE_STATISTICS = 10;
+		public static final int VIEW_INGREDIENTS = 11;
+		public static final int VIEW_MEALS = 12;
+		public static final int REGISTER_INGREDIENT = 13;
+		public static final int REGISTER_MEAL = 14;
+		public static final int ADD_INGREDIENT_TO_MEAL = 15;
+		public static final int REGISTER_SUB_PLAN = 16;
+		public static final int ADD_MEAL_TO_SUB_PLAN = 17;
+
+		
+		
 
 		
 		public MainAdminGui(Admin admin) {
@@ -160,7 +167,59 @@ class MainAdminGui extends JFrame {
 	      }
 	      else if(choices==RETRIEVE_STATISTICS){
 	    	  //metoden for a hente ut statistikk
-	    }
-	  }
-	 }
+	    }else if(choices==VIEW_INGREDIENTS){
+	    	ArrayList<Ingredient> ing = null;
+	    	  try {
+	    		  ing= admin.viewIngredients(); 
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    	  String[] s = new String[ing.size()];
+		    	 for( int i = 0; i < ing.size(); i++ ){
+		    		 Ingredient ingredient = ing.get(i);
+		    		 s[i] = ingredient.ingName+ "\n";
+		    	 }
+		    	 
+		    	 JScrollPane scrollpane = new JScrollPane(); 
+		         JList list = new JList(s);
+		         scrollpane = new JScrollPane(list);
+		         JPanel panel = new JPanel(); 
+		         panel.add(scrollpane);
+		         scrollpane.getViewport().add(list);		    	 
+		    	 JOptionPane.showMessageDialog(null, scrollpane, "All ingredients: ", JOptionPane.INFORMATION_MESSAGE );
+	    	
+	    	}else if(choices==VIEW_MEALS){
+	    		ArrayList<Meal> m = null;
+		    	  try {
+		    		  m= admin.viewAvailableMeals();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		    	  String[] s = new String[m.size()];
+			    	 for( int i = 0; i < m.size(); i++ ){
+			    		 Meal meal = m.get(i);
+			    		 s[i] = meal.getMealName()+ "\n";
+			    	 }
+			    	 
+			    	 JScrollPane scrollpane = new JScrollPane(); 
+			         JList list = new JList(s);
+			         scrollpane = new JScrollPane(list);
+			         JPanel panel = new JPanel(); 
+			         panel.add(scrollpane);
+			         scrollpane.getViewport().add(list);		    	 
+			    	 JOptionPane.showMessageDialog(null, scrollpane, "All meals: ", JOptionPane.INFORMATION_MESSAGE );
+	    		}else if(choices==REGISTER_INGREDIENT){
+	    			new RegisterNewIngredient(new Cook(admin.getUserID(), admin.getName(), database));
+	    		}else if(choices==REGISTER_MEAL){
+	    			new CreateMealDialog(new Cook(admin.getUserID(), admin.getName(), database));
+	    		}else if (choices == ADD_INGREDIENT_TO_MEAL){
+	    			new AddIngredientsToMealGui(new Cook(admin.getUserID(), admin.getName(), database));
+	    		}else if(choices == REGISTER_SUB_PLAN){
+	    			new RegisterSubscriptionPlanDialog(new Cook(admin.getUserID(), admin.getName(), database));
+	    		}else if(choices == ADD_MEAL_TO_SUB_PLAN){
+	    			new AddMealToSubPlanDialog (new Cook(admin.getUserID(), admin.getName(), database));
+	    			
+			
+			}
+		}
     }

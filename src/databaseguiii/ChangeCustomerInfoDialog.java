@@ -36,7 +36,7 @@ class ChangeCustomerInfoDialog extends JFrame {
 			private JTextField preferencesField = new JTextField(100);
 			private JTextField phoneNumberField = new JTextField(12);
 
-			private final String status[] = {"active", "unactive"}; 
+			private final String status[] = {"active", "inactive"}; 
 			private JComboBox status_list = new JComboBox(status);
 			
 			
