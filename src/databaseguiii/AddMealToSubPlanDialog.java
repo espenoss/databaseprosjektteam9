@@ -101,8 +101,8 @@ class AddMealToSubPlanDialog extends JFrame {
  		}
 
  		public boolean okData(){
- 			my_meal = mealIdSelected.getSelectedIndex();
- 			my_sub_plan =SubPlanSelected.getSelectedIndex();
+ 			my_meal = mealIdSelected.getSelectedIndex()+1;
+ 			my_sub_plan =SubPlanSelected.getSelectedIndex()+1;
  			my_day = dayList.getSelectedIndex()+1;
  			
  
