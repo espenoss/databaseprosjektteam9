@@ -268,17 +268,16 @@ public class TestUser {
 	@Test
 	public void testViewFoodOrders() throws Exception {
 		System.out.println("Test 6: View Food orders");
-		Date date0 = java.sql.Date.valueOf("2016-03-03");
-		Date date1 = java.sql.Date.valueOf("2016-03-03");
+		java.sql.Date date0 = java.sql.Date.valueOf("2016-03-03");
+		java.sql.Date date1 = java.sql.Date.valueOf("2016-03-03");
 		
 		boolean res0 = user.viewFoodOrders(date0).get(0).equals(orderList.get(0));
 		boolean expRes0 = true;
-		assertEquals(res0, expRes0);
+		assertEquals(expRes0, res0);
 	 	
 		boolean res1 = user.viewFoodOrders(date1).get(1).equals(orderList.get(1));
 		boolean expRes1 = true;
-		assertEquals(res1, expRes1);
-	 		
+		assertEquals(expRes1, res1);
 	}
 	
 	@Test
