@@ -299,9 +299,11 @@ public class QMOrder {
 		return database.getLastResult();
 	}
 	
+	public static int calculateIncomeForPeriod(String fromDate, String toDate, Database database){
+		
+	}
 	
-	
-	// Puts a ' on either side and a comma at the end  of a string 
+	// Puts a ' on either side and a comma at the end of a string 
 	public static String aq(String s){
 		return "'" + s + "', ";
 	}

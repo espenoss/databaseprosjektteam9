@@ -62,12 +62,16 @@ public class ViewDeliveryList extends JFrame {
 				e.printStackTrace();
 			}
 	    	
-    	    for(int i=0; i<mealList.length;i++){
-    	    	listcontent.addElement(mealList[i][0] + ", Quantity: " + mealList[i][1]);
-    	    	listcontent.addElement(mealList[i][2]);
-    	    	listcontent.addElement(mealList[i][3] + " " + mealList[i][4]);
-    	    	listcontent.addElement(" ");
-    	    }
+	    	if(mealList.length == 0){
+	    		listcontent.addElement("No deliveries left for today");
+	    	}else{
+	    	    for(int i=0; i<mealList.length;i++){
+	    	    	listcontent.addElement(mealList[i][0] + ", Quantity: " + mealList[i][1]);
+	    	    	listcontent.addElement(mealList[i][2]);
+	    	    	listcontent.addElement(mealList[i][3] + " " + mealList[i][4]);
+	    	    	listcontent.addElement(" ");
+	    	    }	
+	    	}
     	    
 	    	list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	    	JScrollPane rullefeltMedListe = new JScrollPane(list); // rullefelt
