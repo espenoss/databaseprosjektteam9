@@ -42,9 +42,20 @@ public class Cook extends User {
 	}
 	
 	//FINISHED, is tested
-	public boolean addMealToSubPlan(int subID, int mealID, int weekdayNr, String weekday) throws Exception{
-		boolean res = QMFood.addMealToPlan(subID, mealID, weekdayNr, weekday, database);
+	public boolean addMealToSubPlan(int subID, int mealID, int weekdayNr) throws Exception{
+		String weekday="";
+		if (weekdayNr<1 || weekdayNr>7){
+			return false;
+		}
+		if (weekdayNr==1){weekday="Monday";}
+		else if (weekdayNr==2){weekday="Tuesday";}
+		else if (weekdayNr==3){weekday="Wednesday";}
+		else if (weekdayNr==4){weekday="Thursday";}
+		else if (weekdayNr==5){weekday="Friday";}
+		else if (weekdayNr==6){weekday="Saturday";}
+		else if (weekdayNr==7){weekday="Sunday";}
 		
+		boolean res = QMFood.addMealToPlan(subID, mealID, weekdayNr, weekday, database);
 		return res;
 	}
 	

@@ -72,15 +72,18 @@ public class Order {
 		return meals.get(index).markMealAsDelivered(database);
 	}
 	
-	public void markAllMealsAsReadyByDate(java.sql.Date date, Database database) throws Exception{
+	//Marks all meals in order with given deliverydate as ready for delivery, returns count for 
+	public int markAllMealsAsReadyByDate(java.sql.Date date, Database database) throws Exception{
 		ArrayList<MealOrdered> meals = viewMealsInOrderByDate(date, database);
 		int count = 0;
 		boolean ok;
 		
 		for (int i=0; i<meals.size();i++){
 			ok = meals.get(i).markMealAsReady(database);
-			if (ok){
+			if (ok){count++;}
 		}
+		
+		return count;
 	}
 	
 	
