@@ -45,6 +45,15 @@ public class TestOrder {
 			}
 			System.out.println("");
 		}
+				
+		delivery = QMOrder.viewAllOrdersFromCustomer(10002, database);
+		
+		for(int x=0;x<delivery.length;x++){
+			for(int y=0;y<delivery[x].length;y++){
+				System.out.print(delivery[x][y] + " ");
+			}
+			System.out.println("");
+		}
 		
 		delivery = QMOrder.viewOrdersByDeliveryDate(date, database);
 		

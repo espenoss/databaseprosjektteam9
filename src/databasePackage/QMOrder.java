@@ -87,6 +87,14 @@ public class QMOrder {
 		return database.getLastResult();
 	}	
 	
+	public static String[][] viewAllOrdersFromCustomer(int customerID, Database database) throws Exception{
+		
+		String statement = "SELECT * FROM food_order WHERE customer_id = " + customerID + ";";
+		
+		database.makeSingleStatement(statement);
+		
+		return database.getLastResult();
+	}
 	
 	// **** IKKE TESTET
 	// Connect meal to order. Both must exisst in database to succeed
