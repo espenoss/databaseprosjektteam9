@@ -72,6 +72,7 @@ class ChangeOrderDialog extends JFrame {
 				customerSelect = new JComboBox<>(nameList.toArray());
 				add(new JLabel("Customer: ", JLabel.RIGHT));
 				add(customerSelect);
+			
 				add(new JLabel("New delivery date: ", JLabel.RIGHT));
 				add(delivery_dateField);
 		
