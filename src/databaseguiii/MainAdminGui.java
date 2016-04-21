@@ -21,7 +21,7 @@ class MainAdminGui extends JFrame {
 		private static final String [] CHOICES =
 		    {"Register new user","Change user information", "View all users", "Register new customer",
 		    		"Register new company", "Change customer information", "View private customers", 
-		    		"View company customers","Register new food order","Change food order", "Retrieve statistics","View available ingredients", "View available meals"};
+		    		"View company customers","Register new food order","Change food order", "Retrieve statistics","View available ingredients", "View available meals", "Register new ingredient", "Register new meal"};
 		private JList<String> choice_list = new JList<String>(CHOICES);  
 		Admin admin = null;
 
@@ -37,7 +37,12 @@ class MainAdminGui extends JFrame {
 		public static final int CHANGE_ORDER = 9;
 		public static final int RETRIEVE_STATISTICS = 10;
 		public static final int VIEW_INGREDIENTS = 11;
-		public static final int VIEW_MEALS = 12;		
+		public static final int VIEW_MEALS = 12;
+
+		public static final int REGISTER_INGREDIENT = 13;
+
+		public static final int REGISTER_MEAL = 14;
+		
 		
 
 		
@@ -200,7 +205,12 @@ class MainAdminGui extends JFrame {
 			         panel.add(scrollpane);
 			         scrollpane.getViewport().add(list);		    	 
 			    	 JOptionPane.showMessageDialog(null, scrollpane, "All meals: ", JOptionPane.INFORMATION_MESSAGE );
+	    		}else if(choices==REGISTER_INGREDIENT){
+	    			new RegisterNewIngredient(new Cook(admin.getUserID(), admin.getName(), database));
+	    		}else if(choices==REGISTER_MEAL){
+	    			new CreateMealDialog(new Cook(admin.getUserID(), admin.getName(), database));
 	    		}
+			
 			}
 		}
     }
