@@ -33,9 +33,9 @@ class RegisterNewIngredient extends JFrame {
 			private JTextField ingredientUnitField = new JTextField(20);
 			private JTextField quantityField = new JTextField(20);
 
+			private String ingredient;
 	 		private float myQuantity;
 	 		private String unit;
-			private String ingredient;
 			
 			
 			public DialogWindow(JFrame parent){
@@ -52,10 +52,11 @@ class RegisterNewIngredient extends JFrame {
 			
 					add(new JLabel("Name of ingredient: ", JLabel.RIGHT));
 					add(ingredientNameField);
-					add(new JLabel("Unit of ingredient: ", JLabel.RIGHT));
-					add(ingredientUnitField);
 					add(new JLabel("Quantity of ingredient: ", JLabel.RIGHT));
 					add(quantityField);
+
+					add(new JLabel("Unit of ingredient: ", JLabel.RIGHT));
+					add(ingredientUnitField);
 
 				}
 			}
@@ -67,9 +68,10 @@ class RegisterNewIngredient extends JFrame {
 	 			float my_quantity = editor.stringToFloat(ingredient_quantity);
 			 	myQuantity = my_quantity;
 			 	
+			 	unit=ingredientUnitField.getText();
 				
 				try {
-					cook.addNewIngredient(ingredient, myQuantity, unit, database);
+					cook.addNewIngredient(ingredient, myQuantity, unit, cook.getDatabase());
 
 				} catch (Exception e) {
 					System.out.println(e.toString());
