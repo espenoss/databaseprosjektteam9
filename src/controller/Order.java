@@ -70,6 +70,7 @@ public class Order {
 	
 	public boolean removeMealFromOrder(int index, Database database) throws Exception{
 		QMOrder.removeMealFromOrder(orderID, meals.get(index).getMealID(), meals.get(index).getDeliverydate().toString(), database);
+		fetchMealsInOrder(database);
 		return false;
 	}
 	
