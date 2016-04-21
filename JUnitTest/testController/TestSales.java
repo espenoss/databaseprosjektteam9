@@ -15,7 +15,7 @@ public class TestSales {
 	private static Database database;
 	private Sales instance;
 	private Customer customer1;
-	
+	private String dateToday;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -27,36 +27,27 @@ public class TestSales {
 		database.initiateDb();
 		
 		String userInsert = "INSERT INTO user VALUES('hanne', 3,'Hanne Hansen', 123456)";
-		String zoneInsert1 = "INSERT INTO zone VALUES(1, 'Midtbyen');";
-		String zoneInsert2 = "INSERT INTO zone VALUES(2, 'Østbyen');";
-		String zoneInsert3 = "INSERT INTO zone VALUES(3, 'Lerkendal');";
-		String zoneInsert4 = "INSERT INTO zone VALUES(4, 'Heimdal');";
-		String zoneInsert5 = "INSERT INTO zone VALUES(5, 'Byåsen');";
-		
+
 		database.makeSingleStatement(userInsert);
-		database.makeSingleStatement(zoneInsert1);
-		database.makeSingleStatement(zoneInsert2);
-		database.makeSingleStatement(zoneInsert3);
-		database.makeSingleStatement(zoneInsert4);
-		database.makeSingleStatement(zoneInsert5);
-		
-		
-		
+	
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		instance = new Sales("hanne",3,"Hanne Hansen", "123456", database);
+		instance = new Sales("hanne","Hanne Hansen", database);
 		customer1 = new Customer(10000,"Geir","Hansen","73329090", "geir@hansen.com",
 				"Nedre Bakklandet 61", 7014, 1,"Allergisk mot sopp", true);
 		
+	    java.util.Date utilDate = new java.util.Date();
+	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+	    dateToday = sqlDate.toString();	
 	}
 	
 	@Test
 	public void testRegisterCustomer() throws Exception {
-		System.out.println("test registerCustomer");
+		System.out.println("Sales test 1: registerCustomer");
 		Customer result = instance.registerCustomer("Hansen","Geir","73329090" , "geir@hansen.com",
-				"Nedre Bakklandet 61", 7014, 1,"Allergisk mot sopp", true, database);
+				"Nedre Bakklandet 61", 7014, 1,"Allergisk mot sopp", true);
 		
 		Customer expResult = instance.viewSingleCustomer(result.getCustomerID());
 		
@@ -66,7 +57,7 @@ public class TestSales {
 	
 	@Test
 	public void testRegisterCompanyToCustomer() throws Exception {
-		System.out.println("Test registerCompanyToCustomer");
+		System.out.println("Sales test 2: registerCompanyToCustomer");
 		
 		boolean result = instance.registerCompanyToCustomer(customer1, "Posten");
 		boolean expResult = true;
@@ -75,13 +66,20 @@ public class TestSales {
 		
 	}
 	
-	@Ignore
-	public void testRegisterNewOrder() {
-		fail("Not yet implemented");
+	@Test
+	public void testRegisterNewOrder() throws Exception {
+		System.out.println("Sales test 3: registerNewOrder");
+		Order result = instance.registerNewOrder(10000,"Infoinfo", "hanne");
+		Order expResult = new Order(1, dateToday, 10000,"Infoinfo", "hanne");
+		
+		assertEquals(result,expResult);
+		
 	}
 	
 	@Ignore
 	public void testRegisterSubscriptionOrder() {
+		System.out.println("Sales test 4: registerSubscriptionOrder");
+		//instance.registerSubscriptionOrder(order, quantitySub, fromDate, toDate, subID);
 		fail("Not yet implemented");
 	}
 
