@@ -299,8 +299,21 @@ public class QMOrder {
 		return database.getLastResult();
 	}
 	
-	public static int calculateIncomeForPeriod(String fromDate, String toDate, Database database){
+	public static int calculateIncomeForPeriod(String fromDate, String toDate, Database database) throws Exception{
+		String statement = "SELECT SUM(price*quantity) FROM meal NATURAL JOIN ordered_meal "
+				+ "WHERE delivery_date > '" + fromDate + "' "
+				+ "AND delivery_date < '" + toDate + "' "
+				+ "AND delivered = true";
+
+		database.makeSingleStatement(statement);
 		
+		String[][] result = database.getLastResult();
+		if(result.length == 0){
+			return -1;			
+		}else{
+			return Integer.parseInt(result[0][0]);			
+		}
+
 	}
 	
 	// Puts a ' on either side and a comma at the end of a string 

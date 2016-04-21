@@ -64,6 +64,8 @@ public class TestOrder {
 			System.out.println("");
 		}		
 
+		int sumForPeriod = QMOrder.calculateIncomeForPeriod("2016-04-20", "2016-04-22", database);
+		
 		int orderPrice = QMOrder.viewOrderPrice(Integer.parseInt(order[0]), database);
 		
 		// attempt to register new info about existing entry
