@@ -207,6 +207,7 @@ public class TestUser {
 		
 		int id1 = 10001; // jensine
 		int id2 = 10002; // lise
+		int id3 = 19921; // no one
 		
 		Customer res1 = user.viewSingleCustomer(id1);
 		Customer expRes1 = jensine;
@@ -215,6 +216,10 @@ public class TestUser {
 		Customer res2 = user.viewSingleCustomer(id2);
 		Customer expRes2 = lise;
 		assertEquals(res2, expRes2);
+		
+		Customer res3 = user.viewSingleCustomer(id3);
+		Customer expRes3 = null;
+		assertEquals(res3,expRes3);
 		
 	}
 	
@@ -252,7 +257,11 @@ public class TestUser {
 	}
 	
 	@Test
-	public void testViewOrderIngredients(){
+	public void testViewOrderIngredients() throws Exception{
+		System.out.println("Test: View order ingredients");
+		
+		String res = user.viewOrderIngredients();
+		String expRes = 
 //	String viewOrderIngredients()
 	}
 	

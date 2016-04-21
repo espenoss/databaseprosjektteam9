@@ -144,7 +144,7 @@ public class User implements java.io.Serializable{
 		return null;
 	}
 	
-	//FINISHED --- Må testes
+	//FINISHED --- Mï¿½ testes
 	public ArrayList<Ingredient> viewIngredients() throws Exception{
 		String[][] ingT = QMFood.viewIngredients(database);
 		Ingredient tempIng; 
@@ -157,18 +157,8 @@ public class User implements java.io.Serializable{
 		}
 		return ingList;
 	}
-
-	//Lists orderIngredients as String
-	public String viewOrderIngredients() throws Exception{
-		String res = "";
-			String[][] temp = QMFood.viewIngredients(database);
-			for (int i = 0; i < temp.length; i++){
-				res += temp[i];
-			}
-			return res;
-	}
 	
-	// FINISHED må testes
+	// FINISHED mï¿½ testes
 	public ArrayList<SubPlan> viewAllSubPlans() throws Exception{
 		String[][] subT = QMFood.viewSubscriptionPlans(database);
 		SubPlan tempSub; 
