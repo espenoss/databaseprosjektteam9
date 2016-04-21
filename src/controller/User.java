@@ -244,7 +244,7 @@ public class User implements java.io.Serializable{
 	
 	
 	
-	
+/*	
 	
 	//TEST
 	public static void main(String[] args) throws Exception{
@@ -271,4 +271,5 @@ public class User implements java.io.Serializable{
 		//System.out.println(user.viewAllSubPlans());
 		
 	}
+	*/
 }
