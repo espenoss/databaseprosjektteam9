@@ -77,7 +77,7 @@ class ViewFoodOrdersByCustomerGui extends JFrame{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			JOptionPane.showMessageDialog(null, s, "Orders of the chosen customer "+ currCust.getFirstName(), JOptionPane.INFORMATION_MESSAGE );
+			JOptionPane.showMessageDialog(null, s, "Orders of the choosen customer "+ currCust.getFirstName(), JOptionPane.INFORMATION_MESSAGE );
 			
 			return true;
 			
