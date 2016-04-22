@@ -47,9 +47,8 @@ public class Order {
 		else return null;
 	}
 	
-	public Meal[] getMeals(){
-		Meal[] temp = new Meal[meals.size()];
-		return temp;
+	public ArrayList<MealOrdered> getMeals(){
+		return meals;
 	}
 	
 	public void setOrderDate(String orderDate){
