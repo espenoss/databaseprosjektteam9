@@ -112,7 +112,7 @@ class ViewFoodOrdersByCustomerGui extends JFrame{
 					}
 					if(orderList != null){
 						for(Order o: orderList){
-							listcontent.addElement(o.toString());
+							listcontent.addElement(o.getOrderID() + "");
 						}
 					}
 				}				
