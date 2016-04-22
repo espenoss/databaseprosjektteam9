@@ -37,7 +37,6 @@ public class Meal {
 	}
 	
 	public ArrayList<Ingredient> getIngredients(){
-		fetchIngredients();
 		return ingredients;
 	}
 	
