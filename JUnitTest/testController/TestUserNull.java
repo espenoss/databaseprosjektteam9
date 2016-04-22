@@ -106,11 +106,11 @@ public class TestUserNull {
 	}
 	
 	@Test
-	public void nullTestShouldAddIngredientToMeal() throws Exception{
+	public void nullTestAddIngredientToMeal() throws Exception{
 		// Tests add ingredient to meal with empty database
 		database.initiateDb();
 		System.out.println("Cook test NULL: Add ingredient to meal with empty databse");
-
+		
 		boolean res = cook.addIngredientToMeal(1, 1, 2);
 		boolean expRes = false;
 		
