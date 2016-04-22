@@ -240,8 +240,7 @@ class MainAdminGui extends JFrame {
 	    			new ViewFoodOrders (new Admin (admin.getUserID(), admin.getName(), database));
 	    		}
 	    		else if(choices==VIEW_INGREDIENTS_IN_MEAL){
-	    			new IngredientsInMealGui(new Cook(admin.getUserID(), admin.getName(), database), new Meal(meal.getMealID(), meal.getMealName(),
-	    					meal.getInstructions(), meal.getAvailable(), meal.getPrice()));
+	    			new IngredientsInMealGui(new Cook(admin.getUserID(), admin.getName(), database));
 	    				
 	    		}
 			}
