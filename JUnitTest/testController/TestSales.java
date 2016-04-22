@@ -32,9 +32,16 @@ public class TestSales {
 		String customerInsert = "INSERT INTO customer VALUES(10000, 'Henrik', 'Hansen', '73909090', 'henrik@hansen.no', 'Gateveien 1', 7098, 4, 'none', true)";
 		String subPlanInsert = "INSERT INTO subscription_plan VALUES(1,'Lunsjmeny')";
 		
+		String insert1 = "INSERT INTO meal VALUES(1, 'pizza', 'info', true, 150)";
+		String insert2 = "INSERT INTO meal VALUES(2, 'taco','info', true, 100)";
+		String insert3 = "INSERT INTO meal VALUES(3, 'steak','info', true, 200)";
+		
 		database.makeSingleStatement(userInsert);
 		database.makeSingleStatement(customerInsert);
 		database.makeSingleStatement(subPlanInsert);
+		database.makeSingleStatement(insert1);
+		database.makeSingleStatement(insert2);
+		database.makeSingleStatement(insert3);
 		
 		instance = new Sales("hanne","Hanne Hansen", database);
 		customer1 = new Customer(10000,"Geir","Hansen","73329090", "geir@hansen.com",
@@ -102,6 +109,20 @@ public class TestSales {
 		//registerSubscriptionOrder(Order order, int quantitySub, String fromDate, String toDate, int subID) throws Exception{
 		
 		assertEquals(result,expResult);
+	}
+	
+	@Test
+	public void testAddMealToOrder() throws Exception{
+		System.out.println("Sales test 5: addMealToOrder");
+		instance.addMealToOrder(1, 1, "2016-04-22", 1);
+		Order order = instance.viewSingleOrder(1);
+		int mealID = order.getMeal(0).getMealID();
+		String mealName = order.getMeal(0).getMealName();
+		
+		boolean res = mealID==1 && mealName.equals("pizza");
+		boolean expRes = true;
+		
+		assertEquals(expRes, res);
 	}
 
 }
