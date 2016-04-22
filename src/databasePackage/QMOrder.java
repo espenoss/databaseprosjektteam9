@@ -124,7 +124,7 @@ public class QMOrder {
 		String statement = "UPDATE ordered_meal SET "
 				+ "order_id = " + orderID + "," 
 				+ "meal_id = " + mealID + "," 
-				+ "delivery_date = " + aq(deliveryDate) 
+				+ "delivery_date = '" + deliveryDate+"'," 
 				+ "quantity = " + quantity + "," 
 				+ "ready_delivery = " + readyDelivery + "," 
 				+ "delivered = " + delivered 

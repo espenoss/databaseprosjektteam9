@@ -1,6 +1,7 @@
 package controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -8,6 +9,8 @@ import java.util.GregorianCalendar;
 import databasePackage.*;
 
 public class Admin extends User {
+	TextEditor t = new TextEditor();
+	
 	
 	public Admin(String userID, String name, Database database) {
 		super(userID, 0, name,  database);
@@ -22,7 +25,13 @@ public class Admin extends User {
 		return(QMUser.updateUser(userID, userType, name, pword, database));
 	}
 	 
-	
+	public String viewUser(String username) throws Exception{
+		String[] userTabl = QMUser.viewUser(username, database);
+		if (userTabl.length==0){
+			return null;
+		}
+		return "Username: "+userTabl[0]+", user type: "+userTabl[1]+", name: "+userTabl[2];
+	}
 	
 	// Returns String with statistics for given year, month by month. 
 	// Calculted with prices of meals that have been delivered
@@ -81,7 +90,7 @@ public class Admin extends User {
 		ArrayList<User> userList = new ArrayList<User>();
 		
 		for(int i=0; i<list.length; i++){
-			int userType = Integer.parseInt(list[i][1]); 
+			int userType = t.stringToInt(list[i][1]); 
 			
 			tempUser = new User(list[i][0],userType,list[i][2], database);
 			userList.add(tempUser);
