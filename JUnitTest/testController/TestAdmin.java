@@ -26,6 +26,7 @@ public class TestAdmin {
 		
 		String insertUser1 = "INSERT INTO user VALUES('hanneh', 1, 'Hanne Hansen', 123456)";
 		String insertUser2 = "INSERT INTO user VALUES('olen', 2, 'Ole Normann', 123456)";
+		String insertUser3 = "INSERT INTO user VALUES('marie', 3, 'Marie', 1234)";
 		
 		userList.add(new User("hanneh", 1, "Hanne Hansen", database));
 		userList.add(new User("olen", 2, "Ole Normann", database));
@@ -33,6 +34,7 @@ public class TestAdmin {
 		
 		database.makeSingleStatement(insertUser1);
 		database.makeSingleStatement(insertUser2);
+		database.makeSingleStatement(insertUser3);
 
 		
 		String customer1 = "INSERT INTO customer VALUES(10000, 'Hansen', 'Geir', '73329090', 'geir@hansen.com', 'Nedre Bakklandet 61', '7014', 1, 'Allergisk mot sopp', true)";
@@ -119,10 +121,32 @@ public class TestAdmin {
 		database.makeSingleStatement(insert15);	
 	}
 	
+	@Test
+	public void testRegisterUser() throws Exception{
+		System.out.println("Admin test 1: registerUser");
+		
+		instance.registerUser("marit", 1, "Marit", "1234", database);
+		String res = instance.viewUser("marit");
+		String expRes = "Username: marit, user type: 1, name: Marit";
+		
+		assertEquals(expRes, res);
+	}
+	
+	@Test
+	public void testUpdateUser() throws Exception{
+		System.out.println("Admin test 2: updateUser");
+		String res = null;
+		
+		if (instance.updateUser("marie", 3, "Marie Hansen", "1234", database)){
+			res = instance.viewUser("marie");
+		}
+		String expRes = "Username: marie, user type: 3, name: Marie Hansen";
+		assertEquals(expRes, res);
+	}
 	
 	@Test
 	public void testGetStatisticsForYear() throws Exception {
-		System.out.println("Admin test 1: getStatisticsForYear");
+		System.out.println("Admin test 3: getStatisticsForYear");
 		String expRes = "Income overview for 2016\n\n"+
 				"Income in January is: 0 kr.\n"+
 				"Income in February is: 0 kr.\n"+
@@ -137,13 +161,10 @@ public class TestAdmin {
 	
 	@Test
 	public void testViewUserList() throws Exception {
-		System.out.println("Admin test 2: viewUserList");
+		System.out.println("Admin test 4: viewUserList");
 		
 		ArrayList<User> testList = instance.viewUserList();
 
-		//boolean res =.equals() && testList.get(2).equals(userList.get(2));
-		
 		assertEquals(userList.get(0), testList.get(0));
-		assertEquals(userList.get(1), testList.get(1));
 	}
 }
