@@ -70,9 +70,9 @@ public class Order {
 	
 	// FINISHED M� TESTES
 	public boolean removeMealFromOrder(int index, Database database) throws Exception{
-		QMOrder.removeMealFromOrder(orderID, meals.get(index).getMealID(), meals.get(index).getDeliverydate().toString(), database);
+		boolean ok = QMOrder.removeMealFromOrder(orderID, meals.get(index).getMealID(), meals.get(index).getDeliverydate().toString(), database);
 		fetchMealsInOrder(database);
-		return false;
+		return ok;
 	}
 	
 	/*
@@ -120,7 +120,7 @@ public class Order {
 		if(mealT.length == 0){
 			return false;
 		}
-		System.out.println("Meals fra database: \n"+Arrays.deepToString(mealT));
+//		System.out.println("Meals fra database: \n"+Arrays.deepToString(mealT));
 		TextEditor t = new TextEditor();
 		
 		for(int i=0;i<mealT.length;i++){			
@@ -143,17 +143,6 @@ public class Order {
 		}
 		
 		return res;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + customerID;
-		result = prime * result + ((orderDate == null) ? 0 : orderDate.hashCode());
-		result = prime * result + orderID;
-		result = prime * result + ((userID == null) ? 0 : userID.hashCode());
-		return result;
 	}
 
 	@Override
@@ -182,7 +171,7 @@ public class Order {
 		return true;
 	}
 	
-	/*
+/*	
 	//TEST TEST TEST 
 	static public void main(String[] arg) throws Exception{
 		String username = "marith1";
@@ -204,5 +193,5 @@ public class Order {
 		//System.out.println(test);
 		
 	}
-	*/
+*/	
 }
