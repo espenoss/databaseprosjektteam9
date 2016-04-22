@@ -7,6 +7,22 @@ public class MealOrdered extends Meal {
 	private int quantity;
 	private int orderID;
 	private boolean readyDelivery;
+	public java.sql.Date getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public int getOrderID() {
+		return orderID;
+	}
+
+	public boolean isReadyDelivery() {
+		return readyDelivery;
+	}
+
+	public boolean isDelivered() {
+		return delivered;
+	}
+
 	private boolean delivered;
 	
 	public MealOrdered(int mealID, String mealName, String instructions, int price,

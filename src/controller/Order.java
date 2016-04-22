@@ -60,45 +60,21 @@ public class Order {
 	public void setInfo(String info){
 		this.info = info;
 	}
-	/*
-	//Skal vi ha denne??
-	//Marks meal as ready for delivery to customer, given index of meal in mealArray
-	public boolean markMealAsReadyByIndex(int index, Database database) throws Exception{
-		return meals.get(index).markMealAsReady(database);
-	}
-	*/
 	
-	// FINISHED M� TESTES
+	// FINISHED, IS TESTED
 	public boolean removeMealFromOrder(int index, Database database) throws Exception{
-		QMOrder.removeMealFromOrder(orderID, meals.get(index).getMealID(), meals.get(index).getDeliverydate().toString(), database);
+		boolean ok = QMOrder.removeMealFromOrder(orderID, meals.get(index).getMealID(), meals.get(index).getDeliverydate().toString(), database);
 		fetchMealsInOrder(database);
-		return false;
+		return ok;
 	}
 	
-	/*
-	//Skal vi ha denne??
-	//Marks all meals in order with given deliverydate as ready for delivery, returns count for 
-	public int markAllMealsAsReadyByDate(java.sql.Date date, Database database) throws Exception{
-		ArrayList<MealOrdered> meals = viewMealsInOrderByDate(date, database);
-		int count = 0;
-		boolean ok;
-		
-		for (int i=0; i<meals.size();i++){
-			ok = meals.get(i).markMealAsReady(database);
-			if (ok){count++;}
-		}
-		return count;
-	}
-	*/
-	
-	
-	//FINISHED m� testes
+	//FINISHED, IS TESTED
 	//Register information to databasee
 	public boolean uploadOrder(Database database) throws Exception{
 		return QMOrder.updateOrder(orderID, orderDate, customerID, info, userID, database);
 	}
 	
-	//FINISHED m� testes
+	//FINISHED, IS TESTED
 	//Makes an arrayList of all meals in an order that has a spesific delivery date. 
 	public ArrayList<MealOrdered> viewMealsInOrderByDate(java.sql.Date date, Database database) throws Exception{
 		fetchMealsInOrder(database);
@@ -112,7 +88,7 @@ public class Order {
 		return tempMeals;
 	}
 	
-	//FINISHED testes?
+	//FINISHED, IS TESTED
 	//Fetches meals from database
 	public boolean fetchMealsInOrder(Database database) throws Exception{
 		meals = new ArrayList<MealOrdered>(); //creates new empty meal arrayList
@@ -120,7 +96,7 @@ public class Order {
 		if(mealT.length == 0){
 			return false;
 		}
-		System.out.println("Meals fra database: \n"+Arrays.deepToString(mealT));
+
 		TextEditor t = new TextEditor();
 		
 		for(int i=0;i<mealT.length;i++){			
@@ -143,17 +119,6 @@ public class Order {
 		}
 		
 		return res;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + customerID;
-		result = prime * result + ((orderDate == null) ? 0 : orderDate.hashCode());
-		result = prime * result + orderID;
-		result = prime * result + ((userID == null) ? 0 : userID.hashCode());
-		return result;
 	}
 
 	@Override
@@ -182,8 +147,9 @@ public class Order {
 		return true;
 	}
 	
-	/*
-	//TEST TEST TEST 
+
+/*
+ * //TEST TEST TEST 
 	static public void main(String[] arg) throws Exception{
 		String username = "marith1";
 		String password = "tgp8sBZA";
@@ -195,14 +161,22 @@ public class Order {
 	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		
 		Order test = new Order(10000,"2016-03-01",10000,"Info", "hanneh");
+		Order test2 = new Order(10001,"2016-03-01",10000,"Info", "hanneh");
+		Order test3 = new Order(10005, "2016-03-09",10002, "En ting", "pero");
 		//System.out.println(test);
 		
 		java.sql.Date dato = java.sql.Date.valueOf("2016-03-01");
+		test2.fetchMealsInOrder(database);
+		System.out.println("test2: "+test2.getMeals());
 		
 		test.fetchMealsInOrder(database);
-		System.out.println(test.viewMealsInOrderByDate(dato, database));
-		//System.out.println(test);
+		System.out.println("test1: "+test.getMeals());
 		
+		System.out.println(test3.fetchMealsInOrder(database));
+		//System.out.println(test.viewMealsInOrderByDate(dato, database));
+		//System.out.println(test);
 	}
-	*/
+
+*/	
+	
 }
