@@ -45,7 +45,7 @@ public class TestCook {
 	
 	@Test
 	public void testShouldCreateMeal() throws Exception {
-		System.out.println("Test 1: Create meal");
+		System.out.println("Cook test 1: Create meal");
 		
 		Meal result = cook.createMeal("Spaghetti", "Boil pasta", 100);
 		Meal expResult = new Meal(2,"Spaghetti", null, true, 100);
@@ -56,7 +56,7 @@ public class TestCook {
 	
 	@Test
 	public void testShoulRegisterSubPlan() throws Exception{
-		System.out.println("Test 2: Register subscriptionplan");
+		System.out.println("Cook test 2: Register subscriptionplan");
 		boolean result = cook.registerSubPlan("name", database).equals(subPlan);
 		boolean expResult = true;
 		
@@ -65,7 +65,7 @@ public class TestCook {
 	
 	@Test
 	public void testShouldAddIngredientToMeal() throws Exception{
-		System.out.println("Test 3: Add ingredient to meal");
+		System.out.println("Cook test 3: Add ingredient to meal");
 			
 		boolean res = cook.addIngredientToMeal(1, 1, 2);
 		boolean expRes = true;
@@ -75,7 +75,7 @@ public class TestCook {
 	
 	@Test
 	public void testShouldAddMealToSubPlan() throws Exception{
-		System.out.println("Test 4: add meal to subscription plan");
+		System.out.println("Cook test 4: add meal to subscription plan");
 		
 		boolean res = cook.addMealToSubPlan(1, 1, 3);
 		boolean expRes = true;
@@ -83,7 +83,7 @@ public class TestCook {
 	}
 	@Test 
 	public void testShouldRemoveMealFromPlan() throws Exception{
-		System.out.println("Test 5: Remove meal from plan");
+		System.out.println("Cook test 5: Remove meal from plan");
 		cook.addMealToSubPlan(1, 1, 2);
 		
 		
@@ -95,7 +95,7 @@ public class TestCook {
 	
 	@Test
 	public void testShouldAddNewIngredient() throws Exception{
-		System.out.println("Test 6: add new ingredient to meal");
+		System.out.println("Cook test 6: add new ingredient to meal");
 		
 		Ingredient res = cook.addNewIngredient("banana", 40, "kg", database);
 		Ingredient expRes = new Ingredient(2, "banana", 40, "kg");
@@ -104,7 +104,7 @@ public class TestCook {
 
 	@Ignore("Can not delete ingredient connected to a meal in 'meal_ingredient'")
 	public void testShouldDeleteIngredient() throws Exception{
-		System.out.println("Test: Delete ingredient");
+		System.out.println("Cook test 7: Delete ingredient");
 		
 		boolean res = cook.deleteIngredient(1);
 		boolean expRes = true;

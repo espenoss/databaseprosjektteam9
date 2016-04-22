@@ -37,7 +37,7 @@ public class TestLogIn {
 
 	@Test
 	public void testShouldLogIn() throws Exception{
-		System.out.println("Test: log in");
+		System.out.println("LogIn test 1: log in");
 		String[] res = login.logIn("trym123", pword, database);
 		
 		boolean result = res[0].equals(trymTabl[0]) && res[1].equals(trymTabl[1]) && res[2].equals(trymTabl[2]);
@@ -49,7 +49,7 @@ public class TestLogIn {
 	
 	@Test
 	public void testShouldFailLogIn() throws Exception{
-		System.out.println("Test: fail log in");
+		System.out.println("LogIn test 2: fail log in");
 		
 		String[] tabl = login.logIn("trine43", pword, database);
 		

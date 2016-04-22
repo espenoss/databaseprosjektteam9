@@ -32,6 +32,7 @@ public class TestCustomer {
 	@Test
 	public void testShouldUpdateCustomer() throws Exception{
 		//boolean updateCustomer(Database database)
+		System.out.println("Customer test 1: updateCustomer");
 		boolean res = customer.updateCustomer(database);
 		boolean expRes = true;
 		
