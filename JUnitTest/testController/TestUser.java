@@ -293,5 +293,16 @@ public class TestUser {
 		assertEquals(res1, expRes1);
 
 	}	
-
+	@Test
+	public void testShouldViewFoodOrdersByCustomer() throws Exception{
+		System.out.println("User test 8: View food orders by customer");
+		
+		int customerID = 10001;
+		
+		boolean res = (user.viewFoodOrdersByCustomer(customerID).get(0).equals(orderList.get(0)));
+		boolean expRes = true;
+		assertEquals(res, expRes);
+	
+	}
+	
 }

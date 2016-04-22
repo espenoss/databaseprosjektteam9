@@ -42,8 +42,7 @@ public class SubPlan {
 	public void setName(String newName){
 		name = newName;
 	}
-	
-	
+
 	//Lists subsriction plan 
 	public String getMealsAsText(){
 		String res = "";

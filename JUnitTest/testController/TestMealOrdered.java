@@ -14,7 +14,6 @@ import databasePackage.Database;
 
 public class TestMealOrdered{
 	private static Database db;
-	private static ArrayList<MealOrdered> ordMeals = new ArrayList<MealOrdered>(); 
 	private static MealOrdered instance;
 	private static MealOrdered instance2;
 	
@@ -45,9 +44,6 @@ public class TestMealOrdered{
 		
 		db.makeSingleStatement(insert4);
 		db.makeSingleStatement(insert5);
-
-		Order order1 = new Order(1, "2016-11-04", 60000, null, "trym123");
-		Order order2 = new Order(2, "2016-11-04", 60001, null, "trym123");
 
 		
 		String insert3 = "INSERT INTO ingredient VALUES(1, 'cheese', 10, 'kg')";

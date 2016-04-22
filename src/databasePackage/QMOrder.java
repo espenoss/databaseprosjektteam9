@@ -132,7 +132,6 @@ public class QMOrder {
 				+ " AND meal_id = " + mealID
 				+ " AND delivery_date = '" + deliveryDate + "'"
 				+";";
-		System.out.println(statement);
 		return database.makeSingleStatement(statement);
 	}
 	 
