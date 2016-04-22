@@ -27,12 +27,6 @@ public class Cook extends User {
 		return res;
 	}
 	
-	// **** DELETE OR CHANGE THIS METHOD ****
-	// Deletes meal from database. ---  is tested //
-	public boolean deleteMeal(int mealID) throws Exception{
-		return QMFood.removeMeal(mealID, database);
-	}
-	
 	//FINISHED, is tested
 	//Registers new empty subscription plan
 	public SubPlan registerSubPlan(String name,Database database) throws Exception{
