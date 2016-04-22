@@ -124,17 +124,14 @@ class ViewFoodOrdersByCustomerGui extends JFrame{
 				public void valueChanged(ListSelectionEvent arg0) {
 					int orderIndex = list.getSelectedIndex();
 					if(orderIndex != -1){
+						list.clearSelection();
 						Order selectedOrder = orderList.get(orderIndex);
-						
+						CustomerOrderMenu com;
 						try {
-							boolean c = selectedOrder.fetchMealsInOrder(sales.getDatabase());
-							if(c){
-								String s = selectedOrder.toString();
-								JOptionPane.showMessageDialog(null, s, "Meals in order", JOptionPane.INFORMATION_MESSAGE );						
-							}
+							com = new CustomerOrderMenu(sales, selectedOrder);
 						} catch (Exception e) {
 							e.printStackTrace();
-						}	
+						}					
 					}
 				}
 			}
