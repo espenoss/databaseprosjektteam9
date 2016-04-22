@@ -3,7 +3,7 @@ package controller;
 import java.util.ArrayList;
 import databasePackage.*;
 
-public class User implements java.io.Serializable{
+public class User{
 	private String userID;
 	private int userType;
 	private String name;
@@ -85,6 +85,14 @@ public class User implements java.io.Serializable{
 		return orderList; 
 	}
 	
+	public Order viewSingleOrder(int orderID) throws Exception{
+		String[] orderT = QMOrder.viewOrder(orderID, database);
+		
+		//(int orderID, String orderDate, int customerID, String info, String userID)
+		Order tempOrder = new Order(t.stringToInt(orderT[0]), orderT[1], t.stringToInt(orderT[2]), orderT[3], orderT[4]);
+		tempOrder.fetchMealsInOrder(database);
+		return tempOrder;
+	}
 	
 	//FINISHED NOT TESTED 
 	//Returns an arraylist with all available meals

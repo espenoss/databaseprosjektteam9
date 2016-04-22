@@ -45,7 +45,9 @@ public class SubPlan {
 	public String getMealsAsText(){
 		String res = "";
 		for(int i = 0; i < meals.length; i++){
-			res += meals.toString();
+			if(meals[i]!=null){
+				res += meals.toString();
+			}
 		}
 		return res;
 	}
