@@ -1,22 +1,10 @@
 package testController;
 
 import static org.junit.Assert.*;
-
-import java.sql.Date;
 import java.util.ArrayList;
-
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
-
-import controller.Customer;
-import controller.Meal;
-import controller.MealOrdered;
-import controller.Order;
-import controller.User;
+import org.junit.*;
+import controller.*;
 import databasePackage.Database;
-import databaseguiii.MealsInOrder;
 
 public class TestOrder {
 	private static Database database;
@@ -34,16 +22,19 @@ public class TestOrder {
 		String password = "e82L3Dat";
 		
 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
+		
 		database = new Database("com.mysql.jdbc.Driver", databasename);
 		database.initiateDb();
 		
-		System.out.println("Total number of tests: 4");
+		System.out.println("ORDER --- Total number of tests: 4");
 		
 		String insert = "INSERT INTO user VALUES('trym123', 1, 'Trym Larsen', '1234');";
+		
 		database.makeSingleStatement(insert);
 		
 		String customer1 = "INSERT INTO customer VALUES(60000, 'Hansen', 'Geir', '73329090', 'geir@hansen.com', 'Nedre Bakklandet 61', 7014, 1, 'Allergisk mot sopp', true);";
 		String customer2 = "INSERT INTO customer VALUES(60001, 'Tvedt', 'Jens', '95454565', 'jens@tvedt.com', 'Gateveien 115', 7021, 3, NULL, true);";
+		
 		database.makeSingleStatement(customer1);
 		database.makeSingleStatement(customer2);
 		

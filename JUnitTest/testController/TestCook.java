@@ -17,7 +17,7 @@ public class TestCook {
 	private static Database database;
 	private static Cook cook;
 	private SubPlan subPlan;	
-	
+	 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		String username = "anitakau";
@@ -32,10 +32,10 @@ public class TestCook {
 		database.makeSingleStatement(insert);
 		database.makeSingleStatement(insert1);
 		
-		System.out.println("COOK --- Total number of tests: 7");
+		System.out.println("COOK --- Total number of tests: 6");
 
 	}
-
+ 
 	@Before
 	public void setUp() throws Exception {
 		cook = new Cook("bob","Bob", database);
@@ -65,8 +65,9 @@ public class TestCook {
 	
 	@Test
 	public void testShouldAddIngredientToMeal() throws Exception{
+		// IS NULL TESTED in TestUserNull
 		System.out.println("Cook test 3: Add ingredient to meal");
-			
+		
 		boolean res = cook.addIngredientToMeal(1, 1, 2);
 		boolean expRes = true;
 		
@@ -76,16 +77,29 @@ public class TestCook {
 	@Test
 	public void testShouldAddMealToSubPlan() throws Exception{
 		System.out.println("Cook test 4: add meal to subscription plan");
+		int[] weekdays = {0,1,2,3,4,5,6};
+		boolean res0 = false;
 		
-		boolean res = cook.addMealToSubPlan(1, 1, 3);
-		boolean expRes = true;
-		assertEquals(res, expRes);
+		for(int i = 0; i < weekdays.length; i++){
+			res0 = cook.addMealToSubPlan(1, 1, weekdays[i]+1);
+			
+		}
+	
+		boolean expRes0 = true;
+		assertEquals(res0, expRes0);
+		
+		boolean res1 = cook.addMealToSubPlan(1, 1, -1);
+		boolean expRes1 = false;
+		assertEquals(res1, expRes1);
+		
+		boolean res2 = cook.addMealToSubPlan(1, 1, 10);
+		boolean expRes2 = false;
+		assertEquals(res2, expRes2);
+	
 	}
 	@Test 
 	public void testShouldRemoveMealFromPlan() throws Exception{
 		System.out.println("Cook test 5: Remove meal from plan");
-		cook.addMealToSubPlan(1, 1, 2);
-		
 		
 		boolean res = cook.removeMealFromPlan(1, 1, 3);
 		boolean expRes = true;
@@ -100,15 +114,5 @@ public class TestCook {
 		Ingredient res = cook.addNewIngredient("banana", 40, "kg", database);
 		Ingredient expRes = new Ingredient(2, "banana", 40, "kg");
 		assertEquals(res, expRes);
-	}
-
-	@Ignore("Can not delete ingredient connected to a meal in 'meal_ingredient'")
-	public void testShouldDeleteIngredient() throws Exception{
-		System.out.println("Cook test 7: Delete ingredient");
-		
-		boolean res = cook.deleteIngredient(1);
-		boolean expRes = true;
-		assertEquals(res, expRes);
-//		deleteIngredient
-	}
+	} 
 }

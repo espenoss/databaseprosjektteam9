@@ -1,5 +1,7 @@
 package databasePackage;
 
+import java.util.Arrays;
+
 //All query methods related to users and login
 
 public class QMUser {
@@ -50,9 +52,9 @@ public class QMUser {
 	// 2 : name - String
 	// 3 : password - String
 	public static String[] viewUser(String userID, Database database) throws Exception{
-		String statement = "SELECT user_id, user_type, name FROM user WHERE user_id = '" + userID + "';";
-		System.out.println(statement);		
+		String statement = "SELECT user_id, user_type, name FROM user WHERE user_id = '" + userID + "';";		
 		database.makeSingleStatement(statement);
+
 		return database.getLastResult()[0];
 	}	
 	

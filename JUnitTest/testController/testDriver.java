@@ -3,15 +3,16 @@ package testController;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.*;
-import controller.Admin;
-import controller.User;
+
+import controller.*;
 import databasePackage.Database;
 
-public class TestAdmin {
-	private static Database database;
-	private static Admin instance;
-	private static ArrayList<User> userList = new ArrayList<User>();
+public class testDriver {
+private static Database database;
+private static Driver instance;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -22,15 +23,13 @@ public class TestAdmin {
 		database = new Database("com.mysql.jdbc.Driver", databasename);
 		database.initiateDb();
 		
-		instance = new Admin("Per","Per",database);
+		instance = new Driver("Per", "Per Pettersen", database);
 		
 		String insertUser1 = "INSERT INTO user VALUES('hanneh', 1, 'Hanne Hansen', 123456)";
 		String insertUser2 = "INSERT INTO user VALUES('olen', 2, 'Ole Normann', 123456)";
 		String insertUser3 = "INSERT INTO user VALUES('marie', 3, 'Marie', 1234)";
 		
-		userList.add(new User("hanneh", 1, "Hanne Hansen", database));
-		userList.add(new User("olen", 2, "Ole Normann", database));
-
+		
 		
 		database.makeSingleStatement(insertUser1);
 		database.makeSingleStatement(insertUser2);
@@ -98,6 +97,9 @@ public class TestAdmin {
 		database.makeSingleStatement(insertMeal5);
 		database.makeSingleStatement(insertMeal6);
 
+	    java.util.Date utilDate = new java.util.Date();
+	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+		
 		//order_id, meal_id, delivery_date, quantity, ready_delivery, delivered		
 		String insert7  = "INSERT INTO ordered_meal VALUES(10000, 1, '2016-03-01', 1, 1, 1)";
 		String insert8  = "INSERT INTO ordered_meal VALUES(10001, 2, '2016-03-31', 1, 1, 1)";
@@ -105,10 +107,13 @@ public class TestAdmin {
 		String insert10 = "INSERT INTO ordered_meal VALUES(10003, 1, '2016-03-04', 2, 1, 1)";
 		String insert11 = "INSERT INTO ordered_meal VALUES(10004, 2, '2016-03-07', 3, 1, 1)";
 		
-		String insert12 = "INSERT INTO ordered_meal VALUES(10000, 3, '2016-04-05', 1, 1, 1)";
-		String insert13 = "INSERT INTO ordered_meal VALUES(10001, 1, '2016-04-30', 1, 1, 1)";
-		String insert14 = "INSERT INTO ordered_meal VALUES(10002, 2, '2016-04-01', 1, 1, 1)";
-		String insert15 = "INSERT INTO ordered_meal VALUES(10003, 3, '2016-04-05', 1, 1, 1)";
+		String insert12 = "INSERT INTO ordered_meal VALUES(10000, 3, '"+sqlDate+"', 1, 1, 0)";
+		String insert13 = "INSERT INTO ordered_meal VALUES(10001, 1, '"+sqlDate+"', 1, 1, 0)";
+		String insert14 = "INSERT INTO ordered_meal VALUES(10002, 2, '"+sqlDate+"', 1, 1, 0)";
+		
+		
+		//[steak, 1, Nedre Bakklandet 61, Geir, Hansen, 10000, 3]
+		//meal_name, quan, adresse, fornavn, etternavn, ordreID, mealID
 		
 		database.makeSingleStatement(insert7);
 		database.makeSingleStatement(insert8);
@@ -117,54 +122,49 @@ public class TestAdmin {
 		database.makeSingleStatement(insert11);
 		database.makeSingleStatement(insert12);
 		database.makeSingleStatement(insert13);
-		database.makeSingleStatement(insert14);
-		database.makeSingleStatement(insert15);	
+		database.makeSingleStatement(insert14);	
 	}
-	
+		
 	@Test
-	public void testRegisterUser() throws Exception{
-		System.out.println("Admin test 1: registerUser");
+	public void testMarkDelivered() throws Exception {
+		System.out.println("Driver test 1: markDelivered");
+		java.sql.Date date = java.sql.Date.valueOf("2016-03-01");
+		instance.markDelivered(10000, 1, date);
 		
-		instance.registerUser("marit", 1, "Marit", "1234", database);
-		String res = instance.viewUser("marit");
-		String expRes = "Username: marit, user type: 1, name: Marit";
-		
-		assertEquals(expRes, res);
-	}
-	
-	@Test
-	public void testUpdateUser() throws Exception{
-		System.out.println("Admin test 2: updateUser");
-		String res = null;
-		
-		if (instance.updateUser("marie", 3, "Marie Hansen", "1234", database)){
-			res = instance.viewUser("marie");
+		Order order = instance.viewSingleOrder(10000);
+		ArrayList<MealOrdered> meals = order.getMeals();
+		MealOrdered tempMeal=null;
+		for (int i=0;i<meals.size();i++){
+			if (meals.get(i).getMealID()==1 && meals.get(i).getDeliverydate().equals(date)){
+				tempMeal =meals.get(i);
+			}
 		}
-		String expRes = "Username: marie, user type: 3, name: Marie Hansen";
+		boolean res = tempMeal.isDelivered();
+		boolean expRes = true;
 		assertEquals(expRes, res);
 	}
 	
 	@Test
-	public void testGetStatisticsForYear() throws Exception {
-		System.out.println("Admin test 3: getStatisticsForYear");
-		String expRes = "Income overview for 2016\n\n"+
-				"Income in January is: 0 kr.\n"+
-				"Income in February is: 0 kr.\n"+
-				"Income in March is: 1050 kr.\n"+
-				"Income in April is: 650 kr.\n\n"+
-				
-				"Total income this year: 1700 kr.";
+	public void testGenerateDeliveryPlan() throws Exception {
+		System.out.println("Driver test 1: generateDeliveryPlan");
 		
-		String res = instance.getStatisticsForYear(2016);
-		assertEquals(expRes, res);
+		String[][] plan = instance.generateDeliveryPlan();
+		
+		System.out.println(Arrays.toString(plan[0]));
+		System.out.println(Arrays.toString(plan[1]));
+		System.out.println(Arrays.toString(plan[2]));
+		
+		//String insert12 = "INSERT INTO ordered_meal VALUES(10000, 3, '"+sqlDate+"', 1, 1, 0)";
+		//String insert13 = "INSERT INTO ordered_meal VALUES(10001, 1, '"+sqlDate+"', 1, 1, 0)";
+		//String insert14 = "INSERT INTO ordered_meal VALUES(10002, 2, '"+sqlDate+"', 1, 1, 0)";
+		
+		//[steak, 1, Nedre Bakklandet 61, Geir, Hansen, 10000, 3]
+		//[pizza, 1, Byåsvegen 64, Jensine, Tvedt, 10001, 1]
+		//[taco, 1, Byåsvegen 64, Jensine, Tvedt, 10002, 2]
+		
+		fail("Not yet implemented");
+		//[steak, 1, Nedre Bakklandet 61, Geir, Hansen, 10000, 3]
+		//meal_name, quan, adresse, fornavn, etternavn, ordreID, mealID
 	}
-	
-	@Test
-	public void testViewUserList() throws Exception {
-		System.out.println("Admin test 4: viewUserList");
-		
-		ArrayList<User> testList = instance.viewUserList();
 
-		assertEquals(userList.get(0), testList.get(0));
-	}
 }

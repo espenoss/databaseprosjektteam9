@@ -34,7 +34,7 @@ class MainAdminGui extends JFrame {
 		    "View available meals", "Register new ingredient", "Register new meal", "Add ingredient to meal",
 		    "Register subscription plan", "Add meal to sub plan", "View food orders",
 		    "View ingregredients in meal", "View information about a single customer", "View food orders of a single customer", 
-		    "View all sub plans", "List subscription plan","Update subscription plan"};
+		    "View all sub plans"," View info about single subscription plan","Update subscription plan"};
 
 		private JList<String> choice_list = new JList<String>(CHOICES);  
 		Admin admin = null;
@@ -60,7 +60,6 @@ class MainAdminGui extends JFrame {
 		public static final int ADD_MEAL_TO_SUB_PLAN = 17;
 		public static final int VIEW_FOOD_ORDERS = 18;
 		public static final int VIEW_INGREDIENTS_IN_MEAL = 19;
-
 		public static final int VIEW_INFO_ABOUT_SINGLE_CUST = 20;
 		public static final int VIEW_FOOD_ORDER_OF_SINGLE_CUSTOMER = 21;
 		public static final int VIEW_ALL_SUBPLANS = 22;
@@ -276,7 +275,7 @@ class MainAdminGui extends JFrame {
 			         scrollpane.getViewport().add(list);		    	 
 			    	 JOptionPane.showMessageDialog(null, scrollpane, "All sub plans: ", JOptionPane.INFORMATION_MESSAGE );
 	    			}else if (choices == LIST_SUBSCRIPTION_PLAN){
-	    				 //new SubPlan(new Admin(admin.getUserID(), admin.getName(), database));
+	    				new GetMealsAsText(new Admin(admin.getUserID(), admin.getName(), database));
 	    			}else if(choices == UPDATE_SUP_PLAN){
 	    				new UpdateSubPlanInfoGui(new Cook(admin.getUserID(), admin.getName(), database));
 	    			}
