@@ -183,7 +183,7 @@ class MainAdminGui extends JFrame {
 			}
 	      }
 	      else if(choices==RETRIEVE_STATISTICS){
-	    	  //metoden for a hente ut statistikk
+	    	  new GetStatistics(new Admin(admin.getUserID(), admin.getName(), database));
 	    }else if(choices==VIEW_INGREDIENTS){
 	    	ArrayList<Ingredient> ing = null;
 	    	  try {
