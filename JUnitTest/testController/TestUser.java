@@ -58,14 +58,14 @@ public class TestUser {
 		database = new Database("com.mysql.jdbc.Driver", databasename);
 		database.initiateDb();
 		
-		System.out.println("Total number of tests: 7");
+		System.out.println("USER --- Total number of tests: 7");
 	
 	
 		
 		// *** USER ***
 		String userInsert = "INSERT INTO user VALUES('bob', 2, 'Bob Smidt', '1234');";
 		user = new User("bob", 2, "Bob Smidt", database);
-		database.makeSingleStatement(userInsert); 
+		database.makeSingleStatement(userInsert);  
 		
 		
 		// *** MEAL INSERT ***

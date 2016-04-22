@@ -25,14 +25,14 @@ public class TestCook {
 		
 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
 		database = new Database("com.mysql.jdbc.Driver", databasename);
-		database.initiateDb();
+		database.initiateDb(); 
 		
 		String insert = "INSERT INTO ingredient VALUES(1,'Mushroom',50,'stk');";
 		String insert1 = "INSERT INTO meal VALUES(1,'Pasta carbonara', NULL, true, 120);";
 		database.makeSingleStatement(insert);
 		database.makeSingleStatement(insert1);
 		
-		System.out.println("Total number of tests: 7");
+		System.out.println("COOK --- Total number of tests: 7");
 
 	}
 
