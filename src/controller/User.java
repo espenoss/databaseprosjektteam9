@@ -1,9 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import javax.swing.JOptionPane;
 import databasePackage.*;
 
 public class User implements java.io.Serializable{
@@ -49,8 +46,7 @@ public class User implements java.io.Serializable{
 		
 		String[][] orderT = QMOrder.viewOrdersByDeliveryDate(date, database);
 		if (orderT.length==0){
-			JOptionPane.showMessageDialog(null,"Could not find anything for the date "+date);
-			return null;
+			return null; 
 		}
 
 		Order tempOrder;
@@ -96,7 +92,6 @@ public class User implements java.io.Serializable{
 		String[][] mealT = QMFood.viewMeals(database);
 		
 		if (mealT.length==0){
-			JOptionPane.showMessageDialog(null,"Could not find any available orders.");
 			return null;
 		}
 		
@@ -120,7 +115,6 @@ public class User implements java.io.Serializable{
 		
 		String[][] list = QMCustomer.viewAllCustomers(database);
 		if (list.length==0){
-			JOptionPane.showMessageDialog(null,"Could not find any customers.");
 			return null;
 		}
 		
@@ -144,7 +138,6 @@ public class User implements java.io.Serializable{
 		
 		String[][] list = QMCustomer.viewAllCompanies(database);
 		if (list.length==0){
-			JOptionPane.showMessageDialog(null,"Could not find any companies.");
 			return null;
 		}
 		
@@ -189,7 +182,6 @@ public class User implements java.io.Serializable{
 	public ArrayList<Ingredient> viewIngredients() throws Exception{
 		String[][] ingT = QMFood.viewIngredients(database);
 		if (ingT.length==0){
-			JOptionPane.showMessageDialog(null,"Could not find any ingredients.");
 			return null;
 		}
 		
@@ -209,7 +201,6 @@ public class User implements java.io.Serializable{
 		String[][] subT = QMFood.viewSubscriptionPlans(database);
 		
 		if (subT.length==0){
-			JOptionPane.showMessageDialog(null,"Could not find any subscription plans.");
 			return null;
 		}
 		
