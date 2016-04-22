@@ -107,7 +107,7 @@ public class TestOrder {
 	
 	}
 	
-	@Ignore
+	@Test
 	public void testShouldFetchMealsInOrder() throws Exception{
 		System.out.println("Order test 1: Fetch meals in order");
 		
@@ -120,7 +120,7 @@ public class TestOrder {
 	}
 
 
-	@Ignore
+	@Test
 	public void testShouldRemoveMealFromOrder() throws Exception{
 		System.out.print("Order test 2: Remove meal from order");
 		
@@ -132,7 +132,7 @@ public class TestOrder {
 	}
 	
 	
-	@Ignore
+	@Test
 	public void testShouldUploadOrderToDatabase() throws Exception{
 		System.out.println("Order test 3: Upload order to database");
 		
@@ -144,7 +144,7 @@ public class TestOrder {
 		assertEquals(res, expRes);
 	}
 	
-	@Test
+	@Ignore
 	public void testShouldViewMealsInOrderByDate() throws Exception{
 		System.out.println("Order test 4: View meals in order by date");
 		java.sql.Date date = new java.sql.Date(2016-11-04);
