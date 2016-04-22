@@ -120,7 +120,7 @@ public class SubPlan {
 		return true;
 	}
 	
-	
+	/*
 	public static void main(String[] args) throws Exception{
 		String username = "marith1";
 		String password = "tgp8sBZA";
@@ -139,6 +139,8 @@ public class SubPlan {
 		System.out.println(testSub);
 		System.out.println("getMealsAsText: \n"+testSub.getMealsAsText());
 	}
+	
+	*/
 	
 
 }

@@ -35,7 +35,7 @@ public class Driver extends User {
 		return s;
 	}	
 	
-	
+	/*
 	public static void main(String[] args) throws Exception{
  		String username = "espenme";
  		String passingword = "16Sossosem06";
@@ -44,4 +44,5 @@ public class Driver extends User {
 		Driver driver = new Driver("","", database);
 		String[][] plan = driver.generateDeliveryPlan();
 	}
+	*/
 }

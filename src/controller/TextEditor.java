@@ -60,7 +60,7 @@ public class TextEditor {
 		}
 		return text;
 	}
-	
+	/*
 	public static void main(String[] args){
 		TextEditor t = new TextEditor();
 		
@@ -73,4 +73,5 @@ public class TextEditor {
 		System.out.println("int empty: "+t.stringToInt(""));
 		
 	}
+	*/
 }

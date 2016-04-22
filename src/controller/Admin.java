@@ -107,7 +107,7 @@ public class Admin extends User {
 		
 		return s;
 	}
-	
+	/*
 	public static void main(String[] args) throws Exception{
 		String username = "marith1";
 		String password = "tgp8sBZA";
@@ -120,5 +120,6 @@ public class Admin extends User {
 		//System.out.println(admin.getStatisticsForYear(2015));
 		System.out.println(admin.getStatisticsForYear(2016));
 	}
+	*/
 	
 }
