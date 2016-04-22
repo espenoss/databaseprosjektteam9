@@ -85,16 +85,7 @@ public class MyDialog extends JDialog {
 	 
 	private class WindowListener extends WindowAdapter{
 		public void windowClosing(WindowEvent event){
-			int answer = showConfirmDialog(MyDialog.this, "Do you want to save data?", "Closing dialog window", YES_NO_OPTION);
-			if(answer == YES_OPTION){
-				if(okData()){ //Skal bare lukke vinduet dersom ok data
-					ok = true;
-					setVisible(false);
-				}
-			}else{ //Data skal ikke lagres, lukker vinduet
-				ok = false;
-				setVisible(false);
-			}
+			setVisible(false);
 		}
 	}
 }

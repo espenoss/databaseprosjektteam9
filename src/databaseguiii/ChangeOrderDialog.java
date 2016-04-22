@@ -24,7 +24,6 @@ import controller.*;
 import databasePackage.Database;
 
 class ChangeOrderDialog extends JFrame {
-	private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
 	private Sales sales = null;
 	private ArrayList<Order> orders = new ArrayList<>();
 	private ArrayList<Customer> customerList = new ArrayList<>();
@@ -112,7 +111,7 @@ class ChangeOrderDialog extends JFrame {
 			currOrder.setInfo(info);
 			
 			try {
-				currOrder.uploadOrder(database);
+				currOrder.uploadOrder(sales.getDatabase());
 			} catch (Exception e) {
 				System.out.println(e.toString());
 			}

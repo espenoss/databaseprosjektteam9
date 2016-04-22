@@ -282,5 +282,15 @@ class MainAdminGui extends JFrame {
 	    			}
 			}
 		}
+		
+	 	public static void main(String[] args){
+	 		String username = "espenme";
+	 		String passingword = "16Sossosem06";
+	 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
+	 		Database database = new Database("com.mysql.jdbc.Driver", databasename);
+			MainAdminGui mag = new MainAdminGui(new Admin("","", database));
+			mag.setVisible(true);
+	 	}
+		
 	}
 	
