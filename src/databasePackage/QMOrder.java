@@ -209,10 +209,10 @@ public class QMOrder {
 		return Integer.parseInt(database.getLastResult()[0][0]);
 	}
 
-	// Returns order id of any orders that has deliveries today
+	// Returns order list of orders together with any orders to be delivered at deliveryDate
 	public static String[][] viewOrdersByDeliveryDate(java.sql.Date deliveryDate, Database database) throws Exception{
 		
-		String statement = "SELECT * FROM food_order NATURAL JOIN ordered_meal where food_order.order_id = ordered_meal.order_id AND delivery_date = '" + deliveryDate + "';";
+		String statement = "SELECT DISTINCT food_order.* FROM food_order NATURAL JOIN ordered_meal where food_order.order_id = ordered_meal.order_id AND delivery_date = '" + deliveryDate + "';";
 		
 		database.makeSingleStatement(statement);
 		

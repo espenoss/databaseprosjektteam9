@@ -84,8 +84,10 @@ public class ViewDeliveryList extends JFrame {
 		public void valueChanged(ListSelectionEvent e) {
 			JList<String> liste = (JList<String>)e.getSource();
 			int selected = liste.getSelectedIndex();
-			int baseIndex = (selected/4)*4; // Round down
-			if(selected > -1) listcontent.remove(baseIndex);
+			int baseIndex = (selected/4)*4; // Round down to nearest multiple of 4
+			for(int i=0;i<4;i++){
+				if(baseIndex > -1 && !listcontent.isEmpty()) listcontent.remove(baseIndex);
+			}
 			int index = selected/4;
 			if(index < mealList.length){
 				int orderID = Integer.parseInt(mealList[index][5]);
