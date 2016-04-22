@@ -190,7 +190,7 @@ public class QMOrder {
 	
 	public static String[][] viewMealsInOrder(int orderID, Database database) throws Exception{
 
-		String statement = "SELECT * FROM meal NATURAL JOIN ordered_meal WHERE order_id= "+10000+";";
+		String statement = "SELECT * FROM meal NATURAL JOIN ordered_meal WHERE order_id= "+ orderID +";";
 		
 		database.makeSingleStatement(statement);
 		
