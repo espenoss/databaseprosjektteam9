@@ -107,11 +107,11 @@ public class User implements java.io.Serializable{
 		for (int i=0; i<mealT.length; i++){
 			if (t.stringToInt(mealT[i][3])>0){
 				tempMeal = new Meal(t.stringToInt(mealT[i][0]), mealT[i][1], mealT[i][2], true, t.stringToInt(mealT[i][4]));
+				tempMeal.fetchIngredients(database);
 				mealList.add(tempMeal);
 			}
 		}
 		return mealList;
-		
 	}
 	
 

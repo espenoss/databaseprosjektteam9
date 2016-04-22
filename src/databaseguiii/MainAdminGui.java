@@ -140,6 +140,7 @@ class MainAdminGui extends JFrame {
 		    	 for( int i = 0; i < c.size(); i++ ){
 		    		 s[i] = c.get(i).toString() + " ";
 		    	 }
+	      	
 		    	 
 		    	 JScrollPane scrollpane = new JScrollPane(); 
 		         JList<String> list = new JList<String>(s);
@@ -239,8 +240,7 @@ class MainAdminGui extends JFrame {
 	    			new ViewFoodOrders (new Admin (admin.getUserID(), admin.getName(), database));
 	    		}
 	    		else if(choices==VIEW_INGREDIENTS_IN_MEAL){
-	    			new IngredientsInMealGui(new Cook(admin.getUserID(), admin.getName(), database), new Meal(meal.getMealID(), meal.getMealName(),
-	    					meal.getInstructions(), meal.getAvailable(), meal.getPrice()));
+	    			new IngredientsInMealGui(new Cook(admin.getUserID(), admin.getName(), database));
 	    				
 	    		}
 			}

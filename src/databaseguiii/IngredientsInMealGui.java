@@ -17,12 +17,12 @@ import databasePackage.Database;
 
 class IngredientsInMealGui extends JFrame {
 	
-	private Meal meal = null; 
+	
 	private Cook cook = null;
+	private Meal meal = null;
   
-	public IngredientsInMealGui(Cook cook, Meal meal){ 
+	public IngredientsInMealGui(Cook cook){ 
 		this.cook=cook;
-		this.meal = meal;
 		IngredientsInMealDialog dialog = new IngredientsInMealDialog(this);
 		dialog.setVisible(true);
 		dialog.setLocation(350, 350);
@@ -74,24 +74,21 @@ class IngredientsInMealGui extends JFrame {
 		public boolean okData(){
 			
 			my_meal = mealIdSelected.getSelectedIndex();
-				
 			String s ="";
-			ArrayList <Ingredient> ingr_in_meal = meal.getIngredients();
+			
+			ArrayList <Ingredient > ingr_in_meal = mealList.get(my_meal).getIngredients();
+			
 			for(int i=0; i<ingr_in_meal.size(); i++){
 				s +=  ingr_in_meal.get(i).toString() + " \n";
 			}
 			JOptionPane.showMessageDialog(null, s, "Inredients of this meal: ", JOptionPane.INFORMATION_MESSAGE );
+				
 			return true;
 		}
 	}
-	public static void main(String[] args){
-		String username = "espenme";
-		String passingword = "16Sossosem06";
-		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
-		Database database = new Database("com.mysql.jdbc.Driver", databasename);
-		new IngredientsInMealGui(new Cook("","", database), new Meal(1,"","", true,1));
-	}
+	
 }  
+
 
 
 
