@@ -106,7 +106,7 @@ public class Admin extends User {
 		
 		Admin admin = new Admin("Per","Per",database);
 		
-		System.out.println(admin.getStatisticsForYear(2015));
+		//System.out.println(admin.getStatisticsForYear(2015));
 		System.out.println(admin.getStatisticsForYear(2016));
 	}
 	

@@ -62,7 +62,6 @@ public class User implements java.io.Serializable{
 			tempOrder.fetchMealsInOrder(database);
 			orderList.add(tempOrder);
 		}
-		
 		return orderList; 
 	}
 	
