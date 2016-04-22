@@ -28,9 +28,12 @@ class MainAdminGui extends JFrame {
 		private JList list = new JList();
 		private static final String [] CHOICES =
 		    {"Register new user","Change user information", "View all users", "Register new customer",
-		    		"Register new company", "Change customer information", "View private customers", 
-		    		"View company customers","Register new food order","Change food order", "Retrieve statistics","View available ingredients", "View available meals", "Register new ingredient", "Register new meal", "Add ingredient to meal",
-		    		"Register subscription plan", "Add meal to sub plan", "View food orders", "View ingregredients in meal", "View information about a single customer"};
+		    "Register new company", "Change customer information", "View private customers", 
+		   	"View company customers","Register new food order","Change food order", 
+		    "Retrieve statistics","View available ingredients", 
+		    "View available meals", "Register new ingredient", "Register new meal", "Add ingredient to meal",
+		    "Register subscription plan", "Add meal to sub plan", "View food orders",
+		    "View ingregredients in meal", "View information about a single customer", "View food orders og a single customer"};
 		private JList<String> choice_list = new JList<String>(CHOICES);  
 		Admin admin = null;
 		Meal meal=null;
@@ -57,10 +60,10 @@ class MainAdminGui extends JFrame {
 		public static final int VIEW_INGREDIENTS_IN_MEAL = 19;
 
 		public static final int VIEW_INFO_ABOUT_SINGLE_CUST = 20;
+		public static final int VIEW_FOOD_ORDER_OF_SINGLE_CUSTOMER = 21;
 
 		
-		
-
+	
 		
 		public MainAdminGui(Admin admin) {
 			this.admin = admin;
@@ -246,6 +249,8 @@ class MainAdminGui extends JFrame {
 	    				
 	    		}else if(choices==VIEW_INFO_ABOUT_SINGLE_CUST){
 	    			new ViewSingleCustomerGui(new Sales(admin.getUserID(), admin.getName(), database));
+	    		}else if(choices==VIEW_FOOD_ORDER_OF_SINGLE_CUSTOMER){
+	    			new ViewFoodOrdersByCustomerGui(new Sales(admin.getUserID(), admin.getName(), database));
 	    		}
 			}
 		}
