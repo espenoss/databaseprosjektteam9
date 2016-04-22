@@ -34,7 +34,7 @@ class MainAdminGui extends JFrame {
 		    "View available meals", "Register new ingredient", "Register new meal", "Add ingredient to meal",
 		    "Register subscription plan", "Add meal to sub plan", "View food orders",
 		    "View ingregredients in meal", "View information about a single customer", "View food orders of a single customer", 
-		    "View all sub plans", "List subscription plan","Update subscription plan"};
+		    "View all sub plans"," View info about single subscription plan","Update subscription plan"};
 
 		private JList<String> choice_list = new JList<String>(CHOICES);  
 		Admin admin = null;
