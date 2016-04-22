@@ -32,7 +32,7 @@ public class TestUserNull {
 		database = new Database("com.mysql.jdbc.Driver", databasename);
 		database.initiateDb();
 		
-		System.out.println("Total number of tests: 7");
+		System.out.println("USERNULL --- Total number of tests: 7");
 		
 		user = new User("bobdy", 1, "Bob Dylan", database);
 	}
