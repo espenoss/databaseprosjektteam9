@@ -23,7 +23,7 @@ import databasePackage.Database;
 
 public class MarkOrderAsReadyDialog extends JFrame{
 
-	  private DefaultListModel<String> listcontent = new DefaultListModel<String>(); // "datamodellen"
+	  private DefaultListModel<String> listcontent = new DefaultListModel<String>();
 	  private JList<String> list = new JList<String>(listcontent);
 	  private Cook cook = null;
 	  ArrayList<Order> orderList = null;

@@ -10,6 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import controller.Cook;
 import controller.Customer;
 import controller.Ingredient;
 import controller.Meal;
@@ -21,8 +22,9 @@ import databasePackage.Database;
 public class TestUserNull {
 	private static Database database;
 	private static User user;
+	private static Cook cook;
 	
-	// Tests user methods with empty database
+	// Tests user (and some cook) methods with empty database
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		String username = "anitakau";
@@ -32,9 +34,10 @@ public class TestUserNull {
 		database = new Database("com.mysql.jdbc.Driver", databasename);
 		database.initiateDb();
 		
-		System.out.println("Total number of tests: 7");
+		System.out.println("NULLTESTS --- Total number of tests: 9");
 		
 		user = new User("bobdy", 1, "Bob Dylan", database);
+		cook = new Cook("bob","Bob", database);
 	}
 	
 		
@@ -99,6 +102,18 @@ public class TestUserNull {
 		
 		ArrayList<SubPlan> res = user.viewAllSubPlans();
 		ArrayList<SubPlan> expRes = null;
+		assertEquals(res, expRes);
+	}
+	
+	@Test
+	public void nullTestShouldAddIngredientToMeal() throws Exception{
+		// Tests add ingredient to meal with empty database
+		database.initiateDb();
+		System.out.println("Cook test NULL: Add ingredient to meal with empty databse");
+
+		boolean res = cook.addIngredientToMeal(1, 1, 2);
+		boolean expRes = false;
+		
 		assertEquals(res, expRes);
 	}
 

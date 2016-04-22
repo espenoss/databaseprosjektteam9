@@ -79,7 +79,7 @@ public class Order {
 	public ArrayList<MealOrdered> viewMealsInOrderByDate(java.sql.Date date, Database database) throws Exception{
 		fetchMealsInOrder(database);
 		ArrayList<MealOrdered> tempMeals = new ArrayList<MealOrdered>();
-		
+		 
 		for (int i=0; i<meals.size();i++){
 			if (meals.get(i).getDeliverydate().equals(date)){
 				tempMeals.add(meals.get(i));
@@ -100,7 +100,7 @@ public class Order {
 		TextEditor t = new TextEditor();
 		
 		for(int i=0;i<mealT.length;i++){			
-			boolean readyDelivery = t.stringToInt(mealT[i][8])==1;
+			boolean readyDelivery = t.stringToInt(mealT[i][8])==1; 
 			boolean delivered = t.stringToInt(mealT[i][9])==1;
 			
 			meals.add(new MealOrdered(t.stringToInt(mealT[i][0]), mealT[i][1], mealT[i][2], t.stringToInt(mealT[i][4]),
