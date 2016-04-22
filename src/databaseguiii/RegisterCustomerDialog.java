@@ -106,14 +106,21 @@ class RegisterCustomerDialog extends JFrame {
 				}else{
 					active = false;
 				}
-				
-				try {
-					sales.registerCustomer(surName, firstName, phoneNumber, email, adress, 
-						zip_code, zone_nr, preferences, active);
-				} catch (Exception e) {
-					System.out.println(e.toString());
+				Customer customer=null;
+				if(zip_code!=-1){
+					try {
+						 customer = sales.registerCustomer(surName, firstName, phoneNumber, email, adress, 
+								zip_code, zone_nr, preferences, active);
+									
+					} catch (Exception e) {
+						System.out.println(e.toString());
+					}
+					return true;		
 				}
-				return true;		
+				if(customer==null || zip_code!=-1){
+					JOptionPane.showMessageDialog(null, "Customer was not registered, fill in correct information","", JOptionPane.INFORMATION_MESSAGE);
+				}
+				return true;
 			}
 		}
 }  

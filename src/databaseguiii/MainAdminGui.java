@@ -275,7 +275,7 @@ class MainAdminGui extends JFrame {
 			         scrollpane.getViewport().add(list);		    	 
 			    	 JOptionPane.showMessageDialog(null, scrollpane, "All sub plans: ", JOptionPane.INFORMATION_MESSAGE );
 	    			}else if (choices == LIST_SUBSCRIPTION_PLAN){
-	    				new GetMealsAsText(new Admin(admin.getUserID(), admin.getName(), database));
+	    				//new GetMealsAsText(new Admin(admin.getUserID(), admin.getName(), database));
 	    			}else if(choices == UPDATE_SUP_PLAN){
 	    				new UpdateSubPlanInfoGui(new Cook(admin.getUserID(), admin.getName(), database));
 	    			}
