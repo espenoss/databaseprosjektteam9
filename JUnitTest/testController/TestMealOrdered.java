@@ -62,9 +62,6 @@ public class TestMealOrdered{
 		db.makeSingleStatement(insert1);
 		db.makeSingleStatement(insert2);
 		
-		Meal meal = new Meal(1, "pizza", null, true, 120);
-		
-		
 		String insert9= "INSERT INTO meal_ingredient VALUES(1,1,2)";
 		String insert10 = "INSERT INTO meal_ingredient VALUES(2,2,1)";
 		db.makeSingleStatement(insert9);
@@ -76,18 +73,10 @@ public class TestMealOrdered{
 		
 		db.makeSingleStatement(insert7);
 		db.makeSingleStatement(insert8);
-/*		
-		Meal meal,
-		String deliveryDate, int quantity, int orderID, boolean readyDelivery, boolean delivered
-		instance2 = new MealOrdered(2, "taco", null, 100, "2016-11-04",2,2,false, false);
-*/		
-	
 		
-	/*	MealOrdered pizza = new MealOrdered(1,"pizza", null, 120, "2016-11-04",1,1,false,false);
-		MealOrdered taco = new MealOrdered(2, "taco", null, 100, "2016-11-04",2,2,false, false);
-		ordMeals.add(pizza);
-		ordMeals.add(taco);
-	*/	
+		Meal pizza = new Meal(1,"pizza", null, true,100);
+		instance2 = new MealOrdered(pizza,"2016-03-03",2,1, false, false);
+		
 		
 		
 	}
@@ -98,6 +87,10 @@ public class TestMealOrdered{
 		boolean res = instance.markMealAsReady(db);
 		boolean expRes = true;
 		assertEquals(res, expRes);
+		
+		boolean res2 = instance2.markMealAsReady(db);
+		boolean expRes2 = true;
+		assertEquals(res2, expRes2);
 	}
 	
 	@Test
@@ -107,6 +100,10 @@ public class TestMealOrdered{
 		boolean res = instance.markMealAsDelivered(db);
 		boolean expRes = true;
 		assertEquals(res,expRes);
+		
+		boolean res2 = instance2.markMealAsDelivered(db);
+		boolean expRes2 = true;
+		assertEquals(res2, expRes2);
 	}
 	
 	@Test
@@ -114,11 +111,17 @@ public class TestMealOrdered{
 		System.out.println("MealOrdered test 3: Upload meal ordered to database");
 		
 		instance.setQuantity(4);
+		instance.setMealName("salad");
 		
 		boolean res = instance.uploadMealOrdered(db);
 		boolean expRes = true;
 		assertEquals(res, expRes);
-//	boolean uploadMealOrdered(Database database)
+		
+		instance2.setInstructions("Something");
+		instance2.setDeliverydate("2016-05-05");
+		boolean res2 = instance2.uploadMealOrdered(db);
+		boolean expRes2 = true;
+		assertEquals(res2, expRes2);
 	}
 
 }

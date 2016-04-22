@@ -60,7 +60,6 @@ class MainAdminGui extends JFrame {
 		public static final int ADD_MEAL_TO_SUB_PLAN = 17;
 		public static final int VIEW_FOOD_ORDERS = 18;
 		public static final int VIEW_INGREDIENTS_IN_MEAL = 19;
-
 		public static final int VIEW_INFO_ABOUT_SINGLE_CUST = 20;
 		public static final int VIEW_FOOD_ORDER_OF_SINGLE_CUSTOMER = 21;
 		public static final int VIEW_ALL_SUBPLANS = 22;
@@ -276,7 +275,7 @@ class MainAdminGui extends JFrame {
 			         scrollpane.getViewport().add(list);		    	 
 			    	 JOptionPane.showMessageDialog(null, scrollpane, "All sub plans: ", JOptionPane.INFORMATION_MESSAGE );
 	    			}else if (choices == LIST_SUBSCRIPTION_PLAN){
-	    				 //new SubPlan(new Admin(admin.getUserID(), admin.getName(), database));
+	    				new GetMealsAsText(new Admin(admin.getUserID(), admin.getName(), database));
 	    			}else if(choices == UPDATE_SUP_PLAN){
 	    				new UpdateSubPlanInfoGui(new Cook(admin.getUserID(), admin.getName(), database));
 	    			}
