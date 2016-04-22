@@ -30,7 +30,7 @@ class MainAdminGui extends JFrame {
 		    {"Register new user","Change user information", "View all users", "Register new customer",
 		    		"Register new company", "Change customer information", "View private customers", 
 		    		"View company customers","Register new food order","Change food order", "Retrieve statistics","View available ingredients", "View available meals", "Register new ingredient", "Register new meal", "Add ingredient to meal",
-		    		"Register subscription plan", "Add meal to sub plan", "View food orders", "View ingregredients in meal"};
+		    		"Register subscription plan", "Add meal to sub plan", "View food orders", "View ingregredients in meal", "View information about a single customer"};
 		private JList<String> choice_list = new JList<String>(CHOICES);  
 		Admin admin = null;
 		Meal meal=null;
@@ -55,6 +55,8 @@ class MainAdminGui extends JFrame {
 		public static final int ADD_MEAL_TO_SUB_PLAN = 17;
 		public static final int VIEW_FOOD_ORDERS = 18;
 		public static final int VIEW_INGREDIENTS_IN_MEAL = 19;
+
+		public static final int VIEW_INFO_ABOUT_SINGLE_CUST = 20;
 
 		
 		
@@ -242,6 +244,8 @@ class MainAdminGui extends JFrame {
 	    		else if(choices==VIEW_INGREDIENTS_IN_MEAL){
 	    			new IngredientsInMealGui(new Cook(admin.getUserID(), admin.getName(), database));
 	    				
+	    		}else if(choices==VIEW_INFO_ABOUT_SINGLE_CUST){
+	    			new ViewSingleCustomerGui(new Sales(admin.getUserID(), admin.getName(), database));
 	    		}
 			}
 		}
