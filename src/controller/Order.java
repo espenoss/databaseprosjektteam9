@@ -2,6 +2,8 @@ package controller;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import databasePackage.*;
 
 
@@ -66,7 +68,7 @@ public class Order {
 	}
 	*/
 	
-	// FINISHED MÅ TESTES
+	// FINISHED Mï¿½ TESTES
 	public boolean removeMealFromOrder(int index, Database database) throws Exception{
 		QMOrder.removeMealFromOrder(orderID, meals.get(index).getMealID(), meals.get(index).getDeliverydate().toString(), database);
 		fetchMealsInOrder(database);
@@ -90,13 +92,13 @@ public class Order {
 	*/
 	
 	
-	//FINISHED må testes
+	//FINISHED mï¿½ testes
 	//Register information to databasee
 	public boolean uploadOrder(Database database) throws Exception{
 		return QMOrder.updateOrder(orderID, orderDate, customerID, info, userID, database);
 	}
 	
-	//FINISHED må testes
+	//FINISHED mï¿½ testes
 	//Makes an arrayList of all meals in an order that has a spesific delivery date. 
 	public ArrayList<MealOrdered> viewMealsInOrderByDate(java.sql.Date date, Database database) throws Exception{
 		fetchMealsInOrder(database);
@@ -112,10 +114,13 @@ public class Order {
 	
 	//FINISHED testes?
 	//Fetches meals from database
-	public void fetchMealsInOrder(Database database) throws Exception{
+	public boolean fetchMealsInOrder(Database database) throws Exception{
 		meals = new ArrayList<MealOrdered>(); //creates new empty meal arrayList
 		String[][] mealT = QMOrder.viewMealsInOrder(orderID, database);
-		
+		if(mealT.length == 0){
+			return false;
+		}
+		System.out.println("Meals fra database: \n"+Arrays.deepToString(mealT));
 		TextEditor t = new TextEditor();
 		
 		for(int i=0;i<mealT.length;i++){			
@@ -125,6 +130,7 @@ public class Order {
 			meals.add(new MealOrdered(t.stringToInt(mealT[i][0]), mealT[i][1], mealT[i][2], t.stringToInt(mealT[i][4]),
 					mealT[i][6], t.stringToInt(mealT[i][7]),t.stringToInt(mealT[i][5]),readyDelivery,delivered));
 		}
+		return true;
 	}
 	
 	public String toString(){
