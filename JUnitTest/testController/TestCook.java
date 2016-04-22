@@ -17,7 +17,7 @@ public class TestCook {
 	private static Database database;
 	private static Cook cook;
 	private SubPlan subPlan;	
-	
+	 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		String username = "anitakau";
@@ -100,8 +100,6 @@ public class TestCook {
 	@Test 
 	public void testShouldRemoveMealFromPlan() throws Exception{
 		System.out.println("Cook test 5: Remove meal from plan");
-		cook.addMealToSubPlan(1, 1, 2);
-		
 		
 		boolean res = cook.removeMealFromPlan(1, 1, 3);
 		boolean expRes = true;
