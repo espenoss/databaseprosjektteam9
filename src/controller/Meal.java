@@ -39,6 +39,9 @@ public class Meal {
 	public ArrayList<Ingredient> getIngredients(){
 		return ingredients;
 	}
+	public ArrayList<Float> getIngQuantity(){
+		return ingQuantity;
+	}
 	
 	public boolean getAvailable(){
 		return available;
