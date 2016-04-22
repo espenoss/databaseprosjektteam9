@@ -26,10 +26,7 @@ class ViewFoodOrders extends JFrame {
 		ArrayList<Order> o = null;
 		SpinnerDateModel dateSelectModel = new SpinnerDateModel();
 		JSpinner dateSelect = new JSpinner(dateSelectModel);
-		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
-		String str = s.format(dateSelect.getValue());
-		java.sql.Date sqlDate = java.sql.Date.valueOf(str);    
-
+		
 		public ViewFoodOrders(User user) {
 			this.user = user;
 			DialogWindow dialog = new DialogWindow(this);
@@ -69,6 +66,11 @@ class ViewFoodOrders extends JFrame {
 					
 					
 			public boolean okData(){
+				
+				SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+				String str = s.format(dateSelect.getValue());
+				java.sql.Date sqlDate = java.sql.Date.valueOf(str);    
+
 					
 			    try {
 			    	o = user.viewFoodOrders(sqlDate);
@@ -76,13 +78,13 @@ class ViewFoodOrders extends JFrame {
 		     	catch (Exception e) {
 		  	 		e.printStackTrace();
 		   	 	}
-		   		 String[] str = new String[o.size()];
+		   		 String[] str2 = new String[o.size()];
 		    	 for( int i = 0; i < o.size(); i++ ){
-		    	 str[i] = o.get(i).toString() + " ";
+		    	 str2[i] = o.get(i).toString() + " ";
 			   	 }
 			    	 
 			    JScrollPane scrollpane = new JScrollPane(); 
-			    JList<String> list = new JList<String>(str);
+			    JList<String> list = new JList<String>(str2);
 			    scrollpane = new JScrollPane(list);
 			    JPanel panel = new JPanel(); 
 			    panel.add(scrollpane);
