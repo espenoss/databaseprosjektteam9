@@ -103,17 +103,19 @@ class ViewFoodOrdersByCustomerGui extends JFrame{
 					// Update orderlist when different customer selected
 					
 					int customerIndex = customerSelect.getSelectedIndex();
-					Customer currCust = customerList.get(customerIndex);
-					listcontent.clear();
-					try {
-						orderList = sales.viewFoodOrdersByCustomer(currCust.getCustomerID());
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					if(orderList != null){
-						for(Order o: orderList){
-							listcontent.addElement(o.getOrderID() + "");
+					if(customerIndex != -1){
+						Customer currCust = customerList.get(customerIndex);
+						listcontent.clear();
+						try {
+							orderList = sales.viewFoodOrdersByCustomer(currCust.getCustomerID());
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
+						if(orderList != null){
+							for(Order o: orderList){
+								listcontent.addElement(o.getOrderID() + "");
+							}
+						}	
 					}
 				}				
 			}
@@ -121,16 +123,18 @@ class ViewFoodOrdersByCustomerGui extends JFrame{
 			private class listListener implements ListSelectionListener{
 				public void valueChanged(ListSelectionEvent arg0) {
 					int orderIndex = list.getSelectedIndex();
-					Order selectedOrder = orderList.get(orderIndex);
-					
-					try {
-						boolean c = selectedOrder.fetchMealsInOrder(sales.getDatabase());
-						if(c){
-							String s = selectedOrder.toString();
-							JOptionPane.showMessageDialog(null, s, "Meals in order", JOptionPane.INFORMATION_MESSAGE );						
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
+					if(orderIndex != -1){
+						Order selectedOrder = orderList.get(orderIndex);
+						
+						try {
+							boolean c = selectedOrder.fetchMealsInOrder(sales.getDatabase());
+							if(c){
+								String s = selectedOrder.toString();
+								JOptionPane.showMessageDialog(null, s, "Meals in order", JOptionPane.INFORMATION_MESSAGE );						
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}	
 					}
 				}
 			}
