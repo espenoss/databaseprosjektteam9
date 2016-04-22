@@ -41,6 +41,7 @@ public class SubPlan {
 		name = newName;
 	}
 	
+	
 	//Lists subsriction plan 
 	public String getMealsAsText(){
 		String res = "";
