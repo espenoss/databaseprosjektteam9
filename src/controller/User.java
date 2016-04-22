@@ -62,7 +62,6 @@ public class User implements java.io.Serializable{
 			tempOrder.fetchMealsInOrder(database);
 			orderList.add(tempOrder);
 		}
-		
 		return orderList; 
 	}
 	
@@ -225,18 +224,30 @@ public class User implements java.io.Serializable{
 		return subList;
 	}
 	
-	public boolean equals(Object obj){
-		if(!(obj instanceof User)){
-			return false;
-		}
-		if(this==obj){
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
 			return true;
-		}
-		User p=(User)obj;
-		return (userID==p.getUserID() && name==p.getName()&&userType==p.getUserType());
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (userID == null) {
+			if (other.userID != null)
+				return false;
+		} else if (!userID.equals(other.userID))
+			return false;
+		if (userType != other.userType)
+			return false;
+		return true;
 	}
-	
-	
+
 	public String toString(){
 		return "Username: "+userID+", usertype: "+userType+", name: "+name;
 	}

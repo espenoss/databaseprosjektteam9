@@ -120,7 +120,9 @@ public class Order {
 		if(mealT.length == 0){
 			return false;
 		}
+
 //		System.out.println("Meals fra database: \n"+Arrays.deepToString(mealT));
+
 		TextEditor t = new TextEditor();
 		
 		for(int i=0;i<mealT.length;i++){			
@@ -171,7 +173,11 @@ public class Order {
 		return true;
 	}
 	
+<<<<<<< HEAD
 /*	
+=======
+	
+>>>>>>> branch 'master' of https://github.com/espenoss/databaseprosjektteam9.git
 	//TEST TEST TEST 
 	static public void main(String[] arg) throws Exception{
 		String username = "marith1";
@@ -184,14 +190,24 @@ public class Order {
 	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		
 		Order test = new Order(10000,"2016-03-01",10000,"Info", "hanneh");
+		Order test2 = new Order(10001,"2016-03-01",10000,"Info", "hanneh");
+		Order test3 = new Order(10005, "2016-03-09",10002, "En ting", "pero");
 		//System.out.println(test);
 		
 		java.sql.Date dato = java.sql.Date.valueOf("2016-03-01");
+		test2.fetchMealsInOrder(database);
+		System.out.println("test2: "+test2.getMeals());
 		
 		test.fetchMealsInOrder(database);
-		System.out.println(test.viewMealsInOrderByDate(dato, database));
-		//System.out.println(test);
+		System.out.println("test1: "+test.getMeals());
 		
+		System.out.println(test3.fetchMealsInOrder(database));
+		//System.out.println(test.viewMealsInOrderByDate(dato, database));
+		//System.out.println(test);
 	}
+<<<<<<< HEAD
 */	
+=======
+	
+>>>>>>> branch 'master' of https://github.com/espenoss/databaseprosjektteam9.git
 }

@@ -36,7 +36,9 @@ public class ViewDeliveryList extends JFrame {
 		  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		  add(new TextPanel(), BorderLayout.NORTH);
 	   	  add(new ListPanel(), BorderLayout.CENTER);
-	   	  list.addListSelectionListener(new listListener());
+	   	  JButton markButton = new JButton("Mark as delivered");
+	   	  markButton.addActionListener(new markButtonListener());
+	   	  add(markButton, BorderLayout.SOUTH);
 		  pack();
 		  
 	  }
@@ -47,7 +49,7 @@ public class ViewDeliveryList extends JFrame {
 	      setLayout(new GridLayout(4, 1, 2, 2));
 	      add(new JLabel(""));  // for å få inn litt luft
 	      add(new JLabel("List of deliveries"));
-	      add(new JLabel("Click to mark as delivered"));
+	      add(new JLabel("Mark and click button to mark as delivered"));
 	      add(new JLabel(""));  // for å få inn litt luft
 	    }
 	  }
@@ -74,16 +76,15 @@ public class ViewDeliveryList extends JFrame {
 	    	}
     	    
 	    	list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	    	JScrollPane rullefeltMedListe = new JScrollPane(list); // rullefelt
-	    	add(rullefeltMedListe, BorderLayout.CENTER);
+	    	JScrollPane mealScroller = new JScrollPane(list); 
+	    	add(mealScroller, BorderLayout.CENTER);
 	    }
 	  }
 	  
-	  private class listListener implements ListSelectionListener{
+	  private class markButtonListener implements ActionListener{
 
-		public void valueChanged(ListSelectionEvent e) {
-			JList<String> liste = (JList<String>)e.getSource();
-			int selected = liste.getSelectedIndex();
+		public void actionPerformed(ActionEvent arg0) {
+			int selected = list.getSelectedIndex();
 			int baseIndex = (selected/4)*4; // Round down to nearest multiple of 4
 			for(int i=0;i<4;i++){
 				if(baseIndex > -1 && !listcontent.isEmpty()) listcontent.remove(baseIndex);
@@ -102,7 +103,6 @@ public class ViewDeliveryList extends JFrame {
 				}
 			}
 		}
-		  
 	  }
 	  
 	 	public static void main(String[] args){
