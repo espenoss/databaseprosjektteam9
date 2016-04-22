@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Arrays;
+
 import databasePackage.Database;
 import databasePackage.QMFood;
 
@@ -45,9 +47,9 @@ public class SubPlan {
 	//Lists subsriction plan 
 	public String getMealsAsText(){
 		String res = "";
-		for(int i = 0; i < meals.length; i++){
-			if(meals[i]!=null){
-				res += meals.toString();
+		for (int i=0; i<7; i++){
+			if(meals[i] != null){
+				res+="\nWeekday nr: "+(i+1)+", meal: "+meals[i].getMealName();
 			}
 		}
 		return res;
@@ -90,7 +92,7 @@ public class SubPlan {
 	public String toString(){
 		String res = "Subscription plan ID: "+ subPlanID+ ", name: "+ name;
 		for (int i=0; i<7; i++){
-			if(meals[i]!= null){
+			if(meals[i] != null){
 				res+="\nWeekday nr: "+(i+1)+", meal: "+meals[i].getMealName();
 			}
 			
@@ -118,7 +120,7 @@ public class SubPlan {
 		return true;
 	}
 	
-	/*
+	
 	public static void main(String[] args) throws Exception{
 		String username = "marith1";
 		String password = "tgp8sBZA";
@@ -130,9 +132,13 @@ public class SubPlan {
 		SubPlan testSub = new SubPlan(1, "Lunsj");
 		
 		testSub.fetchMealsInPlan(database);
+		Meal[] meals = testSub.getMeals();
+		
+		System.out.println(meals[0].getMealName());
 		
 		System.out.println(testSub);
+		System.out.println("getMealsAsText: \n"+testSub.getMealsAsText());
 	}
-	*/
+	
 
 }
