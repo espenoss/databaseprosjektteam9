@@ -76,10 +76,11 @@ public class TestMealOrdered{
 		
 		db.makeSingleStatement(insert7);
 		db.makeSingleStatement(insert8);
-		
-
-		instance2 = new MealOrdered();
-		
+/*		
+		Meal meal,
+		String deliveryDate, int quantity, int orderID, boolean readyDelivery, boolean delivered
+		instance2 = new MealOrdered(2, "taco", null, 100, "2016-11-04",2,2,false, false);
+*/		
 	
 		
 	/*	MealOrdered pizza = new MealOrdered(1,"pizza", null, 120, "2016-11-04",1,1,false,false);
