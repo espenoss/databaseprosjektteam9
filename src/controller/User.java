@@ -16,7 +16,7 @@ public class User{
 		this.name=name;
 		this.database = database;
 	}
-
+ 
 	public String getUserID(){
 		return userID;
 	}
@@ -71,7 +71,7 @@ public class User{
 		if (orderT.length==0){
 			return null;
 		}
-
+ 
 		Order tempOrder;
 		ArrayList<Order> orderList = new ArrayList<Order>();
 		
