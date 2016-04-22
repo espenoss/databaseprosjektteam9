@@ -122,17 +122,17 @@ public class QMOrder {
 			boolean readyDelivery, boolean delivered, Database database) throws Exception{
 		 
 		String statement = "UPDATE ordered_meal SET "
-				+ "order_id = " + orderID + "," 
-				+ "meal_id = " + mealID + "," 
-				+ "delivery_date = '" + deliveryDate+"'," 
-				+ "quantity = " + quantity + "," 
-				+ "ready_delivery = " + readyDelivery + "," 
-				+ "delivered = " + delivered 
-				+ "WHERE order_id =" + orderID
+				+ " order_id = " + orderID + "," 
+				+ " meal_id = " + mealID + "," 
+				+ " delivery_date = '" + deliveryDate+"'," 
+				+ " quantity = " + quantity + "," 
+				+ " ready_delivery = " + readyDelivery + "," 
+				+ " delivered = " + delivered 
+				+ " WHERE order_id =" + orderID
 				+ " AND meal_id = " + mealID
 				+ " AND delivery_date = '" + deliveryDate + "'"
 				+";";
-		
+		System.out.println(statement);
 		return database.makeSingleStatement(statement);
 	}
 	 
