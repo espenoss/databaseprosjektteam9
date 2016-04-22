@@ -65,7 +65,7 @@ public class TestUser {
 		// *** USER ***
 		String userInsert = "INSERT INTO user VALUES('bob', 2, 'Bob Smidt', '1234');";
 		user = new User("bob", 2, "Bob Smidt", database);
-		database.makeSingleStatement(userInsert);
+		database.makeSingleStatement(userInsert); 
 		
 		
 		// *** MEAL INSERT ***
@@ -178,7 +178,7 @@ public class TestUser {
 	
 	@Test
 	public void testViewAvailableMeals() throws Exception {
-		System.out.println("Test 1: View available meals");
+		System.out.println("User test 1: View available meals");
 
 		Meal res0 = user.viewAvailableMeals().get(0);
 		Meal expRes0 = mealList.get(0);
@@ -196,7 +196,7 @@ public class TestUser {
 	
 	@Test
 	public void testViewCustomerList() throws Exception{
-		System.out.println("Test 2: View customer list");
+		System.out.println("User test 2: View customer list");
 	
 		Customer res0 = user.viewCustomerList().get(0);
 		Customer expRes0 = customerList.get(0);
@@ -214,7 +214,7 @@ public class TestUser {
 	
 	@Test
 	public void testViewCompanyList() throws Exception{
-		System.out.println("Test 3: View company list");
+		System.out.println("User test 3: View company list");
 		
 		Customer res0 = user.viewCompanyList().get(0);
 		Customer expRes0 = companyList.get(0);
@@ -228,7 +228,7 @@ public class TestUser {
 	
 	@Test
 	public void testViewSingleCustomer() throws Exception{
-		System.out.println("Test 4: view single customer");
+		System.out.println("User test 4: view single customer");
 		
 		int id1 = 10001; // jensine
 		int id2 = 10002; // lise
@@ -250,7 +250,7 @@ public class TestUser {
 	
 	@Test
 	public void testViewIngredients() throws Exception{
-		System.out.println("Test 5: View ingredients");
+		System.out.println("User test 5: View ingredients");
 		
 		Ingredient res0 = user.viewIngredients().get(0);
 		Ingredient expRes0 = ingredientList.get(0);
@@ -267,7 +267,7 @@ public class TestUser {
 	}
 	@Test
 	public void testViewFoodOrders() throws Exception {
-		System.out.println("Test 6: View Food orders");
+		System.out.println("User test 6: View Food orders");
 		java.sql.Date date0 = java.sql.Date.valueOf("2016-03-03");
 		java.sql.Date date1 = java.sql.Date.valueOf("2016-03-03");
 		
@@ -282,7 +282,7 @@ public class TestUser {
 	
 	@Test
 	public void testViewAllSubPlans() throws Exception{
-		System.out.println("Test 7: View all subscrition plans");
+		System.out.println("User test 7: View all subscrition plans");
 		
 		SubPlan res0 = user.viewAllSubPlans().get(0);
 		SubPlan expRes0 = subPlanList.get(0);

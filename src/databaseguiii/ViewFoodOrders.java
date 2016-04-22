@@ -39,14 +39,7 @@ class ViewFoodOrders extends JFrame {
 		}
 
 		private class DialogWindow extends MyDialog{
-	/*		ArrayList<Order> o = null;
-			SpinnerDateModel dateSelectModel = new SpinnerDateModel();
-			JSpinner dateSelect = new JSpinner(dateSelectModel);
-			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
-			String str = s.format(dateSelect.getValue());
-			java.sql.Date sqlDate = java.sql.Date.valueOf(str);   */
-			
-			public DialogWindow(JFrame parent){
+				public DialogWindow(JFrame parent){
 				super(parent, "View orders");
 				add(new JPanel(), BorderLayout.NORTH);
 				add(new OrderDatapanel(),BorderLayout.CENTER);

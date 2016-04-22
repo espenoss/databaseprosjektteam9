@@ -40,7 +40,7 @@ public class TestUserNull {
 		
 	@Test
 	public void testNullViewFoodOrders() throws Exception{
-		System.out.println("Test 1: View food orders with empty database");
+		System.out.println("UserNull test 1: View food orders with empty database");
 		java.sql.Date date = java.sql.Date.valueOf("2016-02-03");
 		
 		ArrayList<Order> res = user.viewFoodOrders(date);
@@ -50,7 +50,7 @@ public class TestUserNull {
 	
 	@Test
 	public void testNullViewAvailableMeals() throws Exception{
-		System.out.println("Test 2: View available meals with empty database");
+		System.out.println("UserNull test 2: View available meals with empty database");
 		
 		ArrayList<Meal> res = user.viewAvailableMeals();
 		ArrayList<Meal> expRes = null;
@@ -59,7 +59,7 @@ public class TestUserNull {
 	
 	@Test
 	public void testNullViewCustomerList() throws Exception{
-		System.out.println("Test 3: View customer list with empty database");
+		System.out.println("UserNull test 3: View customer list with empty database");
 		
 		ArrayList<Customer> res = user.viewCustomerList();
 		ArrayList<Customer> expRes = null;
@@ -68,7 +68,7 @@ public class TestUserNull {
 	
 	@Test
 	public void testNullViewCompanyList() throws Exception{
-		System.out.println("Test 4: View company list with empty database");
+		System.out.println("UserNull test 4: View company list with empty database");
 		
 		ArrayList<Customer> res = user.viewCompanyList();
 		ArrayList<Customer> expRes = null;
@@ -77,7 +77,7 @@ public class TestUserNull {
 	
 	@Test
 	public void testNullViewSingleCustomer() throws Exception{
-		System.out.println("Test 5: View customer with empty database");
+		System.out.println("UserNull test 5: View customer with empty database");
 		
 		Customer res = user.viewSingleCustomer(2342);
 		Customer expRes = null;
@@ -86,7 +86,7 @@ public class TestUserNull {
 	
 	@Test
 	public void testNullViewIngredients() throws Exception{
-		System.out.println("Test 6: View ingredients with empty database");
+		System.out.println("UserNull test 6: View ingredients with empty database");
 		
 		ArrayList<Ingredient> res = user.viewIngredients();
 		ArrayList<Ingredient> expRes = null;
@@ -95,7 +95,7 @@ public class TestUserNull {
 	
 	@Test
 	public void testNullViewSubPlans() throws Exception{
-		System.out.println("Test 7: View subscription plans with empty database");
+		System.out.println("UserNull test 7: View subscription plans with empty database");
 		
 		ArrayList<SubPlan> res = user.viewAllSubPlans();
 		ArrayList<SubPlan> expRes = null;

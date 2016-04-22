@@ -38,7 +38,7 @@ public class TestSubPlan {
 	
 	@Test
 	public void testShouldAddMealToSubPlan(){
-		System.out.println("Test: add meal to subplan");
+		System.out.println("SubPlan test 1: add meal to subplan");
 		
 		boolean res = instance.addMealToSubPlan(meal, 2);
 		boolean expRes = true;
@@ -48,7 +48,7 @@ public class TestSubPlan {
 	}
 	@Test
 	public void testShouldFailAddMealToSubPlan(){
-		System.out.println("Test: fail add meal to subplan");
+		System.out.println("SubPlan test 2: fail add meal to subplan");
 		
 		boolean res = instance.addMealToSubPlan(meal,9);
 		boolean expRes = false;
@@ -58,7 +58,7 @@ public class TestSubPlan {
 	
 	@Test
 	public void testShouldRemoveMealFromPlan(){
-		System.out.println("Test: remove meal from subplan");
+		System.out.println("SubPlan test 3: remove meal from subplan");
 		
 		boolean res = instance.removeMealFromPlan(2);
 		boolean expRes = true;
@@ -68,7 +68,7 @@ public class TestSubPlan {
 	}
 	@Test
 	public void testShouldFailRemoveMealFromPlan(){
-		System.out.println("Test: fail to remove meal from plan");
+		System.out.println("SubPlan test 4: fail to remove meal from plan");
 		
 		boolean res = instance.removeMealFromPlan(9);
 		boolean expRes = false;
@@ -78,7 +78,7 @@ public class TestSubPlan {
 	
 	@Test
 	public void testShouldUpdateSupPlan() throws Exception{
-		System.out.println("Test: update subplan");
+		System.out.println("SubPlan test 5: update subplan");
 		
 		boolean res = instance.updateSubPlan(database);
 		boolean expRes = true;

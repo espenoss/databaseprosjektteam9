@@ -35,7 +35,7 @@ public class TestIngredient {
 
 	@Test
 	public void testShouldUpdateStorage() throws Exception{
-		System.out.println("Update storage test");
+		System.out.println("Ingredient test 1: Update storage test");
 		ingredient = new Ingredient(1, "poteto", 150, "kg");
 		
 		boolean res = ingredient.updateStorage(database);

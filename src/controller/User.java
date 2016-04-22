@@ -1,9 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import javax.swing.JOptionPane;
 import databasePackage.*;
 
 public class User implements java.io.Serializable{
@@ -49,8 +46,7 @@ public class User implements java.io.Serializable{
 		
 		String[][] orderT = QMOrder.viewOrdersByDeliveryDate(date, database);
 		if (orderT.length==0){
-			JOptionPane.showMessageDialog(null,"Could not find anything for the date "+date);
-			return null;
+			return null; 
 		}
 
 		Order tempOrder;
@@ -62,7 +58,6 @@ public class User implements java.io.Serializable{
 			tempOrder.fetchMealsInOrder(database);
 			orderList.add(tempOrder);
 		}
-		
 		return orderList; 
 	}
 	
@@ -97,7 +92,6 @@ public class User implements java.io.Serializable{
 		String[][] mealT = QMFood.viewMeals(database);
 		
 		if (mealT.length==0){
-			JOptionPane.showMessageDialog(null,"Could not find any available orders.");
 			return null;
 		}
 		
@@ -121,7 +115,6 @@ public class User implements java.io.Serializable{
 		
 		String[][] list = QMCustomer.viewAllCustomers(database);
 		if (list.length==0){
-			JOptionPane.showMessageDialog(null,"Could not find any customers.");
 			return null;
 		}
 		
@@ -145,7 +138,6 @@ public class User implements java.io.Serializable{
 		
 		String[][] list = QMCustomer.viewAllCompanies(database);
 		if (list.length==0){
-			JOptionPane.showMessageDialog(null,"Could not find any companies.");
 			return null;
 		}
 		
@@ -190,7 +182,6 @@ public class User implements java.io.Serializable{
 	public ArrayList<Ingredient> viewIngredients() throws Exception{
 		String[][] ingT = QMFood.viewIngredients(database);
 		if (ingT.length==0){
-			JOptionPane.showMessageDialog(null,"Could not find any ingredients.");
 			return null;
 		}
 		
@@ -210,7 +201,6 @@ public class User implements java.io.Serializable{
 		String[][] subT = QMFood.viewSubscriptionPlans(database);
 		
 		if (subT.length==0){
-			JOptionPane.showMessageDialog(null,"Could not find any subscription plans.");
 			return null;
 		}
 		
@@ -225,18 +215,30 @@ public class User implements java.io.Serializable{
 		return subList;
 	}
 	
-	public boolean equals(Object obj){
-		if(!(obj instanceof User)){
-			return false;
-		}
-		if(this==obj){
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
 			return true;
-		}
-		User p=(User)obj;
-		return (userID==p.getUserID() && name==p.getName()&&userType==p.getUserType());
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (userID == null) {
+			if (other.userID != null)
+				return false;
+		} else if (!userID.equals(other.userID))
+			return false;
+		if (userType != other.userType)
+			return false;
+		return true;
 	}
-	
-	
+
 	public String toString(){
 		return "Username: "+userID+", usertype: "+userType+", name: "+name;
 	}

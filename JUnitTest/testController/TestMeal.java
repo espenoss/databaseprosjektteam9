@@ -57,7 +57,7 @@ public class TestMeal {
 	
 	@Test
 	public void testShouldFetchIngredients() throws Exception {
-		System.out.println("Test: Fetch ingredients");
+		System.out.println("Meal test 1: Fetch ingredients");
 		
 		
 		soup.fetchIngredients(database);
@@ -79,7 +79,7 @@ public class TestMeal {
 	
 	@Test
 	public void testShouldUpdateMealToDatabase() throws Exception{
-		System.out.println("Test: Update meal to database");
+		System.out.println("Meal test 2: Update meal to database");
 		
 		boolean res = soup.updateMealToDatabase(database);
 		boolean expRes = true;
