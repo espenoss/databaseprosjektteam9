@@ -23,6 +23,12 @@ import javax.swing.SpinnerDateModel;
 
 class ViewFoodOrders extends JFrame {
 		private User user = null; 
+		ArrayList<Order> o = null;
+		SpinnerDateModel dateSelectModel = new SpinnerDateModel();
+		JSpinner dateSelect = new JSpinner(dateSelectModel);
+		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+		String str = s.format(dateSelect.getValue());
+		java.sql.Date sqlDate = java.sql.Date.valueOf(str);    
 
 		public ViewFoodOrders(User user) {
 			this.user = user;
@@ -36,12 +42,12 @@ class ViewFoodOrders extends JFrame {
 		}
 
 		private class DialogWindow extends MyDialog{
-			ArrayList<Order> o = null;
+	/*		ArrayList<Order> o = null;
 			SpinnerDateModel dateSelectModel = new SpinnerDateModel();
 			JSpinner dateSelect = new JSpinner(dateSelectModel);
 			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 			String str = s.format(dateSelect.getValue());
-			java.sql.Date sqlDate = java.sql.Date.valueOf(str);
+			java.sql.Date sqlDate = java.sql.Date.valueOf(str);   */
 			
 			public DialogWindow(JFrame parent){
 				super(parent, "View orders");
@@ -55,30 +61,36 @@ class ViewFoodOrders extends JFrame {
 				public OrderDatapanel(){
 					setLayout(new GridLayout(4,2));
 					
-					try {
-		    		 	o = user.viewFoodOrders(sqlDate);
-					}
-		    	 	catch (Exception e) {
-		    	 		e.printStackTrace();
-		    	 	}
-		    		 String[] str = new String[o.size()];
-			    	 for( int i = 0; i < o.size(); i++ ){
-			    		 str[i] = o.get(i).toString() + " ";
-			    	 }
+					add(new JLabel("Select date: ", JLabel.RIGHT));
+			    	add(dateSelect);
+					
+				}
+			}
+					
+					
+			public boolean okData(){
+					
+			    try {
+			    	o = user.viewFoodOrders(sqlDate);
+				}
+		     	catch (Exception e) {
+		  	 		e.printStackTrace();
+		   	 	}
+		   		 String[] str = new String[o.size()];
+		    	 for( int i = 0; i < o.size(); i++ ){
+		    	 str[i] = o.get(i).toString() + " ";
+			   	 }
 			    	 
-			    	 add(new JLabel("Select date: ", JLabel.RIGHT));
-			    	 add(dateSelect);
-			    	 
-			    	 JScrollPane scrollpane = new JScrollPane(); 
-			         JList<String> list = new JList<String>(str);
-			         scrollpane = new JScrollPane(list);
-			         JPanel panel = new JPanel(); 
-			         panel.add(scrollpane);
-			         scrollpane.getViewport().add(list);		    	 
-			    	 JOptionPane.showMessageDialog(null, scrollpane, "All orders: ", JOptionPane.INFORMATION_MESSAGE );
-				
+			    JScrollPane scrollpane = new JScrollPane(); 
+			    JList<String> list = new JList<String>(str);
+			    scrollpane = new JScrollPane(list);
+			    JPanel panel = new JPanel(); 
+			    panel.add(scrollpane);
+			    scrollpane.getViewport().add(list);		    	 
+			    JOptionPane.showMessageDialog(null, scrollpane, "All orders: ", JOptionPane.INFORMATION_MESSAGE );
+			    return true;
 				}
 			}
 		}
-	}
+	
 
