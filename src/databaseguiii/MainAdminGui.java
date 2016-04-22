@@ -33,7 +33,8 @@ class MainAdminGui extends JFrame {
 		    "Retrieve statistics","View available ingredients", 
 		    "View available meals", "Register new ingredient", "Register new meal", "Add ingredient to meal",
 		    "Register subscription plan", "Add meal to sub plan", "View food orders",
-		    "View ingregredients in meal", "View information about a single customer", "View food orders og a single customer"};
+		    "View ingregredients in meal", "View information about a single customer", "View food orders og a single customer", 
+		    "View all sub plans", "List subscription plan"};
 		private JList<String> choice_list = new JList<String>(CHOICES);  
 		Admin admin = null;
 		Meal meal=null;
@@ -61,6 +62,8 @@ class MainAdminGui extends JFrame {
 
 		public static final int VIEW_INFO_ABOUT_SINGLE_CUST = 20;
 		public static final int VIEW_FOOD_ORDER_OF_SINGLE_CUSTOMER = 21;
+		public static final int VIEW_ALL_SUBPLANS = 22;
+		public static final int LIST_SUBSCRIPTION_PLAN = 23;
 
 		
 	
@@ -251,7 +254,28 @@ class MainAdminGui extends JFrame {
 	    			new ViewSingleCustomerGui(new Sales(admin.getUserID(), admin.getName(), database));
 	    		}else if(choices==VIEW_FOOD_ORDER_OF_SINGLE_CUSTOMER){
 	    			new ViewFoodOrdersByCustomerGui(new Sales(admin.getUserID(), admin.getName(), database));
-	    		}
+	    		}else if (choices == VIEW_ALL_SUBPLANS){
+	    			ArrayList<SubPlan> sp = null;
+		      		try {
+		    		 	sp = admin.viewAllSubPlans();
+					}
+		    	 	catch (Exception e) {
+		    	 		e.printStackTrace();
+		    	 	}
+		    		 String[] s = new String[sp.size()];
+			    	 for( int i = 0; i < sp.size(); i++ ){
+			    		 s[i] = sp.get(i).toString() + " ";
+			    	 }
+			    	 JScrollPane scrollpane = new JScrollPane(); 
+			         JList<String> list = new JList<String>(s);
+			         scrollpane = new JScrollPane(list);
+			         JPanel panel = new JPanel(); 
+			         panel.add(scrollpane);
+			         scrollpane.getViewport().add(list);		    	 
+			    	 JOptionPane.showMessageDialog(null, scrollpane, "All sub plans: ", JOptionPane.INFORMATION_MESSAGE );
+	    			}else if (choices == LIST_SUBSCRIPTION_PLAN){
+	    				 //new SubPlan(new Admin(admin.getUserID(), admin.getName(), database));
+	    			}
 			}
 		}
 	}
