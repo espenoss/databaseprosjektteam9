@@ -72,8 +72,11 @@ public class Admin extends User {
 	
 	//returns an arraylist with customer objects with all active users
 	public ArrayList<User> viewUserList() throws Exception{
-		
 		String[][] list = QMUser.viewAllUsers(database);
+		
+		if (list.length== 0){
+			return null;
+		}
 		User tempUser;
 		ArrayList<User> userList = new ArrayList<User>();
 		
@@ -85,7 +88,6 @@ public class Admin extends User {
 		}
 		return userList;
 	}
-	
 	
 	
 	@Override

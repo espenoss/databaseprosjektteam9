@@ -2,14 +2,16 @@ package testController;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import org.junit.*;
-
 import controller.Admin;
+import controller.User;
 import databasePackage.Database;
 
 public class TestAdmin {
 	private static Database database;
 	private static Admin instance;
+	private static ArrayList<User> userList = new ArrayList<User>();
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -24,11 +26,14 @@ public class TestAdmin {
 		
 		String insertUser1 = "INSERT INTO user VALUES('hanneh', 1, 'Hanne Hansen', 123456)";
 		String insertUser2 = "INSERT INTO user VALUES('olen', 2, 'Ole Normann', 123456)";
-		String insertUser3 = "INSERT INTO user VALUES('pero', 3, 'Per Olsen', 123456)";
+		
+		userList.add(new User("hanneh", 1, "Hanne Hansen", database));
+		userList.add(new User("olen", 2, "Ole Normann", database));
+
 		
 		database.makeSingleStatement(insertUser1);
 		database.makeSingleStatement(insertUser2);
-		database.makeSingleStatement(insertUser3);
+
 		
 		String customer1 = "INSERT INTO customer VALUES(10000, 'Hansen', 'Geir', '73329090', 'geir@hansen.com', 'Nedre Bakklandet 61', '7014', 1, 'Allergisk mot sopp', true)";
 		String customer2 = "INSERT INTO customer VALUES(10001, 'Tvedt', 'Jensine', '73254090', 'jensinetvedt@mail.com', 'Byåsvegen 64', '7021', 5, NULL, true)";
@@ -43,10 +48,10 @@ public class TestAdmin {
 		// order_id, order_date, customer_id, info, user_id
 		String insertOrder1 = "INSERT INTO food_order VALUES(10000, '2016-03-01', 10000, 'Noen info', 'hanneh')";
 		String insertOrder2 = "INSERT INTO food_order VALUES(10001, '2016-03-02', 10001, 'Annen info', 'olen')";
-		String insertOrder3 = "INSERT INTO food_order VALUES(10002, '2016-03-05', 10001, 'Mer info', 'pero')";
+		String insertOrder3 = "INSERT INTO food_order VALUES(10002, '2016-03-05', 10001, 'Mer info', 'hanneh')";
 		String insertOrder4 = "INSERT INTO food_order VALUES(10003, '2016-03-07', 10002, 'Blabla', 'hanneh')";
 		String insertOrder5 = "INSERT INTO food_order VALUES(10004, '2016-03-07', 10003, 'Noe', 'olen')";
-		String insertOrder6 = "INSERT INTO food_order VALUES(10005, '2016-03-09', 10002, 'En ting', 'pero')";
+		String insertOrder6 = "INSERT INTO food_order VALUES(10005, '2016-03-09', 10002, 'En ting', 'olen')";
 		
 		database.makeSingleStatement(insertOrder1);
 		database.makeSingleStatement(insertOrder2);
@@ -127,16 +132,18 @@ public class TestAdmin {
 				"Total income this year: 1700 kr.";
 		
 		String res = instance.getStatisticsForYear(2016);
-		System.out.println(res);
 		assertEquals(expRes, res);
 	}
 	
-	@Ignore
-	public void testViewUserList() {
+	@Test
+	public void testViewUserList() throws Exception {
 		System.out.println("Admin test 2: viewUserList");
 		
-		fail("Not yet implemented");
-	}
-	
+		ArrayList<User> testList = instance.viewUserList();
 
+		//boolean res =.equals() && testList.get(2).equals(userList.get(2));
+		
+		assertEquals(userList.get(0), testList.get(0));
+		assertEquals(userList.get(1), testList.get(1));
+	}
 }
