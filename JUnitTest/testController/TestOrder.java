@@ -144,19 +144,14 @@ public class TestOrder {
 		assertEquals(res, expRes);
 	}
 	
-	@Ignore
+	@Test
 	public void testShouldViewMealsInOrderByDate() throws Exception{
 		System.out.println("Order test 4: View meals in order by date");
-		java.sql.Date date = new java.sql.Date(2016-11-04);
+		java.sql.Date date = java.sql.Date.valueOf("2016-11-04");
 		
-		
-		System.out.println("***"+mealsOrdered.get(0));
-		System.out.println("***"+order1.viewMealsInOrderByDate(date, database));
-	
-		boolean res = (order1.viewMealsInOrderByDate(date, database).equals(mealsOrdered.get(0)));
+		boolean res = (order1.viewMealsInOrderByDate(date, database).get(0).equals(mealsOrdered.get(0)));
 		boolean expRes = true;
 		assertEquals(res, expRes);
-//		ArrayList<MealOrdered> viewMealsInOrderByDate(java.sql.Date date, Database database)
 	}
 	
 	

@@ -60,45 +60,21 @@ public class Order {
 	public void setInfo(String info){
 		this.info = info;
 	}
-	/*
-	//Skal vi ha denne??
-	//Marks meal as ready for delivery to customer, given index of meal in mealArray
-	public boolean markMealAsReadyByIndex(int index, Database database) throws Exception{
-		return meals.get(index).markMealAsReady(database);
-	}
-	*/
 	
-	// FINISHED M� TESTES
+	// FINISHED, IS TESTED
 	public boolean removeMealFromOrder(int index, Database database) throws Exception{
 		boolean ok = QMOrder.removeMealFromOrder(orderID, meals.get(index).getMealID(), meals.get(index).getDeliverydate().toString(), database);
 		fetchMealsInOrder(database);
 		return ok;
 	}
 	
-	/*
-	//Skal vi ha denne??
-	//Marks all meals in order with given deliverydate as ready for delivery, returns count for 
-	public int markAllMealsAsReadyByDate(java.sql.Date date, Database database) throws Exception{
-		ArrayList<MealOrdered> meals = viewMealsInOrderByDate(date, database);
-		int count = 0;
-		boolean ok;
-		
-		for (int i=0; i<meals.size();i++){
-			ok = meals.get(i).markMealAsReady(database);
-			if (ok){count++;}
-		}
-		return count;
-	}
-	*/
-	
-	
-	//FINISHED m� testes
+	//FINISHED, IS TESTED
 	//Register information to databasee
 	public boolean uploadOrder(Database database) throws Exception{
 		return QMOrder.updateOrder(orderID, orderDate, customerID, info, userID, database);
 	}
 	
-	//FINISHED m� testes
+	//FINISHED, IS TESTED
 	//Makes an arrayList of all meals in an order that has a spesific delivery date. 
 	public ArrayList<MealOrdered> viewMealsInOrderByDate(java.sql.Date date, Database database) throws Exception{
 		fetchMealsInOrder(database);
@@ -112,7 +88,7 @@ public class Order {
 		return tempMeals;
 	}
 	
-	//FINISHED testes?
+	//FINISHED, IS TESTED
 	//Fetches meals from database
 	public boolean fetchMealsInOrder(Database database) throws Exception{
 		meals = new ArrayList<MealOrdered>(); //creates new empty meal arrayList
@@ -120,8 +96,6 @@ public class Order {
 		if(mealT.length == 0){
 			return false;
 		}
-
-//		System.out.println("Meals fra database: \n"+Arrays.deepToString(mealT));
 
 		TextEditor t = new TextEditor();
 		
@@ -174,11 +148,8 @@ public class Order {
 	}
 	
 
-/*	
-=======
-	
->>>>>>> branch 'master' of https://github.com/espenoss/databaseprosjektteam9.git
-	//TEST TEST TEST 
+/*
+ * //TEST TEST TEST 
 	static public void main(String[] arg) throws Exception{
 		String username = "marith1";
 		String password = "tgp8sBZA";
