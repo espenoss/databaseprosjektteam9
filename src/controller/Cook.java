@@ -73,13 +73,7 @@ public class Cook extends User {
 		} 
 		return new Ingredient(ingredientID, name, quantity, unit);
 	}
-	
-	// CAN'T DELETE INGREDIENT CONNECTED TO A MEAL IN MEAL_INGREDIENT
-	// Deletes ingredient from database, is tested.
-	public boolean deleteIngredient(int ingredientID) throws Exception{
-		return QMFood.removeIngredient(ingredientID, database);
-	}
-	
+
 	
 	@Override
 	public String toString() {

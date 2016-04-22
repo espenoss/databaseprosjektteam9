@@ -52,7 +52,7 @@ public class MealOrdered extends Meal {
 	public int getQuantity(){
 		return quantity;
 	}
-	
+	 
 	
 	public void setQuantity(int quantity){
 		this.quantity = quantity;
@@ -70,10 +70,11 @@ public class MealOrdered extends Meal {
 	//Marks meal as delivered to customer, given index of meal in mealArray
 	public boolean markMealAsDelivered(Database database) throws Exception{
 		return QMOrder.markMealOrderAsDelivered(orderID, getMealID(), deliveryDate.toString(), database);
-	}
+	} 
 	
 	public boolean uploadMealOrdered(Database database) throws Exception{
 		String delDate = deliveryDate.toString();
+		System.out.println(delDate);
 		boolean res = QMOrder.updateMealInOrder(orderID, getMealID(), delDate, quantity, readyDelivery, delivered, database);
 		return res;
 	}

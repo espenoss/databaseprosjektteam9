@@ -120,7 +120,7 @@ public class QMOrder {
 	// Update info about meal in order
 	public static boolean updateMealInOrder(int orderID, int mealID, String deliveryDate, int quantity, 
 			boolean readyDelivery, boolean delivered, Database database) throws Exception{
-		
+		 
 		String statement = "UPDATE ordered_meal SET "
 				+ "order_id = " + orderID + "," 
 				+ "meal_id = " + mealID + "," 

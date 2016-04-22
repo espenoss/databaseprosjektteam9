@@ -32,7 +32,7 @@ public class TestCook {
 		database.makeSingleStatement(insert);
 		database.makeSingleStatement(insert1);
 		
-		System.out.println("COOK --- Total number of tests: 7");
+		System.out.println("COOK --- Total number of tests: 6");
 
 	}
  
@@ -117,14 +117,4 @@ public class TestCook {
 		Ingredient expRes = new Ingredient(2, "banana", 40, "kg");
 		assertEquals(res, expRes);
 	} 
-
-	@Ignore("Can not delete ingredient connected to a meal in 'meal_ingredient'")
-	public void testShouldDeleteIngredient() throws Exception{
-		System.out.println("Cook test 7: Delete ingredient");
-		
-		boolean res = cook.deleteIngredient(1);
-		boolean expRes = true;
-		assertEquals(res, expRes);
-//		deleteIngredient
-	}
 }
