@@ -173,7 +173,7 @@ public class Order {
 		return true;
 	}
 	
-<<<<<<< HEAD
+
 /*	
 =======
 	
@@ -205,9 +205,7 @@ public class Order {
 		//System.out.println(test.viewMealsInOrderByDate(dato, database));
 		//System.out.println(test);
 	}
-<<<<<<< HEAD
+
 */	
-=======
 	
->>>>>>> branch 'master' of https://github.com/espenoss/databaseprosjektteam9.git
 }
