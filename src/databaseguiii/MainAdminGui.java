@@ -140,6 +140,7 @@ class MainAdminGui extends JFrame {
 		    	 for( int i = 0; i < c.size(); i++ ){
 		    		 s[i] = c.get(i).toString() + " ";
 		    	 }
+	      	
 		    	 
 		    	 JScrollPane scrollpane = new JScrollPane(); 
 		         JList<String> list = new JList<String>(s);
