@@ -3,20 +3,34 @@ package databaseguiii;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import controller.*;
 import databasePackage.Database;
 
 class ViewFoodOrdersByCustomerGui extends JFrame{
 	
+	private ArrayList<Customer> customerList = null;
+	private ArrayList<Order> orderList = null;
+	private JComboBox customerSelect;
+	private JTextField company_name_field = new JTextField(50);
+	private DefaultListModel<String> listcontent = new DefaultListModel<String>();
+	private JList<String> list = new JList<String>(listcontent);
 	private Sales sales = null; 
 	
 	public ViewFoodOrdersByCustomerGui(Sales sales) {
@@ -32,10 +46,6 @@ class ViewFoodOrdersByCustomerGui extends JFrame{
 	
 	private class ViewFoodOrdersByCustomerDialog extends MyDialog{
 		
-		private ArrayList<Customer> customerList = new ArrayList<>();
-		private JComboBox customerSelect;
-		private JTextField company_name_field = new JTextField(50);
-		
 		public ViewFoodOrdersByCustomerDialog(JFrame parent){
 			
 			super(parent, "Choose a customer");
@@ -48,8 +58,8 @@ class ViewFoodOrdersByCustomerGui extends JFrame{
 
 		private class CompanyDatapanel extends JPanel{
 			public CompanyDatapanel(){
-				setLayout(new GridLayout(1,2));
-
+				setLayout(new FlowLayout());
+				
 				try {
 					customerList = sales.viewCustomerList();
 				} catch (Exception e) {
@@ -61,28 +71,84 @@ class ViewFoodOrdersByCustomerGui extends JFrame{
 					nameList.add(c.getCustomerID() + " " + c.getFirstName() + " " + c.getSurName());
 				}
 				customerSelect = new JComboBox<>(nameList.toArray());
+				customerSelect.addActionListener(new comboListener());
+				
+				
+				// Initialize orderlist
+				try {
+					orderList = sales.viewFoodOrdersByCustomer(customerList.get(0).getCustomerID());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				if(orderList != null){
+					for(Order o: orderList){
+						listcontent.addElement(o.getOrderID() + "");
+					}
+				}
+
 				add(new JLabel("Customer: ", JLabel.RIGHT));
 				add(customerSelect);
-		
-				
+				add(new JLabel("Orders: ", JLabel.RIGHT));
+		    	JScrollPane orderScroller = new JScrollPane(list); 
+		    	list.addListSelectionListener(new listListener());
+		    	add(orderScroller, BorderLayout.CENTER);
+				pack();
 			}
-		}
-		public boolean okData(){
-			int custIndex = customerSelect.getSelectedIndex();
-			Customer currCust = customerList.get(custIndex);
-			String s="";
 			
-			try {
-				s = sales.viewFoodOrdersByCustomer(currCust.getCustomerID()).toString();
-			} catch (Exception e) {
-				e.printStackTrace();
+			private class comboListener implements ActionListener{
+
+				public void actionPerformed(ActionEvent arg0) {
+
+					// Update orderlist when different customer selected
+					
+					int customerIndex = customerSelect.getSelectedIndex();
+					if(customerIndex != -1){
+						Customer currCust = customerList.get(customerIndex);
+						listcontent.clear();
+						try {
+							orderList = sales.viewFoodOrdersByCustomer(currCust.getCustomerID());
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						if(orderList != null){
+							for(Order o: orderList){
+								listcontent.addElement(o.getOrderID() + "");
+							}
+						}	
+					}
+				}				
 			}
-			JOptionPane.showMessageDialog(null, s, "Orders of the choosen customer "+ currCust.getFirstName(), JOptionPane.INFORMATION_MESSAGE );
 			
-			return true;
-			
+			private class listListener implements ListSelectionListener{
+				public void valueChanged(ListSelectionEvent arg0) {
+					int orderIndex = list.getSelectedIndex();
+					if(orderIndex != -1){
+						Order selectedOrder = orderList.get(orderIndex);
+						
+						try {
+							boolean c = selectedOrder.fetchMealsInOrder(sales.getDatabase());
+							if(c){
+								String s = selectedOrder.toString();
+								JOptionPane.showMessageDialog(null, s, "Meals in order", JOptionPane.INFORMATION_MESSAGE );						
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}	
+					}
+				}
+			}
 		}
 
+	}
+	
+	public static void main(String[] args){
+ 		String username = "espenme";
+ 		String passingword = "16Sossosem06";
+ 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
+ 		Database database = new Database("com.mysql.jdbc.Driver", databasename);
+		ViewFoodOrdersByCustomerGui del = new ViewFoodOrdersByCustomerGui(new Sales("","", database));
+		del.setVisible(true);
 	}
 	
 }

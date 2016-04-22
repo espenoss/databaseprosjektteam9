@@ -96,22 +96,6 @@ public class SubPlan {
 		res+="\n";
 		return res;
 	}
-	
-	public static void main(String[] args) throws Exception{
-		String username = "marith1";
-		String password = "tgp8sBZA";
-		String databaseName = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
-		String databaseDriver = "com.mysql.jdbc.Driver";
-		Database database = new Database(databaseDriver, databaseName);
-		
-		
-		SubPlan testSub = new SubPlan(1, "Lunsj");
-		
-		testSub.fetchMealsInPlan(database);
-		
-		System.out.println(testSub);
-	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -131,4 +115,22 @@ public class SubPlan {
 			return false;
 		return true;
 	}
+	
+	/*
+	public static void main(String[] args) throws Exception{
+		String username = "marith1";
+		String password = "tgp8sBZA";
+		String databaseName = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
+		String databaseDriver = "com.mysql.jdbc.Driver";
+		Database database = new Database(databaseDriver, databaseName);
+		
+		
+		SubPlan testSub = new SubPlan(1, "Lunsj");
+		
+		testSub.fetchMealsInPlan(database);
+		
+		System.out.println(testSub);
+	}
+	*/
+
 }
