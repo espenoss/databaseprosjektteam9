@@ -4,10 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.*;
+
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import controller.*;
 import databasePackage.Database;
@@ -82,13 +85,8 @@ public class AddMealToOrderDialog extends JFrame{
 				JOptionPane.showMessageDialog(null, "Quantity must be greater than zero");
 				return false;
 			}
-			try{
-				sales.addMealToOrder(order.getOrderID(), currMeal.getMealID(), deliveryDate, quantity);
-			}catch (Exception e) {
-				System.out.println(e.toString());
-				return false;
-			}
-			return true;
+
+			return sales.addMealToOrder(order.getOrderID(), currMeal.getMealID(), deliveryDate, quantity);
 		}
 	}
 	

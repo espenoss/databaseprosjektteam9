@@ -15,7 +15,7 @@ public class QMUser {
 
 	
 	// Method for registering new user in database
-	public static boolean registerUser(String userID, int userType, String name, String password, Database database) throws Exception{
+	public static boolean registerUser(String userID, int userType, String name, String password, Database database) {
 		
 		String statement = "INSERT INTO user VALUES(" 
 				+ aq(userID) 
@@ -28,7 +28,7 @@ public class QMUser {
 	}
 
 	// Update user information
-	public static boolean updateUser(String userID, int userType, String name, String password, Database database) throws Exception{
+	public static boolean updateUser(String userID, int userType, String name, String password, Database database) {
 		String statement = "UPDATE user SET "
 				+ "user_id =" + aq(userID)
 				+ "user_type =" + userType + ","
@@ -39,7 +39,7 @@ public class QMUser {
 	}
 	
 	// Delete user entry from database
-	public static boolean removeUser(String userID, Database database) throws Exception{
+	public static boolean removeUser(String userID, Database database) {
 		String statement = "DELETE FROM user WHERE user_id = '" + userID + "';";
 		return database.makeSingleStatement(statement);
 	}
@@ -51,7 +51,7 @@ public class QMUser {
 	// 1 : user_type - int
 	// 2 : name - String
 	// 3 : password - String
-	public static String[] viewUser(String userID, Database database) throws Exception{
+	public static String[] viewUser(String userID, Database database) {
 		String statement = "SELECT user_id, user_type, name FROM user WHERE user_id = '" + userID + "';";		
 		database.makeSingleStatement(statement);
 
@@ -66,14 +66,14 @@ public class QMUser {
 	// 1 : user_type - int
 	// 2 : name - String
 	// 3 : password - String
-	public static String[][] viewAllUsers(Database database) throws Exception{		
+	public static String[][] viewAllUsers(Database database) {		
 		database.makeSingleStatement("SELECT user_id, user_type, name FROM user");
 		
 		return database.getLastResult();		
 	}	
 
 	// Confirms user details
-	public static String[] logIn(String userID, char[] password, Database database) throws Exception{
+	public static String[] logIn(String userID, char[] password, Database database) {
 		
 		String[][] userInfo = null;
 		

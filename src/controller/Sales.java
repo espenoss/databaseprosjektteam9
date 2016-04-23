@@ -14,7 +14,7 @@ public class Sales extends User {
 	
 	//FINISHED NOT TESTED
 	//registers new order, returns order object. 
-	public Order registerNewOrder(int customerID, String info, String userID)throws Exception{
+	public Order registerNewOrder(int customerID, String info, String userID){
 		
 	    java.util.Date utilDate = new java.util.Date();
 	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
@@ -24,13 +24,13 @@ public class Sales extends User {
 		return new Order(orderID, dateToday, customerID, info, userID);
 	}
 	
-	public boolean addMealToOrder(int orderID, int mealID, String deliveryDate, int quantity) throws Exception{
+	public boolean addMealToOrder(int orderID, int mealID, String deliveryDate, int quantity) {
 		boolean res = QMOrder.addMealToOrder(orderID, mealID, deliveryDate, quantity, false, false, database);
 		return res;
 	}
 	
 	//FINISHED NOT TESTED
-	public boolean registerSubscriptionOrder(Order order, int quantitySub, String fromDate, String toDate, int subID) throws Exception{
+	public boolean registerSubscriptionOrder(Order order, int quantitySub, String fromDate, String toDate, int subID) {
 		boolean success = QMOrder.addSubscriptionToOrder(order.getOrderID(), quantitySub, fromDate, toDate, subID, database);
 		
 		return success;
@@ -40,7 +40,7 @@ public class Sales extends User {
 	//FINISHED --- TESTED
 	//Register new customer
 	public Customer registerCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
-			int zip_code, int zone_nr, String preferences, boolean active) throws Exception{
+			int zip_code, int zone_nr, String preferences, boolean active) {
 		int customerID = QMCustomer.registerCustomer(surName, firstName, phoneNumber, email, adress, zip_code, zone_nr, preferences, active, database);
 		
 		if (customerID<0){
@@ -51,7 +51,7 @@ public class Sales extends User {
 	
 	//FINISHED --- TESTED
 	//Register company
-	public boolean registerCompanyToCustomer(Customer customer, String companyName) throws Exception{
+	public boolean registerCompanyToCustomer(Customer customer, String companyName) {
 		boolean ok = QMCustomer.registerCompanyToCustomer(customer.getCustomerID(), companyName, database);
 		if(ok) {
 			customer.setCompanyName(companyName);

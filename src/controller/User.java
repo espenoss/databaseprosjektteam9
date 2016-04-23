@@ -42,7 +42,7 @@ public class User{
 	//FINISHED, is tested
 	//View all orders that has meals with deliverydate on the given date
 	//Returns arraylist with orders that contains all meals in order
-	public ArrayList<Order> viewFoodOrders(java.sql.Date date) throws Exception{
+	public ArrayList<Order> viewFoodOrders(java.sql.Date date) {
 		
 		String[][] orderT = QMOrder.viewOrdersByDeliveryDate(date, database);
 		if (orderT.length==0){
@@ -65,7 +65,7 @@ public class User{
 	//FINISHED, NOT tested
 	//View all orders with a customerID
 	//Returns arraylist with orders that contains all meals in order
-	public ArrayList<Order> viewFoodOrdersByCustomer(int customerID) throws Exception{
+	public ArrayList<Order> viewFoodOrdersByCustomer(int customerID) {
 		
 		String[][] orderT = QMOrder.viewAllOrdersFromCustomer(customerID, database);
 		if (orderT.length==0){
@@ -85,7 +85,7 @@ public class User{
 		return orderList; 
 	}
 	
-	public Order viewSingleOrder(int orderID) throws Exception{
+	public Order viewSingleOrder(int orderID) {
 		String[] orderT = QMOrder.viewOrder(orderID, database);
 		
 		//(int orderID, String orderDate, int customerID, String info, String userID)
@@ -96,7 +96,7 @@ public class User{
 	
 	//FINISHED NOT TESTED 
 	//Returns an arraylist with all available meals
-	public ArrayList<Meal> viewAvailableMeals() throws Exception{
+	public ArrayList<Meal> viewAvailableMeals() {
 		String[][] mealT = QMFood.viewMeals(database);
 		
 		if (mealT.length==0){
@@ -119,7 +119,7 @@ public class User{
 
 	//FINISHED --- MÅ TESTES
 	//returns an arraylist with customer objects with all active customers
-	public ArrayList<Customer> viewCustomerList() throws Exception{
+	public ArrayList<Customer> viewCustomerList() {
 		
 		String[][] list = QMCustomer.viewAllCustomers(database);
 		if (list.length==0){
@@ -142,7 +142,7 @@ public class User{
 		return customerList;
 	}
 	
-	public ArrayList<Customer> viewCompanyList() throws Exception{
+	public ArrayList<Customer> viewCompanyList() {
 		
 		String[][] list = QMCustomer.viewAllCompanies(database);
 		if (list.length==0){
@@ -170,7 +170,7 @@ public class User{
 	
 	//FINISHED --- MÅ TESTES
 	//takes an customerId returns a single customer object, or null if not found
-	public Customer viewSingleCustomer(int customerId) throws Exception{
+	public Customer viewSingleCustomer(int customerId) {
 		String[][] list = QMCustomer.viewAllCustomers(database);
 		
 		for(int i=0; i<list.length; i++){
@@ -187,7 +187,7 @@ public class User{
 	}
 	
 	//FINISHED --- M� testes
-	public ArrayList<Ingredient> viewIngredients() throws Exception{
+	public ArrayList<Ingredient> viewIngredients() {
 		String[][] ingT = QMFood.viewIngredients(database);
 		if (ingT.length==0){
 			return null;
@@ -205,7 +205,7 @@ public class User{
 	}
 	
 	// FINISHED
-	public ArrayList<SubPlan> viewAllSubPlans() throws Exception{
+	public ArrayList<SubPlan> viewAllSubPlans() {
 		String[][] subT = QMFood.viewSubscriptionPlans(database);
 		
 		if (subT.length==0){
@@ -223,7 +223,7 @@ public class User{
 		return subList;
 	}
 	
-	public String[][] viewZones() throws Exception{
+	public String[][] viewZones() {
 		String[][] zones = null;
 		
 		zones = QMCustomer.viewZones(database);
@@ -264,7 +264,7 @@ public class User{
 /*	
 	
 	//TEST
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) {
 		String username = "marith1";
 		String password = "tgp8sBZA";
 		String databaseName = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;

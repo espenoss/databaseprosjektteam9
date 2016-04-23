@@ -63,16 +63,16 @@ public class MealOrdered extends Meal {
 	}
 	
 	//Marks meal as ready for delivery to customer, given index of meal in mealArray
-	public boolean markMealAsReady(Database database) throws Exception{
+	public boolean markMealAsReady(Database database) {
 		return QMOrder.markMealOrderAsReadyForDelivery(orderID, getMealID(), deliveryDate.toString(), database);
 	}
 	
 	//Marks meal as delivered to customer, given index of meal in mealArray
-	public boolean markMealAsDelivered(Database database) throws Exception{
+	public boolean markMealAsDelivered(Database database) {
 		return QMOrder.markMealOrderAsDelivered(orderID, getMealID(), deliveryDate.toString(), database);
 	} 
 	
-	public boolean uploadMealOrdered(Database database) throws Exception{
+	public boolean uploadMealOrdered(Database database) {
 		String delDate = deliveryDate.toString();
 		System.out.println(delDate);
 		boolean res = QMOrder.updateMealInOrder(orderID, getMealID(), delDate, quantity, readyDelivery, delivered, database);

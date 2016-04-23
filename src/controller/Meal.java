@@ -62,7 +62,7 @@ public class Meal {
 	
 	//FINISHED (Must be tested)
 	//Fetches ingredient information from database belonging to this meal. 
-	public boolean fetchIngredients(Database database) throws Exception{
+	public boolean fetchIngredients(Database database) {
 		ingredients = new ArrayList<Ingredient>();
 		TextEditor t = new TextEditor();
 		String[][] ingT = QMFood.viewIngredientsInMeal(mealID, database);
@@ -79,7 +79,7 @@ public class Meal {
 		return true;
 	}
 	
-	public boolean updateMealToDatabase(Database database) throws Exception{
+	public boolean updateMealToDatabase(Database database) {
 		boolean res = QMFood.updateMeal(mealID, mealName, instructions, available, price, database);
 		return res;
 	}
