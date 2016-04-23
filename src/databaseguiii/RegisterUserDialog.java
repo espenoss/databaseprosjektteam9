@@ -9,10 +9,10 @@ import databasePackage.*;
 
 class RegisterUserDialog extends JFrame {
 	private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
-	private Admin user = null; 
+	private Admin admin = null; 
   
-	public RegisterUserDialog(User user) throws Exception { 
-		this.user = (Admin)user;
+	public RegisterUserDialog(Admin admin) throws Exception { 
+		this.admin = admin;
 		UserDialog dialog = new UserDialog(this);
 		dialog.setVisible(true);
 		dialog.setLocation(350, 350);
@@ -66,12 +66,20 @@ class RegisterUserDialog extends JFrame {
 			pword = passwordField.getText();
 			name = usernameField.getText();
 			
+			boolean my_user = false; 
+			
 			try {
-				user.registerUser(userID, userType, name, pword, database);
+				my_user = admin.registerUser(userID, userType, name, pword, database);
 			} catch (Exception e) {
 				System.out.println(e.toString());
 			}
-			return true;		
-		}
+			if(my_user == false){
+				JOptionPane.showMessageDialog(null, "User was not registered, username already exists in database","", JOptionPane.INFORMATION_MESSAGE);
+			}
+			return true;	
+			}
+			
+		
+		
 	}
 }
