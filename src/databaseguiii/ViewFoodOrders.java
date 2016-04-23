@@ -74,7 +74,7 @@ class ViewFoodOrders extends JFrame {
 			}
 
 			if(o == null){
-				JOptionPane.showMessageDialog(null, "Ingen ordre på den datoen");
+				JOptionPane.showMessageDialog(null, "No orders for this date");
 				return false;
 			}
 
