@@ -43,7 +43,7 @@ public class GetMealsAsText extends JFrame {
  		
 		
 		public MealsAsTextDialog(JFrame parent){
-			super(parent, "The meal in subplan listed");
+			super(parent, "Choose a subscription plan");
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new UserDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
@@ -78,7 +78,7 @@ public class GetMealsAsText extends JFrame {
 			SubPlan myPlan = new SubPlan(my_sub, subplan.getName());
 			String s = myPlan.getMealsAsText();	
 			
-			JOptionPane.showMessageDialog(null, s, "Inredients of this meal: ", JOptionPane.INFORMATION_MESSAGE );
+			JOptionPane.showMessageDialog(null, s, "Meals of the chosen subscription plan: ", JOptionPane.INFORMATION_MESSAGE );
 				
 			return true;
 		}
