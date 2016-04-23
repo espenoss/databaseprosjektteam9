@@ -68,6 +68,10 @@ class RegisterUserDialog extends JFrame {
 			
 			boolean my_user = false; 
 			
+			boolean nameOk = editor.isAlpha(userID) 
+					&& name != "" && editor.isAlpha(name);
+			if(!nameOk) JOptionPane.showMessageDialog(null, "Name cannot contain numbers");
+		
 			try {
 				my_user = admin.registerUser(userID, userType, name, pword, database);
 			} catch (Exception e) {

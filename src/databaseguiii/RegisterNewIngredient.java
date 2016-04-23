@@ -32,7 +32,6 @@ class RegisterNewIngredient extends JFrame {
 			private JTextField ingredientNameField = new JTextField(20);
 			private JTextField ingredientUnitField = new JTextField(20);
 			private JTextField quantityField = new JTextField(20);
-
 			private String ingredient;
 	 		private float myQuantity;
 	 		private String unit;
