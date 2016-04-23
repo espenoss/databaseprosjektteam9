@@ -50,12 +50,8 @@ public class AddMealToOrderDialog extends JFrame{
 				
 				setLayout(new GridLayout(3, 2));
 				
-				try {
-					mealList = sales.viewAvailableMeals();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
+				mealList = sales.viewAvailableMeals();
+
 				ArrayList<String> mealNames = new ArrayList<>();
 				
 				for(Meal m:mealList){
@@ -85,7 +81,7 @@ public class AddMealToOrderDialog extends JFrame{
 				JOptionPane.showMessageDialog(null, "Quantity must be greater than zero");
 				return false;
 			}
-
+			
 			return sales.addMealToOrder(order.getOrderID(), currMeal.getMealID(), deliveryDate, quantity);
 		}
 	}
