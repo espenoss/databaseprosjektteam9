@@ -23,19 +23,17 @@ class MainSalesPersonGui extends JFrame {
 	public static final int CHANGE_ORDER = 8;
 	public static final int VIEW_FOOD_ORDER_OF_SINGLE_CUSTOMER = 9;
 	public static final int VIEW_ALL_SUBPLANS = 10;
-	public static final int LIST_SUBSCRIPTION_PLAN = 11;
-	public static final int REGISTER_SUB_PLAN = 12;
-	public static final int ADD_MEAL_TO_SUB_PLAN = 13;
-	public static final int UPDATE_SUP_PLAN = 14;
-	public static final int VIEW_MEALS = 15;
-	public static final int VIEW_INGREDIENTS_IN_MEAL = 16;
+	public static final int REGISTER_SUB_PLAN = 11;
+	public static final int ADD_MEAL_TO_SUB_PLAN = 12;
+	public static final int UPDATE_SUP_PLAN = 13;
+	public static final int VIEW_MEALS = 14;
+	public static final int VIEW_INGREDIENTS_IN_MEAL = 15;
 	
 	private JList list = new JList();
 	private static final String [] CHOICES =
 		{"Register new customer","View information about a single customer","Register new company", "View private customers", "View company customers",
 				"Change customer information", "View food orders","Register new food order", "Change food order",
-				"View food orders of a single customer","View all subscription plans", "View single subscription plan", 
-				"Register new subscription plan", "Add meal to subscription plan", "Update subscription plan","View available meals", "View ingredient in meal"};
+				"View food orders of a single customer","View all subscription plans", "Register new subscription plan", "Add meal to subscription plan", "Update subscription plan","View available meals", "View ingredient in meal"};
 	private JList<String> choice_list = new JList<String>(CHOICES);
 	private Sales sales = null;
 
@@ -158,8 +156,7 @@ class MainSalesPersonGui extends JFrame {
 		         panel.add(scrollpane);
 		         scrollpane.getViewport().add(list);		    	 
 		    	 JOptionPane.showMessageDialog(null, scrollpane, "All sub plans: ", JOptionPane.INFORMATION_MESSAGE );
-    			}else if (choices == LIST_SUBSCRIPTION_PLAN){
-    				new GetMealsAsText(new Admin(sales.getUserID(), sales.getName(), database));
+    			
     			}else if(choices == REGISTER_SUB_PLAN){
 	    			new RegisterSubscriptionPlan(new Cook(sales.getUserID(), sales.getName(), database));
 	    		}else if(choices == ADD_MEAL_TO_SUB_PLAN){
