@@ -19,12 +19,12 @@ class ChangeCustomerInfoDialog extends JFrame {
 	  public ChangeCustomerInfoDialog(Sales sales) {
 		  	this.sales = sales;
 	  		CustomerDialog dialog = new CustomerDialog(this);
-	  		dialog.setVisible(true);
-	  		setTitle("Registrer customer");
+	  		setTitle("Change customer info");
 	  		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	  		setLayout(new FlowLayout());
-	  		setLocation(300, 300); 
-	  		dialog.setLocation(350, 350); 
+			pack();
+			dialog.setLocationRelativeTo(null);
+			dialog.setVisible(true);
 	 } 
 	  
 	  private class CustomerDialog extends MyDialog implements ActionListener{
@@ -160,13 +160,15 @@ class ChangeCustomerInfoDialog extends JFrame {
 				
 				boolean nameOk = !firstName.equals("") && editor.isAlpha(firstName) 
 						&& !surName.equals("") && editor.isAlpha(surName);
-				if(!nameOk) JOptionPane.showMessageDialog(null, "Name cannot be empty or contain numbers");
-				
-				boolean emailAndAdressOk = !email.equals("") && adress.equals("");
+				boolean emailAndAdressOk = !email.equals("") && !adress.equals("");
 				boolean zipAndZoneOk = zip_code != -1 && zone_nr != -1;
-				boolean prefAndPhoneOk = !preferences.equals("") && !phoneNumber.equals("");
+				boolean phoneOk = !preferences.equals("") && !phoneNumber.equals("") && editor.isNumeric(phoneNumber);
+
+				if(!nameOk) JOptionPane.showMessageDialog(null, "Name cannot be empty or contain numbers");
+				if(!emailAndAdressOk) JOptionPane.showMessageDialog(null, "Email or adress cannot be empty or contain numbers");
+				if(!phoneOk) JOptionPane.showMessageDialog(null, "Phone number cannot be empty or contain letters");
 				
-				boolean dataCheck = nameOk && emailAndAdressOk && zipAndZoneOk && prefAndPhoneOk;
+				boolean dataCheck = nameOk && emailAndAdressOk && zipAndZoneOk && phoneOk;
 
 				if(status_list.getSelectedIndex() == 0){
 					active = true;

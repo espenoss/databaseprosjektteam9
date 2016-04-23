@@ -73,6 +73,18 @@ public class TextEditor {
 
 	    return true;
 	}
+	
+	public boolean isNumeric(String numbers) {
+	    char[] chars = numbers.toCharArray();
+
+	    for (char c : chars) {
+	        if(!Character.isDigit(c)) {
+	            return false;
+	        }
+	    }
+
+	    return true;
+	}
 	/*
 	public static void main(String[] args){
 		TextEditor t = new TextEditor();
