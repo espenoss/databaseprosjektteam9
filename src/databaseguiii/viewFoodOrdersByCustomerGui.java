@@ -75,7 +75,7 @@ class ViewFoodOrdersByCustomerGui extends JFrame{
 				customerSelect.addActionListener(new comboListener());
 				
 				
-				// Initialize orderlist
+				
 				try {
 					orderList = sales.viewFoodOrdersByCustomer(customerList.get(0).getCustomerID());
 				} catch (Exception e) {

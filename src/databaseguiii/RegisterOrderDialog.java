@@ -34,7 +34,7 @@ class RegisterOrderDialog extends JFrame {
 		dialog.setLocation(350, 350);  
 	}
 
-//int customerID, String deliveryDate, String info, String userID, Database database
+
 	private class DialogWindow extends MyDialog{
 		private TextEditor editor = new TextEditor();
 		private ArrayList<Customer> customerList = new ArrayList<>();

@@ -29,7 +29,6 @@ class CreateMealDialog extends JFrame {
 		
 	 private class DialogWindow extends MyDialog{
 			private TextEditor editor = new TextEditor();
-		//	String mealName, String instructions, boolean available, int price
 			private JTextField mealNameField = new JTextField(20);
 			private JTextField instructionsField = new JTextField(100);
 			private JTextField priceField = new JTextField(20);

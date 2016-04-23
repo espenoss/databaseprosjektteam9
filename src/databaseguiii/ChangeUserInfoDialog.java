@@ -16,11 +16,11 @@ class ChangeUserInfoDialog extends JFrame {
 		admin = (Admin) user;
 		UserDialog dialog = new UserDialog(this);
 		dialog.setVisible(true);
-		dialog.setLocation(350, 350);  // plasserer dialogen  
+		dialog.setLocation(350, 350);  
 		setTitle("Registrer user");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
-		setLocation(300, 300); // plasserer foreldrevinduet..	    
+		setLocation(300, 300);    
 	} 
 
 	private class UserDialog extends MyDialog{
