@@ -15,11 +15,10 @@ class RegisterUserDialog extends JFrame {
 		this.admin = admin;
 		UserDialog dialog = new UserDialog(this);
 		dialog.setVisible(true);
-		dialog.setLocation(350, 350);
 		setTitle("Registrer user");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
-		setLocation(300, 300); 
+		dialog.setLocationRelativeTo(null); 
 	 } 
 
 	private class UserDialog extends MyDialog{
