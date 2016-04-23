@@ -52,6 +52,11 @@ public class CustomerOrderMenu extends JFrame{
 			}else if(buttonSource == addSubscription){
 				new AddSubscriptionToOrderDialog(sales, order);
 			}else{
+				try {
+					order.fetchMealsInOrder(sales.getDatabase());
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				String s = order.toString();
 				JOptionPane.showMessageDialog(null, s, "Meals in order", JOptionPane.INFORMATION_MESSAGE );						
 			}
