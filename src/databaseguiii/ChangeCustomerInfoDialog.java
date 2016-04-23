@@ -140,9 +140,7 @@ class ChangeCustomerInfoDialog extends JFrame {
 				}
 			}
 			public boolean okData(){
-				
-				boolean dataCheck = true;
-				
+								
 				firstName = firstNameField.getText().trim();	
 				surName = surNameField.getText().trim();
 				email = emailField.getText().trim();
@@ -160,12 +158,15 @@ class ChangeCustomerInfoDialog extends JFrame {
 				preferences = preferencesField.getText().trim();	
 				phoneNumber = phoneNumberField.getText().trim();
 				
-				boolean nameOk = firstName != "" && surName != "";
+				boolean nameOk = firstName != "" && editor.isAlpha(firstName) 
+						&& surName != "" && editor.isAlpha(surName);
+				if(!nameOk) JOptionPane.showMessageDialog(null, "Name cannot contain numbers");
+				
 				boolean emailAndAdressOk = email != "" && adress != "";
 				boolean zipAndZoneOk = zip_code != -1 && zone_nr != -1;
 				boolean prefAndPhoneOk = preferences != "" && phoneNumber != "";
 				
-				dataCheck = nameOk && emailAndAdressOk && zipAndZoneOk && prefAndPhoneOk;
+				boolean dataCheck = nameOk && emailAndAdressOk && zipAndZoneOk && prefAndPhoneOk;
 
 				if(status_list.getSelectedIndex() == 0){
 					active = true;

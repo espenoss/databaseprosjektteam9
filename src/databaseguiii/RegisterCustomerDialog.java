@@ -122,7 +122,10 @@ class RegisterCustomerDialog extends JFrame {
 				preferences = preferencesField.getText().trim();	
 				phoneNumber = phoneNumberField.getText().trim();
 				
-				boolean nameOk = firstName != "" && surName != "";
+				boolean nameOk = firstName != "" && editor.isAlpha(firstName) 
+						&& surName != "" && editor.isAlpha(surName);
+				if(!nameOk) JOptionPane.showMessageDialog(null, "Name cannot contain numbers");
+				
 				boolean emailAndAdressOk = email != "" && adress != "";
 				boolean zipAndZoneOk = zip_code != -1 && zone_nr != -1;
 				boolean prefAndPhoneOk = preferences != "" && phoneNumber != "";

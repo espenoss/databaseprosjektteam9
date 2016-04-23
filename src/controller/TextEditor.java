@@ -60,6 +60,19 @@ public class TextEditor {
 		}
 		return text;
 	}
+	
+	// Check to see if string only contains letters
+	public boolean isAlpha(String name) {
+	    char[] chars = name.toCharArray();
+
+	    for (char c : chars) {
+	        if(!Character.isLetter(c)) {
+	            return false;
+	        }
+	    }
+
+	    return true;
+	}
 	/*
 	public static void main(String[] args){
 		TextEditor t = new TextEditor();
