@@ -2,6 +2,10 @@ package databasePackage;
 import java.sql.*;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 public class Database {		
 		private final String dbDriver; 
 		private final String dbName;
@@ -36,7 +40,7 @@ public class Database {
 			Class.forName(dbDriver);
 		
 		}catch(Exception e){
-			Cleaner.printMessage(e,"Driver error");
+//			Cleaner.printMessage(e,"Driver error");
 			return false;
 		}
 		
@@ -67,7 +71,16 @@ public class Database {
 				values.toArray(lastResult);
 			}
 		}catch(SQLException e){
-			Cleaner.printMessage(e, "makeSingleStatement()");
+			if(e instanceof MySQLIntegrityConstraintViolationException){				
+				JOptionPane.showMessageDialog(null, "Database error: \n"
+						+ "Could not update table because of constraint error\n"
+						+ "Possible reasons:\n"
+						+ "	Tried to enter duplicate entry\n"
+						+ "	Tried to delete entry referenced by another table");
+			}else{
+				Cleaner.printMessage(e, "makeSingleStatement()");
+			}
+			
 			success = false;
 		}finally{
 			// close database connections

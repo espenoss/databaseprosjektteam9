@@ -60,11 +60,7 @@ class AddMealToSubPlanDialog extends JFrame {
  			public IngredientsDatapanel(){
  				setLayout(new GridLayout(9,2));
  				
- 				try {
- 					subPlanList = cook.viewAllSubPlans();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				subPlanList = cook.viewAllSubPlans();
 				
 				ArrayList<String> my_sub_list = new ArrayList<>();
 				
@@ -72,11 +68,7 @@ class AddMealToSubPlanDialog extends JFrame {
 					my_sub_list.add(plan.getName());
 				}
 				
- 				try {
-	 				mealList = cook.viewAvailableMeals();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+ 				mealList = cook.viewAvailableMeals();
  				
  				ArrayList<String> mealNames = new ArrayList<String>();
  				for(Meal m:mealList){
@@ -158,24 +150,19 @@ class AddMealToSubPlanDialog extends JFrame {
  			
  			String newPlanName = subName.getText().trim();
  			
-		 	try {
-		 		Meal[] meals = currSub.getMeals();
-		 		for(int i=0;i<meals.length;i++){
-		 			Meal selectedMeal = meals[weekIndex[i]];
-		 			if(meals[i] != null){
-		 				cook.removeMealFromPlan(currSub.getSubPlanID(), selectedMeal.getMealID(), i+1);
-		 			}
-		 			cook.addMealToSubPlan(currSub.getSubPlanID(), selectedMeal.getMealID(), i);
-		 		}
-		 		
-		 		currSub.setName(newPlanName);
-		 		currSub.updateSubPlan(cook.getDatabase());
-		 		
-		 	}catch (Exception e) {
-		 		System.out.println(e.toString());
-		 	}
-		 	
-		 	return true;
+	 		Meal[] meals = currSub.getMeals();
+	 		for(int i=0;i<meals.length;i++){
+	 			Meal selectedMeal = meals[weekIndex[i]];
+	 			if(meals[i] != null){
+	 				if(!cook.removeMealFromPlan(currSub.getSubPlanID(), selectedMeal.getMealID(), i+1)) return false;
+	 			}
+	 			cook.addMealToSubPlan(currSub.getSubPlanID(), selectedMeal.getMealID(), i);
+	 		}
+	 		
+	 		currSub.setName(newPlanName);
+	 		if(!currSub.updateSubPlan(cook.getDatabase())) return false;
+		 				 	
+	 		return true;
 		 	
  		}
  	}
