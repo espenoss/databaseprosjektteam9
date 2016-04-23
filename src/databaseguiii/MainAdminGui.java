@@ -32,8 +32,8 @@ class MainAdminGui extends JFrame {
 		   	"View company customers","Register new food order","Change food order", 
 		    "Retrieve statistics","View available ingredients", 
 		    "View available meals", "Register new ingredient", "Register new meal", "Add ingredient to meal",
-		    "Register subscription plan", "Add meal to sub plan", "View food orders",
-		    "View ingredients in meal", "View information about a single customer", "View food orders of a single customer", 
+		    "Register subscription plan", "Add meal to sub plan", "View food orders by date",
+		    "View ingredients in meal", "View information about a single customer", "Add meal or subscription to order", 
 		    "View all sub plans","Update subscription plan"};
 
 		private JList<String> choice_list = new JList<String>(CHOICES);  
@@ -99,6 +99,8 @@ class MainAdminGui extends JFrame {
 			  
 			Object[] values = choice_list.getSelectedValuesList().toArray();
 			int choices = choice_list.getSelectedIndex();
+			
+			choice_list.clearSelection();	
 			
 			if(choices == REGISTER_NEW_USER){
 				try {

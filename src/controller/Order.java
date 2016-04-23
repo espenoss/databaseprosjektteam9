@@ -111,7 +111,7 @@ public class Order {
 	
 	public String toString(){
 		String res = "";
-		res += "OrderID: " + orderID + ". Orderdate: " + orderDate+ ". Info: " + info + "\n";
+		res += "OrderID: " + orderID + ". Orderdate: " + orderDate+ ". Info: " + info + "\n ";
 		res += "Meals: \n";
 		
 		for(Meal m:meals){
