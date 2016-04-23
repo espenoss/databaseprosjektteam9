@@ -13,13 +13,12 @@ class RegisterCustomerDialog extends JFrame {
 	  public RegisterCustomerDialog(Sales sales) {
 		  this.sales = sales;
 		  CustomerDialog dialog = new CustomerDialog(this);
-		  dialog.setVisible(true);
 		  setTitle("Register customer");
 		  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		  setLayout(new FlowLayout());
-		  setLocation(300, 300); 
-		  dialog.setLocation(350, 350);
-		  
+		  pack();
+		  dialog.setLocationRelativeTo(null);
+		  dialog.setVisible(true);
 	 } 
 	  
 	  private class CustomerDialog extends MyDialog{
@@ -123,7 +122,7 @@ class RegisterCustomerDialog extends JFrame {
 						&& !surName.equals("") && editor.isAlpha(surName);
 				if(!nameOk) JOptionPane.showMessageDialog(null, "Name cannot be empty or contain numbers");
 				
-				boolean emailAndAdressOk = !email.equals("") && adress.equals("");
+				boolean emailAndAdressOk = !email.equals("") && !adress.equals("");
 				boolean zipAndZoneOk = zip_code != -1 && zone_nr != -1;
 				boolean prefAndPhoneOk = !preferences.equals("") && !phoneNumber.equals("");
 				

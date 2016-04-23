@@ -26,6 +26,8 @@ public class AddSubscriptionToOrderDialog extends JFrame{
 		this.sales = sales;
 		this.order = order;
 		DialogContent dialog = new DialogContent(this);
+		pack();
+		dialog.setLocationRelativeTo(null);
 		dialog.setVisible(true);
 	}
 	
