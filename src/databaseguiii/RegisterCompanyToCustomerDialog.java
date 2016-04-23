@@ -71,14 +71,16 @@ class RegisterCompanyToCustomerDialog extends JFrame{
 				int custIndex = customerSelect.getSelectedIndex();
 				Customer currCust = customerList.get(custIndex);	
 				String company_name = company_name_field.getText();
-	
-				try{
-					sales.registerCompanyToCustomer(currCust, company_name);
-				}catch (Exception e) {
-					System.out.println(e.toString());
-					return false;
-				}
-				return true;
+				if(company_name.equals(""))JOptionPane.showMessageDialog(null, "Company name must be given");
+					try{
+						sales.registerCompanyToCustomer(currCust, company_name);
+					}catch (Exception e) {
+						System.out.println(e.toString());
+						return false;
+					}
+					return true;
+				
+			
 			}
 
 		}
