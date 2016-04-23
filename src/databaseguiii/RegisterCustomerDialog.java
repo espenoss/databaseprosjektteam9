@@ -2,6 +2,8 @@ package databaseguiii;
 import controller.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import databasePackage.Database;
 
@@ -12,11 +14,12 @@ class RegisterCustomerDialog extends JFrame {
 		  this.sales = sales;
 		  CustomerDialog dialog = new CustomerDialog(this);
 		  dialog.setVisible(true);
-		  setTitle("Registrer customer");
+		  setTitle("Register customer");
 		  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		  setLayout(new FlowLayout());
 		  setLocation(300, 300); 
-		  dialog.setLocation(350, 350);  
+		  dialog.setLocation(350, 350);
+		  
 	 } 
 	  
 	  private class CustomerDialog extends MyDialog{
@@ -27,10 +30,11 @@ class RegisterCustomerDialog extends JFrame {
 			private JTextField emailField = new JTextField(20);
 			private JTextField adressField = new JTextField(20);
 			private JTextField zip_codeField = new JTextField(6);
-			private JTextField zone_nrField = new JTextField(6);
-			private JTextField preferencesField = new JTextField(100);
+			public String[][] zoneList = null;
+			private JComboBox zoneSelect;
+			private JTextField preferencesField = new JTextField(50);
 			private JTextField phoneNumberField = new JTextField(12);
-			private final String status[] = {"active", "unactive"}; 
+			private final String status[] = {"Active", "Inactive"}; 
 			private JComboBox status_list = new JComboBox(status);
 			private String surName;
 			private String firstName;
@@ -52,54 +56,78 @@ class RegisterCustomerDialog extends JFrame {
 			
 			private class CustomerDatapanel extends JPanel{
 				public CustomerDatapanel(){
-					setLayout(new GridLayout(9,2));
+					GridLayout superGrid = new GridLayout(18,1);
+					setLayout(superGrid);
 			
-					add(new JLabel("Surname: ", JLabel.RIGHT));
+					try {
+						zoneList = sales.viewZones();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+					ArrayList<String> zoneNames = new ArrayList<>();
+					for(int i=0;i<zoneList.length;i++){
+						zoneNames.add(zoneList[i][1]);
+					}					
+					
+					zoneSelect = new JComboBox<>(zoneNames.toArray());						
+					
+					add(new JLabel("Surname: ", JLabel.LEFT));
 					add(surNameField);
 
-					add(new JLabel("First name: ", JLabel.RIGHT));
+					add(new JLabel("First name: ", JLabel.LEFT));
 					add(firstNameField);
 					
-					add(new JLabel("Phone number: ", JLabel.RIGHT));
+					add(new JLabel("Phone number: ", JLabel.LEFT));
 					add(phoneNumberField);
 					
-					add(new JLabel("Email: ", JLabel.RIGHT));
+					add(new JLabel("Email: ", JLabel.LEFT));
 					add(emailField);
 					
-					add(new JLabel("Adress: ", JLabel.RIGHT));
+					add(new JLabel("Adress: ", JLabel.LEFT));
 					add(adressField);
 					
-					add(new JLabel("Zip Code: ", JLabel.RIGHT));
+					add(new JLabel("Zip Code: ", JLabel.LEFT));
 					add(zip_codeField);
 					
-					add(new JLabel("Zone Number: ", JLabel.RIGHT));
-					add(zone_nrField);
+					add(new JLabel("Zone Number: ", JLabel.LEFT));
+					add(zoneSelect);
 					
-					add(new JLabel("Preferences: ", JLabel.RIGHT));
+					add(new JLabel("Preferences: ", JLabel.LEFT));
 					add(preferencesField);
 					
-					add(new JLabel("Status: ", JLabel.RIGHT));
+					add(new JLabel("Status: ", JLabel.LEFT));
 					add(status_list);
 					
 				}
 			}
 			public boolean okData(){
-				firstName = firstNameField.getText();	
-				surName = surNameField.getText();
-				email = emailField.getText();
-				adress = adressField.getText();
 				
-				String zip_codeText  = zip_codeField.getText();
+				boolean dataCheck = true;
+				
+				firstName = firstNameField.getText().trim();	
+				surName = surNameField.getText().trim();
+				email = emailField.getText().trim();
+				adress = adressField.getText().trim();
+				
+				String zip_codeText  = zip_codeField.getText().trim();
 				int myIntZip = editor.stringToInt(zip_codeText);
 				zip_code = myIntZip;
 				
-				String zone_nrText  = zone_nrField.getText();
+				int zoneIndex = zoneSelect.getSelectedIndex();
+				String zone_nrText  = zoneList[zoneIndex][0];
 				int myIntZone = editor.stringToInt(zone_nrText);
 				zone_nr = myIntZone;
 				
-				preferences = preferencesField.getText();	
-				phoneNumber = phoneNumberField.getText();
+				preferences = preferencesField.getText().trim();	
+				phoneNumber = phoneNumberField.getText().trim();
 				
+				boolean nameOk = firstName != "" && surName != "";
+				boolean emailAndAdressOk = email != "" && adress != "";
+				boolean zipAndZoneOk = zip_code != -1 && zone_nr != -1;
+				boolean prefAndPhoneOk = preferences != "" && phoneNumber != "";
+				
+				dataCheck = nameOk && emailAndAdressOk && zipAndZoneOk && prefAndPhoneOk;
 
 				if(status_list.getSelectedIndex() == 0){
 					active = true;
@@ -107,13 +135,16 @@ class RegisterCustomerDialog extends JFrame {
 					active = false;
 				}
 				
-				try {
-					sales.registerCustomer(surName, firstName, phoneNumber, email, adress, 
-						zip_code, zone_nr, preferences, active);
-				} catch (Exception e) {
-					System.out.println(e.toString());
+				if(dataCheck){
+					try {
+						sales.registerCustomer(surName, firstName, phoneNumber, email, adress, 
+							zip_code, zone_nr, preferences, active);
+					} catch (Exception e) {
+						System.out.println(e.toString());
+					}					
 				}
-				return true;		
+
+				return dataCheck;		
 			}
 		}
 }  

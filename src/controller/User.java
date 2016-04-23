@@ -223,6 +223,14 @@ public class User{
 		return subList;
 	}
 	
+	public String[][] viewZones() throws Exception{
+		String[][] zones = null;
+		
+		zones = QMCustomer.viewZones(database);
+		
+		return zones;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

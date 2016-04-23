@@ -47,7 +47,7 @@ public class MarkOrderAsReadyDialog extends JFrame{
 
 			public void actionPerformed(ActionEvent arg0) {
 				int selected = list.getSelectedIndex();
-				int baseIndex = (selected/3)*3; // Round down to nearest multiple of 3
+				int baseIndex = (selected/3)*3; // Round down to nearest multiple of 3 to get index of meal
 				for(int i=0;i<3;i++){
 					if(baseIndex > -1 && !listcontent.isEmpty()) listcontent.remove(baseIndex);
 				}
@@ -69,10 +69,10 @@ public class MarkOrderAsReadyDialog extends JFrame{
 	  private class TextPanel extends JPanel {
 	    public TextPanel() {
 	      setLayout(new GridLayout(4, 1, 2, 2));
-	      add(new JLabel(""));  // for å få inn litt luft
+	      add(new JLabel(""));
 	      add(new JLabel("List of meals to be made today"));
 	      add(new JLabel("Mark and click button to mark as ready"));
-	      add(new JLabel(""));  // for å få inn litt luft
+	      add(new JLabel(""));
 	    }
 	  }
 
@@ -89,17 +89,17 @@ public class MarkOrderAsReadyDialog extends JFrame{
 				e.printStackTrace();
 			}
 
-	    	try{
-		    	for(Order o: orderList){
-					o.fetchMealsInOrder(cook.getDatabase());
-		    	}	    		
-	    	} catch (Exception e) {
-				e.printStackTrace();
-			}
-	    	
-	    	if(orderList.size() == 0){
+	    	if(orderList == null || orderList.size() == 0){
 	    		listcontent.addElement("No meals left for today");
 	    	}else{
+		    	try{
+			    	for(Order o: orderList){
+						o.fetchMealsInOrder(cook.getDatabase());
+			    	}	    		
+		    	} catch (Exception e) {
+					e.printStackTrace();
+				}
+	    		
 	    	    for(Order o: orderList){
 	    	    	ArrayList<MealOrdered> mealsInOrder = o.getMeals();
 	    	    	for(MealOrdered m: mealsInOrder){

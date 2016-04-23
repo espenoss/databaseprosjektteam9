@@ -14,6 +14,7 @@ import databasePackage.Database;
 
 public class AddMealToOrderDialog extends JFrame{
 
+	TextEditor edit = new TextEditor();
 	private Sales sales = null;
 	private Order order = null;
 	
