@@ -92,6 +92,10 @@ class ChangeUserInfoDialog extends JFrame {
 			pword = passwordField.getText();
 			name = usernameField.getText();
 			
+			boolean nameOk = editor.isAlpha(userID) 
+					&& name != "" && editor.isAlpha(name);
+			if(!nameOk) JOptionPane.showMessageDialog(null, "Name cannot contain numbers");
+			
 			try {
 				admin.updateUser(userID, userType, name, pword, database);
 			} catch (Exception e) {
