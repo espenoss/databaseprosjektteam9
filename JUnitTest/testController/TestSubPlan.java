@@ -52,6 +52,8 @@ public class TestSubPlan {
 		meals[0] = meal1;
 		meals[2] = meal3;
 		
+		System.out.println("SUBPLAN--- Total number of tests: 6");
+		
 	}
 	
 	@Before

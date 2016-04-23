@@ -149,22 +149,14 @@ private static Driver instance;
 		System.out.println("Driver test 1: generateDeliveryPlan");
 		
 		String[][] plan = instance.generateDeliveryPlan();
-		
-		System.out.println(Arrays.toString(plan[0]));
-		System.out.println(Arrays.toString(plan[1]));
-		System.out.println(Arrays.toString(plan[2]));
-		
-		//String insert12 = "INSERT INTO ordered_meal VALUES(10000, 3, '"+sqlDate+"', 1, 1, 0)";
-		//String insert13 = "INSERT INTO ordered_meal VALUES(10001, 1, '"+sqlDate+"', 1, 1, 0)";
-		//String insert14 = "INSERT INTO ordered_meal VALUES(10002, 2, '"+sqlDate+"', 1, 1, 0)";
-		
-		//[steak, 1, Nedre Bakklandet 61, Geir, Hansen, 10000, 3]
-		//[pizza, 1, Byåsvegen 64, Jensine, Tvedt, 10001, 1]
-		//[taco, 1, Byåsvegen 64, Jensine, Tvedt, 10002, 2]
-		
-		fail("Not yet implemented");
-		//[steak, 1, Nedre Bakklandet 61, Geir, Hansen, 10000, 3]
-		//meal_name, quan, adresse, fornavn, etternavn, ordreID, mealID
+
+		String[] list1 = {"steak", "1", "Nedre Bakklandet 61", "Geir", "Hansen", "10000", "3"};
+		String[] list2 = {"pizza", "1", "Byåsvegen 64", "Jensine", "Tvedt", "10001", "1"};
+		String[] list3 = {"taco", "1", "Byåsvegen 64", "Jensine", "Tvedt", "10002", "2"};
+
+		assertEquals(Arrays.toString(plan[0]), Arrays.toString(list1));
+		assertEquals(Arrays.toString(plan[1]), Arrays.toString(list2));
+		assertEquals(Arrays.toString(plan[2]), Arrays.toString(list3));
 	}
 
 }

@@ -95,7 +95,7 @@ class MainAdminGui extends JFrame {
 			private SpinnerDateModel dateSelectModel = new SpinnerDateModel();
 			private JSpinner dateSelect = new JSpinner(dateSelectModel);
 			
-			
+
 			public void valueChanged(ListSelectionEvent hendelse) {
 			  
 			Object[] values = choice_list.getSelectedValuesList().toArray();

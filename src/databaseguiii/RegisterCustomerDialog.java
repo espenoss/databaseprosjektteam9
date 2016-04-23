@@ -134,7 +134,7 @@ class RegisterCustomerDialog extends JFrame {
 				}else{
 					active = false;
 				}
-				
+
 				if(dataCheck){
 					try {
 						sales.registerCustomer(surName, firstName, phoneNumber, email, adress, 
@@ -142,9 +142,11 @@ class RegisterCustomerDialog extends JFrame {
 					} catch (Exception e) {
 						System.out.println(e.toString());
 					}					
+
 				}
 
 				return dataCheck;		
+
 			}
 		}
 }  
