@@ -96,7 +96,7 @@ class RegisterOrderDialog extends JFrame {
 			try {
 				sales.registerNewOrder(customerID, info, sales.getUserID());
 			}catch (Exception e) {
-				System.out.println(e.toString());
+				e.printStackTrace();;
 			}
 			return true;
 		}	

@@ -205,7 +205,12 @@ public class QMOrder {
 		
 		database.makeSingleStatement(statement);
 		
-		return Integer.parseInt(database.getLastResult()[0][0]);
+		String[][] result = database.getLastResult();
+		if(result[0] == null){
+			return 0;
+		}else{
+			return Integer.parseInt(result[0][0]);
+		}
 	}
 
 	// Returns order list of orders together with any orders to be delivered at deliveryDate

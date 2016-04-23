@@ -3,6 +3,9 @@ package databaseguiii;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
@@ -20,35 +23,31 @@ class AddMealToSubPlanDialog extends JFrame {
  	public AddMealToSubPlanDialog(Cook cook){
  		this.cook = cook;
  		AddMealDialog dialog = new AddMealDialog(this);
- 		dialog.setVisible(true);
   		setTitle("Choose the meal and its ingrediets");
   		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   		setLayout(new FlowLayout());
-  		setLocation(300, 300); 
-  		dialog.setLocation(350, 350); 
+  		pack();
+  		dialog.setLocationRelativeTo(null);
+ 		dialog.setVisible(true);
  	}
 
  	private class AddMealDialog extends MyDialog {
  		private TextEditor editor = new TextEditor();
- 		
-
-		private final String days_of_week[] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"}; 
+ 
+ 		private JTextField subName = null;
+		private JComboBox mondaySelect = null;	
+		private JComboBox tuesdaySelect = null;	
+		private JComboBox wednesdaySelect = null;	
+		private JComboBox thursdaySelect = null;	
+		private JComboBox fridaySelect = null;	
+		private JComboBox saturdaySelect = null;	
+		private JComboBox sundaySelect = null;	
 		
-		private JComboBox dayList = new JComboBox(days_of_week);	
-		
- 		private ArrayList<SubPlan> SubPlanList = new ArrayList<SubPlan>();
- 		private JComboBox SubPlanSelected;
+ 		private ArrayList<SubPlan> subPlanList = null;
+ 		private JComboBox subPlanSelected;
  		
- 		private ArrayList<Meal> mealList = new ArrayList<Meal>();
- 		private JComboBox mealIdSelected;
+ 		private ArrayList<Meal> mealList = null;
  		
- 		
- 		private int my_day;
- 		private int my_meal;
- 		private int my_sub_plan;
-	 
-		
-	 
  		public AddMealDialog(JFrame parent){
  			super(parent, "Choose supscription plan and meals");
  			add(new JPanel(), BorderLayout.NORTH);
@@ -59,55 +58,119 @@ class AddMealToSubPlanDialog extends JFrame {
 	   
  		private class IngredientsDatapanel extends JPanel{
  			public IngredientsDatapanel(){
- 				setLayout(new GridLayout(3,2));
+ 				setLayout(new GridLayout(9,2));
  				
  				try {
- 					SubPlanList = cook.viewAllSubPlans();
+ 					subPlanList = cook.viewAllSubPlans();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				
 				ArrayList<String> my_sub_list = new ArrayList<>();
-				for(SubPlan plan: SubPlanList){
+				
+				for(SubPlan plan: subPlanList){
 					my_sub_list.add(plan.getName());
 				}
-				SubPlanSelected = new JComboBox<>(my_sub_list.toArray());
-				
- 				add(new JLabel("Subscription Plan: ", JLabel.RIGHT));
- 				add(SubPlanSelected);
- 			
 				
  				try {
 	 				mealList = cook.viewAvailableMeals();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
+ 				
+ 				ArrayList<String> mealNames = new ArrayList<String>();
+ 				for(Meal m:mealList){
+ 					mealNames.add(m.getMealName());
+ 				}
+ 				
+ 				mondaySelect = new JComboBox<>(mealNames.toArray());	
+ 				tuesdaySelect = new JComboBox<>(mealNames.toArray());	
+ 				wednesdaySelect = new JComboBox<>(mealNames.toArray());	
+ 				thursdaySelect = new JComboBox<>(mealNames.toArray());	
+ 				fridaySelect = new JComboBox<>(mealNames.toArray());	
+ 				saturdaySelect = new JComboBox<>(mealNames.toArray());	
+ 				sundaySelect = new JComboBox<>(mealNames.toArray());	
+ 				
 				ArrayList<String> my_list = new ArrayList<>();
 				for(Meal m: mealList){
 					my_list.add(m.getMealName());
 				}
-				mealIdSelected = new JComboBox<>(my_list.toArray());
- 				add(new JLabel("Meal Id: ", JLabel.RIGHT));
- 				add(mealIdSelected);
- 		
+				
+				subPlanSelected = new JComboBox<>(my_sub_list.toArray());
+				
+ 				add(new JLabel("Subscription Plan: ", JLabel.RIGHT));
+ 				add(subPlanSelected);				
+ 				subPlanSelected.addActionListener(new subSelectListener());
  				
-
-				add(new JLabel("Weekday: ", JLabel.RIGHT));
-				add(dayList);
-			
-
+ 				add(new JLabel("Sub name: ", JLabel.RIGHT));
+ 				subName = new JTextField(subPlanList.get(0).getName());
+ 				add(subName);
+ 				
+ 				add(new JLabel("Monday: ", JLabel.RIGHT));
+ 				add(mondaySelect);
+ 				
+				add(new JLabel("Tuesday: ", JLabel.RIGHT));
+ 				add(tuesdaySelect);
+ 				
+				add(new JLabel("Wednesday: ", JLabel.RIGHT));
+ 				add(wednesdaySelect); 
+				
+				add(new JLabel("Thursday: ", JLabel.RIGHT));
+ 				add(thursdaySelect); 
+				
+				add(new JLabel("Friday: ", JLabel.RIGHT));
+ 				add(fridaySelect); 
+				
+				add(new JLabel("Saturday: ", JLabel.RIGHT));
+ 				add(saturdaySelect); 
+				
+				add(new JLabel("Sunday: ", JLabel.RIGHT));
+ 				add(sundaySelect); 			
+				
  			}
  		}
+ 		
+ 		private class subSelectListener implements ActionListener{
 
+			public void actionPerformed(ActionEvent e) {
+				if(e.getSource() == subPlanSelected){
+					int subIndex = subPlanSelected.getSelectedIndex();
+					SubPlan currSub = subPlanList.get(subIndex);
+					
+					subName.setText(currSub.getName());
+				}
+			} 			
+ 		}
+ 		
  		public boolean okData(){
- 			my_meal = mealIdSelected.getSelectedIndex()+1;
- 			my_sub_plan =SubPlanSelected.getSelectedIndex()+1;
- 			my_day = dayList.getSelectedIndex()+1;
+ 	
+ 			int weekIndex[] = new int[7];
+ 			weekIndex[0]= mondaySelect.getSelectedIndex();
+ 			weekIndex[1] = tuesdaySelect.getSelectedIndex();
+ 			weekIndex[2]  = wednesdaySelect.getSelectedIndex();
+ 			weekIndex[3] = thursdaySelect.getSelectedIndex();
+ 			weekIndex[4] = fridaySelect.getSelectedIndex();
+ 			weekIndex[5] = saturdaySelect.getSelectedIndex();
+ 			weekIndex[6] = sundaySelect.getSelectedIndex();
+
+ 			int subIndex = subPlanSelected.getSelectedIndex();
+ 			SubPlan currSub = subPlanList.get(subIndex);
  			
- 
+ 			String newPlanName = subName.getText().trim();
+ 			
 		 	try {
-		 		cook.addMealToSubPlan(my_sub_plan, my_meal, my_day);
+		 		Meal[] meals = currSub.getMeals();
+		 		for(int i=0;i<meals.length;i++){
+		 			Meal selectedMeal = meals[weekIndex[i]];
+		 			if(meals[i] != null){
+		 				cook.removeMealFromPlan(currSub.getSubPlanID(), selectedMeal.getMealID(), i+1);
+		 			}
+		 			cook.addMealToSubPlan(currSub.getSubPlanID(), selectedMeal.getMealID(), i);
+		 		}
+		 		
+		 		currSub.setName(newPlanName);
+		 		currSub.updateSubPlan(cook.getDatabase());
+		 		
 		 	}catch (Exception e) {
 		 		System.out.println(e.toString());
 		 	}
