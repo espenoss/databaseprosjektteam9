@@ -101,10 +101,7 @@ class RegisterCustomerDialog extends JFrame {
 					
 				}
 			}
-			public boolean okData(){
-				
-				boolean dataCheck = true;
-				
+			public boolean okData(){		
 				firstName = firstNameField.getText().trim();	
 				surName = surNameField.getText().trim();
 				email = emailField.getText().trim();
@@ -122,15 +119,15 @@ class RegisterCustomerDialog extends JFrame {
 				preferences = preferencesField.getText().trim();	
 				phoneNumber = phoneNumberField.getText().trim();
 				
-				boolean nameOk = firstName != "" && editor.isAlpha(firstName) 
-						&& surName != "" && editor.isAlpha(surName);
-				if(!nameOk) JOptionPane.showMessageDialog(null, "Name cannot contain numbers");
+				boolean nameOk = !firstName.equals("") && editor.isAlpha(firstName) 
+						&& !surName.equals("") && editor.isAlpha(surName);
+				if(!nameOk) JOptionPane.showMessageDialog(null, "Name cannot be empty or contain numbers");
 				
-				boolean emailAndAdressOk = email != "" && adress != "";
+				boolean emailAndAdressOk = !email.equals("") && adress.equals("");
 				boolean zipAndZoneOk = zip_code != -1 && zone_nr != -1;
-				boolean prefAndPhoneOk = preferences != "" && phoneNumber != "";
+				boolean prefAndPhoneOk = !preferences.equals("") && !phoneNumber.equals("");
 				
-				dataCheck = nameOk && emailAndAdressOk && zipAndZoneOk && prefAndPhoneOk;
+				boolean dataCheck = nameOk && emailAndAdressOk && zipAndZoneOk && prefAndPhoneOk;
 
 				if(status_list.getSelectedIndex() == 0){
 					active = true;

@@ -22,6 +22,7 @@ public class AddMealToOrderDialog extends JFrame{
 		this.sales = sales;
 		this.order = order;
 		DialogContent dialog = new DialogContent(this);
+		dialog.setLocationRelativeTo(null);
 		dialog.setVisible(true);
 	}
 	
@@ -77,7 +78,10 @@ public class AddMealToOrderDialog extends JFrame{
 			String deliveryDate = s.format(dateSelect.getValue());
 
 			int quantity = (int)quantitySelect.getValue();
-			
+			if(quantity < 1){
+				JOptionPane.showMessageDialog(null, "Quantity must be greater than zero");
+				return false;
+			}
 			try{
 				sales.addMealToOrder(order.getOrderID(), currMeal.getMealID(), deliveryDate, quantity);
 			}catch (Exception e) {

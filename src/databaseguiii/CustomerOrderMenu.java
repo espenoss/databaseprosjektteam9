@@ -20,8 +20,9 @@ public class CustomerOrderMenu extends JFrame{
 		this.order = order;
 		order.fetchMealsInOrder(sales.getDatabase());
 		menuDialog menu = new menuDialog(this);
+		pack();
+		menu.setLocationRelativeTo(null);
 		menu.setVisible(true);
-		setLocation(300, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);		
 	}
 	

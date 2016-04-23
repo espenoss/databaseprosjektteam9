@@ -158,13 +158,13 @@ class ChangeCustomerInfoDialog extends JFrame {
 				preferences = preferencesField.getText().trim();	
 				phoneNumber = phoneNumberField.getText().trim();
 				
-				boolean nameOk = firstName != "" && editor.isAlpha(firstName) 
-						&& surName != "" && editor.isAlpha(surName);
-				if(!nameOk) JOptionPane.showMessageDialog(null, "Name cannot contain numbers");
+				boolean nameOk = !firstName.equals("") && editor.isAlpha(firstName) 
+						&& !surName.equals("") && editor.isAlpha(surName);
+				if(!nameOk) JOptionPane.showMessageDialog(null, "Name cannot be empty or contain numbers");
 				
-				boolean emailAndAdressOk = email != "" && adress != "";
+				boolean emailAndAdressOk = !email.equals("") && adress.equals("");
 				boolean zipAndZoneOk = zip_code != -1 && zone_nr != -1;
-				boolean prefAndPhoneOk = preferences != "" && phoneNumber != "";
+				boolean prefAndPhoneOk = !preferences.equals("") && !phoneNumber.equals("");
 				
 				boolean dataCheck = nameOk && emailAndAdressOk && zipAndZoneOk && prefAndPhoneOk;
 

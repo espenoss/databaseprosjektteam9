@@ -36,12 +36,13 @@ class ViewFoodOrdersByCustomerGui extends JFrame{
 	public ViewFoodOrdersByCustomerGui(Sales sales) {
 		this.sales = sales;
 		ViewFoodOrdersByCustomerDialog dialog = new ViewFoodOrdersByCustomerDialog(this);
-		dialog.setVisible(true);
-		dialog.setLocation(350, 350);
 		setTitle("View food orders of a customer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
-		setLocation(300, 300);  
+		pack();
+		dialog.setLocationRelativeTo(null);
+		dialog.setVisible(true);
+
 	} 
 	
 	private class ViewFoodOrdersByCustomerDialog extends MyDialog{
