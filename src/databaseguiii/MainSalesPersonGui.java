@@ -33,7 +33,7 @@ class MainSalesPersonGui extends JFrame {
 	private static final String [] CHOICES =
 		{"Register new customer","View information about a single customer","Register new company", "View private customers", "View company customers",
 				"Change customer information", "View food orders","Register new food order", "Change food order",
-				"View food orders of a single customer","View all subscription plans", "Register new subscription plan", "Add meal to subscription plan", "Update subscription plan","View available meals", "View ingredient in meal"};
+				"Add meal or subscription to order","View all subscription plans", "Register new subscription plan", "Add meal to subscription plan", "Update subscription plan","View available meals", "View ingredient in meal"};
 	private JList<String> choice_list = new JList<String>(CHOICES);
 	private Sales sales = null;
 

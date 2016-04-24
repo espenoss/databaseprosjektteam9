@@ -51,7 +51,7 @@ class AddMealToSubPlanDialog extends JFrame {
  			add(new JPanel(), BorderLayout.NORTH);
  			add(new IngredientsDatapanel(),BorderLayout.CENTER);
  			add(getButtonPanel(),BorderLayout.SOUTH);
- 			setSize(500,600);
+ 			setSize(500,700);
 			setLocationRelativeTo(null);
  		}
 	   

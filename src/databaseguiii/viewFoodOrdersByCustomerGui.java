@@ -39,8 +39,6 @@ class ViewFoodOrdersByCustomerGui extends JFrame{
 		setTitle("View food orders of a customer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
-		pack();
-		dialog.setLocationRelativeTo(null);
 		dialog.setVisible(true);
 
 	} 
@@ -53,7 +51,8 @@ class ViewFoodOrdersByCustomerGui extends JFrame{
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new CompanyDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+			setSize(500,200);
+			setLocationRelativeTo(null);
 		}
 		
 
