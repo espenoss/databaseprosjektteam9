@@ -39,7 +39,8 @@ public class ViewDeliveryList extends JFrame {
 	   	  JButton markButton = new JButton("Mark as delivered");
 	   	  markButton.addActionListener(new markButtonListener());
 	   	  add(markButton, BorderLayout.SOUTH);
-		  pack();
+	   	  setSize(500, 300);
+	   	  setLocationRelativeTo(null);
 		  
 	  }
 

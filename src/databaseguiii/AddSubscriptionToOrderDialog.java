@@ -26,8 +26,6 @@ public class AddSubscriptionToOrderDialog extends JFrame{
 		this.sales = sales;
 		this.order = order;
 		DialogContent dialog = new DialogContent(this);
-		pack();
-		dialog.setLocationRelativeTo(null);
 		dialog.setVisible(true);
 	}
 	
@@ -46,7 +44,8 @@ public class AddSubscriptionToOrderDialog extends JFrame{
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new DataPanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+			setSize(500,200);
+			setLocationRelativeTo(null);
 		}
 		
 		private class DataPanel extends JPanel{

@@ -26,9 +26,7 @@ class RegisterSubscriptionPlan extends JFrame {
 		dialog.setVisible(true);
 		setTitle("Register new subscription plan");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new FlowLayout());
-		setLocation(300, 300); 
-		dialog.setLocation(350, 350);  
+		setLayout(new FlowLayout()); 
 	}
 
 	private class DialogWindow extends MyDialog{
@@ -43,13 +41,13 @@ class RegisterSubscriptionPlan extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new OrderDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+			setSize(500,100);
+			setLocationRelativeTo(null);
 		}
 	
 		private class OrderDatapanel extends JPanel{
 			public OrderDatapanel(){
 				setLayout(new GridLayout(1,2));
-			
 			
 				add(new JLabel("Name of the supscription plan: ", JLabel.RIGHT));
 				add(sub_plan_nameField);

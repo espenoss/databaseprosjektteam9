@@ -23,12 +23,10 @@ class AddMealToSubPlanDialog extends JFrame {
  	public AddMealToSubPlanDialog(Cook cook){
  		this.cook = cook;
  		AddMealDialog dialog = new AddMealDialog(this);
+ 		dialog.setVisible(true);
   		setTitle("Choose the meal and its ingrediets");
   		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   		setLayout(new FlowLayout());
-  		pack();
-  		dialog.setLocationRelativeTo(null);
- 		dialog.setVisible(true);
  	}
 
  	private class AddMealDialog extends MyDialog {
@@ -53,7 +51,8 @@ class AddMealToSubPlanDialog extends JFrame {
  			add(new JPanel(), BorderLayout.NORTH);
  			add(new IngredientsDatapanel(),BorderLayout.CENTER);
  			add(getButtonPanel(),BorderLayout.SOUTH);
- 			pack();
+ 			setSize(600,400);
+			setLocationRelativeTo(null);
  		}
 	   
  		private class IngredientsDatapanel extends JPanel{
