@@ -41,11 +41,11 @@ class GetStatistics extends JFrame {
 		private int year;
 		
 		public DialogWindow(JFrame parent){
-			super(parent, "New order");
+			super(parent, "Get statistics");
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new OrderDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			setSize(500,100);
+			setSize(500,130);
 			setLocationRelativeTo(null);
 		}
 	
@@ -55,6 +55,7 @@ class GetStatistics extends JFrame {
 			
 				add(new JLabel("Fill in year in format YYYY: ", JLabel.RIGHT));
 				add(dateField);
+				pack();
 				
 			
 			}

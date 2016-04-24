@@ -46,7 +46,7 @@ class IngredientsInMealGui extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new UserDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			setSize(400,100);
+			setSize(400,140);
 			setLocationRelativeTo(null);
 		}
 				

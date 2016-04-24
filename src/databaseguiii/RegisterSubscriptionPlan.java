@@ -41,7 +41,7 @@ class RegisterSubscriptionPlan extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new OrderDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			setSize(500,100);
+			setSize(500,140);
 			setLocationRelativeTo(null);
 		}
 	

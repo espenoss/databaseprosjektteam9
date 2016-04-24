@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -68,13 +69,18 @@ class CreateMealDialog extends JFrame {
 				String priceFieldText = priceField.getText();
 				int myPrice = editor.stringToInt(priceFieldText);
 				
+				if(myPrice > 0){
 				try {
 					cook.createMeal(mealName, instructions, myPrice);
 
 				} catch (Exception e) {
 					System.out.println(e.toString());
 				}
-				return true;		
+				return true;
+				}else{
+					JOptionPane.showMessageDialog(null, "Price must be greater than zero","", JOptionPane.INFORMATION_MESSAGE);
+					return false;
+				}
 			}
 	 }
 	 
