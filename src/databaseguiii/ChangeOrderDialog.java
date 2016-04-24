@@ -40,8 +40,6 @@ class ChangeOrderDialog extends JFrame {
 		setTitle("Change order");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
-		setLocation(300, 300); 
-		dialog.setLocation(350, 350); 
 	}
 	
 	private class DialogWindow extends MyDialog{
@@ -54,11 +52,14 @@ class ChangeOrderDialog extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new ChangeOrderDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+
+			setSize(500,300);
+			setLocationRelativeTo(null);
 		}
 		private class ChangeOrderDatapanel extends JPanel{
 			public ChangeOrderDatapanel(){
-				setLayout(new GridLayout(4,2));
+				GridLayout superGrid = new GridLayout(8,1);
+				setLayout(superGrid);
 				try {
 					customerList = sales.viewCustomerList();
 				} catch (Exception e) {
@@ -84,14 +85,14 @@ class ChangeOrderDialog extends JFrame {
 				customerSelect = new JComboBox<>(nameList.toArray());
 				orderSelect = new JComboBox<>(orderNameList.toArray());
 				
-				add(new JLabel("Customer: ", JLabel.RIGHT));
+				add(new JLabel("Customer: ", JLabel.LEFT));
 				add(customerSelect);
 				customerSelect.addActionListener(new customerListener());
-				add(new JLabel("Order: ", JLabel.RIGHT));				
+				add(new JLabel("Order: ", JLabel.LEFT));				
 				add(orderSelect);
-				add(new JLabel("New delivery date: ", JLabel.RIGHT));
+				add(new JLabel("New delivery date: ", JLabel.LEFT));
 				add(dateSelect);
-				add(new JLabel("Info: ", JLabel.RIGHT));
+				add(new JLabel("Info: ", JLabel.LEFT));
 				add(infoField);
 			}
 		}
@@ -138,13 +139,4 @@ class ChangeOrderDialog extends JFrame {
 			}			
 		}		
 	}
-
- 	public static void main(String[] args){
- 		String username = "espenme";
- 		String passingword = "16Sossosem06";
- 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
- 		Database database = new Database("com.mysql.jdbc.Driver", databasename);
-		ChangeOrderDialog changeOrder = new ChangeOrderDialog(new Sales("","", database));
-		changeOrder.setVisible(true);
- 	}
 }

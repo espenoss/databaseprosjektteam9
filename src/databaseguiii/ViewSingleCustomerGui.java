@@ -25,11 +25,10 @@ class ViewSingleCustomerGui extends JFrame{
 		this.sales = sales;
 		ViewSingleCustomerDialog dialog = new ViewSingleCustomerDialog(this);
 		dialog.setVisible(true);
-		dialog.setLocation(350, 350);
 		setTitle("View information about a customer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
-		setLocation(300, 300);  
+		
 	} 
 	
 	private class ViewSingleCustomerDialog extends MyDialog{
@@ -44,7 +43,8 @@ class ViewSingleCustomerGui extends JFrame{
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new CompanyDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+			setSize(500,200);
+			setLocationRelativeTo(null);
 		}
 		
 
@@ -84,9 +84,7 @@ class ViewSingleCustomerGui extends JFrame{
 			return true;
 			
 		}
-
 	}
-	
 }
 
   

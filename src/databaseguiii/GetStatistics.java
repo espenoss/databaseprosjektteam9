@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JComboBox;
@@ -30,9 +31,7 @@ class GetStatistics extends JFrame {
 		dialog.setVisible(true);
 		setTitle("Get statistics");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new FlowLayout());
-		setLocation(300, 300); 
-		dialog.setLocation(350, 350);  
+		setLayout(new FlowLayout()); 
 	}
 
 	private class DialogWindow extends MyDialog{
@@ -46,7 +45,8 @@ class GetStatistics extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new OrderDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+			setSize(500,100);
+			setLocationRelativeTo(null);
 		}
 	
 		private class OrderDatapanel extends JPanel{
@@ -66,14 +66,24 @@ class GetStatistics extends JFrame {
 			int myIntDate = editor.stringToInt(year_codeText);
 			year = myIntDate;
 			
+			Calendar cal = Calendar.getInstance();
+			
+			if (year > 1980 && year <= cal.get(Calendar.YEAR)){ 
+
 			String s = "";
 			try {
 				s=admin.getStatisticsForYear(year).toString();
 			} catch (Exception e) {
 				System.out.println(e.toString());
 			}
+			
 			 JOptionPane.showMessageDialog(null, s, "Statistics: ", JOptionPane.INFORMATION_MESSAGE );
+			}
+			else{
+				JOptionPane.showMessageDialog(null, "Could not retrieve statistics");
+		
+			}	
 			return true;
-		}	
+		}
 	}
 }

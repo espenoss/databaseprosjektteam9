@@ -24,7 +24,7 @@ import controller.*;
 import databasePackage.Database;
 
 public class ViewDeliveryList extends JFrame {
-	  private DefaultListModel<String> listcontent = new DefaultListModel<String>(); // "datamodellen"
+	  private DefaultListModel<String> listcontent = new DefaultListModel<String>(); 
 	  private JList<String> list = new JList<String>(listcontent);
 	  private Driver driver = null;
   	  String[][] mealList = null;
@@ -39,18 +39,18 @@ public class ViewDeliveryList extends JFrame {
 	   	  JButton markButton = new JButton("Mark as delivered");
 	   	  markButton.addActionListener(new markButtonListener());
 	   	  add(markButton, BorderLayout.SOUTH);
-		  pack();
+	   	  setSize(500, 300);
+	   	  setLocationRelativeTo(null);
 		  
 	  }
 
-	  /* Beskriver ledetekstene øverst i vinduet */
 	  private class TextPanel extends JPanel {
 	    public TextPanel() {
 	      setLayout(new GridLayout(4, 1, 2, 2));
-	      add(new JLabel(""));  // for å få inn litt luft
+	      add(new JLabel(""));  
 	      add(new JLabel("List of deliveries"));
 	      add(new JLabel("Mark and click button to mark as delivered"));
-	      add(new JLabel(""));  // for å få inn litt luft
+	      add(new JLabel(""));  
 	    }
 	  }
 
@@ -85,7 +85,7 @@ public class ViewDeliveryList extends JFrame {
 
 		public void actionPerformed(ActionEvent arg0) {
 			int selected = list.getSelectedIndex();
-			int baseIndex = (selected/4)*4; // Round down to nearest multiple of 4
+			int baseIndex = (selected/4)*4; 
 			for(int i=0;i<4;i++){
 				if(baseIndex > -1 && !listcontent.isEmpty()) listcontent.remove(baseIndex);
 			}

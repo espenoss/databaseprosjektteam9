@@ -63,7 +63,9 @@ class ChangeCustomerInfoDialog extends JFrame {
 				add(new CustomerDatapanel(),BorderLayout.CENTER);
 				add(getButtonPanel(),BorderLayout.SOUTH);
 				customerSelect.addActionListener(this);
-				pack();
+
+				setSize(650,700);
+				setLocationRelativeTo(null);
 			}
 			
 			private class CustomerDatapanel extends JPanel{

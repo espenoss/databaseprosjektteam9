@@ -23,12 +23,10 @@ class AddMealToSubPlanDialog extends JFrame {
  	public AddMealToSubPlanDialog(Cook cook){
  		this.cook = cook;
  		AddMealDialog dialog = new AddMealDialog(this);
+ 		dialog.setVisible(true);
   		setTitle("Choose the meal and its ingrediets");
   		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   		setLayout(new FlowLayout());
-  		pack();
-  		dialog.setLocationRelativeTo(null);
- 		dialog.setVisible(true);
  	}
 
  	private class AddMealDialog extends MyDialog {
@@ -53,12 +51,14 @@ class AddMealToSubPlanDialog extends JFrame {
  			add(new JPanel(), BorderLayout.NORTH);
  			add(new IngredientsDatapanel(),BorderLayout.CENTER);
  			add(getButtonPanel(),BorderLayout.SOUTH);
- 			pack();
+ 			setSize(500,700);
+			setLocationRelativeTo(null);
  		}
 	   
  		private class IngredientsDatapanel extends JPanel{
  			public IngredientsDatapanel(){
- 				setLayout(new GridLayout(9,2));
+				GridLayout superGrid = new GridLayout(18,1);
+				setLayout(superGrid);
  				
 				subPlanList = cook.viewAllSubPlans();
 				
@@ -90,33 +90,33 @@ class AddMealToSubPlanDialog extends JFrame {
 				
 				subPlanSelected = new JComboBox<>(my_sub_list.toArray());
 				
- 				add(new JLabel("Subscription Plan: ", JLabel.RIGHT));
+ 				add(new JLabel("Subscription Plan: ", JLabel.LEFT));
  				add(subPlanSelected);				
  				subPlanSelected.addActionListener(new subSelectListener());
  				
- 				add(new JLabel("Sub name: ", JLabel.RIGHT));
+ 				add(new JLabel("Sub name: ", JLabel.LEFT));
  				subName = new JTextField(subPlanList.get(0).getName());
  				add(subName);
  				
- 				add(new JLabel("Monday: ", JLabel.RIGHT));
+ 				add(new JLabel("Monday: ", JLabel.LEFT));
  				add(mondaySelect);
  				
-				add(new JLabel("Tuesday: ", JLabel.RIGHT));
+				add(new JLabel("Tuesday: ", JLabel.LEFT));
  				add(tuesdaySelect);
  				
-				add(new JLabel("Wednesday: ", JLabel.RIGHT));
+				add(new JLabel("Wednesday: ", JLabel.LEFT));
  				add(wednesdaySelect); 
 				
-				add(new JLabel("Thursday: ", JLabel.RIGHT));
+				add(new JLabel("Thursday: ", JLabel.LEFT));
  				add(thursdaySelect); 
 				
-				add(new JLabel("Friday: ", JLabel.RIGHT));
+				add(new JLabel("Friday: ", JLabel.LEFT));
  				add(fridaySelect); 
 				
-				add(new JLabel("Saturday: ", JLabel.RIGHT));
+				add(new JLabel("Saturday: ", JLabel.LEFT));
  				add(saturdaySelect); 
 				
-				add(new JLabel("Sunday: ", JLabel.RIGHT));
+				add(new JLabel("Sunday: ", JLabel.LEFT));
  				add(sundaySelect); 			
 				
  			}

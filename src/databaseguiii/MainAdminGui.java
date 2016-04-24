@@ -72,7 +72,7 @@ class MainAdminGui extends JFrame {
 			this.admin = admin;
 			setTitle("Admin control panel");
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			Font bigText = new Font("SansSerif", Font.PLAIN, 30);
+			Font bigText = new Font("SansSerif", Font.PLAIN, 25);
 
 			JLabel ledetekst = new JLabel("Choose one of the following options.");
 			add(ledetekst, BorderLayout.NORTH);
@@ -84,6 +84,7 @@ class MainAdminGui extends JFrame {
 			choice_list.addListSelectionListener(lytter);
 			choice_list.setFont(bigText);
 			setSize(700, 700);
+			setLocationRelativeTo(null);
 		}
 		
 
@@ -273,9 +274,9 @@ class MainAdminGui extends JFrame {
 			         scrollpane = new JScrollPane(list);
 			         JPanel panel = new JPanel(); 
 			         panel.add(scrollpane);
-			         scrollpane.getViewport().add(list);		    	 
+			         scrollpane.getViewport().add(list);
 			    	 JOptionPane.showMessageDialog(null, scrollpane, "All sub plans: ", JOptionPane.INFORMATION_MESSAGE );
-	    			
+	    		
 	    			}else if(choices == UPDATE_SUP_PLAN){
 	    				new UpdateSubPlanInfoGui(new Cook(admin.getUserID(), admin.getName(), database));
 	    			}

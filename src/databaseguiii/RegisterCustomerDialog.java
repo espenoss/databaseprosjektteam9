@@ -16,8 +16,6 @@ class RegisterCustomerDialog extends JFrame {
 		setTitle("Register customer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
-		pack();
-		dialog.setLocationRelativeTo(null);
 		dialog.setVisible(true);
 	} 
 
@@ -50,7 +48,9 @@ class RegisterCustomerDialog extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new CustomerDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+
+			setSize(600,700);
+			setLocationRelativeTo(null);
 		}
 
 		private class CustomerDatapanel extends JPanel{

@@ -30,11 +30,10 @@ class RegisterOrderDialog extends JFrame {
 		setTitle("Register new order");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
-		setLocation(300, 300); 
-		dialog.setLocation(350, 350);  
+		 
 	}
 
-//int customerID, String deliveryDate, String info, String userID, Database database
+
 	private class DialogWindow extends MyDialog{
 		private TextEditor editor = new TextEditor();
 		private ArrayList<Customer> customerList = new ArrayList<>();
@@ -53,12 +52,14 @@ class RegisterOrderDialog extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new OrderDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+			setSize(500,300);
+			setLocationRelativeTo(null);
 		}
 	
 		private class OrderDatapanel extends JPanel{
 			public OrderDatapanel(){
-				setLayout(new GridLayout(4,2));
+				GridLayout superGrid = new GridLayout(8,1);
+				setLayout(superGrid);
 			
 				try {
 					customerList = sales.viewCustomerList();
@@ -72,13 +73,13 @@ class RegisterOrderDialog extends JFrame {
 				}
 				customerSelect = new JComboBox<>(nameList.toArray());
 				
-				add(new JLabel("Customer: ", JLabel.RIGHT));
+				add(new JLabel("Customer: ", JLabel.LEFT));
 				add(customerSelect);
 			
-				add(new JLabel("Delivery date: ", JLabel.RIGHT));
+				add(new JLabel("Delivery date: ", JLabel.LEFT));
 				add(dateSelect);
 			
-				add(new JLabel("Information about the order: ", JLabel.RIGHT));
+				add(new JLabel("Information about the order: ", JLabel.LEFT));
 				add(infoField);
 			
 			}

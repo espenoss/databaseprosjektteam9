@@ -26,8 +26,6 @@ public class AddSubscriptionToOrderDialog extends JFrame{
 		this.sales = sales;
 		this.order = order;
 		DialogContent dialog = new DialogContent(this);
-		pack();
-		dialog.setLocationRelativeTo(null);
 		dialog.setVisible(true);
 	}
 	
@@ -46,13 +44,15 @@ public class AddSubscriptionToOrderDialog extends JFrame{
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new DataPanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+			setSize(500,200);
+			setLocationRelativeTo(null);
 		}
 		
 		private class DataPanel extends JPanel{
 			public DataPanel(){
-				
-				setLayout(new GridLayout(4, 2));
+
+				GridLayout superGrid = new GridLayout(8,1);
+				setLayout(superGrid);
 				
 				try {
 					subList = sales.viewAllSubPlans();
@@ -67,13 +67,13 @@ public class AddSubscriptionToOrderDialog extends JFrame{
 				}
 				subSelect = new JComboBox<>(subNames.toArray());
 				
-				add(new JLabel("Plan: ", JLabel.RIGHT));
+				add(new JLabel("Plan: ", JLabel.LEFT));
 				add(subSelect);
-				add(new JLabel("From date: ", JLabel.RIGHT));
+				add(new JLabel("From date: ", JLabel.LEFT));
 				add(fromDateSelect);
-				add(new JLabel("To date: ", JLabel.RIGHT));
+				add(new JLabel("To date: ", JLabel.LEFT));
 				add(toDateSelect);				
-				add(new JLabel("Quantity: ", JLabel.RIGHT));
+				add(new JLabel("Quantity: ", JLabel.LEFT));
 				add(quantitySelect);
 			}
 		}
@@ -98,14 +98,5 @@ public class AddSubscriptionToOrderDialog extends JFrame{
 			return true;
 		}
 	}
-	
-	public static void main(String[] args){
-		
- 		String username = "espenme";
- 		String passingword = "16Sossosem06";
- 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
- 		Database database = new Database("com.mysql.jdbc.Driver", databasename);
-		new AddSubscriptionToOrderDialog(new Sales("","", database), new Order(10010, "", 10005, "", ""));
-		
-	}
 }
+

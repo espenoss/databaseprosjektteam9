@@ -25,7 +25,6 @@ public class AddMealToOrderDialog extends JFrame{
 		this.sales = sales;
 		this.order = order;
 		DialogContent dialog = new DialogContent(this);
-		dialog.setLocationRelativeTo(null);
 		dialog.setVisible(true);
 	}
 	
@@ -42,13 +41,15 @@ public class AddMealToOrderDialog extends JFrame{
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new DataPanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+			setSize(500,300);
+			setLocationRelativeTo(null);
 		}
 		
 		private class DataPanel extends JPanel{
 			public DataPanel(){
-				
-				setLayout(new GridLayout(3, 2));
+
+				GridLayout superGrid = new GridLayout(6,1);
+				setLayout(superGrid);
 				
 				mealList = sales.viewAvailableMeals();
 
@@ -59,11 +60,11 @@ public class AddMealToOrderDialog extends JFrame{
 				}
 				mealSelect = new JComboBox<>(mealNames.toArray());
 				
-				add(new JLabel("Meal: ", JLabel.RIGHT));
+				add(new JLabel("Meal: ", JLabel.LEFT));
 				add(mealSelect);
-				add(new JLabel("Delivery date: ", JLabel.RIGHT));
+				add(new JLabel("Delivery date: ", JLabel.LEFT));
 				add(dateSelect);
-				add(new JLabel("Quantity: ", JLabel.RIGHT));
+				add(new JLabel("Quantity: ", JLabel.LEFT));
 				add(quantitySelect);
 			}
 		}

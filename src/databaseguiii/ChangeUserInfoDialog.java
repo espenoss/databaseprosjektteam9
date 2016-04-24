@@ -16,11 +16,11 @@ class ChangeUserInfoDialog extends JFrame {
 		admin = (Admin) user;
 		UserDialog dialog = new UserDialog(this);
 		dialog.setVisible(true);
-		dialog.setLocation(350, 350);  // plasserer dialogen  
+		dialog.setLocation(350, 350);  
 		setTitle("Registrer user");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
-		setLocation(300, 300); // plasserer foreldrevinduet..	    
+		setLocation(300, 300);    
 	} 
 
 	private class UserDialog extends MyDialog{
@@ -55,23 +55,25 @@ class ChangeUserInfoDialog extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new UserDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			
-			pack();
+
+			setSize(500,300);
+			setLocationRelativeTo(null);
 		}
 				
 		private class UserDatapanel extends JPanel{
 			public UserDatapanel(){
-				setLayout(new GridLayout(4,2));
-				add(new JLabel("Username: ", JLabel.RIGHT));
+				GridLayout superGrid = new GridLayout(8,1);
+				setLayout(superGrid);
+				add(new JLabel("Username: ", JLabel.LEFT));
 				add(userIDfield);
 				
-				add(new JLabel("User type: ", JLabel.RIGHT));
+				add(new JLabel("User type: ", JLabel.LEFT));
 				add(userList);
 				
-				add(new JLabel("Name: ", JLabel.RIGHT));
+				add(new JLabel("Name: ", JLabel.LEFT));
 				add(usernameField);				
 
-				add(new JLabel("Password: ", JLabel.RIGHT));
+				add(new JLabel("Password: ", JLabel.LEFT));
 				add(passwordField);
 			}
 		}

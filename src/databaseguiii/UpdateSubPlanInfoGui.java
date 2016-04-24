@@ -23,11 +23,9 @@ class UpdateSubPlanInfoGui extends JFrame {
 		this.cook = cook;
 		UpdateSubPlanDialog dialog = new UpdateSubPlanDialog(this);
 		dialog.setVisible(true);
-		dialog.setLocation(350, 350); 
 		setTitle("Registrer user");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new FlowLayout());
-		setLocation(300, 300);	    
+		setLayout(new FlowLayout());  
 	} 
 
 	private class UpdateSubPlanDialog extends MyDialog{
@@ -46,12 +44,14 @@ class UpdateSubPlanInfoGui extends JFrame {
 			add(new UserDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
 			
-			pack();
+			setSize(500, 200);
+			setLocationRelativeTo(null);
 		}
 				
 		private class UserDatapanel extends JPanel{
 			public UserDatapanel(){
-				setLayout(new GridLayout(2,2));
+				GridLayout superGrid = new GridLayout(4,1);
+				setLayout(superGrid);
 				try {
 					subPlanList=cook.viewAllSubPlans();
 				} catch (Exception e) {
@@ -62,10 +62,10 @@ class UpdateSubPlanInfoGui extends JFrame {
 					subList.add(c.getName());
 				}
 				subPlanSelect = new JComboBox<>(subList.toArray());
-				add(new JLabel("Choose subscription plan: ", JLabel.RIGHT));
+				add(new JLabel("Choose subscription plan: ", JLabel.LEFT));
 				add(subPlanSelect);
 				
-				add(new JLabel("New name of the supscription plan: ", JLabel.RIGHT));
+				add(new JLabel("New name of the supscription plan: ", JLabel.LEFT));
 				add(sub_plan_nameField);
 			}
 		}

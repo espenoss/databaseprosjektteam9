@@ -25,11 +25,10 @@ class IngredientsInMealGui extends JFrame {
 		this.cook=cook;
 		IngredientsInMealDialog dialog = new IngredientsInMealDialog(this);
 		dialog.setVisible(true);
-		dialog.setLocation(350, 350);
 		setTitle("Registrer user");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
-		setLocation(300, 300); 
+		
 	 } 
 
 	private class IngredientsInMealDialog extends MyDialog{
@@ -47,7 +46,8 @@ class IngredientsInMealGui extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new UserDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+			setSize(400,100);
+			setLocationRelativeTo(null);
 		}
 				
 		private class UserDatapanel extends JPanel{
@@ -85,8 +85,7 @@ class IngredientsInMealGui extends JFrame {
 				
 			return true;
 		}
-	}
-	
+	}	
 }  
 
 

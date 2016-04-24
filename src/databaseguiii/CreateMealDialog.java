@@ -23,13 +23,11 @@ class CreateMealDialog extends JFrame {
 	  setTitle("Create meal");
 	  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	  setLayout(new FlowLayout());
-	  setLocation(300, 300); 
-	  dialog.setLocation(350, 350);  
+	   
  } 
 		
 	 private class DialogWindow extends MyDialog{
 			private TextEditor editor = new TextEditor();
-		//	String mealName, String instructions, boolean available, int price
 			private JTextField mealNameField = new JTextField(20);
 			private JTextField instructionsField = new JTextField(100);
 			private JTextField priceField = new JTextField(20);
@@ -45,20 +43,22 @@ class CreateMealDialog extends JFrame {
 				add(new JPanel(), BorderLayout.NORTH);
 				add(new CustomerDatapanel(),BorderLayout.CENTER);
 				add(getButtonPanel(),BorderLayout.SOUTH);
-				pack();
+				setSize(500,200);
+				setLocationRelativeTo(null);
 			}
 			
 			private class CustomerDatapanel extends JPanel{
 				public CustomerDatapanel(){
-					setLayout(new GridLayout(3,2));
+					GridLayout superGrid = new GridLayout(6,1);
+					setLayout(superGrid);
 			
-					add(new JLabel("Name of meal: ", JLabel.RIGHT));
+					add(new JLabel("Name of meal: ", JLabel.LEFT));
 					add(mealNameField);
 
-					add(new JLabel("Instructions: ", JLabel.RIGHT));
+					add(new JLabel("Instructions: ", JLabel.LEFT));
 					add(instructionsField);
 					
-					add(new JLabel("Price: ", JLabel.RIGHT));
+					add(new JLabel("Price: ", JLabel.LEFT));
 					add(priceField);
 				}
 			}
@@ -76,12 +76,6 @@ class CreateMealDialog extends JFrame {
 				}
 				return true;		
 			}
-	}
-	public static void main(String[] args){
-		String username = "espenme";
-		String passingword = "16Sossosem06";
-		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
-		Database database = new Database("com.mysql.jdbc.Driver", databasename);
-		new CreateMealDialog(new Cook("","", database));
-	}
+	 }
+	 
 }  

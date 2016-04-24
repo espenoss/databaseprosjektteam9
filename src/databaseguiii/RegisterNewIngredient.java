@@ -4,8 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -23,14 +25,13 @@ class RegisterNewIngredient extends JFrame {
 	  setTitle("Register new ingredient");
 	  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	  setLayout(new FlowLayout());
-	  setLocation(300, 300); 
-	  dialog.setLocation(350, 350);  
  } 
 		
 	 private class DialogWindow extends MyDialog{
 			private TextEditor editor = new TextEditor();
-			private JTextField ingredientNameField = new JTextField(20);
-			private JTextField ingredientUnitField = new JTextField(20);
+			private JTextField ingredientNameField = new JTextField(20);			
+			private final String ingredientUnit[] = {"Kilo", "Gramme", "Litre", "Decilitre", "Pieces"}; 
+			private JComboBox<String> ingredientList = new JComboBox<String>(ingredientUnit);	
 			private JTextField quantityField = new JTextField(20);
 			private String ingredient;
 	 		private float myQuantity;
@@ -42,20 +43,21 @@ class RegisterNewIngredient extends JFrame {
 				add(new JPanel(), BorderLayout.NORTH);
 				add(new CustomerDatapanel(),BorderLayout.CENTER);
 				add(getButtonPanel(),BorderLayout.SOUTH);
-				pack();
+				setSize(550,200);
+				setLocationRelativeTo(null);
 			}
 			
 			private class CustomerDatapanel extends JPanel{
 				public CustomerDatapanel(){
-					setLayout(new GridLayout(3,2));
+					GridLayout superGrid = new GridLayout(6,1);
+					setLayout(superGrid);
 			
-					add(new JLabel("Name of ingredient: ", JLabel.RIGHT));
+					add(new JLabel("Name of ingredient: ", JLabel.LEFT));
 					add(ingredientNameField);
-					add(new JLabel("Quantity of ingredient: ", JLabel.RIGHT));
+					add(new JLabel("Quantity of ingredient: ", JLabel.LEFT));
 					add(quantityField);
-
-					add(new JLabel("Unit of ingredient: ", JLabel.RIGHT));
-					add(ingredientUnitField);
+					add(new JLabel("Unit of ingredient: ", JLabel.LEFT));
+					add(ingredientList);
 
 				}
 			}
@@ -66,16 +68,20 @@ class RegisterNewIngredient extends JFrame {
 				String ingredient_quantity = quantityField.getText();
 	 			float my_quantity = editor.stringToFloat(ingredient_quantity);
 			 	myQuantity = my_quantity;
+			   	unit = ingredientList.getSelectedItem().toString();
 			 	
-			 	unit=ingredientUnitField.getText();
-				
-				try {
+			   	if(myQuantity > 0){
+			   		try {
 					cook.addNewIngredient(ingredient, myQuantity, unit, cook.getDatabase());
-
-				} catch (Exception e) {
+					} catch (Exception e) {
 					System.out.println(e.toString());
+					}
+			   		return true;
+			   		}else{
+					JOptionPane.showMessageDialog(null, "Quantity must be greater than zero","", JOptionPane.INFORMATION_MESSAGE);
+					return false;
 				}
-				return true;		
 			}
-	 	}
+		}
 	}  
+

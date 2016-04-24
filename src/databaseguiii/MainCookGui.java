@@ -33,7 +33,7 @@ class MainCookGui extends JFrame {
 		setTitle("Cook control panel");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		Font bigText = new Font("SansSerif", Font.PLAIN, 20);
+		Font bigText = new Font("SansSerif", Font.PLAIN, 25);
     
 		JLabel ledetekst = new JLabel("Choose one of the following options.");
 		add(ledetekst, BorderLayout.NORTH);
@@ -44,7 +44,10 @@ class MainCookGui extends JFrame {
 		ListeboksLytter lytter = new ListeboksLytter();
     	choice_list.addListSelectionListener(lytter);
     	choice_list.setFont(bigText);
+
     	setSize(500,500);
+		setLocationRelativeTo(null);
+    	
 	}
 
 	private class ListeboksLytter implements ListSelectionListener {

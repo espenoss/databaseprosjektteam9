@@ -123,7 +123,7 @@ public class MarkOrderAsReadyDialog extends JFrame{
 	    
 
 	  }
-	  
+
 	 	public static void main(String[] args){
 	 		String username = "espenme";
 	 		String passingword = "16Sossosem06";
@@ -132,4 +132,5 @@ public class MarkOrderAsReadyDialog extends JFrame{
 			MarkOrderAsReadyDialog del = new MarkOrderAsReadyDialog(new Cook("","", database));
 
 	 	}
+
 }
