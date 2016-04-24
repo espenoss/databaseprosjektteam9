@@ -70,17 +70,17 @@ class RegisterUserDialog extends JFrame {
 			
 			boolean nameOk = editor.isAlpha(userID) 
 					&& name != "" && editor.isAlpha(name);
-			if(!nameOk) JOptionPane.showMessageDialog(null, "Name cannot contain numbers");
-		
-			try {
-				my_user = admin.registerUser(userID, userType, name, pword, database);
-			} catch (Exception e) {
-				System.out.println(e.toString());
+			if(!nameOk){
+				JOptionPane.showMessageDialog(null, "Name cannot contain numbers");
+			}else{
+				my_user = admin.registerUser(userID, userType, name, pword, database);				
 			}
+		
 			if(my_user == false){
 				JOptionPane.showMessageDialog(null, "User was not registered, username already exists in database","", JOptionPane.INFORMATION_MESSAGE);
 			}
-			return true;	
+			
+			return my_user;	
 			}
 			
 		

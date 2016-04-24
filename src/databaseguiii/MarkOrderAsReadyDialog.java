@@ -36,10 +36,12 @@ public class MarkOrderAsReadyDialog extends JFrame{
 		  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		  add(new TextPanel(), BorderLayout.NORTH);
 	   	  add(new ListPanel(), BorderLayout.CENTER);
-	   	  JButton markButton = new JButton("Mark as delivered");
+	   	  JButton markButton = new JButton("Mark as ready");
 	   	  markButton.addActionListener(new markButtonListener());
 	   	  add(markButton, BorderLayout.SOUTH);
 		  pack();
+		  setLocationRelativeTo(null);
+		  setVisible(true);
 		  
 	  }
 	  
@@ -128,6 +130,6 @@ public class MarkOrderAsReadyDialog extends JFrame{
 	 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
 	 		Database database = new Database("com.mysql.jdbc.Driver", databasename);
 			MarkOrderAsReadyDialog del = new MarkOrderAsReadyDialog(new Cook("","", database));
-			del.setVisible(true);
+
 	 	}
 }
