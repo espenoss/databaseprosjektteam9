@@ -17,22 +17,24 @@ import javax.swing.JTextField;
 import controller.*;
 
 class AddMealToSubPlanDialog extends JFrame {
- 	
- 	Cook cook = null;
- 	
- 	public AddMealToSubPlanDialog(Cook cook){
- 		this.cook = cook;
- 		AddMealDialog dialog = new AddMealDialog(this);
- 		dialog.setVisible(true);
-  		setTitle("Choose the meal and its ingrediets");
-  		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  		setLayout(new FlowLayout());
- 	}
 
- 	private class AddMealDialog extends MyDialog {
- 		private TextEditor editor = new TextEditor();
- 
- 		private JTextField subName = null;
+	Cook cook = null;
+
+	public AddMealToSubPlanDialog(Cook cook){
+		this.cook = cook;
+		AddMealDialog dialog = new AddMealDialog(this);
+		setTitle("Choose the meal and its ingrediets");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new FlowLayout());
+		pack();
+		dialog.setLocationRelativeTo(null);
+		dialog.setVisible(true);
+	}
+
+	private class AddMealDialog extends MyDialog {
+		private TextEditor editor = new TextEditor();
+
+		private JTextField subName = null;
 		private JComboBox mondaySelect = null;	
 		private JComboBox tuesdaySelect = null;	
 		private JComboBox wednesdaySelect = null;	
@@ -40,130 +42,127 @@ class AddMealToSubPlanDialog extends JFrame {
 		private JComboBox fridaySelect = null;	
 		private JComboBox saturdaySelect = null;	
 		private JComboBox sundaySelect = null;	
-		
- 		private ArrayList<SubPlan> subPlanList = null;
- 		private JComboBox subPlanSelected;
- 		
- 		private ArrayList<Meal> mealList = null;
- 		
- 		public AddMealDialog(JFrame parent){
- 			super(parent, "Choose supscription plan and meals");
- 			add(new JPanel(), BorderLayout.NORTH);
- 			add(new IngredientsDatapanel(),BorderLayout.CENTER);
- 			add(getButtonPanel(),BorderLayout.SOUTH);
- 			setSize(500,700);
+
+		private ArrayList<SubPlan> subPlanList = null;
+		private JComboBox subPlanSelected;
+
+		private ArrayList<Meal> mealList = null;
+
+		public AddMealDialog(JFrame parent){
+			super(parent, "Choose supscription plan and meals");
+			add(new JPanel(), BorderLayout.NORTH);
+			add(new IngredientsDatapanel(),BorderLayout.CENTER);
+			add(getButtonPanel(),BorderLayout.SOUTH);
+			setSize(500,700);
 			setLocationRelativeTo(null);
- 		}
-	   
- 		private class IngredientsDatapanel extends JPanel{
- 			public IngredientsDatapanel(){
+		}
+
+		private class IngredientsDatapanel extends JPanel{
+			public IngredientsDatapanel(){
 				GridLayout superGrid = new GridLayout(18,1);
 				setLayout(superGrid);
- 				
+
 				subPlanList = cook.viewAllSubPlans();
-				
+
 				ArrayList<String> my_sub_list = new ArrayList<>();
-				
+
 				for(SubPlan plan: subPlanList){
 					my_sub_list.add(plan.getName());
 				}
-				
- 				mealList = cook.viewAvailableMeals();
- 				
- 				ArrayList<String> mealNames = new ArrayList<String>();
- 				for(Meal m:mealList){
- 					mealNames.add(m.getMealName());
- 				}
- 				
- 				mondaySelect = new JComboBox<>(mealNames.toArray());	
- 				tuesdaySelect = new JComboBox<>(mealNames.toArray());	
- 				wednesdaySelect = new JComboBox<>(mealNames.toArray());	
- 				thursdaySelect = new JComboBox<>(mealNames.toArray());	
- 				fridaySelect = new JComboBox<>(mealNames.toArray());	
- 				saturdaySelect = new JComboBox<>(mealNames.toArray());	
- 				sundaySelect = new JComboBox<>(mealNames.toArray());	
- 				
+
+				mealList = cook.viewAvailableMeals();
+
+				ArrayList<String> mealNames = new ArrayList<String>();
+				for(Meal m:mealList){
+					mealNames.add(m.getMealName());
+				}
+
+				mondaySelect = new JComboBox<>(mealNames.toArray());	
+				tuesdaySelect = new JComboBox<>(mealNames.toArray());	
+				wednesdaySelect = new JComboBox<>(mealNames.toArray());	
+				thursdaySelect = new JComboBox<>(mealNames.toArray());	
+				fridaySelect = new JComboBox<>(mealNames.toArray());	
+				saturdaySelect = new JComboBox<>(mealNames.toArray());	
+				sundaySelect = new JComboBox<>(mealNames.toArray());	
+
 				ArrayList<String> my_list = new ArrayList<>();
 				for(Meal m: mealList){
 					my_list.add(m.getMealName());
 				}
-				
+
 				subPlanSelected = new JComboBox<>(my_sub_list.toArray());
-				
- 				add(new JLabel("Subscription Plan: ", JLabel.LEFT));
- 				add(subPlanSelected);				
- 				subPlanSelected.addActionListener(new subSelectListener());
- 				
- 				add(new JLabel("Sub name: ", JLabel.LEFT));
- 				subName = new JTextField(subPlanList.get(0).getName());
- 				add(subName);
- 				
- 				add(new JLabel("Monday: ", JLabel.LEFT));
- 				add(mondaySelect);
- 				
+
+				add(new JLabel("Subscription Plan: ", JLabel.LEFT));
+				add(subPlanSelected);				
+				subPlanSelected.addActionListener(new subSelectListener());
+
+				add(new JLabel("Sub name: ", JLabel.LEFT));
+				subName = new JTextField(subPlanList.get(0).getName());
+				add(subName);
+
+				add(new JLabel("Monday: ", JLabel.LEFT));
+				add(mondaySelect);
+
 				add(new JLabel("Tuesday: ", JLabel.LEFT));
- 				add(tuesdaySelect);
- 				
+				add(tuesdaySelect);
+
 				add(new JLabel("Wednesday: ", JLabel.LEFT));
- 				add(wednesdaySelect); 
-				
+				add(wednesdaySelect); 
+
 				add(new JLabel("Thursday: ", JLabel.LEFT));
- 				add(thursdaySelect); 
-				
+				add(thursdaySelect); 
+
 				add(new JLabel("Friday: ", JLabel.LEFT));
- 				add(fridaySelect); 
-				
+				add(fridaySelect); 
+
 				add(new JLabel("Saturday: ", JLabel.LEFT));
- 				add(saturdaySelect); 
-				
+				add(saturdaySelect); 
+
 				add(new JLabel("Sunday: ", JLabel.LEFT));
- 				add(sundaySelect); 			
-				
- 			}
- 		}
- 		
- 		private class subSelectListener implements ActionListener{
+				add(sundaySelect); 			
+
+			}
+		}
+
+		private class subSelectListener implements ActionListener{
 
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource() == subPlanSelected){
 					int subIndex = subPlanSelected.getSelectedIndex();
 					SubPlan currSub = subPlanList.get(subIndex);
-					
+
 					subName.setText(currSub.getName());
 				}
 			} 			
- 		}
- 		
- 		public boolean okData(){
- 	
- 			int weekIndex[] = new int[7];
- 			weekIndex[0]= mondaySelect.getSelectedIndex();
- 			weekIndex[1] = tuesdaySelect.getSelectedIndex();
- 			weekIndex[2]  = wednesdaySelect.getSelectedIndex();
- 			weekIndex[3] = thursdaySelect.getSelectedIndex();
- 			weekIndex[4] = fridaySelect.getSelectedIndex();
- 			weekIndex[5] = saturdaySelect.getSelectedIndex();
- 			weekIndex[6] = sundaySelect.getSelectedIndex();
+		}
 
- 			int subIndex = subPlanSelected.getSelectedIndex();
- 			SubPlan currSub = subPlanList.get(subIndex);
- 			
- 			String newPlanName = subName.getText().trim();
- 			
-	 		Meal[] meals = currSub.getMeals();
-	 		for(int i=0;i<meals.length;i++){
-	 			Meal selectedMeal = meals[weekIndex[i]];
-	 			if(meals[i] != null){
-	 				if(!cook.removeMealFromPlan(currSub.getSubPlanID(), selectedMeal.getMealID(), i+1)) return false;
-	 			}
-	 			cook.addMealToSubPlan(currSub.getSubPlanID(), selectedMeal.getMealID(), i);
-	 		}
-	 		
-	 		currSub.setName(newPlanName);
-	 		if(!currSub.updateSubPlan(cook.getDatabase())) return false;
-		 				 	
-	 		return true;
-		 	
- 		}
- 	}
+		public boolean okData(){
+
+			int weekIndex[] = new int[7];
+			weekIndex[0]= mondaySelect.getSelectedIndex();
+			weekIndex[1] = tuesdaySelect.getSelectedIndex();
+			weekIndex[2]  = wednesdaySelect.getSelectedIndex();
+			weekIndex[3] = thursdaySelect.getSelectedIndex();
+			weekIndex[4] = fridaySelect.getSelectedIndex();
+			weekIndex[5] = saturdaySelect.getSelectedIndex();
+			weekIndex[6] = sundaySelect.getSelectedIndex();
+
+			int subIndex = subPlanSelected.getSelectedIndex();
+			SubPlan currSub = subPlanList.get(subIndex);
+
+			String newPlanName = subName.getText().trim();
+
+			Meal[] meals = currSub.getMeals();
+			for(int i=0;i<meals.length;i++){
+				Meal selectedMeal = meals[weekIndex[i]];
+				if(meals[i] != null){
+					if(!cook.removeMealFromPlan(currSub.getSubPlanID(), selectedMeal.getMealID(), i+1)) return false;
+				}
+				cook.addMealToSubPlan(currSub.getSubPlanID(), selectedMeal.getMealID(), i);
+			}
+
+			currSub.setName(newPlanName);
+			return currSub.updateSubPlan(cook.getDatabase());		 	
+		}
+	}
 }

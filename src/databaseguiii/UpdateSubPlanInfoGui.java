@@ -18,14 +18,16 @@ import databasePackage.Database;
 
 class UpdateSubPlanInfoGui extends JFrame {
 	private Cook cook = null; 
-  
+
 	public UpdateSubPlanInfoGui(Cook cook) { 
 		this.cook = cook;
 		UpdateSubPlanDialog dialog = new UpdateSubPlanDialog(this);
-		dialog.setVisible(true);
 		setTitle("Registrer user");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());  
+		pack();
+		dialog.setLocationRelativeTo(null);
+		dialog.setVisible(true);
 	} 
 
 	private class UpdateSubPlanDialog extends MyDialog{
@@ -33,30 +35,26 @@ class UpdateSubPlanInfoGui extends JFrame {
 		private TextEditor editor = new TextEditor();
 		private ArrayList<SubPlan> subPlanList = new ArrayList<>();
 		private JComboBox subPlanSelect;
-		
+
 		private JTextField sub_plan_nameField = new JTextField(10);
 		String sub_plan;
-		
+
 		public UpdateSubPlanDialog(JFrame parent){
 			super(parent, "Fill in new info about the subscription plan");
-			
+
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new UserDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			
+
 			setSize(500, 200);
-			setLocationRelativeTo(null);
 		}
-				
+
 		private class UserDatapanel extends JPanel{
 			public UserDatapanel(){
 				GridLayout superGrid = new GridLayout(4,1);
 				setLayout(superGrid);
-				try {
-					subPlanList=cook.viewAllSubPlans();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				subPlanList=cook.viewAllSubPlans();
+
 				ArrayList<String> subList = new ArrayList<>();
 				for(SubPlan c: subPlanList){
 					subList.add(c.getName());
@@ -64,27 +62,22 @@ class UpdateSubPlanInfoGui extends JFrame {
 				subPlanSelect = new JComboBox<>(subList.toArray());
 				add(new JLabel("Choose subscription plan: ", JLabel.LEFT));
 				add(subPlanSelect);
-				
+
 				add(new JLabel("New name of the supscription plan: ", JLabel.LEFT));
 				add(sub_plan_nameField);
 			}
 		}
-		
-		
+
+
 		public boolean okData(){
-			
-			
+
+
 			int subPlanIndex = subPlanSelect.getSelectedIndex();
 			SubPlan currSubPlan = subPlanList.get(subPlanIndex);
-			
+
 			currSubPlan.setName(sub_plan_nameField.getText());
-			try {
-				currSubPlan.updateSubPlan(cook.getDatabase());
-			} catch (Exception e) {
-				System.out.println(e.toString());
-			}
-			return true;		
+			return currSubPlan.updateSubPlan(cook.getDatabase());
 		}
 	}
-	
+
 }

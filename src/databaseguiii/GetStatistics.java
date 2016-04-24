@@ -28,18 +28,20 @@ class GetStatistics extends JFrame {
 	public GetStatistics(Admin admin) {
 		this.admin = admin;
 		DialogWindow dialog = new DialogWindow(this);
-		dialog.setVisible(true);
 		setTitle("Get statistics");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout()); 
+		pack();
+		dialog.setLocationRelativeTo(null);
+		dialog.setVisible(true);
 	}
 
 	private class DialogWindow extends MyDialog{
 		private TextEditor editor = new TextEditor();
-		
+
 		private JTextField dateField = new JTextField(10);
 		private int year;
-		
+
 		public DialogWindow(JFrame parent){
 			super(parent, "Get statistics");
 			add(new JPanel(), BorderLayout.NORTH);
@@ -48,43 +50,39 @@ class GetStatistics extends JFrame {
 			setSize(500,130);
 			setLocationRelativeTo(null);
 		}
-	
+
 		private class OrderDatapanel extends JPanel{
 			public OrderDatapanel(){
 				setLayout(new GridLayout(1,2));
-			
+
 				add(new JLabel("Fill in year in format YYYY: ", JLabel.RIGHT));
 				add(dateField);
 				pack();
-				
-			
+
+
 			}
 		}
 
 		public boolean okData(){
-						
+
 			String year_codeText  = dateField.getText();
 			int myIntDate = editor.stringToInt(year_codeText);
 			year = myIntDate;
-			
+
 			Calendar cal = Calendar.getInstance();
-			
+
 			if (year > 1980 && year <= cal.get(Calendar.YEAR)){ 
 
-			String s = "";
-			try {
+				String s = "";
 				s=admin.getStatisticsForYear(year).toString();
-			} catch (Exception e) {
-				System.out.println(e.toString());
-			}
-			
-			 JOptionPane.showMessageDialog(null, s, "Statistics: ", JOptionPane.INFORMATION_MESSAGE );
+
+				JOptionPane.showMessageDialog(null, s, "Statistics: ", JOptionPane.INFORMATION_MESSAGE );
+				return true;
 			}
 			else{
 				JOptionPane.showMessageDialog(null, "Could not retrieve statistics");
-		
+				return false;
 			}	
-			return true;
 		}
 	}
 }

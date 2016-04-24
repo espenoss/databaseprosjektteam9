@@ -16,6 +16,8 @@ class RegisterCustomerDialog extends JFrame {
 		setTitle("Register customer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
+		pack();
+		dialog.setLocationRelativeTo(null);
 		dialog.setVisible(true);
 	} 
 
@@ -58,11 +60,7 @@ class RegisterCustomerDialog extends JFrame {
 				GridLayout superGrid = new GridLayout(18,1);
 				setLayout(superGrid);
 
-				try {
-					zoneList = sales.viewZones();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				zoneList = sales.viewZones();
 
 				ArrayList<String> zoneNames = new ArrayList<>();
 				for(int i=0;i<zoneList.length;i++){
@@ -100,7 +98,7 @@ class RegisterCustomerDialog extends JFrame {
 
 			}
 		}
-		
+
 		public boolean okData(){		
 			firstName = firstNameField.getText().trim();	
 			surName = surNameField.getText().trim();
@@ -128,7 +126,7 @@ class RegisterCustomerDialog extends JFrame {
 			if(!nameOk) JOptionPane.showMessageDialog(null, "Name cannot be empty or contain numbers");
 			if(!emailAndAdressOk) JOptionPane.showMessageDialog(null, "Email or adress cannot be empty or contain numbers");
 			if(!phoneOk) JOptionPane.showMessageDialog(null, "Phone number cannot be empty or contain letters");
-			
+
 			boolean dataCheck = nameOk && emailAndAdressOk && zipAndZoneOk && phoneOk;
 
 			if(status_list.getSelectedIndex() == 0){
@@ -138,16 +136,11 @@ class RegisterCustomerDialog extends JFrame {
 			}
 
 			if(dataCheck){
-				try {
-					sales.registerCustomer(surName, firstName, phoneNumber, email, adress, 
-							zip_code, zone_nr, preferences, active);
-				} catch (Exception e) {
-					System.out.println(e.toString());
-				}					
-
+				return sales.registerCustomer(surName, firstName, phoneNumber, email, adress, 
+						zip_code, zone_nr, preferences, active) != null;
+			}else{
+				return false;
 			}
-
-			return dataCheck;		
 
 		}
 	}

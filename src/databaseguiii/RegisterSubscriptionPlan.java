@@ -23,19 +23,21 @@ class RegisterSubscriptionPlan extends JFrame {
 	public RegisterSubscriptionPlan(Cook cook) {
 		this.cook = cook;
 		DialogWindow dialog = new DialogWindow(this);
-		dialog.setVisible(true);
 		setTitle("Register new subscription plan");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout()); 
+		pack();
+		dialog.setLocationRelativeTo(null);
+		dialog.setVisible(true);
 	}
 
 	private class DialogWindow extends MyDialog{
 		private TextEditor editor = new TextEditor();
-		
+
 		private JTextField sub_plan_nameField = new JTextField(10);
 		String sub_plan;
-		
-		
+
+
 		public DialogWindow(JFrame parent){
 			super(parent, "New subscpiption plan");
 			add(new JPanel(), BorderLayout.NORTH);
@@ -44,21 +46,21 @@ class RegisterSubscriptionPlan extends JFrame {
 			setSize(500,140);
 			setLocationRelativeTo(null);
 		}
-	
+
 		private class OrderDatapanel extends JPanel{
 			public OrderDatapanel(){
 				GridLayout superGrid = new GridLayout(2,1);
 				setLayout(superGrid);
-			
+
 				add(new JLabel("Name of the supscription plan: ", JLabel.LEFT));
 				add(sub_plan_nameField);
-			
+
 			}
 		}
 
 		public boolean okData(){
 			sub_plan = sub_plan_nameField.getText();
-		
+
 			try {
 				cook.registerSubPlan(sub_plan, cook.getDatabase());
 			}catch (Exception e) {

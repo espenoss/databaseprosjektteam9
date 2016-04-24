@@ -11,13 +11,15 @@ class RegisterUserDialog extends JFrame {
 	private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
 	private Admin admin = null; 
   
-	public RegisterUserDialog(Admin admin) throws Exception { 
+	public RegisterUserDialog(Admin admin) { 
 		this.admin = admin;
 		UserDialog dialog = new UserDialog(this);
-		dialog.setVisible(true);
 		setTitle("Registrer user");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout()); 
+		pack();
+		dialog.setLocationRelativeTo(null);
+		dialog.setVisible(true);
 	 } 
 
 	private class UserDialog extends MyDialog{

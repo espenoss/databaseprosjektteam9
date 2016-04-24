@@ -28,10 +28,13 @@ class AddIngredientsToMealGui extends JFrame {
 	public AddIngredientsToMealGui(Cook cook){
 		this.cook = cook;
 		AddIngredientsDialog dialog = new AddIngredientsDialog(this);
-		dialog.setVisible(true);
 		setTitle("Choose the meal and its ingrediets");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
+		pack();
+		dialog.setLocationRelativeTo(null);
+		dialog.setVisible(true);
+
 	}
 
 	private class AddIngredientsDialog extends MyDialog {

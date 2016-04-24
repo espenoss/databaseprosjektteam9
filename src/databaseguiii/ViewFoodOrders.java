@@ -66,12 +66,7 @@ class ViewFoodOrders extends JFrame {
 			String dateStr = s.format(dateSelect.getValue());		
 			java.sql.Date sqlDate = java.sql.Date.valueOf(dateStr);    
 
-			try {
-				o = user.viewFoodOrders(sqlDate);
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
+			o = user.viewFoodOrders(sqlDate);
 
 			if(o == null){
 				JOptionPane.showMessageDialog(null, "No orders for this date");
