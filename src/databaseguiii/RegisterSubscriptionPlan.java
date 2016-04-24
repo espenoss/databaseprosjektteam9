@@ -47,9 +47,10 @@ class RegisterSubscriptionPlan extends JFrame {
 	
 		private class OrderDatapanel extends JPanel{
 			public OrderDatapanel(){
-				setLayout(new GridLayout(1,2));
+				GridLayout superGrid = new GridLayout(2,1);
+				setLayout(superGrid);
 			
-				add(new JLabel("Name of the supscription plan: ", JLabel.RIGHT));
+				add(new JLabel("Name of the supscription plan: ", JLabel.LEFT));
 				add(sub_plan_nameField);
 			
 			}

@@ -52,13 +52,14 @@ class RegisterOrderDialog extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new OrderDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			setSize(500,200);
+			setSize(500,300);
 			setLocationRelativeTo(null);
 		}
 	
 		private class OrderDatapanel extends JPanel{
 			public OrderDatapanel(){
-				setLayout(new GridLayout(4,2));
+				GridLayout superGrid = new GridLayout(8,1);
+				setLayout(superGrid);
 			
 				try {
 					customerList = sales.viewCustomerList();
@@ -72,13 +73,13 @@ class RegisterOrderDialog extends JFrame {
 				}
 				customerSelect = new JComboBox<>(nameList.toArray());
 				
-				add(new JLabel("Customer: ", JLabel.RIGHT));
+				add(new JLabel("Customer: ", JLabel.LEFT));
 				add(customerSelect);
 			
-				add(new JLabel("Delivery date: ", JLabel.RIGHT));
+				add(new JLabel("Delivery date: ", JLabel.LEFT));
 				add(dateSelect);
 			
-				add(new JLabel("Information about the order: ", JLabel.RIGHT));
+				add(new JLabel("Information about the order: ", JLabel.LEFT));
 				add(infoField);
 			
 			}

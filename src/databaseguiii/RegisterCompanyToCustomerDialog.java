@@ -48,7 +48,8 @@ class RegisterCompanyToCustomerDialog extends JFrame{
 
 			private class CompanyDatapanel extends JPanel{
 				public CompanyDatapanel(){
-					setLayout(new GridLayout(2,2));
+					GridLayout superGrid = new GridLayout(4,1);
+					setLayout(superGrid);
 
 					try {
 						customerList = sales.viewCustomerList();
@@ -61,10 +62,10 @@ class RegisterCompanyToCustomerDialog extends JFrame{
 						nameList.add(c.getCustomerID() + " " + c.getFirstName() + " " + c.getSurName());
 					}
 					customerSelect = new JComboBox<>(nameList.toArray());
-					add(new JLabel("Customer: ", JLabel.RIGHT));
+					add(new JLabel("Customer: ", JLabel.LEFT));
 					add(customerSelect);
 			
-					add(new JLabel("Company name: ", JLabel.RIGHT));
+					add(new JLabel("Company name: ", JLabel.LEFT));
 					add(company_name_field);
 				}
 			}

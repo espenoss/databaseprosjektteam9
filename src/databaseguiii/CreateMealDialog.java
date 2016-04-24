@@ -49,15 +49,16 @@ class CreateMealDialog extends JFrame {
 			
 			private class CustomerDatapanel extends JPanel{
 				public CustomerDatapanel(){
-					setLayout(new GridLayout(3,2));
+					GridLayout superGrid = new GridLayout(6,1);
+					setLayout(superGrid);
 			
-					add(new JLabel("Name of meal: ", JLabel.RIGHT));
+					add(new JLabel("Name of meal: ", JLabel.LEFT));
 					add(mealNameField);
 
-					add(new JLabel("Instructions: ", JLabel.RIGHT));
+					add(new JLabel("Instructions: ", JLabel.LEFT));
 					add(instructionsField);
 					
-					add(new JLabel("Price: ", JLabel.RIGHT));
+					add(new JLabel("Price: ", JLabel.LEFT));
 					add(priceField);
 				}
 			}
@@ -75,12 +76,6 @@ class CreateMealDialog extends JFrame {
 				}
 				return true;		
 			}
-	}
-	public static void main(String[] args){
-		String username = "espenme";
-		String passingword = "16Sossosem06";
-		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
-		Database database = new Database("com.mysql.jdbc.Driver", databasename);
-		new CreateMealDialog(new Cook("","", database));
-	}
+	 }
+	 
 }  

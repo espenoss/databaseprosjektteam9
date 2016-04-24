@@ -62,7 +62,8 @@ class AddIngredientsToMealGui extends JFrame {
 
 		private class IngredientsDatapanel extends JPanel{
 			public IngredientsDatapanel(){
-				setLayout(new GridLayout(3,2));
+				GridLayout superGrid = new GridLayout(6,1);
+				setLayout(superGrid);
 
 				mealList = cook.viewAvailableMeals();
 
@@ -71,7 +72,7 @@ class AddIngredientsToMealGui extends JFrame {
 					my_list.add(m.getMealName());
 				}
 				mealIdSelected = new JComboBox<>(my_list.toArray());
-				add(new JLabel("Meal Id: ", JLabel.RIGHT));
+				add(new JLabel("Meal Id: ", JLabel.LEFT));
 				add(mealIdSelected);
 
 				ingredientsList = cook.viewIngredients();
@@ -82,10 +83,10 @@ class AddIngredientsToMealGui extends JFrame {
 				}
 				ingredientSelected = new JComboBox<>(my_ingr_list.toArray());
 
-				add(new JLabel("Ingredient Id: ", JLabel.RIGHT));
+				add(new JLabel("Ingredient Id: ", JLabel.LEFT));
 				add(ingredientSelected);
 
-				add(new JLabel("Ingredient quantity: ", JLabel.RIGHT));
+				add(new JLabel("Ingredient quantity: ", JLabel.LEFT));
 				add(ingredient_quantityField);
 			}
 		}

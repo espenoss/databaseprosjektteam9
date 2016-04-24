@@ -16,8 +16,6 @@ class RegisterCustomerDialog extends JFrame {
 		setTitle("Register customer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
-		pack();
-		dialog.setLocationRelativeTo(null);
 		dialog.setVisible(true);
 	} 
 

@@ -46,14 +46,15 @@ class RegisterNewIngredient extends JFrame {
 			
 			private class CustomerDatapanel extends JPanel{
 				public CustomerDatapanel(){
-					setLayout(new GridLayout(3,2));
+					GridLayout superGrid = new GridLayout(6,1);
+					setLayout(superGrid);
 			
-					add(new JLabel("Name of ingredient: ", JLabel.RIGHT));
+					add(new JLabel("Name of ingredient: ", JLabel.LEFT));
 					add(ingredientNameField);
-					add(new JLabel("Quantity of ingredient: ", JLabel.RIGHT));
+					add(new JLabel("Quantity of ingredient: ", JLabel.LEFT));
 					add(quantityField);
 
-					add(new JLabel("Unit of ingredient: ", JLabel.RIGHT));
+					add(new JLabel("Unit of ingredient: ", JLabel.LEFT));
 					add(ingredientUnitField);
 
 				}

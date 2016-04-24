@@ -56,23 +56,24 @@ class ChangeUserInfoDialog extends JFrame {
 			add(new UserDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
 
-			setSize(500,200);
+			setSize(500,300);
 			setLocationRelativeTo(null);
 		}
 				
 		private class UserDatapanel extends JPanel{
 			public UserDatapanel(){
-				setLayout(new GridLayout(4,2));
-				add(new JLabel("Username: ", JLabel.RIGHT));
+				GridLayout superGrid = new GridLayout(8,1);
+				setLayout(superGrid);
+				add(new JLabel("Username: ", JLabel.LEFT));
 				add(userIDfield);
 				
-				add(new JLabel("User type: ", JLabel.RIGHT));
+				add(new JLabel("User type: ", JLabel.LEFT));
 				add(userList);
 				
-				add(new JLabel("Name: ", JLabel.RIGHT));
+				add(new JLabel("Name: ", JLabel.LEFT));
 				add(usernameField);				
 
-				add(new JLabel("Password: ", JLabel.RIGHT));
+				add(new JLabel("Password: ", JLabel.LEFT));
 				add(passwordField);
 			}
 		}
