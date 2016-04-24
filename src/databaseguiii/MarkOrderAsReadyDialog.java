@@ -121,13 +121,5 @@ public class MarkOrderAsReadyDialog extends JFrame{
 	    
 
 	  }
-	  
-	 	public static void main(String[] args){
-	 		String username = "espenme";
-	 		String passingword = "16Sossosem06";
-	 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
-	 		Database database = new Database("com.mysql.jdbc.Driver", databasename);
-			MarkOrderAsReadyDialog del = new MarkOrderAsReadyDialog(new Cook("","", database));
-			del.setVisible(true);
-	 	}
+	 
 }

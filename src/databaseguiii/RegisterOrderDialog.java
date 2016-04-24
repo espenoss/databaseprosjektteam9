@@ -30,8 +30,7 @@ class RegisterOrderDialog extends JFrame {
 		setTitle("Register new order");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
-		setLocation(300, 300); 
-		dialog.setLocation(350, 350);  
+		 
 	}
 
 
@@ -53,7 +52,8 @@ class RegisterOrderDialog extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new OrderDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+			setSize(500,200);
+			setLocationRelativeTo(null);
 		}
 	
 		private class OrderDatapanel extends JPanel{

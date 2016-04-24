@@ -34,7 +34,8 @@ class RegisterCompanyToCustomerDialog extends JFrame{
 				add(new CompanyDatapanel(),BorderLayout.CENTER);
 				add(getButtonPanel(),BorderLayout.SOUTH);
 				customerSelect.addActionListener(new listListener());
-				pack();
+				setSize(500,200);
+				setLocationRelativeTo(null);
 			}
 			
 			private class listListener implements ActionListener{

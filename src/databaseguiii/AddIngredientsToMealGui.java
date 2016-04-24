@@ -32,8 +32,6 @@ class AddIngredientsToMealGui extends JFrame {
 		setTitle("Choose the meal and its ingrediets");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
-		setLocation(300, 300); 
-		dialog.setLocation(350, 350); 
 	}
 
 	private class AddIngredientsDialog extends MyDialog {
@@ -58,7 +56,8 @@ class AddIngredientsToMealGui extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new IngredientsDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+			setSize(500,200);
+			setLocationRelativeTo(null);
 		}
 
 		private class IngredientsDatapanel extends JPanel{

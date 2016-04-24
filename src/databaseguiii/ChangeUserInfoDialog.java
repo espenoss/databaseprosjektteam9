@@ -55,8 +55,9 @@ class ChangeUserInfoDialog extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new UserDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			
-			pack();
+
+			setSize(500,200);
+			setLocationRelativeTo(null);
 		}
 				
 		private class UserDatapanel extends JPanel{

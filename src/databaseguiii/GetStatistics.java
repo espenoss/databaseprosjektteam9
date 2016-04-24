@@ -31,9 +31,7 @@ class GetStatistics extends JFrame {
 		dialog.setVisible(true);
 		setTitle("Get statistics");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new FlowLayout());
-		setLocation(300, 300); 
-		dialog.setLocation(350, 350);  
+		setLayout(new FlowLayout()); 
 	}
 
 	private class DialogWindow extends MyDialog{
@@ -47,7 +45,8 @@ class GetStatistics extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new OrderDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+			setSize(500,100);
+			setLocationRelativeTo(null);
 		}
 	
 		private class OrderDatapanel extends JPanel{

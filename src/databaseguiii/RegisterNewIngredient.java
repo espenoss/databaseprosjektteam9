@@ -23,8 +23,6 @@ class RegisterNewIngredient extends JFrame {
 	  setTitle("Register new ingredient");
 	  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	  setLayout(new FlowLayout());
-	  setLocation(300, 300); 
-	  dialog.setLocation(350, 350);  
  } 
 		
 	 private class DialogWindow extends MyDialog{
@@ -42,7 +40,8 @@ class RegisterNewIngredient extends JFrame {
 				add(new JPanel(), BorderLayout.NORTH);
 				add(new CustomerDatapanel(),BorderLayout.CENTER);
 				add(getButtonPanel(),BorderLayout.SOUTH);
-				pack();
+				setSize(550,200);
+				setLocationRelativeTo(null);
 			}
 			
 			private class CustomerDatapanel extends JPanel{

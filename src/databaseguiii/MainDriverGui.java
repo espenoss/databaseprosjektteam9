@@ -1,6 +1,8 @@
 package databaseguiii;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -23,14 +25,17 @@ class MainDriverGui extends JFrame {
     
 		JLabel ledetekst = new JLabel("Choose one of the following options.");
 		add(ledetekst, BorderLayout.NORTH);
-
+		Font bigText = new Font("SansSerif", Font.PLAIN, 25);
+		choice_list.setFont(bigText);
     /* Legger paa rullefelt */
 		JScrollPane rullefeltMedListe = new JScrollPane(choice_list);
 		add(rullefeltMedListe, BorderLayout.CENTER);
 
 		ListeboksLytter lytter = new ListeboksLytter();
     	choice_list.addListSelectionListener(lytter);
-    	pack();
+    	setSize(500,500);
+		setLocationRelativeTo(null);
+    	
 	}
 
   /* Lytteren fanger opp alle klikk paa linjer i listeboksen */

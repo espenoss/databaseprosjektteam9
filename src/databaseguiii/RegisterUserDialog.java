@@ -17,8 +17,7 @@ class RegisterUserDialog extends JFrame {
 		dialog.setVisible(true);
 		setTitle("Registrer user");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new FlowLayout());
-		dialog.setLocationRelativeTo(null); 
+		setLayout(new FlowLayout()); 
 	 } 
 
 	private class UserDialog extends MyDialog{
@@ -39,7 +38,8 @@ class RegisterUserDialog extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new UserDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+			setSize(500,200);
+			setLocationRelativeTo(null);
 		}
 				
 		private class UserDatapanel extends JPanel{

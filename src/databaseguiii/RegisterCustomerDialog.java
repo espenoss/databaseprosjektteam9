@@ -50,7 +50,9 @@ class RegisterCustomerDialog extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new CustomerDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+
+			setSize(600,700);
+			setLocationRelativeTo(null);
 		}
 
 		private class CustomerDatapanel extends JPanel{

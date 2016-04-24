@@ -54,7 +54,9 @@ class ChangeOrderDialog extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new ChangeOrderDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+
+			setSize(500,200);
+			setLocationRelativeTo(null);
 		}
 		private class ChangeOrderDatapanel extends JPanel{
 			public ChangeOrderDatapanel(){

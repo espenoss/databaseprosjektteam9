@@ -43,10 +43,12 @@ class LogInGui extends JFrame{
 		JButton button = new JButton("Sign in");
 		Buttonlistener buttonlistener = new Buttonlistener();
 		button.addActionListener (buttonlistener);
-		
 		add(button, BorderLayout.CENTER);  
+		
 		add(message, BorderLayout.PAGE_END);
-		pack();
+		setSize(500,250);
+		setLocationRelativeTo(null);
+	
 	}	
 	
 	private class Buttonlistener implements ActionListener {

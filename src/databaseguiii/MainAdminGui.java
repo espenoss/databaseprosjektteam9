@@ -72,7 +72,7 @@ class MainAdminGui extends JFrame {
 			this.admin = admin;
 			setTitle("Admin control panel");
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			Font bigText = new Font("SansSerif", Font.PLAIN, 30);
+			Font bigText = new Font("SansSerif", Font.PLAIN, 25);
 
 			JLabel ledetekst = new JLabel("Choose one of the following options.");
 			add(ledetekst, BorderLayout.NORTH);
@@ -84,6 +84,7 @@ class MainAdminGui extends JFrame {
 			choice_list.addListSelectionListener(lytter);
 			choice_list.setFont(bigText);
 			setSize(700, 700);
+			setLocationRelativeTo(null);
 		}
 		
 
