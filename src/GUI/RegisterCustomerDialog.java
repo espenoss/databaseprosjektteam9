@@ -30,7 +30,7 @@ class RegisterCustomerDialog extends JFrame {
 		private JTextField emailField = new JTextField(20);
 		private JTextField adressField = new JTextField(20);
 		private JTextField zip_codeField = new JTextField(6);
-		public String[][] zoneList = null;
+		private String[][] zoneList = null;
 		private JComboBox zoneSelect;
 		private JTextField preferencesField = new JTextField(50);
 		private JTextField phoneNumberField = new JTextField(12);
