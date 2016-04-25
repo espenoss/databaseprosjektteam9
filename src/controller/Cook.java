@@ -14,7 +14,7 @@ public class Cook extends User {
 	
 	//FINISHED, is tested
 	//Lets the cook register a new meal
-	public Meal createMeal(String mealName, String instructions, int price) throws Exception{ 
+	public Meal createMeal(String mealName, String instructions, int price) { 
 		int mealID = QMFood.registerMeal(mealName, instructions, true, price, database);
 		if(mealID < 0){
 			return null;
@@ -22,27 +22,21 @@ public class Cook extends User {
 		return new Meal(mealID, mealName, instructions, true, price);
 	}
 	//FINISHED, is tested
-	public boolean addIngredientToMeal(int mealID, int ingredientID, float ingredientQuantity) throws Exception{
+	public boolean addIngredientToMeal(int mealID, int ingredientID, float ingredientQuantity) {
 		boolean res = QMFood.addIngredientToMeal(mealID, ingredientID, ingredientQuantity, database);
 		return res;
 	}
 	
-	// **** DELETE OR CHANGE THIS METHOD ****
-	// Deletes meal from database. ---  is tested //
-	public boolean deleteMeal(int mealID) throws Exception{
-		return QMFood.removeMeal(mealID, database);
-	}
-	
 	//FINISHED, is tested
 	//Registers new empty subscription plan
-	public SubPlan registerSubPlan(String name,Database database) throws Exception{
+	public SubPlan registerSubPlan(String name,Database database) {
 		int subPlanID = QMFood.registerSubscriptionPlan(name, database);
 		
 		return new SubPlan(subPlanID, name);
 	}
 	
 	//FINISHED, is tested
-	public boolean addMealToSubPlan(int subID, int mealID, int weekdayNr) throws Exception{
+	public boolean addMealToSubPlan(int subID, int mealID, int weekdayNr) {
 		String weekday="";
 		if (weekdayNr<1 || weekdayNr>7){
 			return false;
@@ -60,13 +54,13 @@ public class Cook extends User {
 	}
 	
 	//FINISHED, is tested
-	public boolean removeMealFromPlan(int subID, int mealID, int weekdayNr) throws Exception{
+	public boolean removeMealFromPlan(int subID, int mealID, int weekdayNr) {
 		return QMFood.removeMealFromPlan(subID, mealID, weekdayNr, database);
 		
 	}
 	
 	// Adds/registers new ingredient to database --- NOT TESTED
-	public Ingredient addNewIngredient(String name, float quantity, String unit, Database database) throws Exception{
+	public Ingredient addNewIngredient(String name, float quantity, String unit, Database database) {
 		int ingredientID = QMFood.registerIngredient(name, quantity, unit, database);
 		if(ingredientID<0){
 			return null;

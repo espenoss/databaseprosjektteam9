@@ -5,7 +5,7 @@ package databasePackage;
 public class QMFood {
 	
 	public static int registerIngredient(String name, float quantity, 
-			String unit, Database database) throws Exception{
+			String unit, Database database) {
 		
 		for(int i=0; i<5; i++){
 			String statement = "SELECT MAX(ingredient_id) FROM ingredient;";
@@ -31,7 +31,7 @@ public class QMFood {
 	}
 	
 	public static boolean updateIngredient(int ingredientID, String name, float quantity, 
-			String unit, Database database) throws Exception{
+			String unit, Database database) {
 		
 		String statement = "UPDATE ingredient SET "
 				+ "name = " + aq(name)
@@ -43,7 +43,7 @@ public class QMFood {
 		return database.makeSingleStatement(statement);
 	}
 	
-	public static boolean removeIngredient(int ingredientID, Database database) throws Exception{
+	public static boolean removeIngredient(int ingredientID, Database database) {
 		
 		String statement = "DELETE FROM ingredient WHERE ingredient_id = " + ingredientID + ";";
 		
@@ -57,7 +57,7 @@ public class QMFood {
 	// 1 : name - String
 	// 2 : quantity - int
 	// 3 : unit - String
-	public static String[][] viewIngredients(Database database) throws Exception{
+	public static String[][] viewIngredients(Database database) {
 		
 		String statement = "SELECT * FROM ingredient";
 		
@@ -67,7 +67,7 @@ public class QMFood {
 	}
 
 	public static int registerMeal(String mealName, String instructions, boolean available, int price, 
-			Database database) throws Exception{
+			Database database) {
 
 		for(int i=0; i<5; i++){
 			String statement = "SELECT MAX(meal_id) FROM meal;";
@@ -94,7 +94,7 @@ public class QMFood {
 	}
 	
 	public static boolean updateMeal(int mealID, String mealName, String instructions, boolean available, int price, 
-			Database database) throws Exception{
+			Database database) {
 		
 		String statement = "UPDATE meal SET "
 				+ "meal_name = " + aq(mealName)
@@ -107,7 +107,7 @@ public class QMFood {
 		return database.makeSingleStatement(statement);
 	}
 
-	public static boolean removeMeal(int mealID, Database database) throws Exception{
+	public static boolean removeMeal(int mealID, Database database) {
 		
 		String statement = "DELETE FROM meal WHERE meal_id = " + mealID + ";";
 		
@@ -124,7 +124,7 @@ public class QMFood {
 	// 4 : price - int
 	// 5 : discount - int
 	// 6 : discount_lim - int
-	public static String[][] viewMeals(Database database) throws Exception{
+	public static String[][] viewMeals(Database database) {
 		
 		String statement = "SELECT * FROM meal";
 		
@@ -134,7 +134,7 @@ public class QMFood {
 	}	
 	
 	public static boolean addIngredientToMeal(int mealID, int ingredientID, float ingredientQuantity, 
-			Database database) throws Exception{
+			Database database) {
 				
 		String statement = "INSERT INTO meal_ingredient VALUES(" 
 				+ mealID + ", " 
@@ -145,7 +145,7 @@ public class QMFood {
 	}
 	
 	public static boolean updateIngredientInMeal(int mealID, int ingredientID, float quantity, 
-			Database database) throws Exception{
+			Database database) {
 		
 		String statement = "UPDATE meal_ingredient SET "
 				+ "quantity = " + quantity + " "
@@ -156,7 +156,7 @@ public class QMFood {
 		return database.makeSingleStatement(statement);
 	}
 	
-	public static boolean removeIngredientFromMeal(int mealID, int ingredientID, Database database) throws Exception{
+	public static boolean removeIngredientFromMeal(int mealID, int ingredientID, Database database) {
 		
 		String statement = "DELETE FROM meal_ingredient WHERE "
 				+ "meal_id =" + mealID + " "
@@ -175,7 +175,7 @@ public class QMFood {
 	// 2 : quantity - int (quantity in meal)
 	// 3 : quantity - int (qunatity in stock)
 	// 4 : unit - String
-	public static String[][] viewIngredientsInMeal(int mealID, Database database) throws Exception{
+	public static String[][] viewIngredientsInMeal(int mealID, Database database) {
 		
 		String statement = "SELECT a.ingredient_id, b.name, a.quantity, b.quantity, b.unit "
 				+ "FROM meal_ingredient AS a, ingredient AS b "
@@ -189,7 +189,7 @@ public class QMFood {
 	// Register new zone in database
 
 	// Register new subscription plan in database
-	public static int registerSubscriptionPlan(String subName, Database database) throws Exception{		
+	public static int registerSubscriptionPlan(String subName, Database database) {		
 		for(int i=0; i<5; i++){
 			String statement = "SELECT MAX(sub_id) FROM subscription_plan;";
 			database.makeSingleStatement(statement);
@@ -211,7 +211,7 @@ public class QMFood {
 	}
 
 	// Update subscription plan info
-	public static boolean updateSubscriptionPlan(int subID, String subName, Database database) throws Exception{		
+	public static boolean updateSubscriptionPlan(int subID, String subName, Database database) {		
 		
 		String statement = "UPDATE subscription_plan SET "
 				+ "sub_name = '" + subName + "' "
@@ -222,7 +222,7 @@ public class QMFood {
 	}
 	
 	// Remove subscription from database
-	public static boolean removeSubscriptionPlan(int subID, Database database) throws Exception{		
+	public static boolean removeSubscriptionPlan(int subID, Database database) {		
 		
 		String statement = "DELETE FROM subscription_plan WHERE sub_id = " + subID + ";";
 		
@@ -235,7 +235,7 @@ public class QMFood {
 	// Columns by second index:
 	// 0 : sub_id - int
 	// 1 : sub_name - String
-	public static String[][] viewSubscriptionPlans(Database database) throws Exception{
+	public static String[][] viewSubscriptionPlans(Database database) {
 
 		String statement = "SELECT * FROM subscription_plan;";
 		
@@ -244,7 +244,7 @@ public class QMFood {
 		return database.getLastResult();
 	}		
 	
-	public static String[][] viewActiveSubscriptions(String currentDate, Database database) throws Exception{
+	public static String[][] viewActiveSubscriptions(String currentDate, Database database) {
 		
 		String statement = "SELECT * FROM sub_order WHERE from_date <= '" + currentDate + "' "
 				+ "AND to_date >= '" + currentDate + "'";
@@ -254,7 +254,7 @@ public class QMFood {
 		return database.getLastResult();
 	}
 	
-	public static boolean addMealToPlan(int subID, int mealID, int weekdayNr, String weekday, Database database) throws Exception{
+	public static boolean addMealToPlan(int subID, int mealID, int weekdayNr, String weekday, Database database) {
 		
 		String statement = "INSERT INTO sub_meals_day VALUES(" 
 				+ subID + ", " 
@@ -267,7 +267,7 @@ public class QMFood {
 	}
 	
 	
-	public static boolean updateMealInPlan(int subID, int mealID, int weekdayNr, String weekday, Database database) throws Exception{	
+	public static boolean updateMealInPlan(int subID, int mealID, int weekdayNr, String weekday, Database database) {	
 		
 		String statement = "UPDATE sub_meals_day SET "
 				+ "weekday_nr = " + weekdayNr + ", "
@@ -280,7 +280,7 @@ public class QMFood {
 		return database.makeSingleStatement(statement);
 	}
 	
-	public static boolean removeMealFromPlan(int subID, int mealID, int weekdayNr, Database database) throws Exception{
+	public static boolean removeMealFromPlan(int subID, int mealID, int weekdayNr, Database database) {
 		
 		String statement = "DELETE FROM sub_meals_day WHERE "
 		+ "sub_id = " + subID + " "
@@ -307,7 +307,7 @@ public class QMFood {
 	// 6 : weekday_nr - int
 	// 7 : weekday - String
 	 
-	public static String[][] viewMealsInPlan(int subID, Database database) throws Exception{
+	public static String[][] viewMealsInPlan(int subID, Database database) {
 
 		String statement = "SELECT * FROM meal NATURAL JOIN sub_meals_day WHERE sub_id="+subID+" ORDER BY weekday_nr";		
 		

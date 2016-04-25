@@ -32,66 +32,61 @@ class ChangeOrderDialog extends JFrame {
 	private SpinnerDateModel dateSelectModel = new SpinnerDateModel();
 	private JSpinner dateSelect = new JSpinner(dateSelectModel);
 	private JTextField infoField = new JTextField(10);
-	
+
 	public ChangeOrderDialog(Sales sales) {
 		this.sales = sales;
 		DialogWindow dialog = new DialogWindow(this);
-		dialog.setVisible(true);
 		setTitle("Change order");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
-		setLocation(300, 300); 
-		dialog.setLocation(350, 350); 
+		pack();
+		dialog.setLocationRelativeTo(null);
+		dialog.setVisible(true);
 	}
-	
+
 	private class DialogWindow extends MyDialog{
 
 		private String deliveryDateStr;
 		private String info;
-		
+
 		public DialogWindow(JFrame parent){
 			super(parent, "Change order information");
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new ChangeOrderDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+
+			setSize(500,300);
+			setLocationRelativeTo(null);
 		}
 		private class ChangeOrderDatapanel extends JPanel{
 			public ChangeOrderDatapanel(){
-				setLayout(new GridLayout(4,2));
-				try {
-					customerList = sales.viewCustomerList();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				GridLayout superGrid = new GridLayout(8,1);
+				setLayout(superGrid);
+				customerList = sales.viewCustomerList();
 
 				ArrayList<String> nameList = new ArrayList<>();
 				for(Customer c: customerList){
 					nameList.add(c.getCustomerID() + " " + c.getFirstName() + " " + c.getSurName());
 				}
-								
-				try {
-					orders = sales.viewFoodOrdersByCustomer(customerList.get(0).getCustomerID());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
+
+				orders = sales.viewFoodOrdersByCustomer(customerList.get(0).getCustomerID());
+
 				ArrayList<String> orderNameList = new ArrayList<>();
 				for(Order o: orders){
 					orderNameList.add(String.valueOf(o.getOrderID()));
 				}
-				
+
 				customerSelect = new JComboBox<>(nameList.toArray());
 				orderSelect = new JComboBox<>(orderNameList.toArray());
-				
-				add(new JLabel("Customer: ", JLabel.RIGHT));
+
+				add(new JLabel("Customer: ", JLabel.LEFT));
 				add(customerSelect);
 				customerSelect.addActionListener(new customerListener());
-				add(new JLabel("Order: ", JLabel.RIGHT));				
+				add(new JLabel("Order: ", JLabel.LEFT));				
 				add(orderSelect);
-				add(new JLabel("New delivery date: ", JLabel.RIGHT));
+				add(new JLabel("New delivery date: ", JLabel.LEFT));
 				add(dateSelect);
-				add(new JLabel("Info: ", JLabel.RIGHT));
+				add(new JLabel("Info: ", JLabel.LEFT));
 				add(infoField);
 			}
 		}
@@ -99,37 +94,28 @@ class ChangeOrderDialog extends JFrame {
 
 			int custIndex = customerSelect.getSelectedIndex();
 			Customer currCust = customerList.get(custIndex);
-			
+
 			int orderIndex = orderSelect.getSelectedIndex();
 			Order currOrder = orders.get(orderIndex);
-			
+
 			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 			deliveryDateStr = s.format(dateSelect.getValue());
 			info = infoField.getText();
-			
+
 			currOrder.setOrderDate(deliveryDateStr);
 			currOrder.setInfo(info);
-			
-			try {
-				currOrder.uploadOrder(sales.getDatabase());
-			} catch (Exception e) {
-				System.out.println(e.toString());
-			}
-			return true;		
+
+			return currOrder.uploadOrder(sales.getDatabase());
 		}
-		
+
 	} 
-	
+
 	private class customerListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			JComboBox<String> l = (JComboBox<String>)e.getSource();
 			int selected = l.getSelectedIndex();
-			try {
-				orders = sales.viewFoodOrdersByCustomer(customerList.get(selected).getCustomerID());
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-						
+			orders = sales.viewFoodOrdersByCustomer(customerList.get(selected).getCustomerID());
+
 			orderSelect.removeAllItems();
 			if(orders != null){
 				for(Order o: orders){
@@ -138,13 +124,4 @@ class ChangeOrderDialog extends JFrame {
 			}			
 		}		
 	}
-
- 	public static void main(String[] args){
- 		String username = "espenme";
- 		String passingword = "16Sossosem06";
- 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
- 		Database database = new Database("com.mysql.jdbc.Driver", databasename);
-		ChangeOrderDialog changeOrder = new ChangeOrderDialog(new Sales("","", database));
-		changeOrder.setVisible(true);
- 	}
 }

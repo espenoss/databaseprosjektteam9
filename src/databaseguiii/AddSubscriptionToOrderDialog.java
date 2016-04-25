@@ -21,14 +21,16 @@ import databasePackage.Database;
 public class AddSubscriptionToOrderDialog extends JFrame{
 	private Sales sales = null;
 	private Order order = null;
-	
+
 	public AddSubscriptionToOrderDialog(Sales sales, Order order){
 		this.sales = sales;
 		this.order = order;
 		DialogContent dialog = new DialogContent(this);
+		pack();
+		dialog.setLocationRelativeTo(null);
 		dialog.setVisible(true);
 	}
-	
+
 	private class DialogContent extends MyDialog{
 		private ArrayList<SubPlan> subList = null;
 		private JComboBox subSelect;
@@ -38,72 +40,58 @@ public class AddSubscriptionToOrderDialog extends JFrame{
 		private JSpinner toDateSelect = new JSpinner(toDateSelectModel);
 		private SpinnerNumberModel quantitySelectModel = new SpinnerNumberModel();
 		private JSpinner quantitySelect = new JSpinner(quantitySelectModel);		
-		
+
 		public DialogContent(JFrame parent){
 			super(parent, "Add meal to order");
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new DataPanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+			setSize(500,200);
 		}
-		
+
 		private class DataPanel extends JPanel{
 			public DataPanel(){
-				
-				setLayout(new GridLayout(4, 2));
-				
+
+				GridLayout superGrid = new GridLayout(8,1);
+				setLayout(superGrid);
+
 				try {
 					subList = sales.viewAllSubPlans();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
+
 				ArrayList<String> subNames = new ArrayList<>();
-				
+
 				for(SubPlan s:subList){
 					subNames.add(s.getName());
 				}
 				subSelect = new JComboBox<>(subNames.toArray());
-				
-				add(new JLabel("Plan: ", JLabel.RIGHT));
+
+				add(new JLabel("Plan: ", JLabel.LEFT));
 				add(subSelect);
-				add(new JLabel("From date: ", JLabel.RIGHT));
+				add(new JLabel("From date: ", JLabel.LEFT));
 				add(fromDateSelect);
-				add(new JLabel("To date: ", JLabel.RIGHT));
+				add(new JLabel("To date: ", JLabel.LEFT));
 				add(toDateSelect);				
-				add(new JLabel("Quantity: ", JLabel.RIGHT));
+				add(new JLabel("Quantity: ", JLabel.LEFT));
 				add(quantitySelect);
 			}
 		}
-		
-		
+
+
 		public boolean okData(){
 			int subIndex = subSelect.getSelectedIndex();
 			SubPlan currSub= subList.get(subIndex);	
-			
+
 			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 			String fromDate = s.format(fromDateSelect.getValue());
 			String toDate = s.format(toDateSelect.getValue());
-			
+
 			int quantity = (int)quantitySelect.getValue();
-			
-			try{
-				sales.registerSubscriptionOrder(order, quantity, fromDate, toDate, currSub.getSubPlanID());
-			}catch (Exception e) {
-				System.out.println(e.toString());
-				return false;
-			}
-			return true;
+
+			return sales.registerSubscriptionOrder(order, quantity, fromDate, toDate, currSub.getSubPlanID());
 		}
 	}
-	
-	public static void main(String[] args){
-		
- 		String username = "espenme";
- 		String passingword = "16Sossosem06";
- 		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
- 		Database database = new Database("com.mysql.jdbc.Driver", databasename);
-		new AddSubscriptionToOrderDialog(new Sales("","", database), new Order(10010, "", 10005, "", ""));
-		
-	}
 }
+

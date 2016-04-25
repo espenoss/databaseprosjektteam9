@@ -8,14 +8,14 @@ public class Driver extends User {
 		super(userID, 2, name, database);
 	}
 	
-	public boolean markDelivered(int orderID, int mealID, java.sql.Date date) throws Exception{
+	public boolean markDelivered(int orderID, int mealID, java.sql.Date date) {
 		
 		boolean success = QMOrder.markMealOrderAsDelivered(orderID, mealID, date.toString(), database);
 				
 		return success;
 	}
 	
-	public String[][] generateDeliveryPlan() throws Exception{
+	public String[][] generateDeliveryPlan() {
 		String[][] plan = null;
 	    java.util.Date utilDate = new java.util.Date();
 	    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
@@ -36,7 +36,7 @@ public class Driver extends User {
 	}	
 	
 	/*
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) {
  		String username = "espenme";
  		String passingword = "16Sossosem06";
  		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	

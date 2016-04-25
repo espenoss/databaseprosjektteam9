@@ -8,7 +8,7 @@ public class QMOrder {
 	
 	// Register new order in database
 	public static int registerOrder(String order_date, int customer_id, String info, 
-			String user_id, Database database) throws Exception{
+			String user_id, Database database) {
 	
 		for(int i=0; i<5; i++){
 			String statement = "SELECT MAX(order_id) FROM food_order;";
@@ -35,7 +35,7 @@ public class QMOrder {
 	
 	// Update order info
 	public static boolean updateOrder(int orderID, String orderDate, int customerID, String info, 
-			String userID, Database database) throws Exception{
+			String userID, Database database) {
 		
 		String statement = "UPDATE food_order SET "
 				+ "order_date = '" + orderDate + "', "
@@ -48,7 +48,7 @@ public class QMOrder {
 	}
 	
 	// Remove order from database
-	public static boolean removeOrder(int orderID, Database database) throws Exception{
+	public static boolean removeOrder(int orderID, Database database) {
 		
 		String statement = "DELETE FROM food_order WHERE order_id = '" + orderID + "';";
 		
@@ -63,7 +63,7 @@ public class QMOrder {
 	// 2 : customer_id - int
 	// 3 : info - String
 	// 4 : user_id - String
-	public static String[] viewOrder(int orderID, Database database) throws Exception{
+	public static String[] viewOrder(int orderID, Database database) {
 		
 		String statement = "SELECT * FROM food_order WHERE order_id = " + orderID + ";";
 		
@@ -81,7 +81,7 @@ public class QMOrder {
 	// 2 : customer_id - int
 	// 3 : info - String
 	// 4 : user_id - String
-	public static String[][] viewAllOrders(Database database) throws Exception{
+	public static String[][] viewAllOrders(Database database){
 		
 		String statement = "SELECT * FROM food_order;";
 		
@@ -90,7 +90,7 @@ public class QMOrder {
 		return database.getLastResult();
 	}	
 	
-	public static String[][] viewAllOrdersFromCustomer(int customerID, Database database) throws Exception{
+	public static String[][] viewAllOrdersFromCustomer(int customerID, Database database){
 		
 		String statement = "SELECT * FROM food_order WHERE customer_id = " + customerID + ";";
 		
@@ -102,7 +102,7 @@ public class QMOrder {
 	// **** IKKE TESTET
 	// Connect meal to order. Both must exisst in database to succeed
 	public static boolean addMealToOrder(int orderID, int mealID, String deliveryDate, int quantity, 
-			boolean readyDelivery, boolean delivered, Database database) throws Exception{
+			boolean readyDelivery, boolean delivered, Database database){
 		
 		String statement = "INSERT INTO ordered_meal VALUES("
 				+ orderID + "," 
@@ -119,7 +119,7 @@ public class QMOrder {
 	// **** IKKE TESTET
 	// Update info about meal in order
 	public static boolean updateMealInOrder(int orderID, int mealID, String deliveryDate, int quantity, 
-			boolean readyDelivery, boolean delivered, Database database) throws Exception{
+			boolean readyDelivery, boolean delivered, Database database){
 		 
 		String statement = "UPDATE ordered_meal SET "
 				+ " order_id = " + orderID + "," 
@@ -132,13 +132,12 @@ public class QMOrder {
 				+ " AND meal_id = " + mealID
 				+ " AND delivery_date = '" + deliveryDate + "'"
 				+";";
-		System.out.println(statement);
 		return database.makeSingleStatement(statement);
 	}
 	 
 	
 	// Remove meal from order
-	public static boolean removeMealFromOrder(int orderID, int mealID, String deliveryDate, Database database) throws Exception{
+	public static boolean removeMealFromOrder(int orderID, int mealID, String deliveryDate, Database database) {
 
 		String statement = "DELETE FROM ordered_meal WHERE "
 				+ "order_id =" + orderID
@@ -150,7 +149,7 @@ public class QMOrder {
 	
 	
 	// Mark meal in order as ready for delivery
-	public static boolean markMealOrderAsReadyForDelivery(int orderID, int mealID, String deliveryDate,Database database) throws Exception{
+	public static boolean markMealOrderAsReadyForDelivery(int orderID, int mealID, String deliveryDate,Database database) {
 		String statement = "UPDATE ordered_meal SET ready_delivery=true "
 				+ "WHERE order_id = " + orderID 
 				+ " AND meal_id = " + mealID 
@@ -162,7 +161,7 @@ public class QMOrder {
 	
 	
 	// Mark meal in order as delivered
-	public static boolean markMealOrderAsDelivered(int orderID, int mealID, String deliveryDate,Database database) throws Exception{
+	public static boolean markMealOrderAsDelivered(int orderID, int mealID, String deliveryDate,Database database) {
 		String statement = "UPDATE ordered_meal SET delivered=true "
 				+ "WHERE order_id = " + orderID 
 				+ " AND meal_id = " + mealID 
@@ -188,7 +187,7 @@ public class QMOrder {
 	// 8 : ready_delivery
 	// 9 : delivered
 	
-	public static String[][] viewMealsInOrder(int orderID, Database database) throws Exception{
+	public static String[][] viewMealsInOrder(int orderID, Database database) {
 
 		String statement = "SELECT * FROM meal NATURAL JOIN ordered_meal WHERE order_id= "+ orderID +";";
 		
@@ -198,7 +197,7 @@ public class QMOrder {
 	}
 	
 	// Calculates the total price of an order by summing the prices of the individual meals multiplied by quantity
-	public static int viewOrderPrice(int orderID, Database database) throws Exception{
+	public static int viewOrderPrice(int orderID, Database database) {
 
 		String statement = "SELECT SUM(quantity*price) FROM "
 				+ "(SELECT a.quantity,b.price FROM ordered_meal AS a, meal AS b WHERE a.order_id =  " + orderID
@@ -206,11 +205,16 @@ public class QMOrder {
 		
 		database.makeSingleStatement(statement);
 		
-		return Integer.parseInt(database.getLastResult()[0][0]);
+		String[][] result = database.getLastResult();
+		if(result[0] == null){
+			return 0;
+		}else{
+			return Integer.parseInt(result[0][0]);
+		}
 	}
 
 	// Returns order list of orders together with any orders to be delivered at deliveryDate
-	public static String[][] viewOrdersByDeliveryDate(java.sql.Date deliveryDate, Database database) throws Exception{
+	public static String[][] viewOrdersByDeliveryDate(java.sql.Date deliveryDate, Database database) {
 		
 		String statement = "SELECT DISTINCT food_order.* FROM food_order NATURAL JOIN ordered_meal where food_order.order_id = ordered_meal.order_id AND delivery_date = '" + deliveryDate + "';";
 		
@@ -220,7 +224,7 @@ public class QMOrder {
 	}
 	
 	
-	public static String[][] viewMealsInOrderByDeliveryDate(int orderID, java.sql.Date deliveryDate, Database database) throws Exception{
+	public static String[][] viewMealsInOrderByDeliveryDate(int orderID, java.sql.Date deliveryDate, Database database) {
 			
 		String statement = "SELECT a.*, b.adress "
 				+ "FROM meal AS a, customer AS b, (SELECT a.order_id, a.meal_id, b.customer_id FROM "
@@ -237,7 +241,7 @@ public class QMOrder {
 	
 	// Connect subscription plan to order
 	public static boolean addSubscriptionToOrder(int orderID, int quantitySub, String fromDate, String toDate, 
-			int subID, Database database) throws Exception{		
+			int subID, Database database) {		
 		String statement = "INSERT INTO sub_order VALUES(" 
 				+ orderID + "," 
 				+ quantitySub + "," 
@@ -251,7 +255,7 @@ public class QMOrder {
 	
 	// Update subscription information in order
 	public static boolean updateSubscriptionInOrder(int orderID, int quantitySub, String fromDate, String toDate, 
-			int subID, Database database) throws Exception{
+			int subID, Database database) {
 		
 		String statement = "UPDATE sub_order SET "
 				+ "quantity_sub = " + quantitySub + ", "
@@ -266,7 +270,7 @@ public class QMOrder {
 	
 	
 	// Remove subscription from order
-	public static boolean removeSubscriptionFromOrder(int orderID, Database database) throws Exception{
+	public static boolean removeSubscriptionFromOrder(int orderID, Database database) {
 		
 		String statement = "DELETE FROM sub_order WHERE order_id = " + orderID + ";";
 		
@@ -275,7 +279,7 @@ public class QMOrder {
 	
 	
 	// View subcription information for order
-	public static String[] viewSubscriptionInOrder(int orderID, Database database) throws Exception{
+	public static String[] viewSubscriptionInOrder(int orderID, Database database) {
 
 		String statement = "SELECT * FROM sub_order WHERE order_id = " + orderID + ";";
 		
@@ -285,7 +289,7 @@ public class QMOrder {
 	}	
 	
 	// View all subscription connected to orders
-	public static String[][] viewAllSubscriptionsInOrders(Database database) throws Exception{
+	public static String[][] viewAllSubscriptionsInOrders(Database database) {
 
 		String statement = "SELECT * FROM sub_order;";
 		
@@ -294,7 +298,7 @@ public class QMOrder {
 		return database.getLastResult();
 	}
 	
-	public static String[][] generateDeliveryList(java.sql.Date currentDate, Database database) throws Exception{
+	public static String[][] generateDeliveryList(java.sql.Date currentDate, Database database) {
 		
 		String statement = "SELECT a.meal_name, c.quantity, b.adress, b.firstname, b.surname, c.order_id, a.meal_id "
 				+ "FROM meal AS a, customer AS b, (SELECT a.meal_id, a.quantity, b.customer_id, b.order_id FROM "
@@ -310,7 +314,7 @@ public class QMOrder {
 		return database.getLastResult();
 	}
 	
-	public static int calculateIncomeForPeriod(java.sql.Date fromDate, java.sql.Date toDate, Database database) throws Exception{
+	public static int calculateIncomeForPeriod(java.sql.Date fromDate, java.sql.Date toDate, Database database) {
 		String statement = "SELECT SUM(price*quantity) FROM meal NATURAL JOIN ordered_meal "
 				+ "WHERE delivery_date >= '" + fromDate + "' "
 				+ "AND delivery_date <= '" + toDate + "' "

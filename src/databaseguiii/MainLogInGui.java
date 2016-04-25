@@ -32,71 +32,69 @@ class LogInGui extends JFrame{
 	String passingword = "16Sossosem06";
 	String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
 	private Database database = new Database("com.mysql.jdbc.Driver", databasename);
-	
+
 	public LogInGui(String title){
 		setTitle(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		UserInput userID = new UserInput();
 		add(userID, BorderLayout.NORTH);
-		
+
 		JButton button = new JButton("Sign in");
 		Buttonlistener buttonlistener = new Buttonlistener();
 		button.addActionListener (buttonlistener);
-		
 		add(button, BorderLayout.CENTER);  
+
 		add(message, BorderLayout.PAGE_END);
-		pack();
+		setSize(500,250);
+		setLocationRelativeTo(null);
+
 	}	
-	
+
 	private class Buttonlistener implements ActionListener {
 		private LogIn log = new LogIn();
 		public void actionPerformed(ActionEvent event) {
 			String[] loginSuccess = null;
-			try {
-				loginSuccess = log.logIn(userID.getText(), password.getPassword(), database);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			loginSuccess = log.logIn(userID.getText(), password.getPassword(), database);
 
 			JButton source = (JButton)event.getSource();
-			
+
 			if (loginSuccess != null){							
 				String userid = userID.getText();
 				message.setText(userid + " has successfully logged in ");	
 				add(message, BorderLayout.PAGE_END);
-				
+
 				String userID = loginSuccess[0];
 				int userType = Integer.parseInt(loginSuccess[1]);
 				String userName = loginSuccess[2];
-				
+
 				switch(userType){
-					case U_ADMIN:
-						MainAdminGui admingui = new MainAdminGui(new Admin(userID, userName, database));
-						admingui.setVisible(true);
-						break;
-					case U_COOK:
-						MainCookGui cookgui = new MainCookGui(new Cook(userID, userName, database));
-						cookgui.setVisible(true);
-						break;					
-					case U_DRIVER:
-						ViewDeliveryList deliverylist = new ViewDeliveryList(new Driver(userID, userName, database));
-						deliverylist.setVisible(true);						
-						break;
-					case U_SALES:
-						MainSalesPersonGui salesgui = new MainSalesPersonGui(new Sales(userID, userName, database));
-						salesgui.setVisible(true);
-						break;						
+				case U_ADMIN:
+					MainAdminGui admingui = new MainAdminGui(new Admin(userID, userName, database));
+					admingui.setVisible(true);
+					break;
+				case U_COOK:
+					MainCookGui cookgui = new MainCookGui(new Cook(userID, userName, database));
+					cookgui.setVisible(true);
+					break;					
+				case U_DRIVER:
+					ViewDeliveryList deliverylist = new ViewDeliveryList(new Driver(userID, userName, database));
+					deliverylist.setVisible(true);						
+					break;
+				case U_SALES:
+					MainSalesPersonGui salesgui = new MainSalesPersonGui(new Sales(userID, userName, database));
+					salesgui.setVisible(true);
+					break;						
 				}
-	
+
 				source.setEnabled(false);
-				
+
 			}else{
 				message.setText("Wrong username or password");	
 			}
 		}
 	}    
-	
+
 	private class UserInput extends JPanel{
 		public UserInput(){
 			setLayout(new GridLayout(2,2,5,5));
@@ -110,7 +108,7 @@ class LogInGui extends JFrame{
 	}
 }
 
- 
+
 class MainLogInGui{
 	public static void main(String[] args){
 		LogInGui window = new LogInGui("Log In");

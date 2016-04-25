@@ -17,15 +17,15 @@ public class Admin extends User {
 	}
 
 	//Registrerer ny bruker
-	public boolean registerUser(String userID, int userType, String name,String pword, Database database) throws Exception{
+	public boolean registerUser(String userID, int userType, String name,String pword, Database database) {
 		return QMUser.registerUser(userID, userType, name, pword, database);
 	}
 	
-	public boolean updateUser(String userID, int userType, String name, String pword, Database database) throws Exception{
+	public boolean updateUser(String userID, int userType, String name, String pword, Database database) {
 		return(QMUser.updateUser(userID, userType, name, pword, database));
 	}
 	 
-	public String viewUser(String username) throws Exception{
+	public String viewUser(String username) {
 		String[] userTabl = QMUser.viewUser(username, database);
 		if (userTabl.length==0){
 			return null;
@@ -35,7 +35,7 @@ public class Admin extends User {
 	
 	// Returns String with statistics for given year, month by month. 
 	// Calculted with prices of meals that have been delivered
-	public String getStatisticsForYear(int year) throws Exception{
+	public String getStatisticsForYear(int year) {
 		GregorianCalendar cal = (GregorianCalendar) GregorianCalendar.getInstance();
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		
@@ -80,7 +80,7 @@ public class Admin extends User {
 	
 	
 	//returns an arraylist with customer objects with all active users
-	public ArrayList<User> viewUserList() throws Exception{
+	public ArrayList<User> viewUserList() {
 		String[][] list = QMUser.viewAllUsers(database);
 		
 		if (list.length== 0){
@@ -108,7 +108,7 @@ public class Admin extends User {
 		return s;
 	}
 	/*
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) {
 		String username = "marith1";
 		String password = "tgp8sBZA";
 		String databaseName = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;

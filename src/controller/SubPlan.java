@@ -72,7 +72,7 @@ public class SubPlan {
 		return false;
 	}
 	 
-	public void fetchMealsInPlan(Database database) throws Exception{
+	public void fetchMealsInPlan(Database database) {
 		String[][] mealT = QMFood.viewMealsInPlan(subPlanID, database);
 		Meal tempMeal;
 		TextEditor t = new TextEditor();
@@ -84,7 +84,7 @@ public class SubPlan {
 	}
 	
 	//Registers information to database
-	public boolean updateSubPlan(Database database) throws Exception{
+	public boolean updateSubPlan(Database database) {
 		return QMFood.updateSubscriptionPlan(subPlanID, name, database);
 	}
 	
@@ -120,7 +120,7 @@ public class SubPlan {
 	}
 	
 	/*
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) {
 		String username = "marith1";
 		String password = "tgp8sBZA";
 		String databaseName = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;

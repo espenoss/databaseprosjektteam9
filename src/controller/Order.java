@@ -62,7 +62,7 @@ public class Order {
 	}
 	
 	// FINISHED, IS TESTED
-	public boolean removeMealFromOrder(int index, Database database) throws Exception{
+	public boolean removeMealFromOrder(int index, Database database) {
 		boolean ok = QMOrder.removeMealFromOrder(orderID, meals.get(index).getMealID(), meals.get(index).getDeliverydate().toString(), database);
 		fetchMealsInOrder(database);
 		return ok;
@@ -70,13 +70,13 @@ public class Order {
 	
 	//FINISHED, IS TESTED
 	//Register information to databasee
-	public boolean uploadOrder(Database database) throws Exception{
+	public boolean uploadOrder(Database database) {
 		return QMOrder.updateOrder(orderID, orderDate, customerID, info, userID, database);
 	}
 	
 	//FINISHED, IS TESTED
 	//Makes an arrayList of all meals in an order that has a spesific delivery date. 
-	public ArrayList<MealOrdered> viewMealsInOrderByDate(java.sql.Date date, Database database) throws Exception{
+	public ArrayList<MealOrdered> viewMealsInOrderByDate(java.sql.Date date, Database database) {
 		fetchMealsInOrder(database);
 		ArrayList<MealOrdered> tempMeals = new ArrayList<MealOrdered>();
 		 
@@ -90,7 +90,7 @@ public class Order {
 	
 	//FINISHED, IS TESTED
 	//Fetches meals from database
-	public boolean fetchMealsInOrder(Database database) throws Exception{
+	public boolean fetchMealsInOrder(Database database) {
 		meals = new ArrayList<MealOrdered>(); //creates new empty meal arrayList
 		String[][] mealT = QMOrder.viewMealsInOrder(orderID, database);
 		if(mealT.length == 0){
@@ -111,7 +111,7 @@ public class Order {
 	
 	public String toString(){
 		String res = "";
-		res += "OrderID: " + orderID + ". Orderdate: " + orderDate+ ". Info: " + info + "\n";
+		res += "OrderID: " + orderID + ". Orderdate: " + orderDate+ ". Info: " + info + "\n ";
 		res += "Meals: \n";
 		
 		for(Meal m:meals){
@@ -150,7 +150,7 @@ public class Order {
 
 /*
  * //TEST TEST TEST 
-	static public void main(String[] arg) throws Exception{
+	static public void main(String[] arg) {
 		String username = "marith1";
 		String password = "tgp8sBZA";
 		String databaseName = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;

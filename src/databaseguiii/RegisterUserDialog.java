@@ -9,17 +9,17 @@ import databasePackage.*;
 
 class RegisterUserDialog extends JFrame {
 	private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
-	private Admin user = null; 
+	private Admin admin = null; 
   
-	public RegisterUserDialog(User user) throws Exception { 
-		this.user = (Admin)user;
+	public RegisterUserDialog(Admin admin) { 
+		this.admin = admin;
 		UserDialog dialog = new UserDialog(this);
-		dialog.setVisible(true);
-		dialog.setLocation(350, 350);
 		setTitle("Registrer user");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new FlowLayout());
-		setLocation(300, 300); 
+		setLayout(new FlowLayout()); 
+		pack();
+		dialog.setLocationRelativeTo(null);
+		dialog.setVisible(true);
 	 } 
 
 	private class UserDialog extends MyDialog{
@@ -40,22 +40,24 @@ class RegisterUserDialog extends JFrame {
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new UserDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			pack();
+			setSize(500,300);
+			setLocationRelativeTo(null);
 		}
 				
 		private class UserDatapanel extends JPanel{
 			public UserDatapanel(){
-				setLayout(new GridLayout(4,2));
-				add(new JLabel("Username: ", JLabel.RIGHT));
+				GridLayout superGrid = new GridLayout(8,1);
+				setLayout(superGrid);
+				add(new JLabel("Username: ", JLabel.LEFT));
 				add(userIDfield);
 				
-				add(new JLabel("User type: ", JLabel.RIGHT));
+				add(new JLabel("User type: ", JLabel.LEFT));
 				add(userList);
 				
-				add(new JLabel("Name: ", JLabel.RIGHT));
+				add(new JLabel("Name: ", JLabel.LEFT));
 				add(usernameField);				
 
-				add(new JLabel("Password: ", JLabel.RIGHT));
+				add(new JLabel("Password: ", JLabel.LEFT));
 				add(passwordField);
 			}
 		}
@@ -66,12 +68,24 @@ class RegisterUserDialog extends JFrame {
 			pword = passwordField.getText();
 			name = usernameField.getText();
 			
-			try {
-				user.registerUser(userID, userType, name, pword, database);
-			} catch (Exception e) {
-				System.out.println(e.toString());
+			boolean my_user = false; 
+			
+			boolean nameOk = editor.isAlpha(userID) 
+					&& name != "" && editor.isAlpha(name);
+			if(!nameOk){
+				JOptionPane.showMessageDialog(null, "Name cannot contain numbers");
+			}else{
+				my_user = admin.registerUser(userID, userType, name, pword, database);				
 			}
-			return true;		
-		}
+		
+			if(my_user == false){
+				JOptionPane.showMessageDialog(null, "User was not registered, username already exists in database","", JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+			return my_user;	
+			}
+			
+		
+		
 	}
 }

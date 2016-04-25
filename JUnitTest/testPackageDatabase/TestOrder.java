@@ -26,11 +26,14 @@ public class TestOrder {
 		// view all entries
 		String[][] orders = QMOrder.viewAllOrders(database);
 		// view single entry
-		String[] order = QMOrder.viewOrder(Integer.parseInt(orders[0][0]), database);
+		int lastOrder = Integer.parseInt(orders[orders.length-1][0]);
+		String[] order = QMOrder.viewOrder(lastOrder, database);
+		
+		System.out.println(lastOrder);
 		
 		// check to see if they contain the same info
 		for(int i=0;i<order.length;i++){
-			assertEquals(order[i], orders[0][i]);
+			assertEquals(order[i], orders[orders.length-1][i]);
 		}
 		
 		java.text.SimpleDateFormat s = new java.text.SimpleDateFormat("yyyy-MM-dd");

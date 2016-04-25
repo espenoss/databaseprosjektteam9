@@ -125,7 +125,7 @@ public class Customer implements java.io.Serializable{
 
 	
 	//Register information to database
-	public boolean updateCustomer(Database database) throws Exception{
+	public boolean updateCustomer(Database database) {
 		if(QMCustomer.updateCustomer(customerID, surName, firstName, phoneNumber, email, adress, zipCode, zoneNr, preferences, active, database)){
 			return true;
 		}
