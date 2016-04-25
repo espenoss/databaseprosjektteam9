@@ -43,7 +43,7 @@ public class AddMealToOrderDialog extends JFrame{
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new DataPanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
-			setSize(500,300);
+			setSize(500,600);
 			setLocationRelativeTo(null);
 		}
 
