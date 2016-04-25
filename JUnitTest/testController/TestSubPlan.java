@@ -4,14 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import controller.Meal;
 import controller.SubPlan;
-import controller.TextEditor;
 import database.Database;
-import database.QMFood;
 
 public class TestSubPlan {
 	private static Database database;

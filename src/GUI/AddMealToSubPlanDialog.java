@@ -5,7 +5,6 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.DayOfWeek;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
@@ -18,6 +17,10 @@ import controller.*;
 
 class AddMealToSubPlanDialog extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Cook cook = null;
 
 	public AddMealToSubPlanDialog(Cook cook){
@@ -32,7 +35,10 @@ class AddMealToSubPlanDialog extends JFrame {
 	}
 
 	private class AddMealDialog extends MyDialog {
-		private TextEditor editor = new TextEditor();
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 
 		private JTextField subName = null;
 		private JComboBox mondaySelect = null;	
@@ -58,6 +64,11 @@ class AddMealToSubPlanDialog extends JFrame {
 		}
 
 		private class IngredientsDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public IngredientsDatapanel(){
 				GridLayout superGrid = new GridLayout(18,1);
 				setLayout(superGrid);

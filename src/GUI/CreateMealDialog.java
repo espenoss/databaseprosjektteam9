@@ -12,9 +12,12 @@ import javax.swing.JTextField;
 
 import controller.*;
 import controller.TextEditor;
-import database.Database;
 
 class CreateMealDialog extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Cook cook = null; 
 
 	public CreateMealDialog(Cook cook) {
@@ -29,6 +32,10 @@ class CreateMealDialog extends JFrame {
 	} 
 
 	private class DialogWindow extends MyDialog{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private TextEditor editor = new TextEditor();
 		private JTextField mealNameField = new JTextField(20);
 		private JTextField instructionsField = new JTextField(100);
@@ -46,6 +53,11 @@ class CreateMealDialog extends JFrame {
 		}
 
 		private class CustomerDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public CustomerDatapanel(){
 				GridLayout superGrid = new GridLayout(6,1);
 				setLayout(superGrid);

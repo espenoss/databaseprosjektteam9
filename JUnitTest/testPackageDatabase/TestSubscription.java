@@ -33,10 +33,6 @@ public class TestSubscription {
 		boolean exp = QMFood.updateSubscriptionPlan(Integer.parseInt(sub[0]), sub[1], database);
 		assertEquals(true, exp);		
 		
-		// attempt to remove entry		
-		exp = QMFood.removeSubscriptionPlan(Integer.parseInt(sub[0]), database);
-		assertEquals(true, exp);
-
 		// attempt to reregister removed entry	
 		int iexp = QMFood.registerSubscriptionPlan(sub[1], database);
 		assertNotEquals(-1, iexp);		

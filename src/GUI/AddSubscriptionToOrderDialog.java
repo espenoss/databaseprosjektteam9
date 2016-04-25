@@ -14,11 +14,14 @@ import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerNumberModel;
 
 import controller.SubPlan;
-import database.Database;
 import controller.Order;
 import controller.Sales;
 
 public class AddSubscriptionToOrderDialog extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Sales sales = null;
 	private Order order = null;
 
@@ -32,6 +35,10 @@ public class AddSubscriptionToOrderDialog extends JFrame{
 	}
 
 	private class DialogContent extends MyDialog{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private ArrayList<SubPlan> subList = null;
 		private JComboBox subSelect;
 		private SpinnerDateModel fromDateSelectModel = new SpinnerDateModel();
@@ -50,6 +57,11 @@ public class AddSubscriptionToOrderDialog extends JFrame{
 		}
 
 		private class DataPanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public DataPanel(){
 
 				GridLayout superGrid = new GridLayout(8,1);

@@ -3,21 +3,17 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.SpinnerDateModel;
-
 import controller.*;
 
 class RegisterSubscriptionPlan extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Cook cook = null; 
 
 	public RegisterSubscriptionPlan(Cook cook) {
@@ -32,6 +28,11 @@ class RegisterSubscriptionPlan extends JFrame {
 	}
 
 	private class DialogWindow extends MyDialog{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		private TextEditor editor = new TextEditor();
 
 		private JTextField sub_plan_nameField = new JTextField(10);
@@ -48,6 +49,11 @@ class RegisterSubscriptionPlan extends JFrame {
 		}
 
 		private class OrderDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public OrderDatapanel(){
 				GridLayout superGrid = new GridLayout(2,1);
 				setLayout(superGrid);

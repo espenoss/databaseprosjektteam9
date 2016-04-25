@@ -33,9 +33,6 @@ public class TestMeal {
 		boolean exp = QMFood.updateMeal(Integer.parseInt(meal[0]), meal[1], meal[2], false, Integer.parseInt(meal[4]), database);
 		assertEquals(true, exp);		
 		
-		// attempt to remove entry		
-		exp = QMFood.removeMeal(Integer.parseInt(meal[0]), database);
-		assertEquals(true, exp);
 
 		// attempt to reregister removed entry	
 		int iexp = QMFood.registerMeal(meal[1], meal[2], false, Integer.parseInt(meal[4]), database);

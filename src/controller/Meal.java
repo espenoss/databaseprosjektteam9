@@ -1,8 +1,6 @@
 package controller;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 import database.Database;
 import database.QMFood;
 

@@ -2,21 +2,20 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.*;
-
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import controller.*;
 import database.Database;
 
 public class AddMealToOrderDialog extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	TextEditor edit = new TextEditor();
 	private Sales sales = null;
 	private Order order = null;
@@ -31,6 +30,10 @@ public class AddMealToOrderDialog extends JFrame{
 	}
 
 	private class DialogContent extends MyDialog{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private ArrayList<Meal> mealList = null;
 		private JComboBox mealSelect;
 		private SpinnerDateModel dateSelectModel = new SpinnerDateModel();
@@ -48,6 +51,11 @@ public class AddMealToOrderDialog extends JFrame{
 		}
 
 		private class DataPanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public DataPanel(){
 
 				GridLayout superGrid = new GridLayout(6,1);

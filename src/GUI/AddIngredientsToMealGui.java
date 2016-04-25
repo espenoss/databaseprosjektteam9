@@ -3,25 +3,21 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import controller.*;
-import database.*;
 
 class AddIngredientsToMealGui extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Cook cook = null;
 
 
@@ -38,6 +34,11 @@ class AddIngredientsToMealGui extends JFrame {
 	}
 
 	private class AddIngredientsDialog extends MyDialog {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		private TextEditor editor = new TextEditor();
 
 		private ArrayList<Meal> mealList = new ArrayList<Meal>();
@@ -64,6 +65,11 @@ class AddIngredientsToMealGui extends JFrame {
 		}
 
 		private class IngredientsDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public IngredientsDatapanel(){
 				GridLayout superGrid = new GridLayout(6,1);
 				setLayout(superGrid);

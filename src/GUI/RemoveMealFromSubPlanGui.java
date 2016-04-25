@@ -15,6 +15,10 @@ import database.Database;
 
 class RemoveMealFromSubPlanGui extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Cook cook = null;
 
 	public RemoveMealFromSubPlanGui(Cook cook){
@@ -29,6 +33,12 @@ class RemoveMealFromSubPlanGui extends JFrame {
 	}
 
 	private class RemoveMealFromSubPlanDialog extends MyDialog {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+
 		private TextEditor editor = new TextEditor();
 
 
@@ -58,6 +68,11 @@ class RemoveMealFromSubPlanGui extends JFrame {
 		}
 
 		private class IngredientsDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public IngredientsDatapanel(){
 				setLayout(new GridLayout(3,2));
 

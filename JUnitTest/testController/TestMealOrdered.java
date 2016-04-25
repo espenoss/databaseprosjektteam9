@@ -1,15 +1,11 @@
 package testController;
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import controller.Meal;
 import controller.MealOrdered;
-import controller.Order;
 import database.Database;
 
 public class TestMealOrdered{

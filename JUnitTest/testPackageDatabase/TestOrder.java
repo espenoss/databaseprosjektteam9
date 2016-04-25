@@ -67,15 +67,6 @@ public class TestOrder {
 			System.out.println("");
 		}
 
-		delivery = QMOrder.viewMealsInOrderByDeliveryDate(Integer.parseInt(order[0]), date, database);
-		
-		for(int x=0;x<delivery.length;x++){
-			for(int y=0;y<delivery[x].length;y++){
-				System.out.print(delivery[x][y] + " ");
-			}
-			System.out.println("");
-		}		
-
 		tDate = s.parse("2016-04-20");
 		java.sql.Date fromDate = new java.sql.Date(tDate.getTime());
 		
@@ -90,10 +81,6 @@ public class TestOrder {
 		boolean exp = QMOrder.updateOrder(Integer.parseInt(order[0]), order[1], Integer.parseInt(order[2]), "Ny info", order[4], database);
 		assertEquals(true, exp);		
 		
-		// attempt to remove entry		
-		exp = QMOrder.removeOrder(Integer.parseInt(order[0]), database);
-		assertEquals(true, exp);
-
 		// attempt to reregister removed entry	
 		int iexp = QMOrder.registerOrder(order[1], Integer.parseInt(order[2]), order[3], order[4], database);
 		assertNotEquals(-1, iexp);		

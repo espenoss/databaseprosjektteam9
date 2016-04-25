@@ -10,14 +10,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import controller.*;
 
 
 public class GetMealsAsText extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private SubPlan subplan = null;
-	private Meal meal;
 	private Admin admin = null;
 
 
@@ -35,6 +36,10 @@ public class GetMealsAsText extends JFrame {
 	private class MealsAsTextDialog extends MyDialog{
 
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private TextEditor editor = new TextEditor();
 		private ArrayList<SubPlan> subList = new ArrayList<SubPlan>();
 		private JComboBox subIdSelected;
@@ -51,6 +56,11 @@ public class GetMealsAsText extends JFrame {
 		}
 
 		private class UserDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public UserDatapanel(){
 				setLayout(new GridLayout(1,2));
 

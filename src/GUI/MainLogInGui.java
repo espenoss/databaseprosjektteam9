@@ -3,7 +3,6 @@ import controller.*;
 import database.Database;
 
 import java.awt.BorderLayout;
-import java.awt.event.*;
 import javax.swing.*;
 
 
@@ -21,6 +20,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 class LogInGui extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final int U_ADMIN = 0;
 	public static final int U_COOK = 1;
 	public static final int U_DRIVER = 2;
@@ -96,6 +99,11 @@ class LogInGui extends JFrame{
 	}    
 
 	private class UserInput extends JPanel{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public UserInput(){
 			setLayout(new GridLayout(2,2,5,5));
 			JLabel text = new JLabel("Username: ", JLabel.RIGHT);

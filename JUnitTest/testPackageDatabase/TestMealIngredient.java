@@ -38,9 +38,5 @@ public class TestMealIngredient {
 			}
 			System.out.println("");
 		}
-		
-		result = QMFood.removeIngredientFromMeal(4, 1, database);
-		expRes = true;
-		assertEquals(expRes, result);		
 	}
 }

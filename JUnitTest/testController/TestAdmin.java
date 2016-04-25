@@ -126,7 +126,7 @@ public class TestAdmin {
 	public void testRegisterUser() throws Exception{
 		System.out.println("Admin test 1: registerUser");
 		
-		instance.registerUser("marit", 1, "Marit", "1234", database);
+		instance.registerUser("marit", 1, "Marit", "1234");
 		String res = instance.viewUser("marit");
 		String expRes = "Username: marit, user type: 1, name: Marit";
 		
@@ -138,7 +138,7 @@ public class TestAdmin {
 		System.out.println("Admin test 2: updateUser");
 		String res = null;
 		
-		if (instance.updateUser("marie", 3, "Marie Hansen", "1234", database)){
+		if (instance.updateUser("marie", 3, "Marie Hansen", "1234")){
 			res = instance.viewUser("marie");
 		}
 		String expRes = "Username: marie, user type: 3, name: Marie Hansen";

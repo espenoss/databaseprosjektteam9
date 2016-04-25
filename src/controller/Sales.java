@@ -1,10 +1,6 @@
 package controller;
 
-import javax.swing.JOptionPane;
-
 import database.*;
-
-import java.util.ArrayList;
 
 public class Sales extends User {
 	

@@ -2,8 +2,6 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -13,7 +11,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -25,6 +22,10 @@ import database.Database;
 
 class ViewFoodOrdersByCustomerGui extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Customer> customerList = null;
 	private ArrayList<Order> orderList = null;
 	private JComboBox customerSelect;
@@ -47,6 +48,12 @@ class ViewFoodOrdersByCustomerGui extends JFrame{
 
 	private class ViewFoodOrdersByCustomerDialog extends MyDialog{
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+
 		public ViewFoodOrdersByCustomerDialog(JFrame parent){
 
 			super(parent, "Choose a customer");
@@ -58,6 +65,11 @@ class ViewFoodOrdersByCustomerGui extends JFrame{
 
 
 		private class CompanyDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public CompanyDatapanel(){
 				setLayout(new FlowLayout());
 

@@ -2,12 +2,10 @@ package testController;
 
 import static org.junit.Assert.*;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import controller.Customer;

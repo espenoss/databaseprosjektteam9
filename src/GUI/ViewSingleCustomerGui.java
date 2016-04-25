@@ -3,8 +3,6 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
@@ -15,10 +13,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.*;
-import database.Database;
 
 class ViewSingleCustomerGui extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Sales sales = null; 
 
 	public ViewSingleCustomerGui(Sales sales) {
@@ -35,6 +36,10 @@ class ViewSingleCustomerGui extends JFrame{
 
 	private class ViewSingleCustomerDialog extends MyDialog{
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private ArrayList<Customer> customerList = new ArrayList<>();
 		private JComboBox customerSelect;
 		private JTextField company_name_field = new JTextField(50);
@@ -51,6 +56,11 @@ class ViewSingleCustomerGui extends JFrame{
 
 
 		private class CompanyDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public CompanyDatapanel(){
 				setLayout(new GridLayout(1,2));
 

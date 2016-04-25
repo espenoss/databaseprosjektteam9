@@ -1,14 +1,8 @@
 package GUI;
 import controller.*;
-import database.Database;
-
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -16,12 +10,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
-import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 
 
 
 class ViewFoodOrders extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private User user = null; 
 	SpinnerDateModel dateSelectModel = new SpinnerDateModel();
 
@@ -40,6 +37,10 @@ class ViewFoodOrders extends JFrame {
 	}
 
 	private class DialogWindow extends MyDialog{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		ArrayList<Order> o = null;
 
 		public DialogWindow(JFrame parent){
@@ -51,6 +52,11 @@ class ViewFoodOrders extends JFrame {
 		}
 
 		private class OrderDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public OrderDatapanel(){
 				setLayout(new GridLayout(4,2));
 

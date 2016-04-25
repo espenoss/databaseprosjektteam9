@@ -1,7 +1,5 @@
 package GUI;
 import controller.*;
-import database.*;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -11,6 +9,10 @@ import javax.swing.*;
 
 class RegisterCompanyToCustomerDialog extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Sales sales = null; 
 
 	public RegisterCompanyToCustomerDialog(Sales sales) {
@@ -25,6 +27,10 @@ class RegisterCompanyToCustomerDialog extends JFrame{
 	} 
 
 	private class RegCompanytoCustomerDialog extends MyDialog{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private ArrayList<Customer> customerList = new ArrayList<>();
 		private JComboBox customerSelect;
 		private JTextField company_name_field = new JTextField(50);
@@ -48,6 +54,11 @@ class RegisterCompanyToCustomerDialog extends JFrame{
 		}
 
 		private class CompanyDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public CompanyDatapanel(){
 				GridLayout superGrid = new GridLayout(4,1);
 				setLayout(superGrid);

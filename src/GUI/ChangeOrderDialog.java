@@ -7,23 +7,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import controller.*;
-import database.Database;
 
 class ChangeOrderDialog extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Sales sales = null;
 	private ArrayList<Order> orders = new ArrayList<>();
 	private ArrayList<Customer> customerList = new ArrayList<>();
@@ -46,6 +43,10 @@ class ChangeOrderDialog extends JFrame {
 
 	private class DialogWindow extends MyDialog{
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private String deliveryDateStr;
 		private String info;
 
@@ -59,6 +60,11 @@ class ChangeOrderDialog extends JFrame {
 			setLocationRelativeTo(null);
 		}
 		private class ChangeOrderDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public ChangeOrderDatapanel(){
 				GridLayout superGrid = new GridLayout(8,1);
 				setLayout(superGrid);

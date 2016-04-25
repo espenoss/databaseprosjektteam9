@@ -1,18 +1,31 @@
 package database;
 
-
-//All query methods related to customers, companies and zones
-// MÅ TESTE REGISTER ZONE!
-
-
+/**
+ * The Class QMCustomer.<br>
+ * Contains database query methods related to customer information<br>
+ * Assembles statements from parameters and executes the them
+ */
 public class QMCustomer {
-	
-	
-	
-	// Register new customer in database
+
+
+	/**
+	 * Register new customer.
+	 *
+	 * @param surName Customer surname
+	 * @param firstName Customer first name
+	 * @param phoneNumber Customer  phone number
+	 * @param email Customer  email
+	 * @param adress Customer  adress
+	 * @param zip_code Customer zip_code
+	 * @param zone_nr Customer zone_nr, must exist in database table 'zone'
+	 * @param preferences Customer preferences
+	 * @param active Whether customer is active
+	 * @param database Database connection
+	 * @return Customer ID
+	 */
 	public static int registerCustomer(String surName, String firstName, String phoneNumber, String email, String adress, 
 			int zip_code, int zone_nr, String preferences, boolean active, Database database) {
-		
+
 		// Attempt to generate new ID five times
 		for(int i=0; i<5; i++){
 			// Fetch highest currrent ID
@@ -43,11 +56,26 @@ public class QMCustomer {
 		return -1;
 	}
 
-	
-	// Update customer information
+
+	/**
+	 * Update customer information.
+	 *
+	 * @param customerID Customer id
+	 * @param surName Customer surname
+	 * @param firstName Customer first name
+	 * @param phoneNumber Customer  phone number
+	 * @param email Customer  email
+	 * @param adress Customer  adress
+	 * @param zip_code Customer zip_code
+	 * @param zone_nr Customer zone_nr, must exist in databasse table 'zone'
+	 * @param preferences Customer preferences
+	 * @param active Whether customer is active
+	 * @param database Database connection	 
+	 * @return true, if successful
+	 */
 	public static boolean updateCustomer(int customerID, String surName, String firstName, String phoneNumber, String email, String adress, 
 			int zipCode, int zoneNr, String preferences, boolean active, Database database) {
-			
+
 		String statement = "UPDATE customer SET "
 				+ "surname =" + aq(surName)
 				+ "firstname =" + aq(firstName)
@@ -60,200 +88,185 @@ public class QMCustomer {
 				+ "active =" + active
 				+ " WHERE customer_id =" + customerID
 				+ ";";
-		
+
 		return database.makeSingleStatement(statement);
-	}	
-	
-	public static boolean removeCustomer(int customerID, Database database) {
-		
-		String statement ="DELETE FROM customer WHERE customer_id ='" + customerID + "';";
-		
-		return database.makeSingleStatement(statement);
-	}
-	
-	
-	// View single customer information. 
-	// Returns a customer information in a String array
-	// Columns by index:
-	// 0 : customer_id - int
-	// 1 : surname - String
-	// 2 : firstname - String
-	// 3 : phone_number - String
-	// 4 : email - String
-	// 5 : adress - String
-	// 6 : zip_code - int
-	// 7 : zone_nr - int
-	// 8 : preferences - String
-	// 9 : active - boolean
+	}		
+
+	/**
+	 * View customer information.<br>
+	 * Columns by index:<br>
+	 * 0 : customer_id - int<br>
+	 * 1 : surname - String<br>
+	 * 2 : firstname - String<br>
+	 * 3 : phone_number - String<br>
+	 * 4 : email - String<br>
+	 * 5 : adress - String<br>
+	 * 6 : zip_code - int<br>
+	 * 7 : zone_nr - int<br>
+	 * 8 : preferences - String<br>
+	 * 9 : active - boolean<br>
+	 * 
+	 * @param customerID the customer id
+	 * @param database Database connection
+	 * @return String[] of customer information
+	 * 
+	 */
 	public static String[] viewCustomer(int customerID, Database database) {		
 		String statement = "SELECT * FROM customer WHERE customer_id ="
 				+ customerID + ";";
-		
+
 		database.makeSingleStatement(statement);
-		
+
 		return database.getLastResult()[0];
 	}	
 
-	
-	// View list of all customer information. 
-	// Returns a list of all customers in database in a two-dimensional String array
-	// First index is row, second is column
-	// Columns by second index:
-	// 0 : customer_id - int
-	// 1 : surname - String
-	// 2 : firstname - String
-	// 3 : phone_number - String
-	// 4 : email - String
-	// 5 : adress - String
-	// 6 : zip_code - int
-	// 7 : zone_nr - int
-	// 8 : preferences - String
-	// 9 : active - boolean
+
+	/**
+	 * View all customers.
+	 * Returns a list of all customers in database in a two-dimensional String array<br>
+	 * Columns by second index:<br>
+	 * 0 : customer_id - int<br>
+	 * 1 : surname - String<br>
+	 * 2 : firstname - String<br>
+	 * 3 : phone_number - String<br>
+	 * 4 : email - String<br>
+	 * 5 : adress - String<br>
+	 * 6 : zip_code - int<br>
+	 * 7 : zone_nr - int<br>
+	 * 8 : preferences - String<br>
+	 * 9 : active - boolean
+	 * 
+	 * @param database Database connection
+	 * @return String[][] of customer information
+	 */
 	public static String[][] viewAllCustomers(Database database) {		
 		database.makeSingleStatement("SELECT * FROM customer");
-		
+
 		return database.getLastResult(); 
 	}
 
-	
-	// Register company in database. Needs ID of exissting customer to succeed
+
+	/**
+	 * Register company to customer.
+	 * Customer ID needs to exist in 'customer' table
+	 *
+	 * @param customerID Customer id
+	 * @param companyName Company name
+	 * @param database Database connection
+	 * @return true, if successful
+	 */
 	public static boolean registerCompanyToCustomer(int customerID, String companyName, Database database) {				
 		String statement = "INSERT INTO company VALUES("
 				+ customerID + ",'" 
 				+ companyName 
 				+ "');";		
-		
+
 		return database.makeSingleStatement(statement);
 	}
 
-	
-	// Update customer info in database
+
+	/**
+	 * Update company name.
+	 *
+	 * @param customerID Customer id
+	 * @param companyName New company name
+	 * @param database Database connection
+	 * @return true, if successful
+	 */
 	public static boolean updateCompany(int customerID, String companyName, Database database) {
 		String statement = "UPDATE company SET "
 				+ "company_name ='" + companyName + "' "
 				+ "WHERE customer_id =" + customerID + ";";		
-		
+
 		return database.makeSingleStatement(statement);
 	}	
-	
-	
-	// Delete customer entry from database
-	public static boolean removeCompany(int customerID, Database database) {
 
-		String statement ="DELETE FROM company WHERE customer_id =" + customerID + ";";
-		
-		return database.makeSingleStatement(statement);
-	}
-	
-
-	// View list of single company together with customer information. 
-	// Returns information about company in String array
-	// Columns by index:
-	// 0 : customer_id - int
-	// 1 : company_name - String
-	// 2 : surname - String
-	// 3 : firstname - String
-	// 4 : phone_number - String
-	// 5 : email - String
-	// 6 : adress - String
-	// 7 : zip_code - int
-	// 8 : zone_nr - int
-	// 9 : preferences - String
-	// 10 : active - boolean
+	/**
+	 * View company and customer information.
+	 * Returns information about company in String array<br>
+	 * Columns by index:<br>
+	 *
+	 * 0 : customer_id - int<br>
+	 * 1 : company_name - String<br>
+	 * 2 : surname - String<br>
+	 * 3 : firstname - String<br>
+	 * 4 : phone_number - String<br>
+	 * 5 : email - String<br>
+	 * 6 : adress - String<br>
+	 * 7 : zip_code - int<br>
+	 * 8 : zone_nr - int<br>
+	 * 9 : preferences - String<br>
+	 * 10 : active - boolean<br>
+	 *
+	 * @param customerID Customer id
+	 * @param database Database connection
+	 * @return String[] of compant information
+	 */
 	public static String[] viewCompany(int customerID, Database database) {		
 		String statement = "SELECT *  FROM company NATURAL JOIN customer "
 				+ "WHERE company.customer_id = customer.customer_id AND company.customer_id = " + customerID;
-		
+
 		database.makeSingleStatement(statement);
-		
+
 		return database.getLastResult()[0];	
 	}
-	
-	
-	// View list of all companies together with customer information. 
-	// Returns a list of all companies in database in a two-dimensional String array
-	// First index is row, second is column
-	// Columns by second index:
-	// 0 : customer_id - int
-	// 1 : company_name - String
-	// 2 : surname - String
-	// 3 : firstname - String
-	// 4 : phone_number - String
-	// 5 : email - String
-	// 6 : adress - String
-	// 7 : zip_code - int
-	// 8 : zone_nr - int
-	// 9 : preferences - String
-	// 10 : active - boolean
+
+	/**
+	 * View all company and customer information.
+	 * Returns a list of all companies in database in a two-dimensional String array<br>
+	 * Columns by second index:<br>
+	 *
+	 * 0 : customer_id - int<br>
+	 * 1 : company_name - String<br>
+	 * 2 : surname - String<br>
+	 * 3 : firstname - String<br>
+	 * 4 : phone_number - String<br>
+	 * 5 : email - String<br>
+	 * 6 : adress - String<br>
+	 * 7 : zip_code - int<br>
+	 * 8 : zone_nr - int<br>
+	 * 9 : preferences - String<br>
+	 * 10 : active - boolean<br>
+	 *
+	 * @param customerID Customer id
+	 * @param database Database connection
+	 * @return String[] of company information
+	 */
 	public static String[][] viewAllCompanies(Database database) {		
 		database.makeSingleStatement("SELECT *  FROM company NATURAL JOIN customer "
 				+ "WHERE company.customer_id = customer.customer_id");
-		
+
 		return database.getLastResult();
 	}
-	
-	// MÅ TESTES
-	public static int registerZone(String zoneName, Database database) {
-		
-		for(int i=0; i<5; i++){
-			String statement = "SELECT MAX(zone_nr) FROM zone;";
-			database.makeSingleStatement(statement);
 
-			String highestID = database.getLastResult()[0][0];
-			int zoneID = 1;			
-			if(highestID != null){
-				zoneID = Integer.parseInt(highestID) + 1;
-			}
-
-			statement = "INSERT INTO zone VALUES("
-					+ zoneID + ", '" 
-					+ zoneName 
-					+ "');";
-			if(database.makeSingleStatement(statement)) return zoneID;
-		}
-		return -1;
-	}
-	
-	// Update zone entry in database
-	public static boolean updateZone(int zoneID, String zoneName, Database database) {
-		
-		String statement = "UPDATE zone SET "
-				+ "zone_name = '" + zoneName + "' "
-				+ "WHERE zone_nr = " + zoneID
-				+ ";";
-		
-		return database.makeSingleStatement(statement);
-	}
-
-	// Delete zone entry in database
-	public static boolean removeZone(int zoneID, Database database) {
-		
-		String statement = "DELETE FROM zone WHERE zone_nr = " + zoneID + ";";
-		
-		return database.makeSingleStatement(statement);
-	}	
-	
-	// View zones in database
-	// Returns list zones in a two-dimensional String array
-	// First index is row, second is column
-	// Columns by second index:
-	// 0 : zone_nr - int
-	// 1 : zone_name - String
+	/**
+	 * View zones.
+	 * First index is row, second is column<br>
+	 * Columns by second index:<br>
+	 * 0 : zone_nr - int<br>
+	 * 1 : zone_name - String<br>
+	 *
+	 * @param database Database connection
+	 * @return String[][] of zone information
+	 */
 	public static String[][] viewZones(Database database) {
 
 		String statement = "SELECT * FROM zone";
-		
+
 		database.makeSingleStatement(statement);
-		
+
 		return database.getLastResult();
 	}
-	
 
-
-	
-	// Puts a ' on either side and a comma at the end  of a string 
+	/**
+	 * 'Add quotes'.<br>
+	 * Convenience function to make queries easier to read
+	 * Adds single quotes at either end and a comma at the end
+	 *
+	 * @param s String to add quotes to
+	 * @return String with quotes around it
+	 */
 	public static String aq(String s){
 		return "'" + s + "', ";
 	}
-
 }

@@ -10,6 +10,10 @@ import controller.*;
 import database.Database;
 
 public class CustomerOrderMenu extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Sales sales = null;
 	Order order = null;
 	JButton addMeal = new JButton("Add meal");
@@ -28,6 +32,11 @@ public class CustomerOrderMenu extends JFrame{
 	}
 
 	private class menuDialog extends MyDialog{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 
 		protected menuDialog(JFrame parent) {
 			super(parent, "Order ID: " + order.getOrderID());

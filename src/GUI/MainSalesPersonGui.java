@@ -1,6 +1,5 @@
 package GUI;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -11,6 +10,10 @@ import database.*;
 
 class MainSalesPersonGui extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final int REGISTER_NEW_CUSTOMER = 0;
 	public static final int VIEW_INFO_ABOUT_SINGLE_CUST = 1;		
 	public static final int REGISTER_NEW_COMPANY = 2;
@@ -61,7 +64,6 @@ class MainSalesPersonGui extends JFrame {
 
 		public void valueChanged(ListSelectionEvent hendelse) {
 
-			Object[] values = choice_list.getSelectedValuesList().toArray();
 			int choices = choice_list.getSelectedIndex();
 			if(choices == REGISTER_NEW_CUSTOMER){
 				new RegisterCustomerDialog(sales);
