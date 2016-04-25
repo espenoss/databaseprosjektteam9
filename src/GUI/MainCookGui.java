@@ -13,7 +13,8 @@ import database.Database;
 class MainCookGui extends JFrame {
 	private static final String [] CHOICES =
 		{"View food orders","Mark order as ready for delivery","View available ingredients","Register new ingredient",
-				"View available meals", "Register new meal","View ingregredients in meal", "Add ingredient to meal"};
+				"View available meals", "Register new meal","View ingregredients in meal", "Add ingredient to meal", 
+				"View all subscription plans", "Register new subscription plan", "Add meal to subscription plan","Update subscription plan"};
 	private JList<String> choice_list = new JList<String>(CHOICES);
 	Cook cook = null;
 
@@ -25,6 +26,11 @@ class MainCookGui extends JFrame {
 	public static final int REGISTER_MEAL = 5;
 	public static final int VIEW_INGREDIENTS_IN_MEAL = 6;
 	public static final int ADD_INGREDIENT_TO_MEAL = 7;
+	public static final int VIEW_ALL_SUBPLANS = 8;
+	public static final int REGISTER_SUB_PLAN = 9;
+	public static final int ADD_MEAL_TO_SUB_PLAN = 10;
+	public static final int UPDATE_SUP_PLAN = 11;
+
 
 	public MainCookGui(Cook cook) {
 		this.cook = cook;
@@ -105,7 +111,27 @@ class MainCookGui extends JFrame {
 				new IngredientsInMealGui(new Cook(cook.getUserID(), cook.getName(), cook.getDatabase()));
 			}else if(choices==ADD_INGREDIENT_TO_MEAL){
 				new AddIngredientsToMealGui(new Cook(cook.getUserID(), cook.getName(), cook.getDatabase()));
+			}else if (choices == VIEW_ALL_SUBPLANS){
+				ArrayList<SubPlan> sp = null;
+				sp = cook.viewAllSubPlans();
+				String[] s = new String[sp.size()];
+				for( int i = 0; i < sp.size(); i++ ){
+					s[i] = sp.get(i).toString() + " ";
+				}
+				JScrollPane scrollpane = new JScrollPane(); 
+				JList<String> list = new JList<String>(s);
+				scrollpane = new JScrollPane(list);
+				JPanel panel = new JPanel(); 
+				panel.add(scrollpane);
+				scrollpane.getViewport().add(list);		    	 
+				JOptionPane.showMessageDialog(null, scrollpane, "All sub plans: ", JOptionPane.INFORMATION_MESSAGE );
 
+			}else if(choices == REGISTER_SUB_PLAN){
+				new RegisterSubscriptionPlan(new Cook(cook.getUserID(), cook.getName(), cook.getDatabase()));
+			}else if(choices == ADD_MEAL_TO_SUB_PLAN){
+				new AddMealToSubPlanDialog (new Cook(cook.getUserID(), cook.getName(), cook.getDatabase()));
+			}else if(choices == UPDATE_SUP_PLAN){
+				new UpdateSubPlanInfoGui(new Cook(cook.getUserID(), cook.getName(), cook.getDatabase()));
 			}
 
 		}
