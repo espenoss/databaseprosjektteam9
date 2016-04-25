@@ -19,7 +19,7 @@ import controller.SubPlan;
 import controller.User;
 import databasePackage.Database;
 
-public class TestUserNull {
+public class TestWithEmptyDatabase {
 	private static Database database;
 	private static User user;
 	private static Cook cook;
