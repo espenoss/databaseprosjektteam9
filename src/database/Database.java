@@ -114,7 +114,8 @@ public class Database {
 						+ "Could not update table because of constraint error\n"
 						+ "Possible reasons:\n"
 						+ "	Tried to enter duplicate entry\n"
-						+ "	Tried to delete/update entry referenced by another table");
+						+ "	Tried to delete/update entry referenced by another table\n"
+						+ " Tried to reference entry not in database");
 			}else{
 				Cleaner.printMessage(e, "makeSingleStatement()");
 			}

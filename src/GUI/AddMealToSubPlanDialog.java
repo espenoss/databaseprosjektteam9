@@ -139,9 +139,9 @@ class AddMealToSubPlanDialog extends JFrame {
 		public boolean okData(){
 
 			int weekIndex[] = new int[7];
-			weekIndex[0]= mondaySelect.getSelectedIndex();
+			weekIndex[0] = mondaySelect.getSelectedIndex();
 			weekIndex[1] = tuesdaySelect.getSelectedIndex();
-			weekIndex[2]  = wednesdaySelect.getSelectedIndex();
+			weekIndex[2] = wednesdaySelect.getSelectedIndex();
 			weekIndex[3] = thursdaySelect.getSelectedIndex();
 			weekIndex[4] = fridaySelect.getSelectedIndex();
 			weekIndex[5] = saturdaySelect.getSelectedIndex();
@@ -153,12 +153,12 @@ class AddMealToSubPlanDialog extends JFrame {
 			String newPlanName = subName.getText().trim();
 
 			Meal[] meals = currSub.getMeals();
-			for(int i=0;i<meals.length;i++){
-				Meal selectedMeal = meals[weekIndex[i]];
+			for(int i=0;i<weekIndex.length;i++){
+				Meal selectedMeal = meals[i];
 				if(meals[i] != null){
-					if(!cook.removeMealFromPlan(currSub.getSubPlanID(), selectedMeal.getMealID(), i+1)) return false;
+					cook.removeMealFromPlan(currSub.getSubPlanID(), selectedMeal.getMealID(), i+1);
 				}
-				cook.addMealToSubPlan(currSub.getSubPlanID(), selectedMeal.getMealID(), i);
+				cook.addMealToSubPlan(currSub.getSubPlanID(), mealList.get(weekIndex[i]).getMealID(), i+1);
 			}
 
 			currSub.setName(newPlanName);

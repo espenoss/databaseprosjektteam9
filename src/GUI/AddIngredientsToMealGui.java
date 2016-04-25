@@ -74,6 +74,7 @@ class AddIngredientsToMealGui extends JFrame {
 				for(Meal m: mealList){
 					my_list.add(m.getMealName());
 				}
+				
 				mealIdSelected = new JComboBox<>(my_list.toArray());
 				add(new JLabel("Meal Id: ", JLabel.LEFT));
 				add(mealIdSelected);
@@ -102,7 +103,10 @@ class AddIngredientsToMealGui extends JFrame {
 			float my_quantity = editor.stringToFloat(ingredient_quantity);
 			myQuantity = my_quantity;
 
-			return cook.addIngredientToMeal(mealIndex, ingredientIndex, myQuantity) ;
+			int mealId = mealList.get(mealIndex).getMealID();
+			int ingredientId = ingredientsList.get(ingredientIndex).getIngID();
+			
+			return cook.addIngredientToMeal(mealId, ingredientId, myQuantity) ;
 
 		}
 	}
