@@ -116,28 +116,5 @@ public class SubPlan {
 			return false;
 		return true;
 	}
-	
-	/*
-	public static void main(String[] args) {
-		String username = "marith1";
-		String password = "tgp8sBZA";
-		String databaseName = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + password;
-		String databaseDriver = "com.mysql.jdbc.Driver";
-		Database database = new Database(databaseDriver, databaseName);
-		
-		
-		SubPlan testSub = new SubPlan(1, "Lunsj");
-		
-		testSub.fetchMealsInPlan(database);
-		Meal[] meals = testSub.getMeals();
-		
-		System.out.println(meals[0].getMealName());
-		
-		System.out.println(testSub);
-		System.out.println("getMealsAsText: \n"+testSub.getMealsAsText());
-	}
-	
-	*/
-	
 
 }

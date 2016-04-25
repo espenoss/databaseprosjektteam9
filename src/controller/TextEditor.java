@@ -2,12 +2,26 @@ package controller;
 
 import javax.swing.JOptionPane;
 
+/**
+ * The Class TextEditor.<br>
+ * Contains convenience methods for String handling.
+ */
 public class TextEditor {
 	
+	/**
+	 * Instantiates a new text editor.
+	 */
 	public TextEditor(){
 	}
 
-	public int stringToInt(String text){ // removes blank spaces and parses string to an int
+	/**
+	 * String to int.<br>
+	 * Removes blank spaces and parses string to an int.
+	 *
+	 * @param text Text to be parsed
+	 * @return Integer representation of text, else -1 if not parseable
+	 */
+	public int stringToInt(String text){
 		int i = 0;
 		text.trim();
 
@@ -24,7 +38,14 @@ public class TextEditor {
 		return -1;
 	}
 	
-	public float stringToFloat(String text){ // removes blank spaces and parses a string to a float
+	/**
+	 * String to float.<br>
+	 * Removes blank spaces and parses a string to a float.
+	 *
+	 * @param text Text to be parsed
+	 * @return Float representation of text, else -1 if not parseable
+	 */
+	public float stringToFloat(String text){
 		float i = 0;
 		text.trim();
 		
@@ -42,7 +63,14 @@ public class TextEditor {
 	}
 	
 	
-	public String trimAndLowercase(String text){ // removes blank spaces and sets characters to lowercase
+	/**
+	 * Trim and lowercase.<br>
+	 * Removes blank spaces and sets characters to lowercase.
+	 *
+	 * @param text Text to be processed
+	 * @return Text with leading and trailing blankspace removed and all lowercase
+	 */
+	public String trimAndLowercase(String text){ // 
 		if(!text.equals(null)){
 			text.trim();
 			text.toLowerCase();
@@ -52,7 +80,13 @@ public class TextEditor {
 		return text;
 	}
 	
-	public String trimOnly(String text){ // removes blank spaces
+	/**
+	 * Trim only.<br>
+	 * Removes blank spaces at either end of string.
+	 *
+	 * @param text Text to be processed
+	 * @return Text with leading and trailing blankspace removed	 */
+	public String trimOnly(String text){
 		if(!text.equals(null)){
 			text.trim();
 		} else{
@@ -61,9 +95,14 @@ public class TextEditor {
 		return text;
 	}
 	
-	// Check to see if string only contains letters
-	public boolean isAlpha(String name) {
-	    char[] chars = name.toCharArray();
+	/**
+	 * Check to see if string only contains letters.
+	 *
+	 * @param string String to check
+	 * @return true, if string only contains letters
+	 */
+	public boolean isAlpha(String string) {
+	    char[] chars = string.toCharArray();
 
 	    for (char c : chars) {
 	        if(!Character.isLetter(c) && c != ' ') {
@@ -74,6 +113,12 @@ public class TextEditor {
 	    return true;
 	}
 	
+	/**
+	 * Checks to see if string only contains numbers.
+	 *
+	 * @param numbers string to check
+	 * @return true, if string only contains numbers
+	 */
 	public boolean isNumeric(String numbers) {
 	    char[] chars = numbers.toCharArray();
 
@@ -85,18 +130,4 @@ public class TextEditor {
 
 	    return true;
 	}
-	/*
-	public static void main(String[] args){
-		TextEditor t = new TextEditor();
-		
-		System.out.println("float ok: "+t.stringToFloat("1.2"));
-		System.out.println("float not ok: "+t.stringToFloat("hei"));
-		System.out.println("float empty: "+t.stringToFloat(""));
-		
-		System.out.println("int ok: "+t.stringToInt("1"));
-		System.out.println("int not ok: "+t.stringToInt("hei"));
-		System.out.println("int empty: "+t.stringToInt(""));
-		
-	}
-	*/
 }

@@ -56,7 +56,7 @@ public class TestCook {
 	@Test
 	public void testShoulRegisterSubPlan() throws Exception{
 		System.out.println("Cook test 2: Register subscriptionplan");
-		boolean result = cook.registerSubPlan("name", database).equals(subPlan);
+		boolean result = cook.registerSubPlan("name").equals(subPlan);
 		boolean expResult = true;
 		
 		assertEquals(result, expResult);
@@ -110,7 +110,7 @@ public class TestCook {
 	public void testShouldAddNewIngredient() throws Exception{
 		System.out.println("Cook test 6: add new ingredient to meal");
 		
-		Ingredient res = cook.addNewIngredient("banana", 40, "kg", database);
+		Ingredient res = cook.addNewIngredient("banana", 40, "kg");
 		Ingredient expRes = new Ingredient(2, "banana", 40, "kg");
 		assertEquals(res, expRes);
 	} 

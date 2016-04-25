@@ -268,8 +268,8 @@ public class User{
 	/**
 	 * View single customer.<br>
 	 * Takes an customerId returns a single customer object, or null if not found.
-	 * @param customerId the customer id
-	 * @return the customer
+	 * @param customerId Customer id
+	 * @return Customer
 	 */
 	public Customer viewSingleCustomer(int customerId) {
 		String[][] list = QMCustomer.viewAllCustomers(database);
@@ -288,21 +288,21 @@ public class User{
 	}
 	
 	/**
-	 * View ingredients.
+	 * View list of all ingredients.
 	 *
-	 * @return the array list
+	 * @return ArrayList of Ingredient objects
 	 */
-	//FINISHED --- M� testes
 	public ArrayList<Ingredient> viewIngredients() {
+		// Retrieve from database
 		String[][] ingT = QMFood.viewIngredients(database);
 		if (ingT.length==0){
 			return null;
 		}
-		
-		
+				
 		Ingredient tempIng; 
 		ArrayList<Ingredient> ingList = new ArrayList<Ingredient>();
 		
+		// Convert to Ingredient objects
 		for (int i=0; i<ingT.length; i++){
 			tempIng = new Ingredient(t.stringToInt(ingT[i][0]), ingT[i][1], t.stringToFloat(ingT[i][2]), ingT[i][3]);
 			ingList.add(tempIng);
@@ -311,12 +311,12 @@ public class User{
 	}
 	
 	/**
-	 * View all sub plans.
+	 * View all subscription plans.
 	 *
-	 * @return the array list
+	 * @return ArrayList of SubPlan objects
 	 */
-	// FINISHED
 	public ArrayList<SubPlan> viewAllSubPlans() {
+		// Retrieve from database
 		String[][] subT = QMFood.viewSubscriptionPlans(database);
 		
 		if (subT.length==0){
@@ -325,7 +325,8 @@ public class User{
 		
 		SubPlan tempSub; 
 		ArrayList<SubPlan> subList = new ArrayList<SubPlan>();
-		
+
+		// Convert to SunPlan objects
 		for (int i=0; i<subT.length; i++){
 			tempSub = new SubPlan(t.stringToInt(subT[i][0]), subT[i][1]);
 			tempSub.fetchMealsInPlan(database);
@@ -335,13 +336,14 @@ public class User{
 	}
 	
 	/**
-	 * View zones.
+	 * View all zones.
 	 *
-	 * @return the string[][]
+	 * @return String[][] of zone information
 	 */
 	public String[][] viewZones() {
 		String[][] zones = null;
-		
+
+		// Retrieve from database
 		zones = QMCustomer.viewZones(database);
 		
 		return zones;

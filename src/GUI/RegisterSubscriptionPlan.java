@@ -68,7 +68,7 @@ class RegisterSubscriptionPlan extends JFrame {
 			sub_plan = sub_plan_nameField.getText();
 
 			try {
-				cook.registerSubPlan(sub_plan, cook.getDatabase());
+				cook.registerSubPlan(sub_plan);
 			}catch (Exception e) {
 				System.out.println(e.toString());
 			}

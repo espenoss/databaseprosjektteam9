@@ -84,7 +84,7 @@ class RegisterNewIngredient extends JFrame {
 			unit = ingredientList.getSelectedItem().toString();
 
 			if(myQuantity > 0){
-				return cook.addNewIngredient(ingredient, myQuantity, unit, cook.getDatabase()) != null;
+				return cook.addNewIngredient(ingredient, myQuantity, unit) != null;
 			}else{
 				JOptionPane.showMessageDialog(null, "Quantity must be greater than zero","", JOptionPane.INFORMATION_MESSAGE);
 				return false;

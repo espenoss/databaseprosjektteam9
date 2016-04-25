@@ -81,7 +81,7 @@ class LogInGui extends JFrame{
 					cookgui.setVisible(true);
 					break;					
 				case U_DRIVER:
-					ViewDeliveryList deliverylist = new ViewDeliveryList(new Driver(userID, userName, database));
+					MainDriverGui deliverylist = new MainDriverGui(new Driver(userID, userName, database));
 					deliverylist.setVisible(true);						
 					break;
 				case U_SALES:
