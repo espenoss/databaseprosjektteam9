@@ -1,7 +1,6 @@
 package controller;
 
-import databasePackage.Database;
-import databasePackage.*;
+import database.*;
 
 public class Customer implements java.io.Serializable{
 	private final int customerID;

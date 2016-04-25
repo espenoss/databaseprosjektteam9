@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import controller.Ingredient;
-import databasePackage.Database;
+import database.Database;
 
 public class TestIngredient {
 	private static Database database;

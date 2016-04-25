@@ -10,7 +10,7 @@ import org.junit.Test;
 import controller.Meal;
 import controller.MealOrdered;
 import controller.Order;
-import databasePackage.Database;
+import database.Database;
 
 public class TestMealOrdered{
 	private static Database db;

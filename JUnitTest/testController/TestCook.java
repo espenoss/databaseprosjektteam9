@@ -11,7 +11,7 @@ import controller.Cook;
 import controller.Ingredient;
 import controller.Meal;
 import controller.SubPlan;
-import databasePackage.Database;
+import database.Database;
 
 public class TestCook {
 	private static Database database;

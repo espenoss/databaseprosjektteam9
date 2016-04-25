@@ -4,9 +4,10 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import org.junit.*;
+
 import controller.Admin;
 import controller.User;
-import databasePackage.Database;
+import database.Database;
 
 public class TestAdmin {
 	private static Database database;

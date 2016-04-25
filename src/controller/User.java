@@ -1,7 +1,8 @@
 package controller;
 
 import java.util.ArrayList;
-import databasePackage.*;
+
+import database.*;
 
 public class User{
 	private String userID;

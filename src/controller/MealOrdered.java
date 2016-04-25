@@ -1,6 +1,6 @@
 package controller;
 
-import databasePackage.*;
+import database.*;
 
 public class MealOrdered extends Meal {
 	private java.sql.Date deliveryDate;

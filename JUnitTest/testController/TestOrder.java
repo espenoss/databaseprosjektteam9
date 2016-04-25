@@ -3,8 +3,9 @@ package testController;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import org.junit.*;
+
 import controller.*;
-import databasePackage.Database;
+import database.Database;
 
 public class TestOrder {
 	private static Database database;

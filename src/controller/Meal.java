@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import databasePackage.Database;
-import databasePackage.QMFood;
+import database.Database;
+import database.QMFood;
 
 public class Meal {
 	private ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>(); 	//Lists ingredients (objects) that is used in the meal

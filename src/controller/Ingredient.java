@@ -1,5 +1,5 @@
 package controller;
-import databasePackage.*;
+import database.*;
 
 public class Ingredient {
 	public final int ingID; 

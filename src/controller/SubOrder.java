@@ -1,6 +1,6 @@
 package controller;
 
-import databasePackage.*;
+import database.*;
 
 public class SubOrder extends Order {
 	private SubPlan subPlan = null;

@@ -8,7 +8,7 @@ import java.util.Arrays;
 import org.junit.*;
 
 import controller.*;
-import databasePackage.Database;
+import database.Database;
 
 public class testDriver {
 private static Database database;

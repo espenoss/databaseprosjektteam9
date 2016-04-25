@@ -2,8 +2,9 @@ package testController;
 
 import static org.junit.Assert.*;
 import org.junit.*;
+
 import controller.LogIn;
-import databasePackage.Database;
+import database.Database;
 
 public class TestLogIn {
 	private static Database database;

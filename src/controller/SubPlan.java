@@ -2,8 +2,8 @@ package controller;
 
 import java.util.Arrays;
 
-import databasePackage.Database;
-import databasePackage.QMFood;
+import database.Database;
+import database.QMFood;
 
 /* Subscription plan
  * A set plan made by the cook 

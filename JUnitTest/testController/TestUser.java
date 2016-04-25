@@ -16,7 +16,7 @@ import controller.Meal;
 import controller.Order;
 import controller.SubPlan;
 import controller.User;
-import databasePackage.Database;
+import database.Database;
 
 public class TestUser {
 	private static Database database;

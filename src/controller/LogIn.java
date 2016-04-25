@@ -1,6 +1,6 @@
 package controller;
 
-import databasePackage.*;
+import database.*;
 
 public class LogIn {
 	public String[] logIn(String userID, char[] password, Database database) {

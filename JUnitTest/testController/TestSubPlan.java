@@ -10,8 +10,8 @@ import org.junit.Test;
 import controller.Meal;
 import controller.SubPlan;
 import controller.TextEditor;
-import databasePackage.Database;
-import databasePackage.QMFood;
+import database.Database;
+import database.QMFood;
 
 public class TestSubPlan {
 	private static Database database;

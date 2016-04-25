@@ -1,6 +1,5 @@
 package testController;
 
-import databasePackage.Database;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -8,6 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import controller.Customer;
+import database.Database;
 
 public class TestCustomer {
 	private static Database database;

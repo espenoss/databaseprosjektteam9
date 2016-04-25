@@ -1,7 +1,9 @@
 package testPackageDatabase;
 
-import databasePackage.*;
 import org.junit.*;
+
+import database.*;
+
 import static org.junit.Assert.*;
 
 

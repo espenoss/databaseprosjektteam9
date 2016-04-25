@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import databasePackage.*;
+import database.*;
 
 public class Cook extends User {
 

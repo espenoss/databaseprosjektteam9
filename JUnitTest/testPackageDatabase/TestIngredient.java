@@ -6,8 +6,8 @@ import static org.junit.Assert.assertNotEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import databasePackage.Database;
-import databasePackage.QMFood;
+import database.Database;
+import database.QMFood;
 
 public class TestIngredient {
 	public Database database;

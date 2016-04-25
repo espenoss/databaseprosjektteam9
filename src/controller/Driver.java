@@ -1,6 +1,6 @@
 package controller;
 
-import databasePackage.*;
+import database.*;
 
 public class Driver extends User {
 	

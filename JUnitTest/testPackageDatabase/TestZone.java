@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import databasePackage.*;
+import database.*;
 
 public class TestZone {
 	public Database database;

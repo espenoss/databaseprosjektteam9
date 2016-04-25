@@ -9,7 +9,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import controller.*;
-import databasePackage.Database;
+import database.Database;
 
 public class TestSales {
 	private static Database database;
