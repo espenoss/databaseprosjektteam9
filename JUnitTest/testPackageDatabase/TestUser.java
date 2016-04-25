@@ -24,7 +24,6 @@ public class TestUser {
 	public void testUser() throws Exception{
 		System.out.println("Test register new user");
 
-		QMUser.removeUser("Nils", database);		
 		
 		//Register new user
 		boolean expResult = true;
@@ -45,11 +44,7 @@ public class TestUser {
 		assertEquals(resultString[0],"Nils");
 		assertEquals(resultString[1],"3");
 		assertEquals(resultString[2],"Nils Veem");		
-				
-		expResult = true;
-		result = QMUser.removeUser("Nils", database);
-		assertEquals(expResult, result);
-		
+						
 	}
 	
 }

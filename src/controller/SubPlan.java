@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.Arrays;
-
 import database.Database;
 import database.QMFood;
 

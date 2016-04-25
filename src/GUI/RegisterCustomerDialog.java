@@ -1,14 +1,15 @@
 package GUI;
 import controller.*;
-import database.Database;
-
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
 class RegisterCustomerDialog extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Sales sales = null;
 
 	public RegisterCustomerDialog(Sales sales) {
@@ -23,6 +24,11 @@ class RegisterCustomerDialog extends JFrame {
 	} 
 
 	private class CustomerDialog extends MyDialog{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		private TextEditor editor = new TextEditor();
 
 		private JTextField firstNameField = new JTextField(20);
@@ -57,6 +63,11 @@ class RegisterCustomerDialog extends JFrame {
 		}
 
 		private class CustomerDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public CustomerDatapanel(){
 				GridLayout superGrid = new GridLayout(18,1);
 				setLayout(superGrid);

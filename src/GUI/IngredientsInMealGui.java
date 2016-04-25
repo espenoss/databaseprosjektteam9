@@ -10,14 +10,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import controller.*;
-import database.Database;
 
 class IngredientsInMealGui extends JFrame {
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Cook cook = null;
 	private Meal meal = null;
 
@@ -33,6 +34,11 @@ class IngredientsInMealGui extends JFrame {
 	} 
 
 	private class IngredientsInMealDialog extends MyDialog{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 
 		private TextEditor editor = new TextEditor();
 
@@ -52,6 +58,11 @@ class IngredientsInMealGui extends JFrame {
 		}
 
 		private class UserDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public UserDatapanel(){
 				setLayout(new GridLayout(1,2));
 

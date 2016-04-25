@@ -2,9 +2,6 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -14,17 +11,17 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
-import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.SpinnerDateModel;
-
-
 import controller.*;
 import database.Database;
 
 class MainAdminGui extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JList list = new JList();
 	private static final String [] CHOICES =
 		{"Register new user","Change user information", "View all users", "Register new customer",

@@ -3,7 +3,7 @@ import java.sql.*;
 
 /**
  * The Class Cleaner.
- * Contains helper methods for database interactions
+ * Contains convenience methods for database interactions
  */
 public class Cleaner {
 	

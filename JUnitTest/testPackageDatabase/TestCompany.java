@@ -33,11 +33,8 @@ public class TestCompany {
 		
 		boolean exp = QMCustomer.updateCompany(Integer.parseInt(company[0]), "feil navn", database);
 		assertEquals(exp, true);		
-		
-		exp = QMCustomer.removeCompany(Integer.parseInt(company[0]), database);
-		assertEquals(exp, true);
-		
-		exp = QMCustomer.registerCompanyToCustomer(Integer.parseInt(company[0]), company[1], database);
-		assertEquals(exp, true);		
+				
+//		exp = QMCustomer.registerCompanyToCustomer(Integer.parseInt(company[0]), company[1], database);
+//		assertEquals(exp, true);		
 	}
 }

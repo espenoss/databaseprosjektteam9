@@ -1,8 +1,6 @@
 package testPackageDatabase;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,12 +30,5 @@ public class TestIngredient {
 		boolean exp = QMFood.updateIngredient(Integer.parseInt(ingredient[0]), ingredient[1], Float.parseFloat(ingredient[2]), "Ny info", database);
 		assertEquals(true, exp);		
 		
-		// attempt to remove entry		
-		exp = QMFood.removeIngredient(Integer.parseInt(ingredient[0]), database);
-		assertEquals(true, exp);
-
-		// attempt to reregister removed entry	
-		int iexp = QMFood.registerIngredient(ingredient[1], Float.parseFloat(ingredient[2]), ingredient[3], database);
-		assertNotEquals(-1, iexp);		
 	}
 }

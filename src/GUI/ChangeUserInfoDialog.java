@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 class ChangeUserInfoDialog extends JFrame {
-	private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Admin admin = null; 
 
 	public ChangeUserInfoDialog(User user){ 
@@ -24,6 +27,10 @@ class ChangeUserInfoDialog extends JFrame {
 
 	private class UserDialog extends MyDialog{
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private TextEditor editor = new TextEditor();
 		private JComboBox<Object> userIDfield;
 		private final String userRoles[] = {"Admin", "Cook", "Driver", "Sales", "Storage"}; 
@@ -57,6 +64,11 @@ class ChangeUserInfoDialog extends JFrame {
 		}
 
 		private class UserDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public UserDatapanel(){
 				GridLayout superGrid = new GridLayout(8,1);
 				setLayout(superGrid);
@@ -94,7 +106,7 @@ class ChangeUserInfoDialog extends JFrame {
 					&& name != "" && editor.isAlpha(name);
 			if(!nameOk) JOptionPane.showMessageDialog(null, "Name cannot contain numbers");
 
-			return admin.updateUser(userID, userType, name, pword, database);
+			return admin.updateUser(userID, userType, name, pword);
 		}
 	}
 }

@@ -1,7 +1,6 @@
 package GUI;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -11,6 +10,10 @@ import controller.*;
 import database.Database;
 
 class MainCookGui extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final String [] CHOICES =
 		{"View food orders","Mark order as ready for delivery","View available ingredients","Register new ingredient",
 				"View available meals", "Register new meal","View ingregredients in meal", "Add ingredient to meal", 

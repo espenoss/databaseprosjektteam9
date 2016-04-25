@@ -1,8 +1,4 @@
 package controller;
-import java.util.ArrayList;
-
-import javax.swing.JOptionPane;
-
 import database.*;
 
 public class Cook extends User {

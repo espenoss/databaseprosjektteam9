@@ -44,10 +44,6 @@ public class TestSubscriptionOrder {
 				System.out.print(view[x][y] + " ");
 			}
 			System.out.println("");
-		}
-				
-		result = QMOrder.removeSubscriptionFromOrder(10003 ,database);
-		expRes = true;
-		assertEquals(expRes, result);		
+		}				
 	}
 }

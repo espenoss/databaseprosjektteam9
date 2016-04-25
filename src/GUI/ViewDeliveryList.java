@@ -1,14 +1,9 @@
 package GUI;
 
-import static javax.swing.JOptionPane.showInputDialog;
-import static javax.swing.JOptionPane.showMessageDialog;
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,13 +12,14 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import controller.*;
 import database.Database;
 
 public class ViewDeliveryList extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private DefaultListModel<String> listcontent = new DefaultListModel<String>(); 
 	private JList<String> list = new JList<String>(listcontent);
 	private Driver driver = null;
@@ -45,6 +41,11 @@ public class ViewDeliveryList extends JFrame {
 	}
 
 	private class TextPanel extends JPanel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public TextPanel() {
 			setLayout(new GridLayout(4, 1, 2, 2));
 			add(new JLabel(""));  
@@ -55,11 +56,18 @@ public class ViewDeliveryList extends JFrame {
 	}
 
 	private class ListPanel extends JPanel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public ListPanel() {
 			setLayout(new BorderLayout());
 
 			mealList = driver.generateDeliveryPlan();
 
+			// TODO: hente ut subscription?
+			
 			if(mealList.length == 0){
 				listcontent.addElement("No deliveries left for today");
 			}else{
@@ -79,6 +87,8 @@ public class ViewDeliveryList extends JFrame {
 
 	private class markButtonListener implements ActionListener{
 
+		// TODO: forklare hva jeg har gjort
+		
 		public void actionPerformed(ActionEvent arg0) {
 			int selected = list.getSelectedIndex();
 			int baseIndex = (selected/4)*4; 

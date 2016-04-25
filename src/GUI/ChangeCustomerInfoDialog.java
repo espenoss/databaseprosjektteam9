@@ -1,18 +1,16 @@
 package GUI;
 import controller.*;
-import database.Database;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
-import org.hamcrest.core.IsInstanceOf;
-
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-
 class ChangeCustomerInfoDialog extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Sales sales = null; 
 	Customer customer = null;
 
@@ -28,6 +26,11 @@ class ChangeCustomerInfoDialog extends JFrame {
 	} 
 
 	private class CustomerDialog extends MyDialog implements ActionListener{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		private TextEditor editor = new TextEditor();
 
 		private ArrayList<Customer> customerList = new ArrayList<>();
@@ -49,7 +52,6 @@ class ChangeCustomerInfoDialog extends JFrame {
 		private int zone_nr;
 		private String preferences;
 		private String phoneNumber;
-		private boolean active;
 
 
 		private final String status[] = {"active", "inactive"}; 
@@ -69,6 +71,11 @@ class ChangeCustomerInfoDialog extends JFrame {
 		}
 
 		private class CustomerDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public CustomerDatapanel(){
 				setLayout(new GridLayout(20,1));
 
@@ -168,6 +175,7 @@ class ChangeCustomerInfoDialog extends JFrame {
 
 			boolean dataCheck = nameOk && emailAndAdressOk && zipAndZoneOk && phoneOk;
 
+			boolean active;
 			if(status_list.getSelectedIndex() == 0){
 				active = true;
 			}else{
@@ -185,6 +193,7 @@ class ChangeCustomerInfoDialog extends JFrame {
 				currCust.setZoneNr(zone_nr);
 				currCust.setPreferences(preferences);
 				currCust.setPhoneNumber(phoneNumber);
+				currCust.setActive(active);
 				return currCust.updateCustomer(sales.getDatabase());					
 			}else{
 				return false;

@@ -14,6 +14,10 @@ import controller.*;
 import database.Database;
 
 class MainDriverGui extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final String [] CHOICES =
 		{"Generate delivery plan", "Mark order as delivered"};
 	private JList<String> choice_list = new JList<String>(CHOICES);  // Naa er listen laget!

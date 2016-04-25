@@ -4,10 +4,13 @@ import controller.*;
 import database.*;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 class RegisterUserDialog extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
 	private Admin admin = null; 
   
@@ -24,6 +27,10 @@ class RegisterUserDialog extends JFrame {
 
 	private class UserDialog extends MyDialog{
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private TextEditor editor = new TextEditor();
 		private JTextField userIDfield = new JTextField(10);
 		private final String userRoles[] = {"Admin", "Cook", "Driver", "Sales", "Storage"}; 
@@ -45,6 +52,11 @@ class RegisterUserDialog extends JFrame {
 		}
 				
 		private class UserDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public UserDatapanel(){
 				GridLayout superGrid = new GridLayout(8,1);
 				setLayout(superGrid);
@@ -75,7 +87,7 @@ class RegisterUserDialog extends JFrame {
 			if(!nameOk){
 				JOptionPane.showMessageDialog(null, "Name cannot contain numbers");
 			}else{
-				my_user = admin.registerUser(userID, userType, name, pword, database);				
+				my_user = admin.registerUser(userID, userType, name, pword);				
 			}
 		
 			if(my_user == false){

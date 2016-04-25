@@ -40,13 +40,6 @@ public class TestCustomer {
 		
 		assertNotEquals(customer[6], customerCopy[6]);
 		
-		boolean expResult2 = true;
-		boolean bResult2 = QMCustomer.removeCustomer(Integer.parseInt(customer[0]), database); 		
-		assertEquals(bResult2, expResult2);
-		
-		int erResult = -1;
-		int iResult = QMCustomer.registerCustomer(customer[1], customer[2], customer[3], customer[4], customer[5], 5612, 1, customer[8], true, database);
-		assertNotEquals(erResult, iResult);
 				
 	}
 }

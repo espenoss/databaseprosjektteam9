@@ -3,26 +3,21 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.SpinnerDateModel;
-
-import controller.Customer;
 import controller.*;
 import controller.TextEditor;
 
 
 class GetStatistics extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Admin admin = null; 
 
 	public GetStatistics(Admin admin) {
@@ -37,6 +32,11 @@ class GetStatistics extends JFrame {
 	}
 
 	private class DialogWindow extends MyDialog{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		private TextEditor editor = new TextEditor();
 
 		private JTextField dateField = new JTextField(10);
@@ -52,6 +52,11 @@ class GetStatistics extends JFrame {
 		}
 
 		private class OrderDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public OrderDatapanel(){
 				setLayout(new GridLayout(1,2));
 

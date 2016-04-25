@@ -1,11 +1,13 @@
 package GUI;
 
-import java.awt.*; 
 import java.awt.event.*;
 import javax.swing.*;
-import static javax.swing.JOptionPane.*;
 
 public class MyDialog extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean ok = false; 
 	private JButton okButton = new JButton ("OK");
 	private ButtonPanel buttonpanel = new ButtonPanel();
@@ -42,6 +44,11 @@ public class MyDialog extends JDialog {
 	}
 
 	private class ButtonPanel extends JPanel{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public ButtonPanel(){
 			JButton cancelButton = new JButton ("Cancel");
 			Commandlistener buttonlistener = new Commandlistener();
@@ -60,6 +67,11 @@ public class MyDialog extends JDialog {
 	}
 
 	private class Commandlistener extends AbstractAction{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public void actionPerformed(ActionEvent event){
 			String command = event.getActionCommand();
 			if(command.equals("OK")){

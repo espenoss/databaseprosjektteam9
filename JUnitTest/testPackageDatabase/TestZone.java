@@ -1,8 +1,5 @@
 package testPackageDatabase;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,16 +25,5 @@ public class TestZone {
 		// select last entry
 		String[] zone = zones[2];
 				
-		// attempt to register new info about existing entry
-		boolean exp = QMCustomer.updateZone(Integer.parseInt(zone[0]), "Ny info", database);
-		assertEquals(true, exp);		
-		
-		// attempt to remove entry		
-		exp = QMCustomer.removeZone(Integer.parseInt(zone[0]), database);
-		assertEquals(true, exp);
-
-		// attempt to reregister removed entry	
-		int iexp = QMCustomer.registerZone(zone[1], database);
-		assertNotEquals(-1, iexp);		
 	}
 }

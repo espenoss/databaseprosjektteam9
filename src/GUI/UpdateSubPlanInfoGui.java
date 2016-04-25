@@ -3,8 +3,6 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
@@ -14,9 +12,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.*;
-import database.Database;
 
 class UpdateSubPlanInfoGui extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Cook cook = null; 
 
 	public UpdateSubPlanInfoGui(Cook cook) { 
@@ -32,6 +33,10 @@ class UpdateSubPlanInfoGui extends JFrame {
 
 	private class UpdateSubPlanDialog extends MyDialog{
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private TextEditor editor = new TextEditor();
 		private ArrayList<SubPlan> subPlanList = new ArrayList<>();
 		private JComboBox subPlanSelect;
@@ -50,6 +55,11 @@ class UpdateSubPlanInfoGui extends JFrame {
 		}
 
 		private class UserDatapanel extends JPanel{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public UserDatapanel(){
 				GridLayout superGrid = new GridLayout(4,1);
 				setLayout(superGrid);

@@ -15,14 +15,15 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import controller.*;
 import database.Database;
 
 public class MarkOrderAsReadyDialog extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private DefaultListModel<String> listcontent = new DefaultListModel<String>();
 	private JList<String> list = new JList<String>(listcontent);
 	private Cook cook = null;
@@ -65,6 +66,11 @@ public class MarkOrderAsReadyDialog extends JFrame{
 
 	// Top text
 	private class TextPanel extends JPanel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public TextPanel() {
 			setLayout(new GridLayout(4, 1, 2, 2));
 			add(new JLabel(""));
@@ -75,6 +81,11 @@ public class MarkOrderAsReadyDialog extends JFrame{
 	}
 
 	private class ListPanel extends JPanel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public ListPanel() {
 			setLayout(new BorderLayout());
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
