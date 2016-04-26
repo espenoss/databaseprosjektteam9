@@ -6,14 +6,40 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import controller.*;
-import database.*;
 
+/**
+ * The Class MainSalesPersonGui.<br>
+ * The main menu for Sales users
+ */
 class MainSalesPersonGui extends JFrame {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+
+	/** The menu selection list. */
+	private static final String [] CHOICES =
+		{
+				"Register new customer",
+				"View information about a single customer",
+				"Register new company", 
+				"View private customers", 
+				"View company customers",
+				"Change customer information", 
+				"View food orders",
+				"Register new food order", 
+				"Change food order",
+				"Add meal or subscription to order",
+				"View all subscription plans",
+				"View available meals", 
+		"View ingredient in meal"};
+
+	/** The menu list. */
+	private JList<String> choice_list = new JList<String>(CHOICES);
+
+	/** The sales user object. */
+	private Sales sales = null;
+
+	/** User menu selection constants. */
 	private static final int REGISTER_NEW_CUSTOMER = 0;
 	private static final int VIEW_INFO_ABOUT_SINGLE_CUST = 1;		
 	private static final int REGISTER_NEW_COMPANY = 2;
@@ -28,13 +54,12 @@ class MainSalesPersonGui extends JFrame {
 	private static final int VIEW_MEALS = 11;
 	private static final int VIEW_INGREDIENTS_IN_MEAL = 12;
 
-	private static final String [] CHOICES =
-		{"Register new customer","View information about a single customer","Register new company", "View private customers", "View company customers",
-				"Change customer information", "View food orders","Register new food order", "Change food order",
-				"Add meal or subscription to order","View all subscription plans","View available meals", "View ingredient in meal"};
-	private JList<String> choice_list = new JList<String>(CHOICES);
-	private Sales sales = null;
-
+	/**
+	 * 
+	 * Instantiates a new main sales gui.
+	 * 
+	 * @param sales User object
+	 */
 	public MainSalesPersonGui(Sales sales) {
 		this.sales = sales;
 		setTitle("Sales control panel");
@@ -44,19 +69,21 @@ class MainSalesPersonGui extends JFrame {
 		JLabel ledetekst = new JLabel("Choose one of the following options.");
 		add(ledetekst, BorderLayout.NORTH);
 
-
 		JScrollPane rullefeltMedListe = new JScrollPane(choice_list);
 		add(rullefeltMedListe, BorderLayout.CENTER);
 
-		ListeboksLytter lytter = new ListeboksLytter();
-		choice_list.addListSelectionListener(lytter);
+		MenuListListener listener = new MenuListListener();
+		choice_list.addListSelectionListener(listener);
 		choice_list.setFont(bigText);
 		setSize(700, 700);
 		setLocationRelativeTo(null);
 	}
 
-	private class ListeboksLytter implements ListSelectionListener {
-		private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
+	/**
+	 * The Class MenuListListener.<br>
+	 * Listens to menu choice and creates new windows based on selection.
+	 */
+	private class MenuListListener implements ListSelectionListener {
 
 		public void valueChanged(ListSelectionEvent hendelse) {
 
@@ -65,7 +92,7 @@ class MainSalesPersonGui extends JFrame {
 				new RegisterCustomerDialog(sales);
 
 			}else if(choices==VIEW_INFO_ABOUT_SINGLE_CUST){
-				new ViewSingleCustomerGui(new Sales(sales.getUserID(), sales.getName(), database));
+				new ViewSingleCustomerGui(new Sales(sales.getUserID(), sales.getName(), sales.getDatabase()));
 
 			}
 			else if(choices==REGISTER_NEW_COMPANY){
@@ -107,7 +134,7 @@ class MainSalesPersonGui extends JFrame {
 				new ChangeCustomerInfoDialog(sales);      
 
 			}else if(choices==VIEW_FOOD_ORDERS){
-				new ViewFoodOrders (new Sales (sales.getUserID(), sales.getName(), database));
+				new ViewFoodOrders (new Sales (sales.getUserID(), sales.getName(), sales.getDatabase()));
 			}
 			else if(choices==REGISTER_NEW_ORDER){
 				new RegisterOrderDialog(sales);
@@ -115,7 +142,7 @@ class MainSalesPersonGui extends JFrame {
 			else if(choices== CHANGE_ORDER){
 				new ChangeOrderDialog(sales);
 			}else if(choices==VIEW_FOOD_ORDER_OF_SINGLE_CUSTOMER){
-				new ViewFoodOrdersByCustomerGui(new Sales(sales.getUserID(), sales.getName(), database));
+				new ViewFoodOrdersByCustomerGui(new Sales(sales.getUserID(), sales.getName(), sales.getDatabase()));
 			}else if (choices == VIEW_ALL_SUBPLANS){
 				ArrayList<SubPlan> sp = null;
 				sp = sales.viewAllSubPlans();
@@ -147,17 +174,8 @@ class MainSalesPersonGui extends JFrame {
 				scrollpane.getViewport().add(list);		    	 
 				JOptionPane.showMessageDialog(null, scrollpane, "All meals: ", JOptionPane.INFORMATION_MESSAGE );
 			}else if(choices==VIEW_INGREDIENTS_IN_MEAL){
-				new IngredientsInMealGui(new Cook(sales.getUserID(), sales.getName(), database));
+				new IngredientsInMealGui(new Cook(sales.getUserID(), sales.getName(), sales.getDatabase()));
 			}
 		}
 	}
-	public static void main(String[] args){
-		String username = "espenme";
-		String passingword = "16Sossosem06";
-		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
-		Database database = new Database("com.mysql.jdbc.Driver", databasename);
-		MainSalesPersonGui mag = new MainSalesPersonGui(new Sales("","", database));
-		mag.setVisible(true);
-	}
-
 }

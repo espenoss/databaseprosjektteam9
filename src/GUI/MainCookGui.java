@@ -7,20 +7,39 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import controller.*;
-import database.Database;
 
+/**
+ * The Class MainCookGui.<br>
+ * The main menu for Cook users
+ */
 class MainCookGui extends JFrame {
-	/**
-	 * 
-	 */
+
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The menu selection list. */	
 	private static final String [] CHOICES =
-		{"View food orders","Mark order as ready for delivery","View available ingredients","Register new ingredient",
-				"View available meals", "Register new meal","View ingredients in meal", "Add ingredient to meal", 
-				"View all subscription plans", "Register new subscription plan", "Add meal to subscription plan","Rename subscription plan"};
+		{
+				"View food orders",
+				"Mark order as ready for delivery",
+				"View available ingredients",
+				"Register new ingredient",
+				"View available meals", 
+				"Register new meal",
+				"View ingredients in meal", 
+				"Add ingredient to meal", 
+				"View all subscription plans", 
+				"Register new subscription plan", 
+				"Add meal to subscription plan",
+				"Rename subscription plan"};
+	
+	/** The menu list. */	
 	private JList<String> choice_list = new JList<String>(CHOICES);
+	
+	/** The cook user object. */	
 	private Cook cook = null;
 
+	/** User menu selection constants. */	
 	private static final int VIEW_FOOD_ORDERS = 0;
 	private static final int MARK_AS_READY_FOR_DELIVERY = 1;
 	private static final int VIEW_INGREDIENTS = 2;
@@ -34,7 +53,12 @@ class MainCookGui extends JFrame {
 	private static final int ADD_MEAL_TO_SUB_PLAN = 10;
 	private static final int RENAME_SUP_PLAN = 11;
 
-
+	/**
+	 * 
+	 * Instantiates a new main cook gui.
+	 * 
+	 * @param sales User object
+	 */
 	public MainCookGui(Cook cook) {
 		this.cook = cook;
 		setTitle("Cook control panel");
@@ -48,8 +72,8 @@ class MainCookGui extends JFrame {
 		JScrollPane rullefeltMedListe = new JScrollPane(choice_list);
 		add(rullefeltMedListe, BorderLayout.CENTER);
 
-		ListeboksLytter lytter = new ListeboksLytter();
-		choice_list.addListSelectionListener(lytter);
+		MenuListListener listener = new MenuListListener();
+		choice_list.addListSelectionListener(listener);
 		choice_list.setFont(bigText);
 
 		setSize(500,500);
@@ -57,7 +81,7 @@ class MainCookGui extends JFrame {
 
 	}
 
-	private class ListeboksLytter implements ListSelectionListener {
+	private class MenuListListener implements ListSelectionListener {
 
 		public void valueChanged(ListSelectionEvent hendelse) {
 
@@ -137,15 +161,6 @@ class MainCookGui extends JFrame {
 
 		}
 	}
-	public static void main(String[] args){
-		String username = "espenme";
-		String passingword = "16Sossosem06";
-		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
-		Database database = new Database("com.mysql.jdbc.Driver", databasename);
-		MainCookGui mag = new MainCookGui(new Cook("","", database));
-		mag.setVisible(true);
-	}
-
 }
 
 

@@ -14,7 +14,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import controller.*;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MainAdminGui.<br>
  * The main menu for Admin users

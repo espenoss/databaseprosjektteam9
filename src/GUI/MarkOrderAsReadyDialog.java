@@ -142,20 +142,20 @@ public class MarkOrderAsReadyDialog extends JFrame{
 			// Get index of meal to be marked
 			int selected = list.getSelectedIndex();
 			// Every meal take up three spaces on the list
-			// So we round to nearest mulitple of three
+			// So we round down to nearest multiple of three
 			// Probably a better way to do this
 			int baseIndex = (selected/3)*3; 
-			// Remove meal from list
-			for(int i=0;i<3;i++){
-				if(baseIndex > -1 && !listcontent.isEmpty()) listcontent.remove(baseIndex);
-			}
-			// Get index for meal list
 			int index = selected/3;
+			// Remove meal from list and update database
 			if(index < mealList.size()){
 				java.util.Date utilDate = new java.util.Date();
 				new java.sql.Date(utilDate.getTime());
-				// Update database
-				mealList.get(index).markMealAsReady(cook.getDatabase());
+
+				if(mealList.get(index).markMealAsReady(cook.getDatabase())){
+					for(int i=0;i<3;i++){
+						if(baseIndex > -1 && !listcontent.isEmpty()) listcontent.remove(baseIndex);
+					}				
+				}
 			}
 		}
 	}

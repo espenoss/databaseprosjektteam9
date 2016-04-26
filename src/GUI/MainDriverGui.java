@@ -13,18 +13,33 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import controller.*;
-import database.Database;
 
+/**
+ * The Class MainDriverGui.<br>
+ * The main menu for Cook users, contains only the delivery list
+ */
 public class MainDriverGui extends JFrame {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The list content model. */
 	private DefaultListModel<String> listcontent = new DefaultListModel<String>(); 
+	
+	/** The list. */
 	private JList<String> list = new JList<String>(listcontent);
+	
+	/** The driver. */
 	private Driver driver = null;
+	
+	/** The meal list. */
 	private String[][] mealList = null;
 
+	/**
+	 * Instantiates a new main driver gui.
+	 *
+	 * @param driver the driver
+	 */
 	public MainDriverGui(Driver driver) {
 		this.driver = driver;
 		setTitle("Delivery list");
@@ -40,12 +55,17 @@ public class MainDriverGui extends JFrame {
 
 	}
 
+	/**
+	 * The Class TextPanel.
+	 */
 	private class TextPanel extends JPanel {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/**
+		 * Instantiates a new text panel.
+		 */
 		public TextPanel() {
 			setLayout(new GridLayout(4, 1, 2, 2));
 			add(new JLabel(""));  
@@ -55,22 +75,27 @@ public class MainDriverGui extends JFrame {
 		}
 	}
 
+	/**
+	 * The Class ListPanel.
+	 */
 	private class ListPanel extends JPanel {
-		/**
-		 * 
-		 */
+
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/**
+		 * Instantiates a new list panel.
+		 */
 		public ListPanel() {
 			setLayout(new BorderLayout());
 
+			// Fetch delivery plan from database
 			mealList = driver.generateDeliveryPlan();
 
-			// TODO: hente ut subscription?
-			
 			if(mealList.length == 0){
 				listcontent.addElement("No deliveries left for today");
 			}else{
+				// Add delivery item to list
 				for(int i=0; i<mealList.length;i++){
 					listcontent.addElement(mealList[i][0] + ", Quantity: " + mealList[i][1]);
 					listcontent.addElement(mealList[i][2]);
@@ -78,21 +103,30 @@ public class MainDriverGui extends JFrame {
 					listcontent.addElement(" ");
 				}	
 			}
-
+			
+			// Set up list and containing scrollpane
 			list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			JScrollPane mealScroller = new JScrollPane(list); 
 			add(mealScroller, BorderLayout.CENTER);
 		}
 	}
 
+	/**
+	 * Listen to the 'mark as delivered' button
+	 */
 	private class markButtonListener implements ActionListener{
-
-		// TODO: forklare hva jeg har gjort
 		
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		public void actionPerformed(ActionEvent arg0) {
+			// Get index of meal to be marked
 			int selected = list.getSelectedIndex();
+			// Every meal take up three spaces on the list
+			// So we round to down nearest multiple of four			
 			int baseIndex = (selected/4)*4; 
 			int index = selected/4;
+			// Remove meal from list and update database
 			if(index < mealList.length){
 				int orderID = Integer.parseInt(mealList[index][5]);
 				int mealID = Integer.parseInt(mealList[index][6]);
@@ -106,14 +140,5 @@ public class MainDriverGui extends JFrame {
 				}
 			}
 		}
-	}
-
-	public static void main(String[] args){
-		String username = "espenme";
-		String passingword = "16Sossosem06";
-		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
-		Database database = new Database("com.mysql.jdbc.Driver", databasename);
-		MainDriverGui del = new MainDriverGui(new Driver("","", database));
-		del.setVisible(true);
 	}
 }
