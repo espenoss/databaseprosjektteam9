@@ -10,8 +10,6 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerDateModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import controller.*;
@@ -22,7 +20,6 @@ class MainAdminGui extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JList list = new JList();
 	private static final String [] CHOICES =
 		{"Register new user","Change user information", "View all users", "Register new customer",
 				"Register new company", "Change customer information", "View private customers", 
@@ -34,33 +31,32 @@ class MainAdminGui extends JFrame {
 				"View all sub plans","Update subscription plan"};
 
 	private JList<String> choice_list = new JList<String>(CHOICES);  
-	Admin admin = null;
-	Meal meal=null;
+	private Admin admin = null;
 
-	public static final int REGISTER_NEW_USER = 0;
-	public static final int CHANGE_USER_INFO = 1;
-	public static final int VIEW_ALL_USERS = 2;
-	public static final int REGISTER_NEW_CUSTOMER = 3;		
-	public static final int REGISTER_NEW_COMPANY = 4;
-	public static final int CHANGE_CUSTOMER_INFO = 5;
-	public static final int VIEW_PRIVATE_CUSTOMERS = 6;		
-	public static final int VIEW_COMPANY_CUSTOMERS = 7;		
-	public static final int REGISTER_NEW_ORDER = 8;
-	public static final int CHANGE_ORDER = 9;
-	public static final int RETRIEVE_STATISTICS = 10;
-	public static final int VIEW_INGREDIENTS = 11;
-	public static final int VIEW_MEALS = 12;
-	public static final int REGISTER_INGREDIENT = 13;
-	public static final int REGISTER_MEAL = 14;
-	public static final int ADD_INGREDIENT_TO_MEAL = 15;
-	public static final int REGISTER_SUB_PLAN = 16;
-	public static final int ADD_MEAL_TO_SUB_PLAN = 17;
-	public static final int VIEW_FOOD_ORDERS = 18;
-	public static final int VIEW_INGREDIENTS_IN_MEAL = 19;
-	public static final int VIEW_INFO_ABOUT_SINGLE_CUST = 20;
-	public static final int VIEW_FOOD_ORDER_OF_SINGLE_CUSTOMER = 21;
-	public static final int VIEW_ALL_SUBPLANS = 22;
-	public static final int UPDATE_SUB_PLAN = 23;
+	private static final int REGISTER_NEW_USER = 0;
+	private static final int CHANGE_USER_INFO = 1;
+	private static final int VIEW_ALL_USERS = 2;
+	private static final int REGISTER_NEW_CUSTOMER = 3;		
+	private static final int REGISTER_NEW_COMPANY = 4;
+	private static final int CHANGE_CUSTOMER_INFO = 5;
+	private static final int VIEW_PRIVATE_CUSTOMERS = 6;		
+	private static final int VIEW_COMPANY_CUSTOMERS = 7;		
+	private static final int REGISTER_NEW_ORDER = 8;
+	private static final int CHANGE_ORDER = 9;
+	private static final int RETRIEVE_STATISTICS = 10;
+	private static final int VIEW_INGREDIENTS = 11;
+	private static final int VIEW_MEALS = 12;
+	private static final int REGISTER_INGREDIENT = 13;
+	private static final int REGISTER_MEAL = 14;
+	private static final int ADD_INGREDIENT_TO_MEAL = 15;
+	private static final int REGISTER_SUB_PLAN = 16;
+	private static final int ADD_MEAL_TO_SUB_PLAN = 17;
+	private static final int VIEW_FOOD_ORDERS = 18;
+	private static final int VIEW_INGREDIENTS_IN_MEAL = 19;
+	private static final int VIEW_INFO_ABOUT_SINGLE_CUST = 20;
+	private static final int VIEW_FOOD_ORDER_OF_SINGLE_CUSTOMER = 21;
+	private static final int VIEW_ALL_SUBPLANS = 22;
+	private static final int UPDATE_SUB_PLAN = 23;
 
 
 
@@ -88,10 +84,6 @@ class MainAdminGui extends JFrame {
 
 	private class ListeboksLytter implements ListSelectionListener {
 		private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
-
-		private SpinnerDateModel dateSelectModel = new SpinnerDateModel();
-		private JSpinner dateSelect = new JSpinner(dateSelectModel);
-
 
 		public void valueChanged(ListSelectionEvent hendelse) {
 

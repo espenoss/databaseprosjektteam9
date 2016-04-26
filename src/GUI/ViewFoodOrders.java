@@ -20,10 +20,10 @@ class ViewFoodOrders extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private User user = null; 
-	SpinnerDateModel dateSelectModel = new SpinnerDateModel();
+	private SpinnerDateModel dateSelectModel = new SpinnerDateModel();
 
-	JSpinner dateSelect = new JSpinner(dateSelectModel);
-	SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+	private JSpinner dateSelect = new JSpinner(dateSelectModel);
+	private SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 
 	public ViewFoodOrders(User user) {
 		this.user = user;

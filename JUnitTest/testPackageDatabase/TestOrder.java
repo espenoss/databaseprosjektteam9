@@ -73,9 +73,9 @@ public class TestOrder {
 		tDate = s.parse("2016-04-22");
 		java.sql.Date toDate = new java.sql.Date(tDate.getTime());
 		
-		int sumForPeriod = QMOrder.calculateIncomeForPeriod(fromDate, toDate, database);
+		QMOrder.calculateIncomeForPeriod(fromDate, toDate, database);
 		
-		int orderPrice = QMOrder.viewOrderPrice(Integer.parseInt(order[0]), database);
+		QMOrder.viewOrderPrice(Integer.parseInt(order[0]), database);
 		
 		// attempt to register new info about existing entry
 		boolean exp = QMOrder.updateOrder(Integer.parseInt(order[0]), order[1], Integer.parseInt(order[2]), "Ny info", order[4], database);

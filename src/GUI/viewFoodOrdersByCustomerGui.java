@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -29,7 +28,6 @@ class ViewFoodOrdersByCustomerGui extends JFrame{
 	private ArrayList<Customer> customerList = null;
 	private ArrayList<Order> orderList = null;
 	private JComboBox customerSelect;
-	private JTextField company_name_field = new JTextField(50);
 	private DefaultListModel<String> listcontent = new DefaultListModel<String>();
 	private JList<String> list = new JList<String>(listcontent);
 	private Sales sales = null; 
@@ -128,8 +126,7 @@ class ViewFoodOrdersByCustomerGui extends JFrame{
 					if(orderIndex != -1){
 						list.clearSelection();
 						Order selectedOrder = orderList.get(orderIndex);
-						CustomerOrderMenu com;
-						com = new CustomerOrderMenu(sales, selectedOrder);
+						new CustomerOrderMenu(sales, selectedOrder);
 					}
 				}
 			}

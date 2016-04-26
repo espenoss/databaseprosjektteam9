@@ -6,59 +6,118 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+/**
+ * The Class ChangeCustomerInfoDialog.<br>
+ * Used to change customer info
+ */
 class ChangeCustomerInfoDialog extends JFrame {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The sales user object. */
 	private Sales sales = null; 
-	Customer customer = null;
-
+	
+	/**
+	 * Instantiates a new change customer info dialog.
+	 *
+	 * @param sales User object
+	 */
 	public ChangeCustomerInfoDialog(Sales sales) {
 		this.sales = sales;
+		// Add dialog
 		CustomerDialog dialog = new CustomerDialog(this);
 		setTitle("Change customer info");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
 		pack();
+		// Set window location in middle of screen
 		dialog.setLocationRelativeTo(null);
+		// Display window
 		dialog.setVisible(true);
 	} 
 
+	/**
+	 * The Class CustomerDialog.
+	 */
 	private class CustomerDialog extends MyDialog implements ActionListener{
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/** Convenience string handling methods*/
 		private TextEditor editor = new TextEditor();
 
+		/** The customer list. */
 		private ArrayList<Customer> customerList = new ArrayList<>();
+		
+		/** The zone list. */
 		public String[][] zoneList = null;
+		
+		/** The customer selection combobox. */
 		private JComboBox customerSelect;
+		
+		/** The first name entry field. */
 		private JTextField firstNameField = new JTextField(20);
+		
+		/** The sur name entry field. */
 		private JTextField surNameField = new JTextField(20);
+		
+		/** The email entry field. */
 		private JTextField emailField = new JTextField(20);
+		
+		/** The adress entry field. */
 		private JTextField adressField = new JTextField(20);
+		
+		/** The zip code entry field. */
 		private JTextField zip_codeField = new JTextField(6);
+		
+		/** The zone selection combobox. */
 		private JComboBox zoneSelect;
+		
+		/** The preferences entry field. */
 		private JTextField preferencesField = new JTextField(50);
+		
+		/** The phone number entry field. */
 		private JTextField phoneNumberField = new JTextField(12);
+		
+		/** The surname. */
 		private String surName;
+		
+		/** The first name. */
 		private String firstName;
+		
+		/** The email. */
 		private String email;
+		
+		/** The adress. */
 		private String adress;
+		
+		/** The zip_code. */
 		private int zip_code;
+		
+		/** The zone_nr. */
 		private int zone_nr;
+		
+		/** The preferences. */
 		private String preferences;
+		
+		/** The phone number. */
 		private String phoneNumber;
 
-
+		/** The status selection states. */
 		private final String status[] = {"active", "inactive"}; 
+		
+		/** The status selection combobox. */
 		private JComboBox status_list = new JComboBox(status);
 
 
 
+		/**
+		 * Instantiates a new customer dialog.
+		 *
+		 * @param parent Parent frame
+		 */
 		public CustomerDialog(JFrame parent){
 			super(parent, "Fill in new information about a customer");
 			add(new JPanel(), BorderLayout.NORTH);
@@ -67,31 +126,40 @@ class ChangeCustomerInfoDialog extends JFrame {
 			customerSelect.addActionListener(this);
 
 			setSize(650,700);
-			setLocationRelativeTo(null);
 		}
 
+		/**
+		 * The Class CustomerDatapanel.
+		 */
 		private class CustomerDatapanel extends JPanel{
-			/**
-			 * 
-			 */
+			
+			/** The Constant serialVersionUID. */
 			private static final long serialVersionUID = 1L;
 
+			/**
+			 * Instantiates a new customer datapanel.
+			 */
 			public CustomerDatapanel(){
 				setLayout(new GridLayout(20,1));
 
+				// Fetch customer list from database
 				customerList = sales.viewCustomerList();
+				// Fetch zone list from database
 				zoneList = sales.viewZones();
 
+				// Convert customer objects to string list
 				ArrayList<String> nameList = new ArrayList<>();
 				for(Customer c: customerList){
 					nameList.add(c.getCustomerID() + " " + c.getFirstName() + " " + c.getSurName());
 				}
 
+				// Get zone names
 				ArrayList<String> zoneNames = new ArrayList<>();
 				for(int i=0;i<zoneList.length;i++){
 					zoneNames.add(zoneList[i][1]);
 				}
 
+				// Set up comboboxes
 				customerSelect = new JComboBox<>(nameList.toArray());
 				zoneSelect = new JComboBox<>(zoneNames.toArray());	
 
@@ -110,7 +178,7 @@ class ChangeCustomerInfoDialog extends JFrame {
 				}
 				preferencesField.setText(currCust.getPreferences());
 
-
+				// Add components
 				add(new JLabel("Customer: ", JLabel.LEFT));
 				add(customerSelect);
 
@@ -144,8 +212,13 @@ class ChangeCustomerInfoDialog extends JFrame {
 
 			}
 		}
+		
+		/* (non-Javadoc)
+		 * @see GUI.MyDialog#okData()
+		 */
 		public boolean okData(){
 
+			// Get field information
 			firstName = firstNameField.getText().trim();	
 			surName = surNameField.getText().trim();
 			email = emailField.getText().trim();
@@ -163,6 +236,7 @@ class ChangeCustomerInfoDialog extends JFrame {
 			preferences = preferencesField.getText().trim();	
 			phoneNumber = phoneNumberField.getText().trim();
 
+			// Check if data is valid
 			boolean nameOk = !firstName.equals("") && editor.isAlpha(firstName) 
 					&& !surName.equals("") && editor.isAlpha(surName);
 			boolean emailAndAdressOk = !email.equals("") && !adress.equals("");
@@ -182,6 +256,7 @@ class ChangeCustomerInfoDialog extends JFrame {
 				active = false;
 			}
 
+			// If data is valid, update customer info in database
 			if(dataCheck){
 				int customerIndex = customerSelect.getSelectedIndex();
 				Customer currCust = customerList.get(customerIndex);
@@ -199,6 +274,11 @@ class ChangeCustomerInfoDialog extends JFrame {
 				return false;
 			}
 		}			
+		
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 * Listen to customer selection combobox and loads current customer information into fields
+		 */
 		public void actionPerformed(ActionEvent e){
 			int custIndex = customerSelect.getSelectedIndex();
 			Customer currCust = customerList.get(custIndex);
@@ -211,6 +291,7 @@ class ChangeCustomerInfoDialog extends JFrame {
 			for(int i=0;i<zoneList.length;i++){
 				if(currCust.getZoneNr() == Integer.parseInt(zoneList[i][0])){
 					zoneSelect.setSelectedIndex(i);
+					break;
 				}
 			}
 			preferencesField.setText(currCust.getPreferences());

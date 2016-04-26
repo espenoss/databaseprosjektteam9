@@ -37,13 +37,10 @@ class UpdateSubPlanInfoGui extends JFrame {
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-		private TextEditor editor = new TextEditor();
 		private ArrayList<SubPlan> subPlanList = new ArrayList<>();
 		private JComboBox subPlanSelect;
 
 		private JTextField sub_plan_nameField = new JTextField(10);
-		String sub_plan;
-
 		public UpdateSubPlanDialog(JFrame parent){
 			super(parent, "Fill in new info about the subscription plan");
 

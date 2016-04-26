@@ -2,9 +2,7 @@ package GUI;
 
 import controller.*;
 import java.awt.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -38,16 +36,12 @@ class RegisterOrderDialog extends JFrame {
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-		private TextEditor editor = new TextEditor();
 		private ArrayList<Customer> customerList = new ArrayList<>();
 		private JComboBox customerSelect;
 		private SpinnerDateModel dateSelectModel = new SpinnerDateModel();
 		private JSpinner dateSelect = new JSpinner(dateSelectModel);
-		private JTextField delivery_dateField = new JTextField(10);
 		private JTextField infoField = new JTextField(10);
 		private int customerID;
-		private String deliveryDateStr;
-		private Date deliveryDate;
 		private String info;
 
 		public DialogWindow(JFrame parent){
@@ -94,8 +88,6 @@ class RegisterOrderDialog extends JFrame {
 			int customerIndex = customerSelect.getSelectedIndex();
 			customerID = customerList.get(customerIndex).getCustomerID();
 
-			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
-			deliveryDateStr = s.format(dateSelect.getValue());
 			info = infoField.getText();
 
 			return sales.registerNewOrder(customerID, info, sales.getUserID()) != null;

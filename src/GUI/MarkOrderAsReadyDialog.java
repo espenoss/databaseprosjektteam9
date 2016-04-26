@@ -16,25 +16,39 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import controller.*;
-import database.Database;
 
+/**
+ * The Class MarkOrderAsReadyDialog.<br>
+ * Displays list of meals to be made today, and allow marig them as ready
+ */
 public class MarkOrderAsReadyDialog extends JFrame{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The list content  model. */
 	private DefaultListModel<String> listcontent = new DefaultListModel<String>();
+	
+	/** The list of meals. */
 	private JList<String> list = new JList<String>(listcontent);
+	
+	/** The cook user object. */
 	private Cook cook = null;
-	ArrayList<Order> orderList = null;
-	ArrayList<MealOrdered> mealList = new ArrayList<>();
+	
+	/** The order list. */
+	private ArrayList<Order> orderList = null;
+	
+	/** The meal list. */
+	private ArrayList<MealOrdered> mealList = new ArrayList<>();
 
+	/**
+	 * Instantiates a new mark order as ready dialog.
+	 *
+	 * @param cook User object
+	 */
 	public MarkOrderAsReadyDialog(Cook cook) {
 		this.cook = cook;
 		setTitle("Meals to be made");
-
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(new TextPanel(), BorderLayout.NORTH);
 		add(new ListPanel(), BorderLayout.CENTER);
 		JButton markButton = new JButton("Mark as ready");
@@ -46,31 +60,18 @@ public class MarkOrderAsReadyDialog extends JFrame{
 
 	}
 
-	private class markButtonListener implements ActionListener{
-
-		public void actionPerformed(ActionEvent arg0) {
-			int selected = list.getSelectedIndex();
-			int baseIndex = (selected/3)*3; // Round down to nearest multiple of 3 to get index of meal
-			for(int i=0;i<3;i++){
-				if(baseIndex > -1 && !listcontent.isEmpty()) listcontent.remove(baseIndex);
-			}
-			int index = selected/3;
-			if(index < mealList.size()){
-				java.util.Date utilDate = new java.util.Date();
-				java.sql.Date date = new java.sql.Date(utilDate.getTime());
-
-				mealList.get(index).markMealAsReady(cook.getDatabase());
-			}
-		}
-	}
-
+	/**
+	 * The Class TextPanel.
+	 */
 	// Top text
 	private class TextPanel extends JPanel {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/**
+		 * Instantiates a new text panel.
+		 */
 		public TextPanel() {
 			setLayout(new GridLayout(4, 1, 2, 2));
 			add(new JLabel(""));
@@ -80,23 +81,33 @@ public class MarkOrderAsReadyDialog extends JFrame{
 		}
 	}
 
+	/**
+	 * The Class ListPanel.
+	 */
 	private class ListPanel extends JPanel {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/**
+		 * Instantiates a new list panel.
+		 */
 		public ListPanel() {
 			setLayout(new BorderLayout());
+			
+			// Get todays date
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			java.util.Date utilDate = new java.util.Date();
 			java.sql.Date date = new java.sql.Date(utilDate.getTime());
 
+			// Get food orders to be delivered today
 			orderList = cook.viewFoodOrders(date);
 
+			
 			if(orderList == null || orderList.size() == 0){
 				listcontent.addElement("No meals left for today");
 			}else{
+				// Fetch meals in orders
 				for(Order o: orderList){
 					o.fetchMealsInOrder(cook.getDatabase());
 				}	    		
@@ -104,8 +115,10 @@ public class MarkOrderAsReadyDialog extends JFrame{
 				for(Order o: orderList){
 					ArrayList<MealOrdered> mealsInOrder = o.getMeals();
 					for(MealOrdered m: mealsInOrder){
+						// Check if meals are to be delivered today
 						boolean sameDate = sdf.format(date).equals(sdf.format(m.getDeliverydate()));
 						if(sameDate && !m.isReadyDelivery()){
+							// Add to list if so
 							listcontent.addElement(String.valueOf(o.getOrderID())  + ":");
 							listcontent.addElement(m.getMealName());
 							listcontent.addElement(" ");
@@ -119,17 +132,31 @@ public class MarkOrderAsReadyDialog extends JFrame{
 			JScrollPane mealScroller = new JScrollPane(list); 
 			add(mealScroller, BorderLayout.CENTER);
 		}
-
-
 	}
+	private class markButtonListener implements ActionListener{
 
-	public static void main(String[] args){
-		String username = "espenme";
-		String passingword = "16Sossosem06";
-		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
-		Database database = new Database("com.mysql.jdbc.Driver", databasename);
-		MarkOrderAsReadyDialog del = new MarkOrderAsReadyDialog(new Cook("","", database));
-
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
+		public void actionPerformed(ActionEvent arg0) {
+			// Get index of meal to be marked
+			int selected = list.getSelectedIndex();
+			// Every meal take up three spaces on the list
+			// So we round to nearest mulitple of three
+			// Probably a better way to do this
+			int baseIndex = (selected/3)*3; 
+			// Remove meal from list
+			for(int i=0;i<3;i++){
+				if(baseIndex > -1 && !listcontent.isEmpty()) listcontent.remove(baseIndex);
+			}
+			// Get index for meal list
+			int index = selected/3;
+			if(index < mealList.size()){
+				java.util.Date utilDate = new java.util.Date();
+				new java.sql.Date(utilDate.getTime());
+				// Update database
+				mealList.get(index).markMealAsReady(cook.getDatabase());
+			}
+		}
 	}
-
 }

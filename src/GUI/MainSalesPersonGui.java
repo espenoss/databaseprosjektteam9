@@ -14,21 +14,20 @@ class MainSalesPersonGui extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final int REGISTER_NEW_CUSTOMER = 0;
-	public static final int VIEW_INFO_ABOUT_SINGLE_CUST = 1;		
-	public static final int REGISTER_NEW_COMPANY = 2;
-	public static final int VIEW_PRIVATE_CUSTOMERS = 3;		
-	public static final int VIEW_COMPANY_CUSTOMERS = 4;
-	public static final int CHANGE_CUSTOMER_INFO = 5;
-	public static final int VIEW_FOOD_ORDERS = 6;
-	public static final int REGISTER_NEW_ORDER = 7;
-	public static final int CHANGE_ORDER = 8;
-	public static final int VIEW_FOOD_ORDER_OF_SINGLE_CUSTOMER = 9;
-	public static final int VIEW_ALL_SUBPLANS = 10;
-	public static final int VIEW_MEALS = 11;
-	public static final int VIEW_INGREDIENTS_IN_MEAL = 12;
+	private static final int REGISTER_NEW_CUSTOMER = 0;
+	private static final int VIEW_INFO_ABOUT_SINGLE_CUST = 1;		
+	private static final int REGISTER_NEW_COMPANY = 2;
+	private static final int VIEW_PRIVATE_CUSTOMERS = 3;		
+	private static final int VIEW_COMPANY_CUSTOMERS = 4;
+	private static final int CHANGE_CUSTOMER_INFO = 5;
+	private static final int VIEW_FOOD_ORDERS = 6;
+	private static final int REGISTER_NEW_ORDER = 7;
+	private static final int CHANGE_ORDER = 8;
+	private static final int VIEW_FOOD_ORDER_OF_SINGLE_CUSTOMER = 9;
+	private static final int VIEW_ALL_SUBPLANS = 10;
+	private static final int VIEW_MEALS = 11;
+	private static final int VIEW_INGREDIENTS_IN_MEAL = 12;
 
-	private JList list = new JList();
 	private static final String [] CHOICES =
 		{"Register new customer","View information about a single customer","Register new company", "View private customers", "View company customers",
 				"Change customer information", "View food orders","Register new food order", "Change food order",

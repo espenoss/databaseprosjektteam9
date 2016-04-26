@@ -12,7 +12,7 @@ import database.*;
  */
 public class Admin extends User {
 
-	TextEditor t = new TextEditor();
+	private TextEditor t = new TextEditor();
 
 	/**
 	 * Instantiates a new admin user.

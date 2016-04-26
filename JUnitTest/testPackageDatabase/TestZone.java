@@ -20,10 +20,7 @@ public class TestZone {
 	@Test
 	public void zoneTest() throws Exception{
 
-		// view all entries
-		String[][] zones = QMCustomer.viewZones(database);
-		// select last entry
-		String[] zone = zones[2];
+		QMCustomer.viewZones(database);
 				
 	}
 }

@@ -24,16 +24,16 @@ class LogInGui extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final int U_ADMIN = 0;
-	public static final int U_COOK = 1;
-	public static final int U_DRIVER = 2;
-	public static final int U_SALES = 3;
+	private static final int U_ADMIN = 0;
+	private static final int U_COOK = 1;
+	private static final int U_DRIVER = 2;
+	private static final int U_SALES = 3;
 	private JTextField userID = new JTextField(20);
 	private JPasswordField password = new JPasswordField(20);
 	private JLabel message = new JLabel("Log in information");
-	String username = "espenme";
-	String passingword = "16Sossosem06";
-	String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
+	private String username = "espenme";
+	private String passingword = "16Sossosem06";
+	private String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
 	private Database database = new Database("com.mysql.jdbc.Driver", databasename);
 
 	public LogInGui(String title){

@@ -10,7 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import controller.*;
 
@@ -42,7 +41,6 @@ class ViewSingleCustomerGui extends JFrame{
 		private static final long serialVersionUID = 1L;
 		private ArrayList<Customer> customerList = new ArrayList<>();
 		private JComboBox customerSelect;
-		private JTextField company_name_field = new JTextField(50);
 
 		public ViewSingleCustomerDialog(JFrame parent){
 

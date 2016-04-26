@@ -8,16 +8,16 @@ import database.*;
 public class Ingredient {
 	
 	/** The ingredient id. */
-	public final int ingID; 
+	private final int ingID; 
 	
 	/** The ingredient name. */
 	public String ingName;
 	
 	/** The storage quantity. */
-	public float storageQuantity;
+	private float storageQuantity;
 	
 	/** Measuring unit (kg, l, ...). */
-	public String unit;
+	private String unit;
 
 	/**
 	 * Instantiates ingredient.

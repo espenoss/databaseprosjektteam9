@@ -5,7 +5,7 @@ import java.sql.*;
  * The Class Cleaner.
  * Contains convenience methods for database interactions
  */
-public class Cleaner {
+class Cleaner {
 	
 	/**
 	 * Close result set.

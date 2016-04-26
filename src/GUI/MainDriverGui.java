@@ -23,7 +23,7 @@ public class MainDriverGui extends JFrame {
 	private DefaultListModel<String> listcontent = new DefaultListModel<String>(); 
 	private JList<String> list = new JList<String>(listcontent);
 	private Driver driver = null;
-	String[][] mealList = null;
+	private String[][] mealList = null;
 
 	public MainDriverGui(Driver driver) {
 		this.driver = driver;

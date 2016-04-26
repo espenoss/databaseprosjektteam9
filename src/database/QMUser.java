@@ -121,7 +121,7 @@ public class QMUser {
 	 * @param s String to add quotes to
 	 * @return String with quotes around it
 	 */
-	public static String aq(String s){
+	private static String aq(String s){
 		return "'" + s + "', ";
 	}
 }

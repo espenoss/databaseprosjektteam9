@@ -16,23 +16,23 @@ class MainCookGui extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static final String [] CHOICES =
 		{"View food orders","Mark order as ready for delivery","View available ingredients","Register new ingredient",
-				"View available meals", "Register new meal","View ingregredients in meal", "Add ingredient to meal", 
-				"View all subscription plans", "Register new subscription plan", "Add meal to subscription plan","Update subscription plan"};
+				"View available meals", "Register new meal","View ingredients in meal", "Add ingredient to meal", 
+				"View all subscription plans", "Register new subscription plan", "Add meal to subscription plan","Rename subscription plan"};
 	private JList<String> choice_list = new JList<String>(CHOICES);
-	Cook cook = null;
+	private Cook cook = null;
 
-	public static final int VIEW_FOOD_ORDERS = 0;
-	public static final int MARK_AS_READY_FOR_DELIVERY = 1;
-	public static final int VIEW_INGREDIENTS = 2;
-	public static final int REGISTER_INGREDIENT = 3;
-	public static final int VIEW_MEALS = 4;
-	public static final int REGISTER_MEAL = 5;
-	public static final int VIEW_INGREDIENTS_IN_MEAL = 6;
-	public static final int ADD_INGREDIENT_TO_MEAL = 7;
-	public static final int VIEW_ALL_SUBPLANS = 8;
-	public static final int REGISTER_SUB_PLAN = 9;
-	public static final int ADD_MEAL_TO_SUB_PLAN = 10;
-	public static final int UPDATE_SUP_PLAN = 11;
+	private static final int VIEW_FOOD_ORDERS = 0;
+	private static final int MARK_AS_READY_FOR_DELIVERY = 1;
+	private static final int VIEW_INGREDIENTS = 2;
+	private static final int REGISTER_INGREDIENT = 3;
+	private static final int VIEW_MEALS = 4;
+	private static final int REGISTER_MEAL = 5;
+	private static final int VIEW_INGREDIENTS_IN_MEAL = 6;
+	private static final int ADD_INGREDIENT_TO_MEAL = 7;
+	private static final int VIEW_ALL_SUBPLANS = 8;
+	private static final int REGISTER_SUB_PLAN = 9;
+	private static final int ADD_MEAL_TO_SUB_PLAN = 10;
+	private static final int RENAME_SUP_PLAN = 11;
 
 
 	public MainCookGui(Cook cook) {
@@ -59,14 +59,12 @@ class MainCookGui extends JFrame {
 
 	private class ListeboksLytter implements ListSelectionListener {
 
-		private SpinnerDateModel dateSelectModel = new SpinnerDateModel();
-		private JSpinner dateSelect = new JSpinner(dateSelectModel);
-
 		public void valueChanged(ListSelectionEvent hendelse) {
 
-			Object[] values = choice_list.getSelectedValuesList().toArray();
 			int choices = choice_list.getSelectedIndex();
 
+			choice_list.clearSelection();
+			
 			if(choices == VIEW_FOOD_ORDERS){
 				new ViewFoodOrders (new Admin (cook.getUserID(), cook.getName(), cook.getDatabase()));
 			}else if(choices==MARK_AS_READY_FOR_DELIVERY){
@@ -133,7 +131,7 @@ class MainCookGui extends JFrame {
 				new RegisterSubscriptionPlan(new Cook(cook.getUserID(), cook.getName(), cook.getDatabase()));
 			}else if(choices == ADD_MEAL_TO_SUB_PLAN){
 				new AddMealToSubPlanDialog (new Cook(cook.getUserID(), cook.getName(), cook.getDatabase()));
-			}else if(choices == UPDATE_SUP_PLAN){
+			}else if(choices == RENAME_SUP_PLAN){
 				new UpdateSubPlanInfoGui(new Cook(cook.getUserID(), cook.getName(), cook.getDatabase()));
 			}
 

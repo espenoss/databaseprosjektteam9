@@ -38,10 +38,6 @@ class RemoveMealFromSubPlanGui extends JFrame {
 		 */
 		private static final long serialVersionUID = 1L;
 
-
-		private TextEditor editor = new TextEditor();
-
-
 		private final String days_of_week[] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"}; 
 
 		private JComboBox dayList = new JComboBox(days_of_week);	

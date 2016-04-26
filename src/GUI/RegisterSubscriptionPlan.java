@@ -33,8 +33,6 @@ class RegisterSubscriptionPlan extends JFrame {
 		 */
 		private static final long serialVersionUID = 1L;
 
-		private TextEditor editor = new TextEditor();
-
 		private JTextField sub_plan_nameField = new JTextField(10);
 		String sub_plan;
 

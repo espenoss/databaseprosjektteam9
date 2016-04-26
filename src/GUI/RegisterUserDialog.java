@@ -1,7 +1,6 @@
 package GUI;
 
 import controller.*;
-import database.*;
 
 import java.awt.*;
 import javax.swing.*;
@@ -11,7 +10,6 @@ class RegisterUserDialog extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Database database = new Database("com.mysql.jdbc.Driver", "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/espenme?user=espenme&password=16Sossosem06");
 	private Admin admin = null; 
   
 	public RegisterUserDialog(Admin admin) { 
