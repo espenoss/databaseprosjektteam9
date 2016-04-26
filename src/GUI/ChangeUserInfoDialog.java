@@ -51,7 +51,7 @@ class ChangeUserInfoDialog extends JFrame {
 		private JComboBox<Object> userIDfield;
 		
 		/** The user roles. */
-		private final String userRoles[] = {"Admin", "Cook", "Driver", "Sales", "Storage"}; 
+		private final String userRoles[] = {"Admin", "Cook", "Driver", "Sales"}; 
 		
 		/** The user list. */
 		private JComboBox<String> userList = new JComboBox<String>(userRoles);	
@@ -91,7 +91,7 @@ class ChangeUserInfoDialog extends JFrame {
 			// Convert to string list
 			ArrayList<String> names = new ArrayList<>();
 			for(User u:users){
-				names.add(u.getName());
+				names.add(u.getUserID());
 			}
 			
 			// Set up user selection box
@@ -165,7 +165,10 @@ class ChangeUserInfoDialog extends JFrame {
 			// Check if data is valid
 			boolean nameOk = editor.isAlpha(userID) 
 					&& name != "" && editor.isAlpha(name);
-			if(!nameOk) JOptionPane.showMessageDialog(null, "Name cannot contain numbers");
+			if(!nameOk) {
+				JOptionPane.showMessageDialog(null, "Name cannot contain numbers");
+				return false;
+			}
 
 			// Update info in database
 			return admin.updateUser(userID, userType, name, pword);

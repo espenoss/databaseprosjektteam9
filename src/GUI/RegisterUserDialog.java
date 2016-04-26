@@ -48,7 +48,7 @@ class RegisterUserDialog extends JFrame {
 		private JTextField userIDfield = new JTextField(10);
 		
 		/** The user roles. */
-		private final String userRoles[] = {"Admin", "Cook", "Driver", "Sales", "Storage"}; 
+		private final String userRoles[] = {"Admin", "Cook", "Driver", "Sales"}; 
 		
 		/** The user list. */
 		private JComboBox<String> userList = new JComboBox<String>(userRoles);	
