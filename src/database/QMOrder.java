@@ -48,10 +48,10 @@ public class QMOrder {
 	 * Update order.
 	 *
 	 * @param orderID Order id
-	 * @param order_date Order date in YYYY-MM-DD format
-	 * @param customer_id Customer ID
+	 * @param orderDate Order date in YYYY-MM-DD format
+	 * @param customerID Customer ID
 	 * @param info Info about customer
-	 * @param user_id the User ID
+	 * @param userID the User ID
 	 * @param database Database connection
 	 * @return true, if successful
 	 */
@@ -407,7 +407,6 @@ public class QMOrder {
 	 * 3 : to_date - String<br>	 
 	 * 4 : sub_id - int
 	 * 
-	 * @param orderID Order ID
 	 * @param database Database connection
 	 * @return String[][] of subscription orders
 	 */

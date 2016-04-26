@@ -66,8 +66,8 @@ public class QMCustomer {
 	 * @param phoneNumber Customer  phone number
 	 * @param email Customer  email
 	 * @param adress Customer  adress
-	 * @param zip_code Customer zip_code
-	 * @param zone_nr Customer zone_nr, must exist in databasse table 'zone'
+	 * @param zipCode Customer zip_code
+	 * @param zoneNr Customer zone_nr, must exist in databasse table 'zone'
 	 * @param preferences Customer preferences
 	 * @param active Whether customer is active
 	 * @param database Database connection	 
@@ -228,7 +228,6 @@ public class QMCustomer {
 	 * 9 : preferences - String<br>
 	 * 10 : active - boolean<br>
 	 *
-	 * @param customerID Customer id
 	 * @param database Database connection
 	 * @return String[] of company information
 	 */
