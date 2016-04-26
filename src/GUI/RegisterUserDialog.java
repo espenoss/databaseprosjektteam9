@@ -5,59 +5,87 @@ import controller.*;
 import java.awt.*;
 import javax.swing.*;
 
+/**
+ * The Class RegisterUserDialog.<br>
+ * Used to register new user
+ */
 class RegisterUserDialog extends JFrame {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The admin user object. */
 	private Admin admin = null; 
   
+	/**
+	 * Instantiates a new register user dialog.
+	 *
+	 * @param admin User object
+	 */
 	public RegisterUserDialog(Admin admin) { 
 		this.admin = admin;
 		UserDialog dialog = new UserDialog(this);
-		setTitle("Registrer user");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout()); 
 		pack();
+		// Set window location in middle of screen
 		dialog.setLocationRelativeTo(null);
+		// Display window
 		dialog.setVisible(true);
 	 } 
 
+	/**
+	 * The Class UserDialog.
+	 */
 	private class UserDialog extends MyDialog{
 
-		/**
-		 * 
-		 */
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
-		private TextEditor editor = new TextEditor();
-		private JTextField userIDfield = new JTextField(10);
-		private final String userRoles[] = {"Admin", "Cook", "Driver", "Sales", "Storage"}; 
-		private JComboBox<String> userList = new JComboBox<String>(userRoles);	
-		private JTextField usernameField = new JTextField(20);		
-		private JTextField passwordField = new JTextField(20);
-		private String pword;
-		private String name;
-		private String userID;
-		private int userType;
 		
+		/** The editor. */
+		private TextEditor editor = new TextEditor();
+		
+		/** The user i dfield. */
+		private JTextField userIDfield = new JTextField(10);
+		
+		/** The user roles. */
+		private final String userRoles[] = {"Admin", "Cook", "Driver", "Sales", "Storage"}; 
+		
+		/** The user list. */
+		private JComboBox<String> userList = new JComboBox<String>(userRoles);	
+		
+		/** The username field. */
+		private JTextField usernameField = new JTextField(20);		
+		
+		/** The password field. */
+		private JTextField passwordField = new JTextField(20);
+		
+		/**
+		 * Instantiates a new user dialog.
+		 *
+		 * @param parent the parent
+		 */
 		public UserDialog(JFrame parent){
 			super(parent, "New user");
 			add(new JPanel(), BorderLayout.NORTH);
 			add(new UserDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
 			setSize(500,300);
-			setLocationRelativeTo(null);
 		}
 				
+		/**
+		 * The Class UserDatapanel.
+		 */
 		private class UserDatapanel extends JPanel{
-			/**
-			 * 
-			 */
+			
+			/** The Constant serialVersionUID. */
 			private static final long serialVersionUID = 1L;
 
+			/**
+			 * Instantiates a new user datapanel.
+			 */
 			public UserDatapanel(){
-				GridLayout superGrid = new GridLayout(8,1);
-				setLayout(superGrid);
+				setLayout(new GridLayout(8,1));
+				
 				add(new JLabel("Username: ", JLabel.LEFT));
 				add(userIDfield);
 				
@@ -72,30 +100,24 @@ class RegisterUserDialog extends JFrame {
 			}
 		}
 		
+		/* (non-Javadoc)
+		 * @see GUI.MyDialog#okData()
+		 */
 		public boolean okData(){
-			userID = userIDfield.getText();	
-			userType = userList.getSelectedIndex();				
-			pword = passwordField.getText();
-			name = usernameField.getText();
-			
-			boolean my_user = false; 
+			// Get field values
+			String userID = userIDfield.getText();	
+			int userType = userList.getSelectedIndex();				
+			String pword = passwordField.getText();
+			String name = usernameField.getText();
 			
 			boolean nameOk = editor.isAlpha(userID) 
 					&& name != "" && editor.isAlpha(name);
 			if(!nameOk){
 				JOptionPane.showMessageDialog(null, "Name cannot contain numbers");
+				return false;
 			}else{
-				my_user = admin.registerUser(userID, userType, name, pword);				
+				return admin.registerUser(userID, userType, name, pword);				
 			}
-		
-			if(my_user == false){
-				JOptionPane.showMessageDialog(null, "User was not registered, username already exists in database","", JOptionPane.INFORMATION_MESSAGE);
-			}
-			
-			return my_user;	
-			}
-			
-		
-		
+		}
 	}
 }

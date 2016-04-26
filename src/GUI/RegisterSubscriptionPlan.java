@@ -9,34 +9,54 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import controller.*;
 
+/**
+ * The Class RegisterSubscriptionPlan.<br>
+ * Used to register new subscription plan
+ */
 class RegisterSubscriptionPlan extends JFrame {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The cook  user object. */
 	private Cook cook = null; 
 
+	/**
+	 * Instantiates a new register subscription plan.
+	 *
+	 * @param cook User object
+	 */
 	public RegisterSubscriptionPlan(Cook cook) {
 		this.cook = cook;
 		DialogWindow dialog = new DialogWindow(this);
-		setTitle("Register new subscription plan");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout()); 
 		pack();
+		// Set window location in middle of screen
 		dialog.setLocationRelativeTo(null);
+		// Display window
 		dialog.setVisible(true);
 	}
 
+	/**
+	 * The Class DialogWindow.
+	 */
 	private class DialogWindow extends MyDialog{
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/** The sub_plan_name field. */
 		private JTextField sub_plan_nameField = new JTextField(10);
+		
+		/** The sub_plan. */
 		String sub_plan;
 
 
+		/**
+		 * Instantiates a new dialog window.
+		 *
+		 * @param parent the parent
+		 */
 		public DialogWindow(JFrame parent){
 			super(parent, "New subscpiption plan");
 			add(new JPanel(), BorderLayout.NORTH);
@@ -46,12 +66,17 @@ class RegisterSubscriptionPlan extends JFrame {
 			setLocationRelativeTo(null);
 		}
 
+		/**
+		 * The Class OrderDatapanel.
+		 */
 		private class OrderDatapanel extends JPanel{
-			/**
-			 * 
-			 */
+			
+			/** The Constant serialVersionUID. */
 			private static final long serialVersionUID = 1L;
 
+			/**
+			 * Instantiates a new order datapanel.
+			 */
 			public OrderDatapanel(){
 				GridLayout superGrid = new GridLayout(2,1);
 				setLayout(superGrid);
@@ -62,6 +87,9 @@ class RegisterSubscriptionPlan extends JFrame {
 			}
 		}
 
+		/* (non-Javadoc)
+		 * @see GUI.MyDialog#okData()
+		 */
 		public boolean okData(){
 			sub_plan = sub_plan_nameField.getText();
 

@@ -17,79 +17,103 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import controller.*;
-import database.Database;
+
+/**
+ * The Class ViewFoodOrdersByCustomerGui<br>
+ * Used to view food orders by a customer.
+ */
 
 class ViewFoodOrdersByCustomerGui extends JFrame{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Customer> customerList = null;
-	private ArrayList<Order> orderList = null;
-	private JComboBox customerSelect;
-	private DefaultListModel<String> listcontent = new DefaultListModel<String>();
-	private JList<String> list = new JList<String>(listcontent);
+
+	/** Sales user object. */
 	private Sales sales = null; 
 
 	public ViewFoodOrdersByCustomerGui(Sales sales) {
 		this.sales = sales;
 		ViewFoodOrdersByCustomerDialog dialog = new ViewFoodOrdersByCustomerDialog(this);
-		setTitle("View food orders of a customer");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
 		pack();
+		// Set window location in middle of screen
 		dialog.setLocationRelativeTo(null);
+		// Display window
 		dialog.setVisible(true);
-
 	} 
 
+	/**
+	 * The Class ViewFoodOrdersByCustomerDialog.
+	 */
+	
 	private class ViewFoodOrdersByCustomerDialog extends MyDialog{
 
-		/**
-		 * 
-		 */
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
+		/** The customer list. */
+		private ArrayList<Customer> customerList = null;
+		
+		/** The order list. */
+		private ArrayList<Order> orderList = null;
+		
+		/** The customer selection box. */
+		private JComboBox customerSelect;
 
+		/** Listmodel for orderlist component. */
+		private DefaultListModel<String> orderListContent = new DefaultListModel<String>();
+
+		/** orderlist component. */
+		private JList<String> list = new JList<String>(orderListContent);
+		
+		/**
+		 * Instantiates dialog.
+		 *
+		 * @param parent Parent frame
+		 */
 		public ViewFoodOrdersByCustomerDialog(JFrame parent){
 
 			super(parent, "Choose a customer");
 			add(new JPanel(), BorderLayout.NORTH);
-			add(new CompanyDatapanel(),BorderLayout.CENTER);
+			add(new FoodOrderDatapanel(),BorderLayout.CENTER);
 			add(getButtonPanel(),BorderLayout.SOUTH);
 			setSize(500,200);
 		}
 
+		/**
+		 * The Class FoodOrderDatapanel.
+		 */
+		private class FoodOrderDatapanel extends JPanel{
 
-		private class CompanyDatapanel extends JPanel{
-			/**
-			 * 
-			 */
+			/** The Constant serialVersionUID. */
 			private static final long serialVersionUID = 1L;
 
-			public CompanyDatapanel(){
+			public FoodOrderDatapanel(){
 				setLayout(new FlowLayout());
 
+				// Fetches customer list from database
 				customerList = sales.viewCustomerList();
 
+				// Convert to string list
 				ArrayList<String> nameList = new ArrayList<>();
 				for(Customer c: customerList){
 					nameList.add(c.getCustomerID() + " " + c.getFirstName() + " " + c.getSurName());
 				}
+				
+				// Set up customer select box
 				customerSelect = new JComboBox<>(nameList.toArray());
 				customerSelect.addActionListener(new comboListener());
 
-
-
+				// Fetch orders for first customer in list
 				orderList = sales.viewFoodOrdersByCustomer(customerList.get(0).getCustomerID());
 
 				if(orderList != null){
 					for(Order o: orderList){
-						listcontent.addElement(o.getOrderID() + "");
+						orderListContent.addElement(o.getOrderID() + "");
 					}
 				}
 
+				// Add components
 				add(new JLabel("Customer: ", JLabel.RIGHT));
 				add(customerSelect);
 				add(new JLabel("Orders: ", JLabel.RIGHT));
@@ -104,45 +128,38 @@ class ViewFoodOrdersByCustomerGui extends JFrame{
 				public void actionPerformed(ActionEvent arg0) {
 
 					// Update orderlist when different customer selected
-
+					// Get customer
 					int customerIndex = customerSelect.getSelectedIndex();
 					if(customerIndex != -1){
 						Customer currCust = customerList.get(customerIndex);
-						listcontent.clear();
+						orderListContent.clear();
 						orderList = sales.viewFoodOrdersByCustomer(currCust.getCustomerID());
 
+						// Get orders for customer
 						if(orderList != null){
 							for(Order o: orderList){
-								listcontent.addElement(o.getOrderID() + "");
+								orderListContent.addElement(o.getOrderID() + "");
 							}
 						}	
 					}
 				}				
 			}
 
+			// Listener for orderlist
 			private class listListener implements ListSelectionListener{
 				public void valueChanged(ListSelectionEvent arg0) {
+					// Get order
 					int orderIndex = list.getSelectedIndex();
 					if(orderIndex != -1){
 						list.clearSelection();
+						// Display order menu
 						Order selectedOrder = orderList.get(orderIndex);
 						new CustomerOrderMenu(sales, selectedOrder);
 					}
 				}
 			}
 		}
-
 	}
-
-	public static void main(String[] args){
-		String username = "espenme";
-		String passingword = "16Sossosem06";
-		String databasename = "jdbc:mysql://mysql.stud.iie.ntnu.no:3306/" + username + "?user=" + username + "&password=" + passingword;	
-		Database database = new Database("com.mysql.jdbc.Driver", databasename);
-		ViewFoodOrdersByCustomerGui del = new ViewFoodOrdersByCustomerGui(new Sales("","", database));
-		del.setVisible(true);
-	}
-
 }
 
 

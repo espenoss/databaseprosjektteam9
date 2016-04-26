@@ -35,7 +35,6 @@ class AddIngredientsToMealGui extends JFrame {
 		this.cook = cook;
 		// Add dialog
 		AddIngredientsDialog dialog = new AddIngredientsDialog(this);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
 		pack();
 		// Set window location in middle of screen
