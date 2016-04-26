@@ -20,7 +20,7 @@ import controller.*;
  * The Class ChangeOrderDialog.<br>
  * Used to change order information
  */
-class ChangeOrderDialog extends JFrame {
+public class ChangeOrderDialog extends JFrame {
 	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;

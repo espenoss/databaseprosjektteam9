@@ -17,7 +17,7 @@ import controller.*;
  * The Class AddIngredientsToMealGui.<br>
  * Used to add ingredient to a meal recipe.
  */
-class AddIngredientsToMealGui extends JFrame {
+public class AddIngredientsToMealGui extends JFrame {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;

@@ -20,7 +20,7 @@ import controller.*;
  * The Class AddMealToSubPlanDialog.
  * Used to add meal to subscription plan
  */
-class AddMealToSubPlanDialog extends JFrame {
+public class AddMealToSubPlanDialog extends JFrame {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;

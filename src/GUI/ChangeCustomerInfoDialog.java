@@ -10,7 +10,7 @@ import javax.swing.*;
  * The Class ChangeCustomerInfoDialog.<br>
  * Used to change customer info
  */
-class ChangeCustomerInfoDialog extends JFrame {
+public class ChangeCustomerInfoDialog extends JFrame {
 	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;

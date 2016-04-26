@@ -57,7 +57,7 @@ class MainCookGui extends JFrame {
 	 * 
 	 * Instantiates a new main cook gui.
 	 * 
-	 * @param sales User object
+	 * @param cook User object
 	 */
 	public MainCookGui(Cook cook) {
 		this.cook = cook;

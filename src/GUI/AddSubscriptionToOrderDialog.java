@@ -23,7 +23,7 @@ import controller.Sales;
  * The Class AddSubscriptionToOrderDialog.<br>
  * Used to add subscription to order
  */
- class AddSubscriptionToOrderDialog extends JFrame{
+public  class AddSubscriptionToOrderDialog extends JFrame{
 	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
